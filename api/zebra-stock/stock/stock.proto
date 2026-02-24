@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package stock;
 
-option go_package = "./api/zebra-stock/stock;stock";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-stock/stock;stock";
 
 // 库存信息
 message Stock {

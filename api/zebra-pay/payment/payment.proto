@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package payment;
 
-option go_package = "./api/zebra-pay/payment;payment";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-pay/payment;payment";
 
 // 支付记录
 message Payment {

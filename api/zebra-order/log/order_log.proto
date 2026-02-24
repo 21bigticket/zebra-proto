@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package log;
 
-option go_package = "./api/zebra-order/log;log";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-order/log;log";
 
 // 订单日志
 message OrderLog {

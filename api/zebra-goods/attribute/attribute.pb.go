@@ -602,7 +602,7 @@ const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\x06Update\x12!.attribute.UpdateAttributeRequest\x1a\x19.attribute.GoodsAttribute\x12F\n" +
 	"\x06Delete\x12!.attribute.DeleteAttributeRequest\x1a\x19.attribute.GoodsAttribute\x12F\n" +
 	"\x03Get\x12\x1e.attribute.GetAttributeRequest\x1a\x1f.attribute.GetAttributeResponse\x12I\n" +
-	"\x04List\x12\x1f.attribute.ListAttributeRequest\x1a .attribute.ListAttributeResponseB'Z%./api/zebra-goods/attribute;attributeb\x06proto3"
+	"\x04List\x12\x1f.attribute.ListAttributeRequest\x1a .attribute.ListAttributeResponseBJZH./github.com/21bigticket/zebra-proto/api/zebra-goods/attribute;attributeb\x06proto3"
 
 var (
 	file_api_zebra_goods_attribute_attribute_proto_rawDescOnce sync.Once

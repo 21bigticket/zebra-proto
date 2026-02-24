@@ -156,7 +156,7 @@ const file_api_zebra_passport_permission_permission_proto_rawDesc = "" +
 	"\x15HasPermissionResponse\x12%\n" +
 	"\x0ehas_permission\x18\x01 \x01(\bR\rhasPermission2i\n" +
 	"\x11PermissionService\x12T\n" +
-	"\rHasPermission\x12 .permission.HasPermissionRequest\x1a!.permission.HasPermissionResponseB,Z*./api/zebra-passport/permission;permissionb\x06proto3"
+	"\rHasPermission\x12 .permission.HasPermissionRequest\x1a!.permission.HasPermissionResponseBOZM./github.com/21bigticket/zebra-proto/api/zebra-passport/permission;permissionb\x06proto3"
 
 var (
 	file_api_zebra_passport_permission_permission_proto_rawDescOnce sync.Once

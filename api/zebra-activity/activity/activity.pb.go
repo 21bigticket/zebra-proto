@@ -1566,7 +1566,7 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x10GetActivityGoods\x12!.activity.GetActivityGoodsRequest\x1a\".activity.GetActivityGoodsResponse\x12Y\n" +
 	"\x10GetGoodsActivity\x12!.activity.GetGoodsActivityRequest\x1a\".activity.GetGoodsActivityResponse\x12Y\n" +
 	"\x10ValidateActivity\x12!.activity.ValidateActivityRequest\x1a\".activity.ValidateActivityResponse\x12W\n" +
-	"\x13DeductActivityStock\x12$.activity.DeductActivityStockRequest\x1a\x1a.activity.ActivityResponseB(Z&./api/zebra-activity/activity;activityb\x06proto3"
+	"\x13DeductActivityStock\x12$.activity.DeductActivityStockRequest\x1a\x1a.activity.ActivityResponseBKZI./github.com/21bigticket/zebra-proto/api/zebra-activity/activity;activityb\x06proto3"
 
 var (
 	file_api_zebra_activity_activity_activity_proto_rawDescOnce sync.Once

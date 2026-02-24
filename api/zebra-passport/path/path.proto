@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package path;
 
-option go_package = "./api/zebra-passport/path;path";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/path;path";
 
 // API路径信息
 message Path {

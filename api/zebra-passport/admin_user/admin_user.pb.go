@@ -760,7 +760,7 @@ const file_api_zebra_passport_admin_user_admin_user_proto_rawDesc = "" +
 	"\x06Delete\x12\".admin_user.DeleteAdminUserRequest\x1a\x15.admin_user.AdminUser\x12H\n" +
 	"\x03Get\x12\x1f.admin_user.GetAdminUserRequest\x1a .admin_user.GetAdminUserResponse\x12K\n" +
 	"\x04List\x12 .admin_user.ListAdminUserRequest\x1a!.admin_user.ListAdminUserResponse\x12<\n" +
-	"\x05Login\x12\x18.admin_user.LoginRequest\x1a\x19.admin_user.LoginResponseB,Z*./api/zebra-passport/admin_user;admin_userb\x06proto3"
+	"\x05Login\x12\x18.admin_user.LoginRequest\x1a\x19.admin_user.LoginResponseBOZM./github.com/21bigticket/zebra-proto/api/zebra-passport/admin_user;admin_userb\x06proto3"
 
 var (
 	file_api_zebra_passport_admin_user_admin_user_proto_rawDescOnce sync.Once

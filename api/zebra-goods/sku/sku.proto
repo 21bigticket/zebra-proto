@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package sku;
 
-option go_package = "./api/zebra-goods/sku;sku";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-goods/sku;sku";
 
 // SKU信息
 message GoodsSku {

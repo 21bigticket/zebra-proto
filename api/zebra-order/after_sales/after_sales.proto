@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package after_sales;
 
-option go_package = "./api/zebra-order/after_sales;after_sales";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-order/after_sales;after_sales";
 
 // 售后单
 message AfterSales {

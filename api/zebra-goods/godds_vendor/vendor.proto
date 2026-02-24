@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package vendor;
 
-option go_package = "./api/zebra-goods/godds_vendor;godds_vendor";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-goods/godds_vendor;godds_vendor";
 
 // 供应商信息
 message Vendor {

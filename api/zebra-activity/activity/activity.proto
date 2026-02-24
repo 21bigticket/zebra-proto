@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package activity;
 
-option go_package = "./api/zebra-activity/activity;activity";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-activity/activity;activity";
 
 // 活动信息
 message Activity {

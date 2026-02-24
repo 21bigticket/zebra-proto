@@ -426,7 +426,7 @@ const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\n" +
 	"SmsService\x124\n" +
 	"\aSendSms\x12\x13.sms.SendSmsRequest\x1a\x14.sms.SendSmsResponse\x12C\n" +
-	"\fBatchSendSms\x12\x18.sms.BatchSendSmsRequest\x1a\x19.sms.BatchSendSmsResponseB\x1dZ\x1b./api/zebra-message/sms;smsb\x06proto3"
+	"\fBatchSendSms\x12\x18.sms.BatchSendSmsRequest\x1a\x19.sms.BatchSendSmsResponseB@Z>./github.com/21bigticket/zebra-proto/api/zebra-message/sms;smsb\x06proto3"
 
 var (
 	file_api_zebra_message_sms_sms_proto_rawDescOnce sync.Once

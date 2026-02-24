@@ -443,7 +443,7 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\rWeixinService\x12C\n" +
 	"\n" +
 	"SendWeixin\x12\x19.weixin.SendWeixinRequest\x1a\x1a.weixin.SendWeixinResponse\x12R\n" +
-	"\x0fBatchSendWeixin\x12\x1e.weixin.BatchSendWeixinRequest\x1a\x1f.weixin.BatchSendWeixinResponseB#Z!./api/zebra-message/weixin;weixinb\x06proto3"
+	"\x0fBatchSendWeixin\x12\x1e.weixin.BatchSendWeixinRequest\x1a\x1f.weixin.BatchSendWeixinResponseBFZD./github.com/21bigticket/zebra-proto/api/zebra-message/weixin;weixinb\x06proto3"
 
 var (
 	file_api_zebra_message_weixin_weixin_proto_rawDescOnce sync.Once

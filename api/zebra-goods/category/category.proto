@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package category;
 
-option go_package = "./api/zebra-goods/category;category";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-goods/category;category";
 
 // 商品分类信息
 message GoodsCategory {

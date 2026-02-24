@@ -1492,7 +1492,7 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"GetPayment\x12\x1a.payment.GetPaymentRequest\x1a\x1b.payment.GetPaymentResponse\x12B\n" +
 	"\tGetRefund\x12\x19.payment.GetRefundRequest\x1a\x1a.payment.GetRefundResponse\x12E\n" +
 	"\n" +
-	"LogPayment\x12\x1a.payment.LogPaymentRequest\x1a\x1b.payment.LogPaymentResponseB!Z\x1f./api/zebra-pay/payment;paymentb\x06proto3"
+	"LogPayment\x12\x1a.payment.LogPaymentRequest\x1a\x1b.payment.LogPaymentResponseBDZB./github.com/21bigticket/zebra-proto/api/zebra-pay/payment;paymentb\x06proto3"
 
 var (
 	file_api_zebra_pay_payment_payment_proto_rawDescOnce sync.Once

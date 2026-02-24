@@ -616,7 +616,7 @@ const file_api_zebra_stock_stock_stock_proto_rawDesc = "" +
 	"\bOutbound\x12\x16.stock.OutboundRequest\x1a\x14.stock.StockResponse\x124\n" +
 	"\x06Freeze\x12\x14.stock.FreezeRequest\x1a\x14.stock.StockResponse\x126\n" +
 	"\aRelease\x12\x15.stock.ReleaseRequest\x1a\x14.stock.StockResponse\x12;\n" +
-	"\bGetStock\x12\x16.stock.GetStockRequest\x1a\x17.stock.GetStockResponseB\x1fZ\x1d./api/zebra-stock/stock;stockb\x06proto3"
+	"\bGetStock\x12\x16.stock.GetStockRequest\x1a\x17.stock.GetStockResponseBBZ@./github.com/21bigticket/zebra-proto/api/zebra-stock/stock;stockb\x06proto3"
 
 var (
 	file_api_zebra_stock_stock_stock_proto_rawDescOnce sync.Once

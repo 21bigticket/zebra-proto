@@ -1316,7 +1316,7 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\fDeliverOrder\x12\x1a.order.DeliverOrderRequest\x1a\x14.order.OrderResponse\x12>\n" +
 	"\vFinishOrder\x12\x19.order.FinishOrderRequest\x1a\x14.order.OrderResponse\x12;\n" +
 	"\bGetOrder\x12\x16.order.GetOrderRequest\x1a\x17.order.GetOrderResponse\x12J\n" +
-	"\rGetUserOrders\x12\x1b.order.GetUserOrdersRequest\x1a\x1c.order.GetUserOrdersResponseB\x1fZ\x1d./api/zebra-order/order;orderb\x06proto3"
+	"\rGetUserOrders\x12\x1b.order.GetUserOrdersRequest\x1a\x1c.order.GetUserOrdersResponseBBZ@./github.com/21bigticket/zebra-proto/api/zebra-order/order;orderb\x06proto3"
 
 var (
 	file_api_zebra_order_order_order_proto_rawDescOnce sync.Once

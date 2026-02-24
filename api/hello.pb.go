@@ -135,7 +135,7 @@ const file_api_hello_proto_rawDesc = "" +
 	"\rHelloResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage2G\n" +
 	"\fHelloService\x127\n" +
-	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x00B\rZ\v./api;hellob\x06proto3"
+	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x00B0Z../github.com/21bigticket/zebra-proto/api;hellob\x06proto3"
 
 var (
 	file_api_hello_proto_rawDescOnce sync.Once

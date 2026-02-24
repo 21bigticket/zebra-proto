@@ -772,7 +772,7 @@ const file_api_zebra_goods_category_category_proto_rawDesc = "" +
 	"\x06Delete\x12\x1f.category.DeleteCategoryRequest\x1a\x17.category.GoodsCategory\x12B\n" +
 	"\x03Get\x12\x1c.category.GetCategoryRequest\x1a\x1d.category.GetCategoryResponse\x12E\n" +
 	"\x04List\x12\x1d.category.ListCategoryRequest\x1a\x1e.category.ListCategoryResponse\x12N\n" +
-	"\aGetTree\x12 .category.GetCategoryTreeRequest\x1a!.category.GetCategoryTreeResponseB%Z#./api/zebra-goods/category;categoryb\x06proto3"
+	"\aGetTree\x12 .category.GetCategoryTreeRequest\x1a!.category.GetCategoryTreeResponseBHZF./github.com/21bigticket/zebra-proto/api/zebra-goods/category;categoryb\x06proto3"
 
 var (
 	file_api_zebra_goods_category_category_proto_rawDescOnce sync.Once

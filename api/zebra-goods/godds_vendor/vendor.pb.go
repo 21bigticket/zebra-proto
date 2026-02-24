@@ -652,7 +652,7 @@ const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\x06Update\x12\x1b.vendor.UpdateVendorRequest\x1a\x0e.vendor.Vendor\x125\n" +
 	"\x06Delete\x12\x1b.vendor.DeleteVendorRequest\x1a\x0e.vendor.Vendor\x12:\n" +
 	"\x03Get\x12\x18.vendor.GetVendorRequest\x1a\x19.vendor.GetVendorResponse\x12=\n" +
-	"\x04List\x12\x19.vendor.ListVendorRequest\x1a\x1a.vendor.ListVendorResponseB-Z+./api/zebra-goods/godds_vendor;godds_vendorb\x06proto3"
+	"\x04List\x12\x19.vendor.ListVendorRequest\x1a\x1a.vendor.ListVendorResponseBPZN./github.com/21bigticket/zebra-proto/api/zebra-goods/godds_vendor;godds_vendorb\x06proto3"
 
 var (
 	file_api_zebra_goods_godds_vendor_vendor_proto_rawDescOnce sync.Once

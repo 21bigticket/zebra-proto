@@ -610,7 +610,7 @@ const file_api_zebra_config_application_application_proto_rawDesc = "" +
 	"\x06Update\x12%.application.UpdateApplicationRequest\x1a\x18.application.Application\x12I\n" +
 	"\x06Delete\x12%.application.DeleteApplicationRequest\x1a\x18.application.Application\x12N\n" +
 	"\x03Get\x12\".application.GetApplicationRequest\x1a#.application.GetApplicationResponse\x12Q\n" +
-	"\x04List\x12#.application.ListApplicationRequest\x1a$.application.ListApplicationResponseB,Z*./api/zebra-config/application;applicationb\x06proto3"
+	"\x04List\x12#.application.ListApplicationRequest\x1a$.application.ListApplicationResponseBOZM./github.com/21bigticket/zebra-proto/api/zebra-config/application;applicationb\x06proto3"
 
 var (
 	file_api_zebra_config_application_application_proto_rawDescOnce sync.Once

@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package order;
 
-option go_package = "./api/zebra-order/order;order";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-order/order;order";
 
 // 订单
 message Order {

@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package sms;
 
-option go_package = "./api/zebra-message/sms;sms";
+option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-message/sms;sms";
 
 // 短信模板
 message SmsTemplate {
