@@ -1,0 +1,97 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package stock;
+
+option go_package = "./api/zebra-stock/stock;stock";
+
+// 库存信息
+message Stock {
+  int64  sku_id      = 1;  // SKU ID（商品最小单元唯一标识）
+  int32  stock_num   = 2;  // 可用库存（可销售库存）
+  int32  freeze_num  = 3;  // 冻结库存（订单未支付/发货锁定的库存）
+  int32  sale_num    = 4;  // 累计已售数量（仅统计，不参与库存计算）
+  int32  version     = 5;  // 乐观锁版本号（用于并发更新控制）
+  int64  create_time = 6;  // 创建时间
+  int64  update_time = 7;  // 更新时间
+  int32  is_deleted  = 8;  // 是否删除: 0=否, 1=是
+}
+
+// 入库请求
+message InboundRequest {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 入库数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+// 出库请求
+message OutboundRequest {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 出库数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+// 冻结库存请求
+message FreezeRequest {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 冻结数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+// 释放库存请求
+message ReleaseRequest {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 释放数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+// 批量库存查询请求
+message GetStockRequest {
+  repeated int64 sku_ids = 1;  // SKU IDs
+}
+
+// 批量库存查询响应
+message GetStockResponse {
+  repeated Stock stocks = 1;  // 库存信息列表
+}
+
+// 通用响应
+message StockResponse {
+  bool   success = 1;  // 是否成功
+  string message = 2;  // 消息
+  Stock  stock   = 3;  // 库存信息
+}
+
+// 库存服务
+service StockService {
+  // 入库
+  rpc Inbound(InboundRequest) returns (StockResponse);
+  // 出库
+  rpc Outbound(OutboundRequest) returns (StockResponse);
+  // 冻结库存
+  rpc Freeze(FreezeRequest) returns (StockResponse);
+  // 释放库存
+  rpc Release(ReleaseRequest) returns (StockResponse);
+  // 获取库存
+  rpc GetStock(GetStockRequest) returns (GetStockResponse);
+}

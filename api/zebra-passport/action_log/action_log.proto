@@ -1,0 +1,59 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package action_log;
+
+option go_package = "./api/zebra-passport/action_log;action_log";
+
+// 管理员操作日志信息
+message AdminActionLog {
+  int64  id          = 1;
+  int64  admin_id    = 2;
+  string admin_name  = 3;
+  string action      = 4;
+  string resource    = 5;
+  int64  resource_id = 6;
+  string ip          = 7;
+  string user_agent  = 8;
+  int32  result      = 9; // 0=失败, 1=成功
+  string error_msg   = 10;
+  int64  create_time = 11;
+}
+
+// 查询操作日志请求
+message ListActionLogRequest {
+  int32  page        = 1;
+  int32  page_size   = 2;
+  int64  admin_id    = 3; // 管理员ID，0表示全部
+  string action      = 4; // 操作类型，空字符串表示全部
+  int32  result      = 5; // 操作结果，-1表示全部
+  int64  start_time  = 6; // 开始时间（时间戳）
+  int64  end_time    = 7; // 结束时间（时间戳）
+}
+
+// 查询操作日志响应
+message ListActionLogResponse {
+  repeated AdminActionLog logs  = 1;
+  int32                  total = 2;
+}
+
+// 操作日志服务
+service ActionLogService {
+  rpc List(ListActionLogRequest) returns (ListActionLogResponse);
+}

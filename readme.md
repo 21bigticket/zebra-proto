@@ -1,3 +1,4 @@
+### zebra-proto
 zebra-proto/
 ├── api/                          # 所有 proto 定义
 │   ├── hello.proto               # 示例/测试接口
@@ -27,7 +28,7 @@ zebra-proto/
 ├── gen-proto.sh                  # Proto 代码生成脚本
 └── go.mod                        # Go 模块定义
 
-
+### 使用
 开发人员修改 .proto 文件
         ↓
 运行 ./gen-proto.sh

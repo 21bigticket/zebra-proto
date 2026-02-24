@@ -1,0 +1,78 @@
+syntax = "proto3";
+package role_path;
+option go_package = "./api/zebra-passport/role_path;role_path";
+
+// RolePath 角色路径关联
+message RolePath {
+  int64 id = 1;
+  int64 role_id = 2;
+  int64 path_id = 3;
+  int64 create_time = 4;
+  int64 update_time = 5;
+  int32 is_deleted = 6;
+}
+
+// CreateRolePathRequest 创建角色路径关联请求
+message CreateRolePathRequest {
+  int64 role_id = 1;
+  int64 path_id = 2;
+}
+
+// UpdateRolePathRequest 更新角色路径关联请求
+message UpdateRolePathRequest {
+  int64 id = 1;
+  int64 role_id = 2;
+  int64 path_id = 3;
+}
+
+// DeleteRolePathRequest 删除角色路径关联请求
+message DeleteRolePathRequest {
+  int64 id = 1;
+}
+
+// GetRolePathRequest 获取角色路径关联请求
+message GetRolePathRequest {
+  int64 id = 1;
+}
+
+// GetRolePathResponse 获取角色路径关联响应
+message GetRolePathResponse {
+  RolePath role_path = 1;
+}
+
+// ListRolePathRequest 列出角色路径关联请求
+message ListRolePathRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 role_id = 3;
+  int64 path_id = 4;
+}
+
+// ListRolePathResponse 列出角色路径关联响应
+message ListRolePathResponse {
+  repeated RolePath role_paths = 1;
+  int32 total = 2;
+}
+
+// BatchCreateRolePathRequest 批量创建角色路径关联请求
+message BatchCreateRolePathRequest {
+  int64 role_id = 1;
+  repeated int64 path_ids = 2;
+}
+
+// BatchDeleteRolePathRequest 批量删除角色路径关联请求
+message BatchDeleteRolePathRequest {
+  int64 role_id = 1;
+  repeated int64 path_ids = 2;
+}
+
+// RolePathService 角色路径关联服务
+service RolePathService {
+  rpc Create(CreateRolePathRequest) returns (RolePath);
+  rpc Update(UpdateRolePathRequest) returns (RolePath);
+  rpc Delete(DeleteRolePathRequest) returns (RolePath);
+  rpc Get(GetRolePathRequest) returns (GetRolePathResponse);
+  rpc List(ListRolePathRequest) returns (ListRolePathResponse);
+  rpc BatchCreate(BatchCreateRolePathRequest) returns (ListRolePathResponse);
+  rpc BatchDelete(BatchDeleteRolePathRequest) returns (ListRolePathResponse);
+}

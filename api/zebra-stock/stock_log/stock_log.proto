@@ -1,0 +1,120 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package stock_log;
+
+option go_package = "./api/zebra-stock/stock_log;stock_log";
+
+// 库存日志
+message StockLog {
+  int64  log_id          = 1;  // 日志ID（自增主键）
+  int64  sku_id          = 2;  // SKU ID
+  int32  change_type     = 3;  // 变更类型: 1=入库, 2=出库, 3=冻结, 4=解冻
+  int32  change_num      = 4;  // 变更数量（正数，方向由change_type决定）
+  int32  before_stock    = 5;  // 变更前可用库存
+  int32  after_stock     = 6;  // 变更后可用库存
+  int32  before_freeze   = 7;  // 变更前冻结库存（补充字段，完善日志链路）
+  int32  after_freeze    = 8;  // 变更后冻结库存（补充字段，完善日志链路）
+  string order_no        = 9;  // 关联订单号（无则为NULL）
+  int64  operate_user_id = 10; // 操作人ID（系统操作填0）
+  string operate_ip      = 11; // 操作IP地址
+  string remark          = 12; // 备注（扩容长度，满足业务描述需求）
+  int64  create_time     = 13; // 创建时间
+}
+
+// 创建库存日志请求
+message CreateLogRequest {
+  int64  sku_id          = 1;  // SKU ID
+  int32  change_type     = 2;  // 变更类型: 1=入库, 2=出库, 3=冻结, 4=解冻
+  int32  change_num      = 3;  // 变更数量
+  int32  before_stock    = 4;  // 变更前可用库存
+  int32  after_stock     = 5;  // 变更后可用库存
+  int32  before_freeze   = 6;  // 变更前冻结库存
+  int32  after_freeze    = 7;  // 变更后冻结库存
+  string order_no        = 8;  // 关联订单号
+  int64  operate_user_id = 9;  // 操作人ID
+  string operate_ip      = 10; // 操作IP地址
+  string remark          = 11; // 备注
+}
+
+// 获取库存日志请求
+message GetLogRequest {
+  int64 log_id = 1;  // 日志ID
+}
+
+// 获取库存日志响应
+message GetLogResponse {
+  StockLog stock_log = 1;  // 库存日志
+}
+
+// 查询库存日志列表请求
+message ListLogRequest {
+  int32  page        = 1;  // 页码
+  int32  page_size   = 2;  // 页大小
+  int64  sku_id      = 3;  // SKU ID
+  int32  change_type = 4;  // 变更类型: 1=入库, 2=出库, 3=冻结, 4=解冻
+  string order_no    = 5;  // 订单号
+  int64  start_time  = 6;  // 开始时间戳
+  int64  end_time    = 7;  // 结束时间戳
+}
+
+// 查询库存日志列表响应
+message ListLogResponse {
+  repeated StockLog stock_logs = 1;  // 库存日志列表
+  int32            total     = 2;  // 总数
+}
+
+// 按SKU查询日志请求
+message GetLogsBySkuRequest {
+  int64  sku_id     = 1;  // SKU ID
+  int32  page       = 2;  // 页码
+  int32  page_size  = 3;  // 页大小
+  int64  start_time = 4;  // 开始时间戳
+  int64  end_time   = 5;  // 结束时间戳
+}
+
+// 按订单号查询日志请求
+message GetLogsByOrderRequest {
+  string order_no  = 1;  // 订单号
+  int32  page      = 2;  // 页码
+  int32  page_size = 3;  // 页大小
+}
+
+// 按变更类型查询日志请求
+message GetLogsByChangeTypeRequest {
+  int32  change_type = 1;  // 变更类型: 1=入库, 2=出库, 3=冻结, 4=解冻
+  int32  page      = 2;  // 页码
+  int32  page_size = 3;  // 页大小
+}
+
+// 库存日志服务
+service StockLogService {
+  // 创建日志
+  rpc Create(CreateLogRequest) returns (StockLog);
+  // 获取单条日志
+  rpc Get(GetLogRequest) returns (GetLogResponse);
+  // 查询日志列表
+  rpc List(ListLogRequest) returns (ListLogResponse);
+  // 按SKU查询日志
+  rpc GetLogsBySku(GetLogsBySkuRequest) returns (ListLogResponse);
+  // 按订单号查询日志
+  rpc GetLogsByOrder(GetLogsByOrderRequest) returns (ListLogResponse);
+  // 按变更类型查询日志
+  rpc GetLogsByChangeType(GetLogsByChangeTypeRequest) returns (ListLogResponse);
+}

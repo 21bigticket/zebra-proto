@@ -1,0 +1,127 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package after_sales;
+
+option go_package = "./api/zebra-order/after_sales;after_sales";
+
+// 售后单
+message AfterSales {
+  int64  sales_id        = 1;
+  string sales_no        = 2;
+  string order_no        = 3;
+  int64  user_id          = 4;
+  int32  sales_type      = 5;  // 1=退款, 2=退货, 3=换货
+  int32  sales_reason    = 6;  // 1=不想要了, 2=商品质量问题, 3=商品错发漏发, 4=其他
+  string sales_desc      = 7;  // 售后说明
+  int64  refund_amount   = 8;  // 退款金额（分）
+  int32  sales_status    = 9;  // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
+  string audit_remark    = 10; // 审核备注
+  int64  audit_time      = 11;
+  int64  refund_time     = 12;
+  int64  create_time     = 13;
+  int64  update_time     = 14;
+  int32  is_deleted      = 15;
+}
+
+// 售后单商品
+message AfterSalesItem {
+  int64  item_id         = 1;
+  int64  sales_id        = 2;
+  int64  order_item_id   = 3;
+  int64  sku_id          = 4;
+  string sku_name       = 5;
+  int32  quantity        = 6;
+  int64  refund_amount   = 7;  // 退款金额（分）
+  int64  create_time     = 8;
+  int64  update_time     = 9;
+  int32  is_deleted      = 10;
+}
+
+// 创建售后单请求
+message CreateAfterSalesRequest {
+  string             order_no     = 1;
+  int64              user_id      = 2;
+  int32              sales_type   = 3;
+  int32              sales_reason = 4;
+  string             sales_desc   = 5;
+  repeated int64     order_item_ids = 6;
+}
+
+// 创建售后单响应
+message CreateAfterSalesResponse {
+  AfterSales after_sales = 1;
+  string     message     = 2;
+}
+
+// 审核售后单请求
+message AuditAfterSalesRequest {
+  string sales_no    = 1;
+  int32  audit_status = 2;  // 1=通过, 2=拒绝
+  string audit_remark = 3;
+}
+
+// 退款请求
+message RefundRequest {
+  string sales_no = 1;
+}
+
+// 查询售后单请求
+message GetAfterSalesRequest {
+  oneof query {
+    string sales_no = 1;
+    int64  sales_id = 2;
+  }
+}
+
+// 查询售后单响应
+message GetAfterSalesResponse {
+  AfterSales              after_sales = 1;
+  repeated AfterSalesItem items       = 2;
+}
+
+// 查询用户售后单列表请求
+message GetUserAfterSalesRequest {
+  int64 user_id      = 1;
+  int32 sales_status = 2;  // -1=全部
+  int32 page         = 3;
+  int32 page_size    = 4;
+}
+
+// 查询用户售后单列表响应
+message GetUserAfterSalesResponse {
+  repeated AfterSales after_sales_list = 1;
+  int32              total            = 2;
+}
+
+// 通用响应
+message AfterSalesResponse {
+  bool        success    = 1;
+  string      message    = 2;
+  AfterSales  after_sales = 3;
+}
+
+// 售后服务
+service AfterSalesService {
+  rpc CreateAfterSales(CreateAfterSalesRequest) returns (CreateAfterSalesResponse);
+  rpc AuditAfterSales(AuditAfterSalesRequest) returns (AfterSalesResponse);
+  rpc Refund(RefundRequest) returns (AfterSalesResponse);
+  rpc GetAfterSales(GetAfterSalesRequest) returns (GetAfterSalesResponse);
+  rpc GetUserAfterSales(GetUserAfterSalesRequest) returns (GetUserAfterSalesResponse);
+}

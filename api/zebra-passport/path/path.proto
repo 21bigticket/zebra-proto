@@ -1,0 +1,92 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package path;
+
+option go_package = "./api/zebra-passport/path;path";
+
+// API路径信息
+message Path {
+  int64  id          = 1;
+  string path_name   = 2;
+  string path_url    = 3;
+  string method      = 4; // GET, POST, PUT, DELETE
+  string description = 5;
+  int32  status      = 6; // 0=禁用, 1=启用
+  int64  create_time = 7;
+  int64  update_time = 8;
+  int32  is_deleted  = 9;
+}
+
+// 创建路径请求
+message CreatePathRequest {
+  string path_name   = 1;
+  string path_url    = 2;
+  string method      = 3;
+  string description = 4;
+}
+
+// 更新路径请求
+message UpdatePathRequest {
+  int64  id          = 1;
+  string path_name   = 2;
+  string path_url    = 3;
+  string method      = 4;
+  string description = 5;
+  int32  status      = 6;
+}
+
+// 删除路径请求
+message DeletePathRequest {
+  int64 id = 1;
+}
+
+// 获取路径请求
+message GetPathRequest {
+  int64 id = 1;
+}
+
+// 获取路径响应
+message GetPathResponse {
+  Path path = 1;
+}
+
+// 列出路径请求
+message ListPathRequest {
+  int32  page          = 1;
+  int32  page_size     = 2;
+  string name_keyword  = 3;
+  string method        = 4;
+  int32  status        = 5;
+}
+
+// 列出路径响应
+message ListPathResponse {
+  repeated Path paths = 1;
+  int32        total = 2;
+}
+
+// 路径服务
+service PathService {
+  rpc Create(CreatePathRequest) returns (Path);
+  rpc Update(UpdatePathRequest) returns (Path);
+  rpc Delete(DeletePathRequest) returns (Path);
+  rpc Get(GetPathRequest) returns (GetPathResponse);
+  rpc List(ListPathRequest) returns (ListPathResponse);
+}

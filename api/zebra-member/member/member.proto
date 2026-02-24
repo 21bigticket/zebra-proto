@@ -1,0 +1,99 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package member;
+
+option go_package = "./api/zebra-member/member;member";
+
+// 用户信息
+message Member {
+  int64  user_id       = 1;
+  string user_name     = 2;
+  string password      = 3;
+  string zb_lion       = 4;
+  string nick_name     = 5;
+  int32  member_status = 6; // 0=禁用, 1=启用
+  string head_url      = 7;
+  string phone         = 8;
+  string email         = 9;
+  int64  create_time   = 10;
+  int64  update_time   = 11;
+  int32  is_deleted    = 12;
+}
+
+// 创建用户请求
+message CreateMemberRequest {
+  string user_name     = 1;
+  string password      = 2;
+  string zb_lion       = 3;
+  string nick_name     = 4;
+  string head_url      = 5;
+  string phone         = 6;
+  string email         = 7;
+}
+
+// 更新用户请求
+message UpdateMemberRequest {
+  int64  user_id       = 1;
+  string nick_name     = 2;
+  string head_url      = 3;
+  int32  member_status = 4;
+}
+
+// 删除用户请求
+message DeleteMemberRequest {
+  int64 user_id = 1;
+}
+
+// 获取用户请求
+message GetMemberRequest {
+  oneof query {
+    int64  user_id   = 1;
+    string user_name = 2;
+    string phone     = 3;
+  }
+}
+
+// 获取用户响应
+message GetMemberResponse {
+  Member member = 1;
+}
+
+// 列出用户请求
+message ListMemberRequest {
+  int32  page            = 1;
+  int32  page_size       = 2;
+  string name_keyword   = 3; // 名称模糊查询
+  int32  member_status   = 4;  // 状态过滤，-1表示全部
+}
+
+// 列出用户响应
+message ListMemberResponse {
+  repeated Member members = 1;
+  int32           total    = 2;
+}
+
+// 用户服务
+service MemberService {
+  rpc Create(CreateMemberRequest) returns (Member);
+  rpc Update(UpdateMemberRequest) returns (Member);
+  rpc Delete(DeleteMemberRequest) returns (Member);
+  rpc Get(GetMemberRequest) returns (GetMemberResponse);
+  rpc List(ListMemberRequest) returns (ListMemberResponse);
+}

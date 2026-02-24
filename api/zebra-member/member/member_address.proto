@@ -1,0 +1,101 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package member;
+
+option go_package = "./api/zebra-member/member;member";
+
+// 用户地址
+message MemberAddress {
+  int64  id              = 1;
+  int64  user_id        = 2;
+  string country        = 3;
+  string province       = 4;
+  string city           = 5;
+  string region         = 6;
+  string street         = 7;
+  int32  address_status = 8; // 0=禁用, 1=启用
+  int32  default_option = 9; // 0=非默认, 1=默认
+  int64  create_time    = 10;
+  int64  update_time    = 11;
+  int32  is_deleted     = 12;
+}
+
+// 创建地址请求
+message CreateMemberAddressRequest {
+  int64  user_id   = 1;
+  string country  = 2;
+  string province = 3;
+  string city     = 4;
+  string region   = 5;
+  string street   = 6;
+}
+
+// 更新地址请求
+message UpdateMemberAddressRequest {
+  int64  id              = 1;
+  string country        = 2;
+  string province       = 3;
+  string city           = 4;
+  string region         = 5;
+  string street         = 6;
+  int32  address_status = 7;
+  int32  default_option = 8;
+}
+
+// 删除地址请求
+message DeleteMemberAddressRequest {
+  int64 id = 1;
+}
+
+// 获取地址请求
+message GetMemberAddressRequest {
+  int64 id = 1;
+}
+
+// 获取地址响应
+message GetMemberAddressResponse {
+  MemberAddress member_address = 1;
+}
+
+// 根据用户ID获取地址列表请求
+message GetAddressListByUserRequest {
+  int64 user_id = 1;
+}
+
+// 地址列表响应
+message AddressListResponse {
+  repeated MemberAddress addresses = 1;
+}
+
+// 设置默认地址请求
+message SetDefaultAddressRequest {
+  int64 id      = 1;
+  int64 user_id = 2;
+}
+
+// 用户地址服务
+service MemberAddressService {
+  rpc Create(CreateMemberAddressRequest) returns (MemberAddress);
+  rpc Update(UpdateMemberAddressRequest) returns (MemberAddress);
+  rpc Delete(DeleteMemberAddressRequest) returns (MemberAddress);
+  rpc Get(GetMemberAddressRequest) returns (GetMemberAddressResponse);
+  rpc GetListByUser(GetAddressListByUserRequest) returns (AddressListResponse);
+  rpc SetDefault(SetDefaultAddressRequest) returns (MemberAddress);
+}

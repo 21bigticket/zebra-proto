@@ -1,0 +1,99 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+package cart_log;
+option go_package = "./api/zebra-cart/cart_log;cart_log";
+
+// 购物车日志
+message CartLog {
+  int64  log_id       = 1;
+  int64  user_id      = 2;
+  int64  cart_id      = 3;
+  int64  item_id      = 4;
+  string action       = 5;  // add/remove/update/clear/checkout
+  string action_data  = 6;  // JSON数据
+  int64  create_time  = 7;
+}
+
+// 创建日志请求
+message CreateLogRequest {
+  int64  user_id     = 1;
+  int64  cart_id     = 2;
+  int64  item_id     = 3;
+  string action      = 4;
+  string action_data = 5;
+}
+
+// 获取日志请求
+message GetLogRequest {
+  int64 log_id = 1;
+}
+
+// 获取日志响应
+message GetLogResponse {
+  CartLog cart_log = 1;
+}
+
+// 查询日志请求
+message ListLogRequest {
+  int32  page       = 1;
+  int32  page_size  = 2;
+  int64  user_id    = 3;
+  int64  cart_id    = 4;
+  string action     = 5;
+  int64  start_time = 6;
+  int64  end_time   = 7;
+}
+
+// 查询日志响应
+message ListLogResponse {
+  repeated CartLog cart_logs = 1;
+  int32           total      = 2;
+}
+
+// 按用户查询日志请求
+message GetUserLogsRequest {
+  int64 user_id    = 1;
+  int32 page       = 2;
+  int32 page_size  = 3;
+  int64 start_time = 4;
+  int64 end_time   = 5;
+}
+
+// 按购物车查询日志请求
+message GetCartLogsRequest {
+  int64 cart_id    = 1;
+  int32 page       = 2;
+  int32 page_size  = 3;
+  int64 start_time = 4;
+  int64 end_time   = 5;
+}
+
+// 购物车日志服务
+service CartLogService {
+  // 创建日志
+  rpc Create(CreateLogRequest) returns (CartLog);
+  // 获取单条日志
+  rpc Get(GetLogRequest) returns (GetLogResponse);
+  // 查询日志列表
+  rpc List(ListLogRequest) returns (ListLogResponse);
+  // 获取用户日志
+  rpc GetUserLogs(GetUserLogsRequest) returns (ListLogResponse);
+  // 获取购物车日志
+  rpc GetCartLogs(GetCartLogsRequest) returns (ListLogResponse);
+}

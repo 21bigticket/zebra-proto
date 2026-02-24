@@ -1,0 +1,108 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package admin_user;
+
+option go_package = "./api/zebra-passport/admin_user;admin_user";
+
+// 管理员用户信息
+message AdminUser {
+  int64  id           = 1;
+  string user_name    = 2;
+  string password     = 3;
+  string real_name    = 4;
+  string phone        = 5;
+  string email        = 6;
+  int32  status       = 7; // 0=禁用, 1=启用
+  int64  create_time  = 8;
+  int64  update_time  = 9;
+  int32  is_deleted   = 10;
+}
+
+// 创建管理员请求
+message CreateAdminUserRequest {
+  string user_name  = 1;
+  string password   = 2;
+  string real_name  = 3;
+  string phone      = 4;
+  string email      = 5;
+  repeated int64 role_ids = 6;
+}
+
+// 更新管理员请求
+message UpdateAdminUserRequest {
+  int64  id          = 1;
+  string real_name   = 2;
+  string phone       = 3;
+  string email       = 4;
+  int32  status      = 5;
+  repeated int64 role_ids = 6;
+}
+
+// 删除管理员请求
+message DeleteAdminUserRequest {
+  int64 id = 1;
+}
+
+// 获取管理员请求
+message GetAdminUserRequest {
+  int64 id = 1;
+}
+
+// 获取管理员响应
+message GetAdminUserResponse {
+  AdminUser admin_user = 1;
+  repeated int64 role_ids = 2;
+}
+
+// 列出管理员请求
+message ListAdminUserRequest {
+  int32  page          = 1;
+  int32  page_size     = 2;
+  string name_keyword  = 3;
+  int32  status        = 4;
+}
+
+// 列出管理员响应
+message ListAdminUserResponse {
+  repeated AdminUser admin_users = 1;
+  int32                 total     = 2;
+}
+
+// 登录请求
+message LoginRequest {
+  string user_name = 1;
+  string password  = 2;
+}
+
+// 登录响应
+message LoginResponse {
+  AdminUser admin_user = 1;
+  string token         = 2;
+}
+
+// 管理员用户服务
+service AdminUserService {
+  rpc Create(CreateAdminUserRequest) returns (AdminUser);
+  rpc Update(UpdateAdminUserRequest) returns (AdminUser);
+  rpc Delete(DeleteAdminUserRequest) returns (AdminUser);
+  rpc Get(GetAdminUserRequest) returns (GetAdminUserResponse);
+  rpc List(ListAdminUserRequest) returns (ListAdminUserResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+}

@@ -1,0 +1,90 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package application;
+
+option go_package = "./api/zebra-config/application;application";
+
+// 应用信息
+message Application {
+  int64 id = 1;
+  string appid = 2;
+  string name = 3;
+  string desc = 4;
+  string app_key = 5;
+  int64 create_time = 6;
+  int64 update_time = 7;
+  int32 is_deleted = 8;
+}
+
+// 创建应用请求
+message CreateApplicationRequest {
+  string appid = 1;
+  string name = 2;
+  string desc = 3;
+  string app_key = 4;
+}
+
+// 更新应用请求
+message UpdateApplicationRequest {
+  int64 id = 1;
+  string name = 2;
+  string desc = 3;
+  string app_key = 4;
+}
+
+// 删除应用请求
+message DeleteApplicationRequest {
+  int64 id = 1;
+}
+
+// 获取应用请求
+message GetApplicationRequest {
+  oneof query {
+    int64 id = 1;
+    string appid = 2;
+  }
+}
+
+// 获取应用响应
+message GetApplicationResponse {
+  Application application = 1;
+}
+
+// 列出应用请求
+message ListApplicationRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string name_keyword = 3; // 名称模糊查询
+}
+
+// 列出应用响应
+message ListApplicationResponse {
+  repeated Application applications = 1;
+  int32 total = 2;
+}
+
+// 应用服务
+service ApplicationService {
+  rpc Create(CreateApplicationRequest) returns (Application);
+  rpc Update(UpdateApplicationRequest) returns (Application);
+  rpc Delete(DeleteApplicationRequest) returns (Application);
+  rpc Get(GetApplicationRequest) returns (GetApplicationResponse);
+  rpc List(ListApplicationRequest) returns (ListApplicationResponse);
+}

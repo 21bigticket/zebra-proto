@@ -1,0 +1,67 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package member;
+
+option go_package = "./api/zebra-member/member;member";
+
+// 用户详细信息
+message MemberItem {
+  int64 id          = 1;
+  int64 user_id     = 2;
+  int32 gender      = 3; // 0=未知, 1=男, 2=女
+  int32 age         = 4;
+  int64 birthday    = 5;
+  int64 create_time = 6;
+  int64 update_time = 7;
+  int32 is_deleted  = 8;
+}
+
+// 创建用户详细信息请求
+message CreateMemberItemRequest {
+  int64  user_id  = 1;
+  int32  gender   = 2;
+  int32  age      = 3;
+  int64  birthday = 4;
+}
+
+// 更新用户详细信息请求
+message UpdateMemberItemRequest {
+  int64  id       = 1;
+  int32  gender   = 2;
+  int32  age      = 3;
+  int64  birthday = 4;
+}
+
+// 获取用户详细信息请求
+message GetMemberItemRequest {
+  int64 user_id = 1;
+}
+
+// 获取用户详细信息响应
+message GetMemberItemResponse {
+  MemberItem member_item = 1;
+}
+
+// 用户详细信息服务
+service MemberItemService {
+  rpc Create(CreateMemberItemRequest) returns (MemberItem);
+  rpc Update(UpdateMemberItemRequest) returns (MemberItem);
+  rpc Get(GetMemberItemRequest) returns (GetMemberItemResponse);
+}

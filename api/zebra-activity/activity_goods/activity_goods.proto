@@ -1,0 +1,149 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package activity_goods;
+
+option go_package = "./api/zebra-activity/activity_goods;activity_goods";
+
+// 活动商品信息
+message ActivityGoods {
+  int64  activity_goods_id = 1;
+  int64  activity_id       = 2;
+  int64  sku_id            = 3;
+  int64  activity_price    = 4; // 活动价（分）
+  int32  stock_limit       = 5; // 活动库存限制
+  int32  sold_quantity     = 6; // 已售数量
+  int32  limit_per_user    = 7; // 每人限购数量，0表示不限购
+  int32  sort_order        = 8; // 排序
+  int64  create_time       = 9;
+  int64  update_time       = 10;
+  int32  is_deleted        = 11;
+}
+
+// 创建活动商品请求
+message CreateActivityGoodsRequest {
+  int64 activity_id    = 1;
+  int64 sku_id         = 2;
+  int64 activity_price = 3;
+  int32 stock_limit    = 4;
+  int32 limit_per_user = 5;
+  int32 sort_order     = 6;
+}
+
+// 批量创建活动商品请求
+message BatchCreateActivityGoodsRequest {
+  int64                          activity_id = 1;
+  repeated CreateActivityGoodsRequest goods    = 2;
+}
+
+// 更新活动商品请求
+message UpdateActivityGoodsRequest {
+  int64  activity_goods_id = 1;
+  int64  activity_price    = 2;
+  int32  stock_limit       = 3;
+  int32  limit_per_user    = 4;
+  int32  sort_order        = 5;
+}
+
+// 删除活动商品请求
+message DeleteActivityGoodsRequest {
+  int64 activity_goods_id = 1;
+}
+
+// 批量删除活动商品请求
+message BatchDeleteActivityGoodsRequest {
+  repeated int64 activity_goods_ids = 1;
+}
+
+// 获取活动商品请求
+message GetActivityGoodsRequest {
+  int64 activity_goods_id = 1;
+}
+
+// 获取活动商品响应
+message GetActivityGoodsResponse {
+  ActivityGoods activity_goods = 1;
+}
+
+// 列出活动商品请求（按活动ID）
+message ListActivityGoodsRequest {
+  int64 activity_id = 1;
+  int32 page        = 2;
+  int32 page_size   = 3;
+}
+
+// 列出活动商品响应
+message ListActivityGoodsResponse {
+  repeated ActivityGoods activity_goods = 1;
+  int32                 total          = 2;
+}
+
+// 获取商品活动请求（按SKU ID）
+message GetGoodsActivityRequest {
+  repeated int64 sku_ids = 1;
+}
+
+// 获取商品活动响应
+message GetGoodsActivityResponse {
+  repeated ActivityGoods goods = 1;
+}
+
+// 验证活动请求
+message ValidateActivityRequest {
+  int64 activity_id = 1;
+  int64 sku_id      = 2;
+  int64 user_id     = 3;
+  int32 quantity    = 4;
+}
+
+// 验证活动响应
+message ValidateActivityResponse {
+  bool   valid         = 1;
+  string message       = 2;
+  int64  activity_price = 3;
+}
+
+// 扣减活动库存请求
+message DeductActivityStockRequest {
+  int64  activity_id = 1;
+  int64  sku_id      = 2;
+  int64  user_id     = 3;
+  int32  quantity    = 4;
+  string order_no    = 5;
+}
+
+// 通用响应
+message ActivityGoodsResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// 活动商品服务
+service ActivityGoodsService {
+  rpc Create(CreateActivityGoodsRequest) returns (ActivityGoods);
+  rpc BatchCreate(BatchCreateActivityGoodsRequest) returns (ActivityGoodsResponse);
+  rpc Update(UpdateActivityGoodsRequest) returns (ActivityGoods);
+  rpc Delete(DeleteActivityGoodsRequest) returns (ActivityGoods);
+  rpc BatchDelete(BatchDeleteActivityGoodsRequest) returns (ActivityGoodsResponse);
+  rpc Get(GetActivityGoodsRequest) returns (GetActivityGoodsResponse);
+  rpc List(ListActivityGoodsRequest) returns (ListActivityGoodsResponse);
+  rpc GetGoodsActivity(GetGoodsActivityRequest) returns (GetGoodsActivityResponse);
+  rpc ValidateActivity(ValidateActivityRequest) returns (ValidateActivityResponse);
+  rpc DeductActivityStock(DeductActivityStockRequest) returns (ActivityGoodsResponse);
+}

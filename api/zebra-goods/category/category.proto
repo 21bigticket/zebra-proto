@@ -1,0 +1,109 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package category;
+
+option go_package = "./api/zebra-goods/category;category";
+
+// 商品分类信息
+message GoodsCategory {
+  int64  id          = 1;
+  int64  parent_id   = 2; // 父分类ID，0表示根分类
+  string name        = 3;
+  int32  level       = 4; // 层级：1=一级，2=二级，3=三级
+  string icon_url    = 5;
+  int32  sort_order  = 6;
+  int32  status      = 7; // 0=禁用, 1=启用
+  int64  create_time = 8;
+  int64  update_time = 9;
+  int32  is_deleted  = 10;
+}
+
+// 创建分类请求
+message CreateCategoryRequest {
+  int64  parent_id  = 1;
+  string name       = 2;
+  string icon_url   = 3;
+  int32  sort_order = 4;
+}
+
+// 更新分类请求
+message UpdateCategoryRequest {
+  int64  id         = 1;
+  string name       = 2;
+  string icon_url   = 3;
+  int32  sort_order = 4;
+  int32  status     = 5;
+}
+
+// 删除分类请求
+message DeleteCategoryRequest {
+  int64 id = 1;
+}
+
+// 获取分类请求
+message GetCategoryRequest {
+  int64 id = 1;
+}
+
+// 获取分类响应
+message GetCategoryResponse {
+  GoodsCategory category = 1;
+}
+
+// 列出分类请求
+message ListCategoryRequest {
+  int32  page       = 1;
+  int32  page_size  = 2;
+  int64  parent_id  = 3; // 父分类ID，-1表示全部
+  int32  level      = 4; // 层级，-1表示全部
+  int32  status     = 5; // 状态，-1表示全部
+}
+
+// 列出分类响应
+message ListCategoryResponse {
+  repeated GoodsCategory categories = 1;
+  int32                   total     = 2;
+}
+
+// 获取分类树请求
+message GetCategoryTreeRequest {
+  int64 parent_id = 1; // 父分类ID，-1表示从根开始
+}
+
+// 获取分类树响应
+message GetCategoryTreeResponse {
+  repeated GoodsCategoryTreeItem tree = 1;
+}
+
+// 分类树节点
+message GoodsCategoryTreeItem {
+  GoodsCategory               category    = 1;
+  repeated GoodsCategoryTreeItem children = 2;
+}
+
+// 分类服务
+service CategoryService {
+  rpc Create(CreateCategoryRequest) returns (GoodsCategory);
+  rpc Update(UpdateCategoryRequest) returns (GoodsCategory);
+  rpc Delete(DeleteCategoryRequest) returns (GoodsCategory);
+  rpc Get(GetCategoryRequest) returns (GetCategoryResponse);
+  rpc List(ListCategoryRequest) returns (ListCategoryResponse);
+  rpc GetTree(GetCategoryTreeRequest) returns (GetCategoryTreeResponse);
+}

@@ -1,0 +1,107 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package coupon;
+
+option go_package = "./api/zebra-activity/coupon;coupon";
+
+// 优惠券信息
+message Coupon {
+  int64  id              = 1;
+  string name            = 2;
+  int32  type            = 3; // 1=满减券, 2=折扣券, 3=立减券
+  int64  min_amount      = 4; // 最小使用金额（分）
+  int64  discount_amount = 5; // 优惠金额（分）
+  int32  discount_rate   = 6; // 折扣率（如95表示95折）
+  int32  total_quantity  = 7; // 总数量
+  int32  issued_quantity = 8; // 已发放数量
+  int32  used_quantity   = 9; // 已使用数量
+  int32  valid_days      = 10; // 有效天数
+  int64  start_time      = 11; // 开始时间
+  int64  end_time        = 12; // 结束时间
+  int32  status          = 13; // 0=禁用, 1=启用
+  int64  create_time     = 14;
+  int64  update_time     = 15;
+  int32  is_deleted      = 16;
+}
+
+// 创建优惠券请求
+message CreateCouponRequest {
+  string name            = 1;
+  int32  type            = 2;
+  int64  min_amount      = 3;
+  int64  discount_amount = 4;
+  int32  discount_rate   = 5;
+  int32  total_quantity  = 6;
+  int32  valid_days      = 7;
+  int64  start_time      = 8;
+  int64  end_time        = 9;
+}
+
+// 更新优惠券请求
+message UpdateCouponRequest {
+  int64  id              = 1;
+  string name            = 2;
+  int64  min_amount      = 3;
+  int64  discount_amount = 4;
+  int32  discount_rate   = 5;
+  int32  total_quantity  = 6;
+  int32  valid_days      = 7;
+  int64  start_time      = 8;
+  int64  end_time        = 9;
+  int32  status          = 10;
+}
+
+// 删除优惠券请求
+message DeleteCouponRequest {
+  int64 id = 1;
+}
+
+// 获取优惠券请求
+message GetCouponRequest {
+  int64 id = 1;
+}
+
+// 获取优惠券响应
+message GetCouponResponse {
+  Coupon coupon = 1;
+}
+
+// 列出优惠券请求
+message ListCouponRequest {
+  int32  page      = 1;
+  int32  page_size = 2;
+  int32  type      = 3; // -1表示全部
+  int32  status    = 4; // -1表示全部
+}
+
+// 列出优惠券响应
+message ListCouponResponse {
+  repeated Coupon coupons = 1;
+  int32          total   = 2;
+}
+
+// 优惠券服务
+service CouponService {
+  rpc Create(CreateCouponRequest) returns (Coupon);
+  rpc Update(UpdateCouponRequest) returns (Coupon);
+  rpc Delete(DeleteCouponRequest) returns (Coupon);
+  rpc Get(GetCouponRequest) returns (GetCouponResponse);
+  rpc List(ListCouponRequest) returns (ListCouponResponse);
+}

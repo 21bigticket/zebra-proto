@@ -1,0 +1,94 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package member;
+
+option go_package = "./api/zebra-member/member;member";
+
+// 用户收藏记录
+message MemberCollect {
+  int64  id             = 1;
+  int64  user_id        = 2;
+  int32  collect_status = 3; // 0=取消收藏, 1=已收藏
+  int64  goods_id       = 4;
+  int64  sku_id         = 5;
+  int64  create_time    = 6;
+  int64  update_time    = 7;
+  int32  is_deleted     = 8;
+}
+
+// 创建收藏请求
+message CreateMemberCollectRequest {
+  int64 user_id = 1;
+  int64 goods_id = 2;
+  int64 sku_id   = 3;
+}
+
+// 更新收藏状态请求
+message UpdateCollectStatusRequest {
+  int64 id             = 1;
+  int32 collect_status = 2;
+}
+
+// 删除收藏请求
+message DeleteMemberCollectRequest {
+  int64 id = 1;
+}
+
+// 获取收藏请求
+message GetMemberCollectRequest {
+  int64 id = 1;
+}
+
+// 获取收藏响应
+message GetMemberCollectResponse {
+  MemberCollect member_collect = 1;
+}
+
+// 根据用户ID获取收藏列表请求
+message GetCollectListByUserRequest {
+  int64 user_id = 1;
+}
+
+// 收藏列表响应
+message CollectListResponse {
+  repeated MemberCollect collects = 1;
+}
+
+// 检查收藏状态请求
+message CheckCollectStatusRequest {
+  int64 user_id  = 1;
+  int64 goods_id = 2;
+  int64 sku_id   = 3;
+}
+
+// 检查收藏状态响应
+message CheckCollectStatusResponse {
+  int32 collect_status = 1; // 0=未收藏, 1=已收藏
+}
+
+// 用户收藏服务
+service MemberCollectService {
+  rpc Create(CreateMemberCollectRequest) returns (MemberCollect);
+  rpc UpdateStatus(UpdateCollectStatusRequest) returns (MemberCollect);
+  rpc Delete(DeleteMemberCollectRequest) returns (MemberCollect);
+  rpc Get(GetMemberCollectRequest) returns (GetMemberCollectResponse);
+  rpc GetListByUser(GetCollectListByUserRequest) returns (CollectListResponse);
+  rpc CheckStatus(CheckCollectStatusRequest) returns (CheckCollectStatusResponse);
+}

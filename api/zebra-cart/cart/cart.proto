@@ -1,0 +1,108 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package cart;
+
+option go_package = "./api/zebra-cart/cart;cart";
+
+// 购物车
+message Cart {
+  int64  cart_id     = 1;
+  int64  user_id     = 2;
+  int64  create_time = 3;
+  int64  update_time = 4;
+  int32  is_deleted  = 5;
+}
+
+// 购物车商品
+message CartItem {
+  int64  item_id     = 1;
+  int64  cart_id     = 2;
+  int64  user_id     = 3;
+  int64  sku_id      = 4;
+  string sku_name    = 5;
+  string sku_image   = 6;
+  int64  price       = 7;  // 单价（分）
+  int32  quantity    = 8;  // 数量
+  int64  create_time = 9;
+  int64  update_time = 10;
+  int32  is_deleted  = 11;
+}
+
+// 添加商品请求
+message AddItemRequest {
+  int64  user_id  = 1;
+  int64  sku_id   = 2;
+  string sku_name = 3;
+  string sku_image = 4;
+  int64  price    = 5;
+  int32  quantity = 6;
+}
+
+// 移除商品请求
+message RemoveItemRequest {
+  int64 user_id  = 1;
+  int64 item_id  = 2;
+}
+
+// 更新数量请求
+message UpdateQuantityRequest {
+  int64 user_id  = 1;
+  int64 item_id  = 2;
+  int32 quantity = 3;
+}
+
+// 清空购物车请求
+message ClearCartRequest {
+  int64 user_id = 1;
+}
+
+// 获取购物车请求
+message GetCartRequest {
+  int64 user_id = 1;
+}
+
+// 获取购物车响应
+message GetCartResponse {
+  Cart           cart        = 1;
+  repeated CartItem items    = 2;
+}
+
+// 批量删除请求
+message BatchRemoveRequest {
+  int64          user_id = 1;
+  repeated int64 item_ids = 2;
+}
+
+// 通用响应
+message CartResponse {
+  bool       success  = 1;
+  string     message  = 2;
+  CartItem   item     = 3;
+}
+
+// 购物车服务
+service CartService {
+  rpc AddItem(AddItemRequest) returns (CartResponse);
+  rpc RemoveItem(RemoveItemRequest) returns (CartResponse);
+  rpc UpdateQuantity(UpdateQuantityRequest) returns (CartResponse);
+  rpc ClearCart(ClearCartRequest) returns (CartResponse);
+  rpc GetCart(GetCartRequest) returns (GetCartResponse);
+  rpc BatchRemove(BatchRemoveRequest) returns (CartResponse);
+}

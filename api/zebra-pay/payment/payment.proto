@@ -1,0 +1,183 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package payment;
+
+option go_package = "./api/zebra-pay/payment;payment";
+
+// 支付记录
+message Payment {
+  int64  pay_id          = 1;
+  string pay_no          = 2;
+  string order_no        = 3;
+  int64  user_id          = 4;
+  int64  pay_amount      = 5;  // 支付金额（分）
+  int32  pay_type        = 6;  // 1=支付宝, 2=微信, 3=余额
+  int32  pay_status      = 7;  // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
+  string third_party_no  = 8;  // 第三方支付流水号
+  int64  pay_time        = 9;
+  string notify_url     = 10;
+  string return_url     = 11;
+  int64  create_time     = 12;
+  int64  update_time     = 13;
+  int32  is_deleted      = 14;
+}
+
+// 退款记录
+message Refund {
+  int64  refund_id       = 1;
+  string refund_no       = 2;
+  string pay_no          = 3;
+  string order_no        = 4;
+  int64  refund_amount   = 5;  // 退款金额（分）
+  int32  refund_status   = 6;  // 0=退款中, 1=退款成功, 2=退款失败
+  string third_party_no  = 7;  // 第三方退款流水号
+  int64  refund_time     = 8;
+  string refund_reason   = 9;
+  int64  create_time     = 10;
+  int64  update_time     = 11;
+  int32  is_deleted      = 12;
+}
+
+// 退款明细
+message RefundItem {
+  int64  item_id         = 1;
+  int64  refund_id       = 2;
+  string sales_no       = 3;  // 售后单号
+  int64  refund_amount   = 4;  // 退款金额（分）
+  int64  create_time     = 5;
+  int64  update_time     = 6;
+  int32  is_deleted      = 7;
+}
+
+// 创建支付请求
+message CreatePaymentRequest {
+  string order_no    = 1;
+  int64  user_id      = 2;
+  int64  pay_amount   = 3;
+  int32  pay_type     = 4;
+  string notify_url  = 5;
+  string return_url  = 6;
+}
+
+// 创建支付响应
+message CreatePaymentResponse {
+  Payment payment     = 1;
+  string  pay_url     = 2;  // 支付URL
+  string  message     = 3;
+}
+
+// 支付回调请求
+message PayCallbackRequest {
+  string pay_no         = 1;
+  string third_party_no = 2;
+  int32  pay_status     = 3;
+}
+
+// 创建退款请求
+message CreateRefundRequest {
+  string       pay_no       = 1;
+  string       sales_no     = 2;  // 售后单号
+  int64        refund_amount = 3;
+  string       refund_reason = 4;
+  repeated RefundItemReq items = 5;
+}
+
+// 退款明细请求
+message RefundItemReq {
+  string sales_no     = 1;
+  int64  refund_amount = 2;
+}
+
+// 创建退款响应
+message CreateRefundResponse {
+  Refund refund  = 1;
+  string message = 2;
+}
+
+// 查询支付请求
+message GetPaymentRequest {
+  oneof query {
+    string pay_no    = 1;
+    string order_no  = 2;
+  }
+}
+
+// 查询支付响应
+message GetPaymentResponse {
+  Payment payment = 1;
+}
+
+// 查询退款请求
+message GetRefundRequest {
+  oneof query {
+    string refund_no = 1;
+    string sales_no  = 2;
+  }
+}
+
+// 查询退款响应
+message GetRefundResponse {
+  Refund                refund = 1;
+  repeated RefundItem   items  = 2;
+}
+
+// 支付日志记录
+message PaymentLog {
+  int64  log_id       = 1;
+  string pay_no       = 2;  // 支付单号
+  string order_no     = 3;  // 订单号
+  string action       = 4;  // 操作: create=创建支付, pay=支付处理, refund=退款处理
+  string request_data = 5;  // 请求数据(JSON)
+  string response_data = 6; // 响应数据(JSON)
+  int64  create_time  = 7;  // 创建时间
+}
+
+// 记录支付日志请求
+message LogPaymentRequest {
+  string pay_no       = 1;  // 支付单号
+  string order_no     = 2;  // 订单号
+  string action       = 3;  // 操作类型
+  string request_data = 4;  // 请求数据
+  string response_data = 5; // 响应数据
+}
+
+// 记录支付日志响应
+message LogPaymentResponse {
+  bool   success = 1;
+  string message = 2;
+  PaymentLog log = 3;
+}
+
+// 通用响应
+message PaymentResponse {
+  bool    success = 1;
+  string  message = 2;
+  Payment payment = 3;
+}
+
+// 支付服务
+service PaymentService {
+  rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+  rpc PayCallback(PayCallbackRequest) returns (PaymentResponse);
+  rpc CreateRefund(CreateRefundRequest) returns (CreateRefundResponse);
+  rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
+  rpc GetRefund(GetRefundRequest) returns (GetRefundResponse);
+  rpc LogPayment(LogPaymentRequest) returns (LogPaymentResponse);
+}

@@ -1,0 +1,198 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package activity;
+
+option go_package = "./api/zebra-activity/activity;activity";
+
+// 活动信息
+message Activity {
+  int64  activity_id     = 1;
+  string activity_name   = 2;
+  int32  activity_type   = 3; // 1=秒杀, 2=拼团, 3=满减, 4=折扣
+  int64  start_time      = 4;
+  int64  end_time        = 5;
+  int32  activity_status = 6; // 0=未开始, 1=进行中, 2=已结束, 3=已取消
+  string remark          = 7;
+  int64  create_time     = 8;
+  int64  update_time     = 9;
+  int32  is_deleted      = 10;
+}
+
+// 创建活动请求
+message CreateActivityRequest {
+  string activity_name   = 1;
+  int32  activity_type   = 2;
+  int64  start_time      = 3;
+  int64  end_time        = 4;
+  string remark          = 5;
+}
+
+// 更新活动请求
+message UpdateActivityRequest {
+  int64  activity_id     = 1;
+  string activity_name   = 2;
+  int64  start_time      = 3;
+  int64  end_time        = 4;
+  int32  activity_status = 5;
+  string remark          = 6;
+}
+
+// 删除活动请求
+message DeleteActivityRequest {
+  int64 activity_id = 1;
+}
+
+// 获取活动请求
+message GetActivityRequest {
+  int64 activity_id = 1;
+}
+
+// 获取活动响应
+message GetActivityResponse {
+  Activity activity = 1;
+}
+
+// 列出活动请求
+message ListActivityRequest {
+  int32 page            = 1;
+  int32 page_size       = 2;
+  int32 activity_type   = 3; // -1表示全部
+  int32 activity_status = 4; // -1表示全部
+}
+
+// 列出活动响应
+message ListActivityResponse {
+  repeated Activity activities = 1;
+  int32            total      = 2;
+}
+
+// 启动活动请求
+message StartActivityRequest {
+  int64 activity_id = 1;
+}
+
+// 启动活动响应
+message StartActivityResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// 结束活动请求
+message EndActivityRequest {
+  int64 activity_id = 1;
+}
+
+// 结束活动响应
+message EndActivityResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// 取消活动请求
+message CancelActivityRequest {
+  int64 activity_id = 1;
+}
+
+// 取消活动响应
+message CancelActivityResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// 活动商品
+message ActivityGoods {
+  int64  activity_goods_id = 1;
+  int64  activity_id       = 2;
+  int64  sku_id            = 3;
+  int64  activity_price    = 4; // 活动价（分）
+  int32  stock_limit       = 5; // 活动库存限制
+  int32  sold_quantity     = 6; // 已售数量
+  int32  limit_per_user    = 7; // 每人限购数量
+  int32  sort_order        = 8;
+  int64  create_time       = 9;
+  int64  update_time       = 10;
+  int32  is_deleted        = 11;
+}
+
+// 获取活动商品请求
+message GetActivityGoodsRequest {
+  int64 activity_id = 1;
+}
+
+// 获取活动商品响应
+message GetActivityGoodsResponse {
+  repeated ActivityGoods goods = 1;
+}
+
+// 获取商品活动请求
+message GetGoodsActivityRequest {
+  repeated int64 sku_ids = 1;
+}
+
+// 获取商品活动响应
+message GetGoodsActivityResponse {
+  repeated ActivityGoods goods = 1;
+}
+
+// 验证活动请求
+message ValidateActivityRequest {
+  int64 activity_id = 1;
+  int64 sku_id      = 2;
+  int64 user_id     = 3;
+  int32 quantity    = 4;
+}
+
+// 验证活动响应
+message ValidateActivityResponse {
+  bool   valid       = 1;
+  string message     = 2;
+  int64  activity_price = 3;
+}
+
+// 扣减活动库存请求
+message DeductActivityStockRequest {
+  int64 activity_id = 1;
+  int64 sku_id      = 2;
+  int64 user_id     = 3;
+  int32 quantity    = 4;
+  string order_no   = 5;
+}
+
+// 通用响应
+message ActivityResponse {
+  bool   success = 1;
+  string message = 2;
+}
+
+// 活动服务
+service ActivityService {
+  rpc Create(CreateActivityRequest) returns (Activity);
+  rpc Update(UpdateActivityRequest) returns (Activity);
+  rpc Delete(DeleteActivityRequest) returns (Activity);
+  rpc Get(GetActivityRequest) returns (GetActivityResponse);
+  rpc List(ListActivityRequest) returns (ListActivityResponse);
+  rpc Start(StartActivityRequest) returns (StartActivityResponse);
+  rpc End(EndActivityRequest) returns (EndActivityResponse);
+  rpc Cancel(CancelActivityRequest) returns (CancelActivityResponse);
+  rpc GetActivityGoods(GetActivityGoodsRequest) returns (GetActivityGoodsResponse);
+  rpc GetGoodsActivity(GetGoodsActivityRequest) returns (GetGoodsActivityResponse);
+  rpc ValidateActivity(ValidateActivityRequest) returns (ValidateActivityResponse);
+  rpc DeductActivityStock(DeductActivityStockRequest) returns (ActivityResponse);
+}

@@ -1,0 +1,167 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package order;
+
+option go_package = "./api/zebra-order/order;order";
+
+// 订单
+message Order {
+  int64  order_id         = 1;
+  string order_no        = 2;
+  int64  user_id          = 3;
+  int32  order_status     = 4;  // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
+  int64  total_amount     = 5;  // 订单总金额（分）
+  int64  pay_amount       = 6;  // 实付金额（分）
+  int64  discount_amount  = 7;  // 优惠金额（分）
+  int64  freight_amount   = 8;  // 运费（分）
+  string receiver_name    = 9;
+  string receiver_phone   = 10;
+  string receiver_address = 11;
+  int64  pay_time         = 12;
+  int64  delivery_time    = 13;
+  int64  finish_time      = 14;
+  int64  cancel_time      = 15;
+  int64  create_time      = 16;
+  int64  update_time      = 17;
+  int32  is_deleted       = 18;
+}
+
+// 订单商品
+message OrderItem {
+  int64  item_id        = 1;
+  int64  order_id       = 2;
+  string order_no      = 3;
+  int64  sku_id         = 4;
+  string sku_name      = 5;
+  string sku_image     = 6;
+  int64  price          = 7;  // 商品单价（分）
+  int32  quantity       = 8;  // 数量
+  int64  total_amount   = 9;  // 小计（分）
+  int64  create_time    = 10;
+  int64  update_time    = 11;
+  int32  is_deleted     = 12;
+}
+
+// 订单发货信息
+message OrderDelivery {
+  int64  delivery_id       = 1;  // 发货ID
+  int64  order_id          = 2;  // 订单ID
+  string order_no         = 3;  // 订单号
+  string delivery_no      = 4;  // 物流单号
+  string delivery_comp    = 5;  // 物流公司
+  int32  delivery_status  = 6;  // 发货状态: 0=运输中, 1=已签收, 2=异常
+  int64  create_time      = 7;
+  int64  update_time      = 8;
+  int32  is_deleted       = 9;
+}
+
+// 创建订单请求
+message CreateOrderRequest {
+  int64                  user_id          = 1;
+  repeated OrderItemReq  items            = 2;
+  int64                  coupon_id        = 3;
+  int64                  activity_id      = 4;
+  string                receiver_name    = 5;
+  string                receiver_phone   = 6;
+  string                receiver_address = 7;
+}
+
+// 订单商品请求
+message OrderItemReq {
+  int64 sku_id    = 1;
+  int32 quantity  = 2;
+}
+
+// 创建订单响应
+message CreateOrderResponse {
+  Order  order  = 1;
+  string message = 2;
+}
+
+// 取消订单请求
+message CancelOrderRequest {
+  string order_no = 1;
+  int64  user_id   = 2;
+}
+
+// 支付订单请求
+message PayOrderRequest {
+  string order_no = 1;
+  int64  user_id   = 2;
+}
+
+// 发货请求
+message DeliverOrderRequest {
+  string order_no      = 1;
+  string delivery_no   = 2;
+  string delivery_comp = 3;
+}
+
+// 完成订单请求
+message FinishOrderRequest {
+  string order_no = 1;
+}
+
+// 查询订单请求
+message GetOrderRequest {
+  oneof query {
+    string order_no = 1;
+    int64  order_id = 2;
+  }
+}
+
+// 查询订单响应
+message GetOrderResponse {
+  Order             order        = 1;
+  repeated OrderItem items        = 2;
+  OrderDelivery     delivery     = 3;  // 添加发货信息
+}
+
+// 查询用户订单列表请求
+message GetUserOrdersRequest {
+  int64  user_id       = 1;
+  int32  order_status  = 2;  // -1=全部
+  int32  page          = 3;
+  int32  page_size     = 4;
+}
+
+// 查询用户订单列表响应
+message GetUserOrdersResponse {
+  repeated Order orders = 1;
+  int32          total  = 2;
+}
+
+// 通用响应
+message OrderResponse {
+  bool   success = 1;
+  string message = 2;
+  Order  order    = 3;
+}
+
+// 订单服务
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc CancelOrder(CancelOrderRequest) returns (OrderResponse);
+  rpc PayOrder(PayOrderRequest) returns (OrderResponse);
+  rpc DeliverOrder(DeliverOrderRequest) returns (OrderResponse);
+  rpc FinishOrder(FinishOrderRequest) returns (OrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc GetUserOrders(GetUserOrdersRequest) returns (GetUserOrdersResponse);
+}

@@ -1,0 +1,103 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package goods;
+
+option go_package = "./api/zebra-goods/goods;goods";
+
+// 商品(SPU)信息
+message Goods {
+  int64  id              = 1;
+  int64  category_id     = 2;
+  int64  vendor_id       = 3;
+  int64  brand_id        = 4;
+  string name            = 5;
+  string sub_title       = 6;
+  string main_image      = 7;
+  string detail          = 8; // 富文本详情
+  int32  sort_order      = 9;
+  int32  status          = 10; // 0=下架, 1=上架
+  int64  create_time     = 11;
+  int64  update_time     = 12;
+  int32  is_deleted      = 13;
+}
+
+// 创建商品请求
+message CreateGoodsRequest {
+  int64  category_id = 1;
+  int64  vendor_id   = 2;
+  int64  brand_id    = 3;
+  string name        = 4;
+  string sub_title   = 5;
+  string main_image  = 6;
+  string detail      = 7;
+  int32  sort_order  = 8;
+}
+
+// 更新商品请求
+message UpdateGoodsRequest {
+  int64  id          = 1;
+  string name        = 2;
+  string sub_title   = 3;
+  string main_image  = 4;
+  string detail      = 5;
+  int32  sort_order  = 6;
+  int32  status      = 7;
+}
+
+// 删除商品请求
+message DeleteGoodsRequest {
+  int64 id = 1;
+}
+
+// 获取商品请求
+message GetGoodsRequest {
+  int64 id = 1;
+}
+
+// 获取商品响应
+message GetGoodsResponse {
+  Goods goods = 1;
+}
+
+// 列出商品请求
+message ListGoodsRequest {
+  int32  page         = 1;
+  int32  page_size    = 2;
+  int64  category_id  = 3; // -1表示全部
+  int64  vendor_id    = 4; // -1表示全部
+  int64  brand_id     = 5; // -1表示全部
+  int32  status       = 6; // -1表示全部
+  string name_keyword = 7;
+}
+
+// 列出商品响应
+message ListGoodsResponse {
+  repeated Goods goods = 1;
+  int32         total = 2;
+}
+
+// 商品服务
+service GoodsService {
+  rpc Create(CreateGoodsRequest) returns (Goods);
+  rpc Update(UpdateGoodsRequest) returns (Goods);
+  rpc Delete(DeleteGoodsRequest) returns (Goods);
+  rpc Get(GetGoodsRequest) returns (GetGoodsResponse);
+  rpc List(ListGoodsRequest) returns (ListGoodsResponse);
+}

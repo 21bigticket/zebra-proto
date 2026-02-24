@@ -1,0 +1,108 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package user_coupon;
+
+option go_package = "./api/zebra-activity/user_coupon;user_coupon";
+
+// 用户优惠券信息
+message UserCoupon {
+  int64  user_coupon_id = 1;
+  int64  user_id        = 2;
+  int64  coupon_id      = 3;
+  string coupon_no      = 4;
+  int32  coupon_status  = 5; // 0=未使用, 1=已使用, 2=已过期
+  int64  start_time     = 6;
+  int64  end_time       = 7;
+  int64  use_time       = 8;
+  string order_no       = 9;
+  int64  create_time    = 10;
+  int64  update_time    = 11;
+  int32  is_deleted     = 12;
+}
+
+// 领取优惠券请求
+message ReceiveCouponRequest {
+  int64 user_id   = 1;
+  int64 coupon_id = 2;
+}
+
+// 领取优惠券响应
+message ReceiveCouponResponse {
+  UserCoupon user_coupon = 1;
+  string    message      = 2;
+}
+
+// 使用优惠券请求
+message UseCouponRequest {
+  int64  user_coupon_id = 1;
+  int64  user_id        = 2;
+  string order_no       = 3;
+}
+
+// 使用优惠券响应
+message UseCouponResponse {
+  UserCoupon user_coupon = 1;
+  bool       success     = 2;
+  string     message     = 3;
+}
+
+// 获取用户优惠券请求
+message GetUserCouponRequest {
+  int64 user_coupon_id = 1;
+}
+
+// 获取用户优惠券响应
+message GetUserCouponResponse {
+  UserCoupon user_coupon = 1;
+}
+
+// 列出用户优惠券请求
+message ListUserCouponRequest {
+  int64 user_id       = 1;
+  int32 page          = 2;
+  int32 page_size     = 3;
+  int32 coupon_status = 4; // -1表示全部
+}
+
+// 列出用户优惠券响应
+message ListUserCouponResponse {
+  repeated UserCoupon user_coupons = 1;
+  int32              total        = 2;
+}
+
+// 查询可用优惠券请求（下单时）
+message GetAvailableCouponsRequest {
+  int64 user_id     = 1;
+  int64 order_amount = 2; // 订单金额（分）
+}
+
+// 查询可用优惠券响应
+message GetAvailableCouponsResponse {
+  repeated UserCoupon user_coupons = 1;
+}
+
+// 用户优惠券服务
+service UserCouponService {
+  rpc Receive(ReceiveCouponRequest) returns (ReceiveCouponResponse);
+  rpc Use(UseCouponRequest) returns (UseCouponResponse);
+  rpc Get(GetUserCouponRequest) returns (GetUserCouponResponse);
+  rpc List(ListUserCouponRequest) returns (ListUserCouponResponse);
+  rpc GetAvailable(GetAvailableCouponsRequest) returns (GetAvailableCouponsResponse);
+}

@@ -1,0 +1,116 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package config;
+
+option go_package = "./api/zebra-config/config;config";
+
+// 业务配置信息
+message Config {
+  int64 id = 1;
+  string appid = 2;
+  string config_key = 3;
+  string config_value = 4;
+  int32 config_status = 5; // 0=禁用, 1=启用
+  string config_desc = 6;
+  int64 create_time = 7;
+  int64 update_time = 8;
+  int32 is_deleted = 9;
+}
+
+// 创建配置请求
+message CreateConfigRequest {
+  string appid = 1;
+  string config_key = 2;
+  string config_value = 3;
+  int32 config_status = 4;
+  string config_desc = 5;
+}
+
+// 更新配置请求
+message UpdateConfigRequest {
+  int64 id = 1;
+  string config_value = 2;
+  int32 config_status = 3;
+  string config_desc = 4;
+}
+
+// 删除配置请求
+message DeleteConfigRequest {
+  int64 id = 1;
+}
+
+// 获取配置请求
+message GetConfigRequest {
+  int64 id = 1;
+}
+
+// 获取配置响应
+message GetConfigResponse {
+  Config config = 1;
+}
+
+// 根据应用和配置key获取请求
+message GetConfigByAppRequest {
+  string appid = 1;
+  string config_key = 2;
+}
+
+// 列出配置请求
+message ListConfigRequest {
+  string appid = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  string config_keyword = 4; // 配置key模糊查询
+  int32 config_status = 5;   // 状态过滤，-1表示全部
+}
+
+// 列出配置响应
+message ListConfigResponse {
+  repeated Config configs = 1;
+  int32 total = 2;
+}
+
+// 批量获取配置请求（根据 appid）
+message BatchGetConfigRequest {
+  string appid = 1;
+}
+
+// 批量获取配置响应
+message BatchGetConfigResponse {
+  repeated Config configs = 1;
+}
+
+// 根据应用和批量配置key获取
+message GetConfigListByAppRequest {
+  string appid = 1;
+  repeated string config_key = 2;
+}
+
+// 配置服务
+service ConfigService {
+  rpc Create(CreateConfigRequest) returns (Config);
+  rpc Update(UpdateConfigRequest) returns (Config);
+  rpc Delete(DeleteConfigRequest) returns (Config);
+  rpc Get(GetConfigRequest) returns (GetConfigResponse);
+  rpc GetByAppAndKey(GetConfigByAppRequest) returns (GetConfigResponse);
+  rpc List(ListConfigRequest) returns (ListConfigResponse);
+  rpc BatchGetByApp(BatchGetConfigRequest) returns (BatchGetConfigResponse);
+  rpc GetConfigListByApp(GetConfigListByAppRequest) returns (BatchGetConfigResponse);
+}
