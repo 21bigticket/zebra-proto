@@ -964,7 +964,7 @@ const file_api_zebra_order_after_sales_after_sales_proto_rawDesc = "" +
 	"\x0fAuditAfterSales\x12#.after_sales.AuditAfterSalesRequest\x1a\x1f.after_sales.AfterSalesResponse\x12E\n" +
 	"\x06Refund\x12\x1a.after_sales.RefundRequest\x1a\x1f.after_sales.AfterSalesResponse\x12V\n" +
 	"\rGetAfterSales\x12!.after_sales.GetAfterSalesRequest\x1a\".after_sales.GetAfterSalesResponse\x12b\n" +
-	"\x11GetUserAfterSales\x12%.after_sales.GetUserAfterSalesRequest\x1a&.after_sales.GetUserAfterSalesResponseBNZL./github.com/21bigticket/zebra-proto/api/zebra-order/after_sales;after_salesb\x06proto3"
+	"\x11GetUserAfterSales\x12%.after_sales.GetUserAfterSalesRequest\x1a&.after_sales.GetUserAfterSalesResponseB+Z)./api/zebra-order/after_sales;after_salesb\x06proto3"
 
 var (
 	file_api_zebra_order_after_sales_after_sales_proto_rawDescOnce sync.Once

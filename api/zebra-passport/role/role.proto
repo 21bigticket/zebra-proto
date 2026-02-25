@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package role;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/role;role";
+option go_package = "./api/zebra-passport/role;role";
 
 // 角色信息
 message Role {

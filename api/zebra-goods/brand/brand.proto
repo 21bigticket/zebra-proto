@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package brand;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-goods/brand;brand";
+option go_package = "./api/zebra-goods/brand;brand";
 
 // 品牌信息
 message Brand {

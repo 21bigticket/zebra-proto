@@ -692,7 +692,7 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\x03Get\x12\x1f.member.GetMemberAddressRequest\x1a .member.GetMemberAddressResponse\x12Q\n" +
 	"\rGetListByUser\x12#.member.GetAddressListByUserRequest\x1a\x1b.member.AddressListResponse\x12E\n" +
 	"\n" +
-	"SetDefault\x12 .member.SetDefaultAddressRequest\x1a\x15.member.MemberAddressBEZC./github.com/21bigticket/zebra-proto/api/zebra-member/member;memberb\x06proto3"
+	"SetDefault\x12 .member.SetDefaultAddressRequest\x1a\x15.member.MemberAddressB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
 	file_api_zebra_member_member_member_address_proto_rawDescOnce sync.Once

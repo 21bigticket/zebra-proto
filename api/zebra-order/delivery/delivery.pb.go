@@ -500,7 +500,7 @@ const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\x0fDeliveryService\x12S\n" +
 	"\x0eCreateDelivery\x12\x1f.delivery.CreateDeliveryRequest\x1a .delivery.CreateDeliveryResponse\x12_\n" +
 	"\x14UpdateDeliveryStatus\x12%.delivery.UpdateDeliveryStatusRequest\x1a .delivery.CreateDeliveryResponse\x12J\n" +
-	"\vGetDelivery\x12\x1c.delivery.GetDeliveryRequest\x1a\x1d.delivery.GetDeliveryResponseBHZF./github.com/21bigticket/zebra-proto/api/zebra-order/delivery;deliveryb\x06proto3"
+	"\vGetDelivery\x12\x1c.delivery.GetDeliveryRequest\x1a\x1d.delivery.GetDeliveryResponseB%Z#./api/zebra-order/delivery;deliveryb\x06proto3"
 
 var (
 	file_api_zebra_order_delivery_delivery_proto_rawDescOnce sync.Once

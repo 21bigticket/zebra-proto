@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 package cart_item;
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-cart/cart_item;cart_item";
+option go_package = "./api/zebra-cart/cart_item;cart_item";
 
 // 购物车商品
 message CartItem {

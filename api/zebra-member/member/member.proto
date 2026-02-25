@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package member;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-member/member;member";
+option go_package = "./api/zebra-member/member;member";
 
 // 用户信息
 message Member {

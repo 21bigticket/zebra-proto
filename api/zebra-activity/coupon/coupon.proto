@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package coupon;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-activity/coupon;coupon";
+option go_package = "./api/zebra-activity/coupon;coupon";
 
 // 优惠券信息
 message Coupon {

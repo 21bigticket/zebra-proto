@@ -1,6 +1,6 @@
 syntax = "proto3";
 package role_path;
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/role_path;role_path";
+option go_package = "./api/zebra-passport/role_path;role_path";
 
 // RolePath 角色路径关联
 message RolePath {

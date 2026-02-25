@@ -700,7 +700,7 @@ const file_api_zebra_member_member_member_proto_rawDesc = "" +
 	"\x06Update\x12\x1b.member.UpdateMemberRequest\x1a\x0e.member.Member\x125\n" +
 	"\x06Delete\x12\x1b.member.DeleteMemberRequest\x1a\x0e.member.Member\x12:\n" +
 	"\x03Get\x12\x18.member.GetMemberRequest\x1a\x19.member.GetMemberResponse\x12=\n" +
-	"\x04List\x12\x19.member.ListMemberRequest\x1a\x1a.member.ListMemberResponseBEZC./github.com/21bigticket/zebra-proto/api/zebra-member/member;memberb\x06proto3"
+	"\x04List\x12\x19.member.ListMemberRequest\x1a\x1a.member.ListMemberResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
 	file_api_zebra_member_member_member_proto_rawDescOnce sync.Once

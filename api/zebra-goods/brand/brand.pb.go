@@ -609,7 +609,7 @@ const file_api_zebra_goods_brand_brand_proto_rawDesc = "" +
 	"\x06Update\x12\x19.brand.UpdateBrandRequest\x1a\f.brand.Brand\x121\n" +
 	"\x06Delete\x12\x19.brand.DeleteBrandRequest\x1a\f.brand.Brand\x126\n" +
 	"\x03Get\x12\x16.brand.GetBrandRequest\x1a\x17.brand.GetBrandResponse\x129\n" +
-	"\x04List\x12\x17.brand.ListBrandRequest\x1a\x18.brand.ListBrandResponseBBZ@./github.com/21bigticket/zebra-proto/api/zebra-goods/brand;brandb\x06proto3"
+	"\x04List\x12\x17.brand.ListBrandRequest\x1a\x18.brand.ListBrandResponseB\x1fZ\x1d./api/zebra-goods/brand;brandb\x06proto3"
 
 var (
 	file_api_zebra_goods_brand_brand_proto_rawDescOnce sync.Once

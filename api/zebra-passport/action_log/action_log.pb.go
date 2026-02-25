@@ -344,7 +344,7 @@ const file_api_zebra_passport_action_log_action_log_proto_rawDesc = "" +
 	"\x04logs\x18\x01 \x03(\v2\x1a.action_log.AdminActionLogR\x04logs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total2_\n" +
 	"\x10ActionLogService\x12K\n" +
-	"\x04List\x12 .action_log.ListActionLogRequest\x1a!.action_log.ListActionLogResponseBOZM./github.com/21bigticket/zebra-proto/api/zebra-passport/action_log;action_logb\x06proto3"
+	"\x04List\x12 .action_log.ListActionLogRequest\x1a!.action_log.ListActionLogResponseB,Z*./api/zebra-passport/action_log;action_logb\x06proto3"
 
 var (
 	file_api_zebra_passport_action_log_action_log_proto_rawDescOnce sync.Once

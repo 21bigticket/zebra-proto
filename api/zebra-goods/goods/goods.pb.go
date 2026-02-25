@@ -724,7 +724,7 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\x06Update\x12\x19.goods.UpdateGoodsRequest\x1a\f.goods.Goods\x121\n" +
 	"\x06Delete\x12\x19.goods.DeleteGoodsRequest\x1a\f.goods.Goods\x126\n" +
 	"\x03Get\x12\x16.goods.GetGoodsRequest\x1a\x17.goods.GetGoodsResponse\x129\n" +
-	"\x04List\x12\x17.goods.ListGoodsRequest\x1a\x18.goods.ListGoodsResponseBBZ@./github.com/21bigticket/zebra-proto/api/zebra-goods/goods;goodsb\x06proto3"
+	"\x04List\x12\x17.goods.ListGoodsRequest\x1a\x18.goods.ListGoodsResponseB\x1fZ\x1d./api/zebra-goods/goods;goodsb\x06proto3"
 
 var (
 	file_api_zebra_goods_goods_goods_proto_rawDescOnce sync.Once

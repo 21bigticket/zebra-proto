@@ -654,7 +654,7 @@ const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\x03Get\x12\x17.cart_log.GetLogRequest\x1a\x18.cart_log.GetLogResponse\x12;\n" +
 	"\x04List\x12\x18.cart_log.ListLogRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
 	"\vGetUserLogs\x12\x1c.cart_log.GetUserLogsRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
-	"\vGetCartLogs\x12\x1c.cart_log.GetCartLogsRequest\x1a\x19.cart_log.ListLogResponseBGZE./github.com/21bigticket/zebra-proto/api/zebra-cart/cart_log;cart_logb\x06proto3"
+	"\vGetCartLogs\x12\x1c.cart_log.GetCartLogsRequest\x1a\x19.cart_log.ListLogResponseB$Z\"./api/zebra-cart/cart_log;cart_logb\x06proto3"
 
 var (
 	file_api_zebra_cart_cart_log_cart_log_proto_rawDescOnce sync.Once

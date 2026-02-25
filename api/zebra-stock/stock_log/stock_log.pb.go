@@ -820,7 +820,7 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\x04List\x12\x19.stock_log.ListLogRequest\x1a\x1a.stock_log.ListLogResponse\x12J\n" +
 	"\fGetLogsBySku\x12\x1e.stock_log.GetLogsBySkuRequest\x1a\x1a.stock_log.ListLogResponse\x12N\n" +
 	"\x0eGetLogsByOrder\x12 .stock_log.GetLogsByOrderRequest\x1a\x1a.stock_log.ListLogResponse\x12X\n" +
-	"\x13GetLogsByChangeType\x12%.stock_log.GetLogsByChangeTypeRequest\x1a\x1a.stock_log.ListLogResponseBJZH./github.com/21bigticket/zebra-proto/api/zebra-stock/stock_log;stock_logb\x06proto3"
+	"\x13GetLogsByChangeType\x12%.stock_log.GetLogsByChangeTypeRequest\x1a\x1a.stock_log.ListLogResponseB'Z%./api/zebra-stock/stock_log;stock_logb\x06proto3"
 
 var (
 	file_api_zebra_stock_stock_log_stock_log_proto_rawDescOnce sync.Once

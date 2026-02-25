@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package weixin;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-message/weixin;weixin";
+option go_package = "./api/zebra-message/weixin;weixin";
 
 // 微信模板
 message WeixinTemplate {

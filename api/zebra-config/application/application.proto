@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package application;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-config/application;application";
+option go_package = "./api/zebra-config/application;application";
 
 // 应用信息
 message Application {

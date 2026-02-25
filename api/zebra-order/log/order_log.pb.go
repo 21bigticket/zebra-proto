@@ -409,7 +409,7 @@ const file_api_zebra_order_log_order_log_proto_rawDesc = "" +
 	"\x05total\x18\x02 \x01(\x05R\x05total2\xa1\x01\n" +
 	"\x0fOrderLogService\x12I\n" +
 	"\x0eCreateOrderLog\x12\x1a.log.CreateOrderLogRequest\x1a\x1b.log.CreateOrderLogResponse\x12C\n" +
-	"\fGetOrderLogs\x12\x18.log.GetOrderLogsRequest\x1a\x19.log.GetOrderLogsResponseB>Z<./github.com/21bigticket/zebra-proto/api/zebra-order/log;logb\x06proto3"
+	"\fGetOrderLogs\x12\x18.log.GetOrderLogsRequest\x1a\x19.log.GetOrderLogsResponseB\x1bZ\x19./api/zebra-order/log;logb\x06proto3"
 
 var (
 	file_api_zebra_order_log_order_log_proto_rawDescOnce sync.Once

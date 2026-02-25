@@ -19,7 +19,7 @@ syntax = "proto3";
 package hello;
 
 // 修复：导入路径添加 ./，包名保留 greet
-option go_package = "./github.com/21bigticket/zebra-proto/api;hello";
+option go_package = "./api;hello";
 
 message HelloRequest {
   string name = 1;

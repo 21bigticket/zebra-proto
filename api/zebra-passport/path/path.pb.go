@@ -620,7 +620,7 @@ const file_api_zebra_passport_path_path_proto_rawDesc = "" +
 	"\x06Delete\x12\x17.path.DeletePathRequest\x1a\n" +
 	".path.Path\x122\n" +
 	"\x03Get\x12\x14.path.GetPathRequest\x1a\x15.path.GetPathResponse\x125\n" +
-	"\x04List\x12\x15.path.ListPathRequest\x1a\x16.path.ListPathResponseBCZA./github.com/21bigticket/zebra-proto/api/zebra-passport/path;pathb\x06proto3"
+	"\x04List\x12\x15.path.ListPathRequest\x1a\x16.path.ListPathResponseB Z\x1e./api/zebra-passport/path;pathb\x06proto3"
 
 var (
 	file_api_zebra_passport_path_path_proto_rawDescOnce sync.Once

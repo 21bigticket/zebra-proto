@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package attribute;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-goods/attribute;attribute";
+option go_package = "./api/zebra-goods/attribute;attribute";
 
 // 商品属性信息
 message GoodsAttribute {

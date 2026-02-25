@@ -761,7 +761,7 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\x0eUpdateQuantity\x12\x1b.cart.UpdateQuantityRequest\x1a\x12.cart.CartResponse\x127\n" +
 	"\tClearCart\x12\x16.cart.ClearCartRequest\x1a\x12.cart.CartResponse\x126\n" +
 	"\aGetCart\x12\x14.cart.GetCartRequest\x1a\x15.cart.GetCartResponse\x12;\n" +
-	"\vBatchRemove\x12\x18.cart.BatchRemoveRequest\x1a\x12.cart.CartResponseB?Z=./github.com/21bigticket/zebra-proto/api/zebra-cart/cart;cartb\x06proto3"
+	"\vBatchRemove\x12\x18.cart.BatchRemoveRequest\x1a\x12.cart.CartResponseB\x1cZ\x1a./api/zebra-cart/cart;cartb\x06proto3"
 
 var (
 	file_api_zebra_cart_cart_cart_proto_rawDescOnce sync.Once

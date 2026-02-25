@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package permission;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/permission;permission";
+option go_package = "./api/zebra-passport/permission;permission";
 
 // 权限检查请求
 message HasPermissionRequest {

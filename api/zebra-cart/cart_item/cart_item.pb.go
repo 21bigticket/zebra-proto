@@ -947,7 +947,7 @@ const file_api_zebra_cart_cart_item_cart_item_proto_rawDesc = "" +
 	"\fGetCartItems\x12\x1e.cart_item.GetCartItemsRequest\x1a\x1f.cart_item.ListCartItemResponse\x12G\n" +
 	"\x0eUpdateQuantity\x12 .cart_item.UpdateQuantityRequest\x1a\x13.cart_item.CartItem\x12M\n" +
 	"\vBatchDelete\x12\x1d.cart_item.BatchDeleteRequest\x1a\x1f.cart_item.ListCartItemResponse\x12S\n" +
-	"\x0eClearCartItems\x12 .cart_item.ClearCartItemsRequest\x1a\x1f.cart_item.ListCartItemResponseBIZG./github.com/21bigticket/zebra-proto/api/zebra-cart/cart_item;cart_itemb\x06proto3"
+	"\x0eClearCartItems\x12 .cart_item.ClearCartItemsRequest\x1a\x1f.cart_item.ListCartItemResponseB&Z$./api/zebra-cart/cart_item;cart_itemb\x06proto3"
 
 var (
 	file_api_zebra_cart_cart_item_cart_item_proto_rawDescOnce sync.Once

@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package action_log;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/action_log;action_log";
+option go_package = "./api/zebra-passport/action_log;action_log";
 
 // 管理员操作日志信息
 message AdminActionLog {

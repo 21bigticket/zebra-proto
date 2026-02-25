@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package admin_user;
 
-option go_package = "./github.com/21bigticket/zebra-proto/api/zebra-passport/admin_user;admin_user";
+option go_package = "./api/zebra-passport/admin_user;admin_user";
 
 // 管理员用户信息
 message AdminUser {

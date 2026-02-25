@@ -822,7 +822,7 @@ const file_api_zebra_config_config_config_proto_rawDesc = "" +
 	"\x0eGetByAppAndKey\x12\x1d.config.GetConfigByAppRequest\x1a\x19.config.GetConfigResponse\x12=\n" +
 	"\x04List\x12\x19.config.ListConfigRequest\x1a\x1a.config.ListConfigResponse\x12N\n" +
 	"\rBatchGetByApp\x12\x1d.config.BatchGetConfigRequest\x1a\x1e.config.BatchGetConfigResponse\x12W\n" +
-	"\x12GetConfigListByApp\x12!.config.GetConfigListByAppRequest\x1a\x1e.config.BatchGetConfigResponseBEZC./github.com/21bigticket/zebra-proto/api/zebra-config/config;configb\x06proto3"
+	"\x12GetConfigListByApp\x12!.config.GetConfigListByAppRequest\x1a\x1e.config.BatchGetConfigResponseB\"Z ./api/zebra-config/config;configb\x06proto3"
 
 var (
 	file_api_zebra_config_config_config_proto_rawDescOnce sync.Once

@@ -584,7 +584,7 @@ const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\x06Delete\x12\x17.role.DeleteRoleRequest\x1a\n" +
 	".role.Role\x122\n" +
 	"\x03Get\x12\x14.role.GetRoleRequest\x1a\x15.role.GetRoleResponse\x125\n" +
-	"\x04List\x12\x15.role.ListRoleRequest\x1a\x16.role.ListRoleResponseBCZA./github.com/21bigticket/zebra-proto/api/zebra-passport/role;roleb\x06proto3"
+	"\x04List\x12\x15.role.ListRoleRequest\x1a\x16.role.ListRoleResponseB Z\x1e./api/zebra-passport/role;roleb\x06proto3"
 
 var (
 	file_api_zebra_passport_role_role_proto_rawDescOnce sync.Once

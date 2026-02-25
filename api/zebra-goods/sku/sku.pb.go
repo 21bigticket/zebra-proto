@@ -647,7 +647,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x06Update\x12\x15.sku.UpdateSkuRequest\x1a\r.sku.GoodsSku\x12.\n" +
 	"\x06Delete\x12\x15.sku.DeleteSkuRequest\x1a\r.sku.GoodsSku\x12.\n" +
 	"\x03Get\x12\x12.sku.GetSkuRequest\x1a\x13.sku.GetSkuResponse\x121\n" +
-	"\x04List\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponseB>Z<./github.com/21bigticket/zebra-proto/api/zebra-goods/sku;skub\x06proto3"
+	"\x04List\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponseB\x1bZ\x19./api/zebra-goods/sku;skub\x06proto3"
 
 var (
 	file_api_zebra_goods_sku_sku_proto_rawDescOnce sync.Once

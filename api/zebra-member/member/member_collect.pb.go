@@ -629,7 +629,7 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x06Delete\x12\".member.DeleteMemberCollectRequest\x1a\x15.member.MemberCollect\x12H\n" +
 	"\x03Get\x12\x1f.member.GetMemberCollectRequest\x1a .member.GetMemberCollectResponse\x12Q\n" +
 	"\rGetListByUser\x12#.member.GetCollectListByUserRequest\x1a\x1b.member.CollectListResponse\x12T\n" +
-	"\vCheckStatus\x12!.member.CheckCollectStatusRequest\x1a\".member.CheckCollectStatusResponseBEZC./github.com/21bigticket/zebra-proto/api/zebra-member/member;memberb\x06proto3"
+	"\vCheckStatus\x12!.member.CheckCollectStatusRequest\x1a\".member.CheckCollectStatusResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
 	file_api_zebra_member_member_member_collect_proto_rawDescOnce sync.Once

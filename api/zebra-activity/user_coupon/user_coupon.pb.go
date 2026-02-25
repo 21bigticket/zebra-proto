@@ -771,7 +771,7 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\x03Use\x12\x1d.user_coupon.UseCouponRequest\x1a\x1e.user_coupon.UseCouponResponse\x12L\n" +
 	"\x03Get\x12!.user_coupon.GetUserCouponRequest\x1a\".user_coupon.GetUserCouponResponse\x12O\n" +
 	"\x04List\x12\".user_coupon.ListUserCouponRequest\x1a#.user_coupon.ListUserCouponResponse\x12a\n" +
-	"\fGetAvailable\x12'.user_coupon.GetAvailableCouponsRequest\x1a(.user_coupon.GetAvailableCouponsResponseBQZO./github.com/21bigticket/zebra-proto/api/zebra-activity/user_coupon;user_couponb\x06proto3"
+	"\fGetAvailable\x12'.user_coupon.GetAvailableCouponsRequest\x1a(.user_coupon.GetAvailableCouponsResponseB.Z,./api/zebra-activity/user_coupon;user_couponb\x06proto3"
 
 var (
 	file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescOnce sync.Once

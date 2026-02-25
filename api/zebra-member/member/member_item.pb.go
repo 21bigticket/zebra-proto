@@ -402,7 +402,7 @@ const file_api_zebra_member_member_member_item_proto_rawDesc = "" +
 	"\x11MemberItemService\x12=\n" +
 	"\x06Create\x12\x1f.member.CreateMemberItemRequest\x1a\x12.member.MemberItem\x12=\n" +
 	"\x06Update\x12\x1f.member.UpdateMemberItemRequest\x1a\x12.member.MemberItem\x12B\n" +
-	"\x03Get\x12\x1c.member.GetMemberItemRequest\x1a\x1d.member.GetMemberItemResponseBEZC./github.com/21bigticket/zebra-proto/api/zebra-member/member;memberb\x06proto3"
+	"\x03Get\x12\x1c.member.GetMemberItemRequest\x1a\x1d.member.GetMemberItemResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
 	file_api_zebra_member_member_member_item_proto_rawDescOnce sync.Once
