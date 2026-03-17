@@ -54,9 +54,9 @@ var (
 
 // MemberService is a client for the member.MemberService service.
 type MemberService interface {
-	Create(ctx context.Context, req *CreateMemberRequest, opts ...client.CallOption) (*Member, error)
-	Update(ctx context.Context, req *UpdateMemberRequest, opts ...client.CallOption) (*Member, error)
-	Delete(ctx context.Context, req *DeleteMemberRequest, opts ...client.CallOption) (*Member, error)
+	Create(ctx context.Context, req *CreateMemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	Update(ctx context.Context, req *UpdateMemberRequest, opts ...client.CallOption) (*MemberResponse, error)
+	Delete(ctx context.Context, req *DeleteMemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	Get(ctx context.Context, req *GetMemberRequest, opts ...client.CallOption) (*GetMemberResponse, error)
 	List(ctx context.Context, req *ListMemberRequest, opts ...client.CallOption) (*ListMemberResponse, error)
 }
@@ -81,24 +81,24 @@ type MemberServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *MemberServiceImpl) Create(ctx context.Context, req *CreateMemberRequest, opts ...client.CallOption) (*Member, error) {
-	resp := new(Member)
+func (c *MemberServiceImpl) Create(ctx context.Context, req *CreateMemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberServiceImpl) Update(ctx context.Context, req *UpdateMemberRequest, opts ...client.CallOption) (*Member, error) {
-	resp := new(Member)
+func (c *MemberServiceImpl) Update(ctx context.Context, req *UpdateMemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberServiceImpl) Delete(ctx context.Context, req *DeleteMemberRequest, opts ...client.CallOption) (*Member, error) {
-	resp := new(Member)
+func (c *MemberServiceImpl) Delete(ctx context.Context, req *DeleteMemberRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var MemberService_ClientInfo = client.ClientInfo{
 
 // MemberServiceHandler is an implementation of the member.MemberService service.
 type MemberServiceHandler interface {
-	Create(context.Context, *CreateMemberRequest) (*Member, error)
-	Update(context.Context, *UpdateMemberRequest) (*Member, error)
-	Delete(context.Context, *DeleteMemberRequest) (*Member, error)
+	Create(context.Context, *CreateMemberRequest) (*MemberResponse, error)
+	Update(context.Context, *UpdateMemberRequest) (*MemberResponse, error)
+	Delete(context.Context, *DeleteMemberRequest) (*MemberResponse, error)
 	Get(context.Context, *GetMemberRequest) (*GetMemberResponse, error)
 	List(context.Context, *ListMemberRequest) (*ListMemberResponse, error)
 }

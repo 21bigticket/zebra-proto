@@ -25,6 +25,7 @@ package stock_log
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -351,7 +352,9 @@ func (x *GetLogRequest) GetLogId() int64 {
 // 获取库存日志响应
 type GetLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	StockLog      *StockLog              `protobuf:"bytes,1,opt,name=stock_log,json=stockLog,proto3" json:"stock_log,omitempty"` // 库存日志
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                         // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`                           // 提示语
+	StockLog      *StockLog              `protobuf:"bytes,3,opt,name=stock_log,json=stockLog,proto3" json:"stock_log,omitempty"` // 库存日志
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -384,6 +387,20 @@ func (x *GetLogResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetLogResponse.ProtoReflect.Descriptor instead.
 func (*GetLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_stock_stock_log_stock_log_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetLogResponse) GetStockLog() *StockLog {
@@ -489,8 +506,10 @@ func (x *ListLogRequest) GetEndTime() int64 {
 // 查询库存日志列表响应
 type ListLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	StockLogs     []*StockLog            `protobuf:"bytes,1,rep,name=stock_logs,json=stockLogs,proto3" json:"stock_logs,omitempty"` // 库存日志列表
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`                         // 总数
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                            // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`                              // 提示语
+	StockLogs     []*StockLog            `protobuf:"bytes,3,rep,name=stock_logs,json=stockLogs,proto3" json:"stock_logs,omitempty"` // 库存日志列表
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`                         // 总数
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -523,6 +542,20 @@ func (x *ListLogResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListLogResponse.ProtoReflect.Descriptor instead.
 func (*ListLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_stock_stock_log_stock_log_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *ListLogResponse) GetStockLogs() []*StockLog {
@@ -738,11 +771,63 @@ func (x *GetLogsByChangeTypeRequest) GetPageSize() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_stock_stock_log_stock_log_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_stock_stock_log_stock_log_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_stock_stock_log_stock_log_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_stock_stock_log_stock_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-stock/stock_log/stock_log.proto\x12\tstock_log\"\x9f\x03\n" +
+	")api/zebra-stock/stock_log/stock_log.proto\x12\tstock_log\x1a\x1egoogle/protobuf/wrappers.proto\"\x9f\x03\n" +
 	"\bStockLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
 	"\x06sku_id\x18\x02 \x01(\x03R\x05skuId\x12\x1f\n" +
@@ -781,9 +866,11 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	" \x01(\tR\toperateIp\x12\x16\n" +
 	"\x06remark\x18\v \x01(\tR\x06remark\"&\n" +
 	"\rGetLogRequest\x12\x15\n" +
-	"\x06log_id\x18\x01 \x01(\x03R\x05logId\"B\n" +
-	"\x0eGetLogResponse\x120\n" +
-	"\tstock_log\x18\x01 \x01(\v2\x13.stock_log.StockLogR\bstockLog\"\xce\x01\n" +
+	"\x06log_id\x18\x01 \x01(\x03R\x05logId\"\x85\x01\n" +
+	"\x0eGetLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x120\n" +
+	"\tstock_log\x18\x03 \x01(\v2\x13.stock_log.StockLogR\bstockLog\"\xce\x01\n" +
 	"\x0eListLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
@@ -793,11 +880,13 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\border_no\x18\x05 \x01(\tR\aorderNo\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\a \x01(\x03R\aendTime\"[\n" +
-	"\x0fListLogResponse\x122\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\x9e\x01\n" +
+	"\x0fListLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
 	"\n" +
-	"stock_logs\x18\x01 \x03(\v2\x13.stock_log.StockLogR\tstockLogs\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"\x97\x01\n" +
+	"stock_logs\x18\x03 \x03(\v2\x13.stock_log.StockLogR\tstockLogs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x97\x01\n" +
 	"\x13GetLogsBySkuRequest\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -813,9 +902,12 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\vchange_type\x18\x01 \x01(\x05R\n" +
 	"changeType\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize2\xbe\x03\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xbe\x03\n" +
 	"\x0fStockLogService\x12:\n" +
-	"\x06Create\x12\x1b.stock_log.CreateLogRequest\x1a\x13.stock_log.StockLog\x12:\n" +
+	"\x06Create\x12\x1b.stock_log.CreateLogRequest\x1a\x13.stock_log.Response\x12:\n" +
 	"\x03Get\x12\x18.stock_log.GetLogRequest\x1a\x19.stock_log.GetLogResponse\x12=\n" +
 	"\x04List\x12\x19.stock_log.ListLogRequest\x1a\x1a.stock_log.ListLogResponse\x12J\n" +
 	"\fGetLogsBySku\x12\x1e.stock_log.GetLogsBySkuRequest\x1a\x1a.stock_log.ListLogResponse\x12N\n" +
@@ -834,7 +926,7 @@ func file_api_zebra_stock_stock_log_stock_log_proto_rawDescGZIP() []byte {
 	return file_api_zebra_stock_stock_log_stock_log_proto_rawDescData
 }
 
-var file_api_zebra_stock_stock_log_stock_log_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_api_zebra_stock_stock_log_stock_log_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_zebra_stock_stock_log_stock_log_proto_goTypes = []any{
 	(*StockLog)(nil),                   // 0: stock_log.StockLog
 	(*CreateLogRequest)(nil),           // 1: stock_log.CreateLogRequest
@@ -845,27 +937,32 @@ var file_api_zebra_stock_stock_log_stock_log_proto_goTypes = []any{
 	(*GetLogsBySkuRequest)(nil),        // 6: stock_log.GetLogsBySkuRequest
 	(*GetLogsByOrderRequest)(nil),      // 7: stock_log.GetLogsByOrderRequest
 	(*GetLogsByChangeTypeRequest)(nil), // 8: stock_log.GetLogsByChangeTypeRequest
+	(*Response)(nil),                   // 9: stock_log.Response
+	(*wrapperspb.Int32Value)(nil),      // 10: google.protobuf.Int32Value
 }
 var file_api_zebra_stock_stock_log_stock_log_proto_depIdxs = []int32{
-	0, // 0: stock_log.GetLogResponse.stock_log:type_name -> stock_log.StockLog
-	0, // 1: stock_log.ListLogResponse.stock_logs:type_name -> stock_log.StockLog
-	1, // 2: stock_log.StockLogService.Create:input_type -> stock_log.CreateLogRequest
-	2, // 3: stock_log.StockLogService.Get:input_type -> stock_log.GetLogRequest
-	4, // 4: stock_log.StockLogService.List:input_type -> stock_log.ListLogRequest
-	6, // 5: stock_log.StockLogService.GetLogsBySku:input_type -> stock_log.GetLogsBySkuRequest
-	7, // 6: stock_log.StockLogService.GetLogsByOrder:input_type -> stock_log.GetLogsByOrderRequest
-	8, // 7: stock_log.StockLogService.GetLogsByChangeType:input_type -> stock_log.GetLogsByChangeTypeRequest
-	0, // 8: stock_log.StockLogService.Create:output_type -> stock_log.StockLog
-	3, // 9: stock_log.StockLogService.Get:output_type -> stock_log.GetLogResponse
-	5, // 10: stock_log.StockLogService.List:output_type -> stock_log.ListLogResponse
-	5, // 11: stock_log.StockLogService.GetLogsBySku:output_type -> stock_log.ListLogResponse
-	5, // 12: stock_log.StockLogService.GetLogsByOrder:output_type -> stock_log.ListLogResponse
-	5, // 13: stock_log.StockLogService.GetLogsByChangeType:output_type -> stock_log.ListLogResponse
-	8, // [8:14] is the sub-list for method output_type
-	2, // [2:8] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	10, // 0: stock_log.GetLogResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: stock_log.GetLogResponse.stock_log:type_name -> stock_log.StockLog
+	10, // 2: stock_log.ListLogResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: stock_log.ListLogResponse.stock_logs:type_name -> stock_log.StockLog
+	10, // 4: stock_log.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: stock_log.StockLogService.Create:input_type -> stock_log.CreateLogRequest
+	2,  // 6: stock_log.StockLogService.Get:input_type -> stock_log.GetLogRequest
+	4,  // 7: stock_log.StockLogService.List:input_type -> stock_log.ListLogRequest
+	6,  // 8: stock_log.StockLogService.GetLogsBySku:input_type -> stock_log.GetLogsBySkuRequest
+	7,  // 9: stock_log.StockLogService.GetLogsByOrder:input_type -> stock_log.GetLogsByOrderRequest
+	8,  // 10: stock_log.StockLogService.GetLogsByChangeType:input_type -> stock_log.GetLogsByChangeTypeRequest
+	9,  // 11: stock_log.StockLogService.Create:output_type -> stock_log.Response
+	3,  // 12: stock_log.StockLogService.Get:output_type -> stock_log.GetLogResponse
+	5,  // 13: stock_log.StockLogService.List:output_type -> stock_log.ListLogResponse
+	5,  // 14: stock_log.StockLogService.GetLogsBySku:output_type -> stock_log.ListLogResponse
+	5,  // 15: stock_log.StockLogService.GetLogsByOrder:output_type -> stock_log.ListLogResponse
+	5,  // 16: stock_log.StockLogService.GetLogsByChangeType:output_type -> stock_log.ListLogResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_stock_stock_log_stock_log_proto_init() }
@@ -879,7 +976,7 @@ func file_api_zebra_stock_stock_log_stock_log_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_stock_stock_log_stock_log_proto_rawDesc), len(file_api_zebra_stock_stock_log_stock_log_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

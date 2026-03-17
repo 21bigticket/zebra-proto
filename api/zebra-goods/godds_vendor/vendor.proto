@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package vendor;
 
 option go_package = "./api/zebra-goods/godds_vendor;godds_vendor";
@@ -69,7 +71,9 @@ message GetVendorRequest {
 
 // 获取供应商响应
 message GetVendorResponse {
-  Vendor vendor = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Vendor vendor = 3;
 }
 
 // 列出供应商请求
@@ -82,15 +86,22 @@ message ListVendorRequest {
 
 // 列出供应商响应
 message ListVendorResponse {
-  repeated Vendor vendors = 1;
-  int32         total    = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Vendor vendors = 3;
+  int32         total    = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 供应商服务
 service VendorService {
-  rpc Create(CreateVendorRequest) returns (Vendor);
-  rpc Update(UpdateVendorRequest) returns (Vendor);
-  rpc Delete(DeleteVendorRequest) returns (Vendor);
+  rpc Create(CreateVendorRequest) returns (Response);
+  rpc Update(UpdateVendorRequest) returns (Response);
+  rpc Delete(DeleteVendorRequest) returns (Response);
   rpc Get(GetVendorRequest) returns (GetVendorResponse);
   rpc List(ListVendorRequest) returns (ListVendorResponse);
 }

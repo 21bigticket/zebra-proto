@@ -54,9 +54,9 @@ var (
 
 // CouponService is a client for the coupon.CouponService service.
 type CouponService interface {
-	Create(ctx context.Context, req *CreateCouponRequest, opts ...client.CallOption) (*Coupon, error)
-	Update(ctx context.Context, req *UpdateCouponRequest, opts ...client.CallOption) (*Coupon, error)
-	Delete(ctx context.Context, req *DeleteCouponRequest, opts ...client.CallOption) (*Coupon, error)
+	Create(ctx context.Context, req *CreateCouponRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateCouponRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteCouponRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetCouponRequest, opts ...client.CallOption) (*GetCouponResponse, error)
 	List(ctx context.Context, req *ListCouponRequest, opts ...client.CallOption) (*ListCouponResponse, error)
 }
@@ -81,24 +81,24 @@ type CouponServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *CouponServiceImpl) Create(ctx context.Context, req *CreateCouponRequest, opts ...client.CallOption) (*Coupon, error) {
-	resp := new(Coupon)
+func (c *CouponServiceImpl) Create(ctx context.Context, req *CreateCouponRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CouponServiceImpl) Update(ctx context.Context, req *UpdateCouponRequest, opts ...client.CallOption) (*Coupon, error) {
-	resp := new(Coupon)
+func (c *CouponServiceImpl) Update(ctx context.Context, req *UpdateCouponRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CouponServiceImpl) Delete(ctx context.Context, req *DeleteCouponRequest, opts ...client.CallOption) (*Coupon, error) {
-	resp := new(Coupon)
+func (c *CouponServiceImpl) Delete(ctx context.Context, req *DeleteCouponRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var CouponService_ClientInfo = client.ClientInfo{
 
 // CouponServiceHandler is an implementation of the coupon.CouponService service.
 type CouponServiceHandler interface {
-	Create(context.Context, *CreateCouponRequest) (*Coupon, error)
-	Update(context.Context, *UpdateCouponRequest) (*Coupon, error)
-	Delete(context.Context, *DeleteCouponRequest) (*Coupon, error)
+	Create(context.Context, *CreateCouponRequest) (*Response, error)
+	Update(context.Context, *UpdateCouponRequest) (*Response, error)
+	Delete(context.Context, *DeleteCouponRequest) (*Response, error)
 	Get(context.Context, *GetCouponRequest) (*GetCouponResponse, error)
 	List(context.Context, *ListCouponRequest) (*ListCouponResponse, error)
 }

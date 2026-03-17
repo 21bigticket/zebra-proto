@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package member;
 
 option go_package = "./api/zebra-member/member;member";
@@ -72,7 +74,9 @@ message GetMemberRequest {
 
 // 获取用户响应
 message GetMemberResponse {
-  Member member = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Member member = 3;
 }
 
 // 列出用户请求
@@ -85,15 +89,22 @@ message ListMemberRequest {
 
 // 列出用户响应
 message ListMemberResponse {
-  repeated Member members = 1;
-  int32           total    = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Member members = 3;
+  int32           total    = 4;
+}
+
+message MemberResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 用户服务
 service MemberService {
-  rpc Create(CreateMemberRequest) returns (Member);
-  rpc Update(UpdateMemberRequest) returns (Member);
-  rpc Delete(DeleteMemberRequest) returns (Member);
+  rpc Create(CreateMemberRequest) returns (MemberResponse);
+  rpc Update(UpdateMemberRequest) returns (MemberResponse);
+  rpc Delete(DeleteMemberRequest) returns (MemberResponse);
   rpc Get(GetMemberRequest) returns (GetMemberResponse);
   rpc List(ListMemberRequest) returns (ListMemberResponse);
 }

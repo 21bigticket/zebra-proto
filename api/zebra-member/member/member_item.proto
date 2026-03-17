@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package member;
 
 option go_package = "./api/zebra-member/member;member";
@@ -56,12 +58,19 @@ message GetMemberItemRequest {
 
 // 获取用户详细信息响应
 message GetMemberItemResponse {
-  MemberItem member_item = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  MemberItem member_item = 3;
+}
+
+message MemberItemResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 用户详细信息服务
 service MemberItemService {
-  rpc Create(CreateMemberItemRequest) returns (MemberItem);
-  rpc Update(UpdateMemberItemRequest) returns (MemberItem);
+  rpc Create(CreateMemberItemRequest) returns (MemberItemResponse);
+  rpc Update(UpdateMemberItemRequest) returns (MemberItemResponse);
   rpc Get(GetMemberItemRequest) returns (GetMemberItemResponse);
 }

@@ -60,9 +60,9 @@ var (
 
 // ConfigService is a client for the config.ConfigService service.
 type ConfigService interface {
-	Create(ctx context.Context, req *CreateConfigRequest, opts ...client.CallOption) (*Config, error)
-	Update(ctx context.Context, req *UpdateConfigRequest, opts ...client.CallOption) (*Config, error)
-	Delete(ctx context.Context, req *DeleteConfigRequest, opts ...client.CallOption) (*Config, error)
+	Create(ctx context.Context, req *CreateConfigRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateConfigRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteConfigRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetConfigRequest, opts ...client.CallOption) (*GetConfigResponse, error)
 	GetByAppAndKey(ctx context.Context, req *GetConfigByAppRequest, opts ...client.CallOption) (*GetConfigResponse, error)
 	List(ctx context.Context, req *ListConfigRequest, opts ...client.CallOption) (*ListConfigResponse, error)
@@ -90,24 +90,24 @@ type ConfigServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *ConfigServiceImpl) Create(ctx context.Context, req *CreateConfigRequest, opts ...client.CallOption) (*Config, error) {
-	resp := new(Config)
+func (c *ConfigServiceImpl) Create(ctx context.Context, req *CreateConfigRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ConfigServiceImpl) Update(ctx context.Context, req *UpdateConfigRequest, opts ...client.CallOption) (*Config, error) {
-	resp := new(Config)
+func (c *ConfigServiceImpl) Update(ctx context.Context, req *UpdateConfigRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ConfigServiceImpl) Delete(ctx context.Context, req *DeleteConfigRequest, opts ...client.CallOption) (*Config, error) {
-	resp := new(Config)
+func (c *ConfigServiceImpl) Delete(ctx context.Context, req *DeleteConfigRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -165,9 +165,9 @@ var ConfigService_ClientInfo = client.ClientInfo{
 
 // ConfigServiceHandler is an implementation of the config.ConfigService service.
 type ConfigServiceHandler interface {
-	Create(context.Context, *CreateConfigRequest) (*Config, error)
-	Update(context.Context, *UpdateConfigRequest) (*Config, error)
-	Delete(context.Context, *DeleteConfigRequest) (*Config, error)
+	Create(context.Context, *CreateConfigRequest) (*Response, error)
+	Update(context.Context, *UpdateConfigRequest) (*Response, error)
+	Delete(context.Context, *DeleteConfigRequest) (*Response, error)
 	Get(context.Context, *GetConfigRequest) (*GetConfigResponse, error)
 	GetByAppAndKey(context.Context, *GetConfigByAppRequest) (*GetConfigResponse, error)
 	List(context.Context, *ListConfigRequest) (*ListConfigResponse, error)

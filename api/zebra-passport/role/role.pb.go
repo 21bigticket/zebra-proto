@@ -25,6 +25,7 @@ package role
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -361,8 +362,10 @@ func (x *GetRoleRequest) GetId() int64 {
 // 获取角色响应
 type GetRoleResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Role          *Role                  `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`
-	PathIds       []int64                `protobuf:"varint,2,rep,packed,name=path_ids,json=pathIds,proto3" json:"path_ids,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Role          *Role                  `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
+	PathIds       []int64                `protobuf:"varint,4,rep,packed,name=path_ids,json=pathIds,proto3" json:"path_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -395,6 +398,20 @@ func (x *GetRoleResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetRoleResponse.ProtoReflect.Descriptor instead.
 func (*GetRoleResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetRoleResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetRoleResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetRoleResponse) GetRole() *Role {
@@ -483,8 +500,10 @@ func (x *ListRoleRequest) GetStatus() int32 {
 // 列出角色响应
 type ListRoleResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Roles         []*Role                `protobuf:"bytes,1,rep,name=roles,proto3" json:"roles,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Roles         []*Role                `protobuf:"bytes,3,rep,name=roles,proto3" json:"roles,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -519,6 +538,20 @@ func (*ListRoleResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListRoleResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListRoleResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListRoleResponse) GetRoles() []*Role {
 	if x != nil {
 		return x.Roles
@@ -533,11 +566,63 @@ func (x *ListRoleResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_passport_role_role_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_role_role_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_passport_role_role_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-passport/role/role.proto\x12\x04role\"\xce\x01\n" +
+	"\"api/zebra-passport/role/role.proto\x12\x04role\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x01\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\trole_name\x18\x02 \x01(\tR\broleName\x12 \n" +
@@ -562,27 +647,31 @@ const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\x11DeleteRoleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x0eGetRoleRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"L\n" +
-	"\x0fGetRoleResponse\x12\x1e\n" +
-	"\x04role\x18\x01 \x01(\v2\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x8f\x01\n" +
+	"\x0fGetRoleResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1e\n" +
+	"\x04role\x18\x03 \x01(\v2\n" +
 	".role.RoleR\x04role\x12\x19\n" +
-	"\bpath_ids\x18\x02 \x03(\x03R\apathIds\"}\n" +
+	"\bpath_ids\x18\x04 \x03(\x03R\apathIds\"}\n" +
 	"\x0fListRoleRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
 	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"J\n" +
-	"\x10ListRoleResponse\x12 \n" +
-	"\x05roles\x18\x01 \x03(\v2\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"\x8d\x01\n" +
+	"\x10ListRoleResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12 \n" +
+	"\x05roles\x18\x03 \x03(\v2\n" +
 	".role.RoleR\x05roles\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\x85\x02\n" +
-	"\vRoleService\x12-\n" +
-	"\x06Create\x12\x17.role.CreateRoleRequest\x1a\n" +
-	".role.Role\x12-\n" +
-	"\x06Update\x12\x17.role.UpdateRoleRequest\x1a\n" +
-	".role.Role\x12-\n" +
-	"\x06Delete\x12\x17.role.DeleteRoleRequest\x1a\n" +
-	".role.Role\x122\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\x91\x02\n" +
+	"\vRoleService\x121\n" +
+	"\x06Create\x12\x17.role.CreateRoleRequest\x1a\x0e.role.Response\x121\n" +
+	"\x06Update\x12\x17.role.UpdateRoleRequest\x1a\x0e.role.Response\x121\n" +
+	"\x06Delete\x12\x17.role.DeleteRoleRequest\x1a\x0e.role.Response\x122\n" +
 	"\x03Get\x12\x14.role.GetRoleRequest\x1a\x15.role.GetRoleResponse\x125\n" +
 	"\x04List\x12\x15.role.ListRoleRequest\x1a\x16.role.ListRoleResponseB Z\x1e./api/zebra-passport/role;roleb\x06proto3"
 
@@ -598,35 +687,40 @@ func file_api_zebra_passport_role_role_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_role_role_proto_rawDescData
 }
 
-var file_api_zebra_passport_role_role_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_passport_role_role_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_passport_role_role_proto_goTypes = []any{
-	(*Role)(nil),              // 0: role.Role
-	(*CreateRoleRequest)(nil), // 1: role.CreateRoleRequest
-	(*UpdateRoleRequest)(nil), // 2: role.UpdateRoleRequest
-	(*DeleteRoleRequest)(nil), // 3: role.DeleteRoleRequest
-	(*GetRoleRequest)(nil),    // 4: role.GetRoleRequest
-	(*GetRoleResponse)(nil),   // 5: role.GetRoleResponse
-	(*ListRoleRequest)(nil),   // 6: role.ListRoleRequest
-	(*ListRoleResponse)(nil),  // 7: role.ListRoleResponse
+	(*Role)(nil),                  // 0: role.Role
+	(*CreateRoleRequest)(nil),     // 1: role.CreateRoleRequest
+	(*UpdateRoleRequest)(nil),     // 2: role.UpdateRoleRequest
+	(*DeleteRoleRequest)(nil),     // 3: role.DeleteRoleRequest
+	(*GetRoleRequest)(nil),        // 4: role.GetRoleRequest
+	(*GetRoleResponse)(nil),       // 5: role.GetRoleResponse
+	(*ListRoleRequest)(nil),       // 6: role.ListRoleRequest
+	(*ListRoleResponse)(nil),      // 7: role.ListRoleResponse
+	(*Response)(nil),              // 8: role.Response
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_role_role_proto_depIdxs = []int32{
-	0, // 0: role.GetRoleResponse.role:type_name -> role.Role
-	0, // 1: role.ListRoleResponse.roles:type_name -> role.Role
-	1, // 2: role.RoleService.Create:input_type -> role.CreateRoleRequest
-	2, // 3: role.RoleService.Update:input_type -> role.UpdateRoleRequest
-	3, // 4: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
-	4, // 5: role.RoleService.Get:input_type -> role.GetRoleRequest
-	6, // 6: role.RoleService.List:input_type -> role.ListRoleRequest
-	0, // 7: role.RoleService.Create:output_type -> role.Role
-	0, // 8: role.RoleService.Update:output_type -> role.Role
-	0, // 9: role.RoleService.Delete:output_type -> role.Role
-	5, // 10: role.RoleService.Get:output_type -> role.GetRoleResponse
-	7, // 11: role.RoleService.List:output_type -> role.ListRoleResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: role.GetRoleResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: role.GetRoleResponse.role:type_name -> role.Role
+	9,  // 2: role.ListRoleResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: role.ListRoleResponse.roles:type_name -> role.Role
+	9,  // 4: role.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: role.RoleService.Create:input_type -> role.CreateRoleRequest
+	2,  // 6: role.RoleService.Update:input_type -> role.UpdateRoleRequest
+	3,  // 7: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
+	4,  // 8: role.RoleService.Get:input_type -> role.GetRoleRequest
+	6,  // 9: role.RoleService.List:input_type -> role.ListRoleRequest
+	8,  // 10: role.RoleService.Create:output_type -> role.Response
+	8,  // 11: role.RoleService.Update:output_type -> role.Response
+	8,  // 12: role.RoleService.Delete:output_type -> role.Response
+	5,  // 13: role.RoleService.Get:output_type -> role.GetRoleResponse
+	7,  // 14: role.RoleService.List:output_type -> role.ListRoleResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_role_role_proto_init() }
@@ -640,7 +734,7 @@ func file_api_zebra_passport_role_role_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_role_role_proto_rawDesc), len(file_api_zebra_passport_role_role_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

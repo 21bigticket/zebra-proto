@@ -58,9 +58,9 @@ var (
 
 // RolePathService is a client for the role_path.RolePathService service.
 type RolePathService interface {
-	Create(ctx context.Context, req *CreateRolePathRequest, opts ...client.CallOption) (*RolePath, error)
-	Update(ctx context.Context, req *UpdateRolePathRequest, opts ...client.CallOption) (*RolePath, error)
-	Delete(ctx context.Context, req *DeleteRolePathRequest, opts ...client.CallOption) (*RolePath, error)
+	Create(ctx context.Context, req *CreateRolePathRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateRolePathRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteRolePathRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetRolePathRequest, opts ...client.CallOption) (*GetRolePathResponse, error)
 	List(ctx context.Context, req *ListRolePathRequest, opts ...client.CallOption) (*ListRolePathResponse, error)
 	BatchCreate(ctx context.Context, req *BatchCreateRolePathRequest, opts ...client.CallOption) (*ListRolePathResponse, error)
@@ -87,24 +87,24 @@ type RolePathServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *RolePathServiceImpl) Create(ctx context.Context, req *CreateRolePathRequest, opts ...client.CallOption) (*RolePath, error) {
-	resp := new(RolePath)
+func (c *RolePathServiceImpl) Create(ctx context.Context, req *CreateRolePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *RolePathServiceImpl) Update(ctx context.Context, req *UpdateRolePathRequest, opts ...client.CallOption) (*RolePath, error) {
-	resp := new(RolePath)
+func (c *RolePathServiceImpl) Update(ctx context.Context, req *UpdateRolePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *RolePathServiceImpl) Delete(ctx context.Context, req *DeleteRolePathRequest, opts ...client.CallOption) (*RolePath, error) {
-	resp := new(RolePath)
+func (c *RolePathServiceImpl) Delete(ctx context.Context, req *DeleteRolePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -154,9 +154,9 @@ var RolePathService_ClientInfo = client.ClientInfo{
 
 // RolePathServiceHandler is an implementation of the role_path.RolePathService service.
 type RolePathServiceHandler interface {
-	Create(context.Context, *CreateRolePathRequest) (*RolePath, error)
-	Update(context.Context, *UpdateRolePathRequest) (*RolePath, error)
-	Delete(context.Context, *DeleteRolePathRequest) (*RolePath, error)
+	Create(context.Context, *CreateRolePathRequest) (*Response, error)
+	Update(context.Context, *UpdateRolePathRequest) (*Response, error)
+	Delete(context.Context, *DeleteRolePathRequest) (*Response, error)
 	Get(context.Context, *GetRolePathRequest) (*GetRolePathResponse, error)
 	List(context.Context, *ListRolePathRequest) (*ListRolePathResponse, error)
 	BatchCreate(context.Context, *BatchCreateRolePathRequest) (*ListRolePathResponse, error)

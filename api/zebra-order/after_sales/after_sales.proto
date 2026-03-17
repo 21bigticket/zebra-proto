@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package after_sales;
 
 option go_package = "./api/zebra-order/after_sales;after_sales";
@@ -66,8 +68,10 @@ message CreateAfterSalesRequest {
 
 // 创建售后单响应
 message CreateAfterSalesResponse {
-  AfterSales after_sales = 1;
-  string     message     = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  AfterSales after_sales = 3;
+  string     message     = 4;
 }
 
 // 审核售后单请求
@@ -92,8 +96,10 @@ message GetAfterSalesRequest {
 
 // 查询售后单响应
 message GetAfterSalesResponse {
-  AfterSales              after_sales = 1;
-  repeated AfterSalesItem items       = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  AfterSales              after_sales = 3;
+  repeated AfterSalesItem items       = 4;
 }
 
 // 查询用户售后单列表请求
@@ -106,15 +112,19 @@ message GetUserAfterSalesRequest {
 
 // 查询用户售后单列表响应
 message GetUserAfterSalesResponse {
-  repeated AfterSales after_sales_list = 1;
-  int32              total            = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated AfterSales after_sales_list = 3;
+  int32              total            = 4;
 }
 
 // 通用响应
 message AfterSalesResponse {
-  bool        success    = 1;
-  string      message    = 2;
-  AfterSales  after_sales = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool        success    = 3;
+  string      message    = 4;
+  AfterSales  after_sales = 5;
 }
 
 // 售后服务

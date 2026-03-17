@@ -56,12 +56,12 @@ var (
 
 // CartService is a client for the cart.CartService service.
 type CartService interface {
-	AddItem(ctx context.Context, req *AddItemRequest, opts ...client.CallOption) (*CartResponse, error)
-	RemoveItem(ctx context.Context, req *RemoveItemRequest, opts ...client.CallOption) (*CartResponse, error)
-	UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*CartResponse, error)
-	ClearCart(ctx context.Context, req *ClearCartRequest, opts ...client.CallOption) (*CartResponse, error)
+	AddItem(ctx context.Context, req *AddItemRequest, opts ...client.CallOption) (*Response, error)
+	RemoveItem(ctx context.Context, req *RemoveItemRequest, opts ...client.CallOption) (*Response, error)
+	UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*Response, error)
+	ClearCart(ctx context.Context, req *ClearCartRequest, opts ...client.CallOption) (*Response, error)
 	GetCart(ctx context.Context, req *GetCartRequest, opts ...client.CallOption) (*GetCartResponse, error)
-	BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*CartResponse, error)
+	BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*Response, error)
 }
 
 // NewCartService constructs a client for the cart.CartService service.
@@ -84,32 +84,32 @@ type CartServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *CartServiceImpl) AddItem(ctx context.Context, req *AddItemRequest, opts ...client.CallOption) (*CartResponse, error) {
-	resp := new(CartResponse)
+func (c *CartServiceImpl) AddItem(ctx context.Context, req *AddItemRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "AddItem", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CartServiceImpl) RemoveItem(ctx context.Context, req *RemoveItemRequest, opts ...client.CallOption) (*CartResponse, error) {
-	resp := new(CartResponse)
+func (c *CartServiceImpl) RemoveItem(ctx context.Context, req *RemoveItemRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "RemoveItem", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CartServiceImpl) UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*CartResponse, error) {
-	resp := new(CartResponse)
+func (c *CartServiceImpl) UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateQuantity", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CartServiceImpl) ClearCart(ctx context.Context, req *ClearCartRequest, opts ...client.CallOption) (*CartResponse, error) {
-	resp := new(CartResponse)
+func (c *CartServiceImpl) ClearCart(ctx context.Context, req *ClearCartRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ClearCart", opts...); err != nil {
 		return nil, err
 	}
@@ -124,8 +124,8 @@ func (c *CartServiceImpl) GetCart(ctx context.Context, req *GetCartRequest, opts
 	return resp, nil
 }
 
-func (c *CartServiceImpl) BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*CartResponse, error) {
-	resp := new(CartResponse)
+func (c *CartServiceImpl) BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchRemove", opts...); err != nil {
 		return nil, err
 	}
@@ -143,12 +143,12 @@ var CartService_ClientInfo = client.ClientInfo{
 
 // CartServiceHandler is an implementation of the cart.CartService service.
 type CartServiceHandler interface {
-	AddItem(context.Context, *AddItemRequest) (*CartResponse, error)
-	RemoveItem(context.Context, *RemoveItemRequest) (*CartResponse, error)
-	UpdateQuantity(context.Context, *UpdateQuantityRequest) (*CartResponse, error)
-	ClearCart(context.Context, *ClearCartRequest) (*CartResponse, error)
+	AddItem(context.Context, *AddItemRequest) (*Response, error)
+	RemoveItem(context.Context, *RemoveItemRequest) (*Response, error)
+	UpdateQuantity(context.Context, *UpdateQuantityRequest) (*Response, error)
+	ClearCart(context.Context, *ClearCartRequest) (*Response, error)
 	GetCart(context.Context, *GetCartRequest) (*GetCartResponse, error)
-	BatchRemove(context.Context, *BatchRemoveRequest) (*CartResponse, error)
+	BatchRemove(context.Context, *BatchRemoveRequest) (*Response, error)
 }
 
 func RegisterCartServiceHandler(srv *server.Server, hdlr CartServiceHandler, opts ...server.ServiceOption) error {

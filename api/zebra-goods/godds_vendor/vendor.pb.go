@@ -25,6 +25,7 @@ package godds_vendor
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -433,7 +434,9 @@ func (x *GetVendorRequest) GetId() int64 {
 // 获取供应商响应
 type GetVendorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Vendor        *Vendor                `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Vendor        *Vendor                `protobuf:"bytes,3,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -466,6 +469,20 @@ func (x *GetVendorResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetVendorResponse.ProtoReflect.Descriptor instead.
 func (*GetVendorResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_godds_vendor_vendor_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetVendorResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetVendorResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetVendorResponse) GetVendor() *Vendor {
@@ -547,8 +564,10 @@ func (x *ListVendorRequest) GetStatus() int32 {
 // 列出供应商响应
 type ListVendorResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Vendors       []*Vendor              `protobuf:"bytes,1,rep,name=vendors,proto3" json:"vendors,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Vendors       []*Vendor              `protobuf:"bytes,3,rep,name=vendors,proto3" json:"vendors,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -583,6 +602,20 @@ func (*ListVendorResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_godds_vendor_vendor_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListVendorResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListVendorResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListVendorResponse) GetVendors() []*Vendor {
 	if x != nil {
 		return x.Vendors
@@ -597,11 +630,63 @@ func (x *ListVendorResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_goods_godds_vendor_vendor_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_godds_vendor_vendor_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_godds_vendor_vendor_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_goods_godds_vendor_vendor_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-goods/godds_vendor/vendor.proto\x12\x06vendor\"\x99\x02\n" +
+	")api/zebra-goods/godds_vendor/vendor.proto\x12\x06vendor\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x02\n" +
 	"\x06Vendor\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -636,21 +721,28 @@ const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\x13DeleteVendorRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\"\n" +
 	"\x10GetVendorRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\";\n" +
-	"\x11GetVendorResponse\x12&\n" +
-	"\x06vendor\x18\x01 \x01(\v2\x0e.vendor.VendorR\x06vendor\"\x7f\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"~\n" +
+	"\x11GetVendorResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12&\n" +
+	"\x06vendor\x18\x03 \x01(\v2\x0e.vendor.VendorR\x06vendor\"\x7f\n" +
 	"\x11ListVendorRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
 	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"T\n" +
-	"\x12ListVendorResponse\x12(\n" +
-	"\avendors\x18\x01 \x03(\v2\x0e.vendor.VendorR\avendors\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\xaf\x02\n" +
-	"\rVendorService\x125\n" +
-	"\x06Create\x12\x1b.vendor.CreateVendorRequest\x1a\x0e.vendor.Vendor\x125\n" +
-	"\x06Update\x12\x1b.vendor.UpdateVendorRequest\x1a\x0e.vendor.Vendor\x125\n" +
-	"\x06Delete\x12\x1b.vendor.DeleteVendorRequest\x1a\x0e.vendor.Vendor\x12:\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"\x97\x01\n" +
+	"\x12ListVendorResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12(\n" +
+	"\avendors\x18\x03 \x03(\v2\x0e.vendor.VendorR\avendors\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xb5\x02\n" +
+	"\rVendorService\x127\n" +
+	"\x06Create\x12\x1b.vendor.CreateVendorRequest\x1a\x10.vendor.Response\x127\n" +
+	"\x06Update\x12\x1b.vendor.UpdateVendorRequest\x1a\x10.vendor.Response\x127\n" +
+	"\x06Delete\x12\x1b.vendor.DeleteVendorRequest\x1a\x10.vendor.Response\x12:\n" +
 	"\x03Get\x12\x18.vendor.GetVendorRequest\x1a\x19.vendor.GetVendorResponse\x12=\n" +
 	"\x04List\x12\x19.vendor.ListVendorRequest\x1a\x1a.vendor.ListVendorResponseB-Z+./api/zebra-goods/godds_vendor;godds_vendorb\x06proto3"
 
@@ -666,35 +758,40 @@ func file_api_zebra_goods_godds_vendor_vendor_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_godds_vendor_vendor_proto_rawDescData
 }
 
-var file_api_zebra_goods_godds_vendor_vendor_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_goods_godds_vendor_vendor_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_goods_godds_vendor_vendor_proto_goTypes = []any{
-	(*Vendor)(nil),              // 0: vendor.Vendor
-	(*CreateVendorRequest)(nil), // 1: vendor.CreateVendorRequest
-	(*UpdateVendorRequest)(nil), // 2: vendor.UpdateVendorRequest
-	(*DeleteVendorRequest)(nil), // 3: vendor.DeleteVendorRequest
-	(*GetVendorRequest)(nil),    // 4: vendor.GetVendorRequest
-	(*GetVendorResponse)(nil),   // 5: vendor.GetVendorResponse
-	(*ListVendorRequest)(nil),   // 6: vendor.ListVendorRequest
-	(*ListVendorResponse)(nil),  // 7: vendor.ListVendorResponse
+	(*Vendor)(nil),                // 0: vendor.Vendor
+	(*CreateVendorRequest)(nil),   // 1: vendor.CreateVendorRequest
+	(*UpdateVendorRequest)(nil),   // 2: vendor.UpdateVendorRequest
+	(*DeleteVendorRequest)(nil),   // 3: vendor.DeleteVendorRequest
+	(*GetVendorRequest)(nil),      // 4: vendor.GetVendorRequest
+	(*GetVendorResponse)(nil),     // 5: vendor.GetVendorResponse
+	(*ListVendorRequest)(nil),     // 6: vendor.ListVendorRequest
+	(*ListVendorResponse)(nil),    // 7: vendor.ListVendorResponse
+	(*Response)(nil),              // 8: vendor.Response
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_godds_vendor_vendor_proto_depIdxs = []int32{
-	0, // 0: vendor.GetVendorResponse.vendor:type_name -> vendor.Vendor
-	0, // 1: vendor.ListVendorResponse.vendors:type_name -> vendor.Vendor
-	1, // 2: vendor.VendorService.Create:input_type -> vendor.CreateVendorRequest
-	2, // 3: vendor.VendorService.Update:input_type -> vendor.UpdateVendorRequest
-	3, // 4: vendor.VendorService.Delete:input_type -> vendor.DeleteVendorRequest
-	4, // 5: vendor.VendorService.Get:input_type -> vendor.GetVendorRequest
-	6, // 6: vendor.VendorService.List:input_type -> vendor.ListVendorRequest
-	0, // 7: vendor.VendorService.Create:output_type -> vendor.Vendor
-	0, // 8: vendor.VendorService.Update:output_type -> vendor.Vendor
-	0, // 9: vendor.VendorService.Delete:output_type -> vendor.Vendor
-	5, // 10: vendor.VendorService.Get:output_type -> vendor.GetVendorResponse
-	7, // 11: vendor.VendorService.List:output_type -> vendor.ListVendorResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: vendor.GetVendorResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: vendor.GetVendorResponse.vendor:type_name -> vendor.Vendor
+	9,  // 2: vendor.ListVendorResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: vendor.ListVendorResponse.vendors:type_name -> vendor.Vendor
+	9,  // 4: vendor.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: vendor.VendorService.Create:input_type -> vendor.CreateVendorRequest
+	2,  // 6: vendor.VendorService.Update:input_type -> vendor.UpdateVendorRequest
+	3,  // 7: vendor.VendorService.Delete:input_type -> vendor.DeleteVendorRequest
+	4,  // 8: vendor.VendorService.Get:input_type -> vendor.GetVendorRequest
+	6,  // 9: vendor.VendorService.List:input_type -> vendor.ListVendorRequest
+	8,  // 10: vendor.VendorService.Create:output_type -> vendor.Response
+	8,  // 11: vendor.VendorService.Update:output_type -> vendor.Response
+	8,  // 12: vendor.VendorService.Delete:output_type -> vendor.Response
+	5,  // 13: vendor.VendorService.Get:output_type -> vendor.GetVendorResponse
+	7,  // 14: vendor.VendorService.List:output_type -> vendor.ListVendorResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_godds_vendor_vendor_proto_init() }
@@ -708,7 +805,7 @@ func file_api_zebra_goods_godds_vendor_vendor_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc), len(file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

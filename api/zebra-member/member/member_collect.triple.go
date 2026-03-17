@@ -56,9 +56,9 @@ var (
 
 // MemberCollectService is a client for the member.MemberCollectService service.
 type MemberCollectService interface {
-	Create(ctx context.Context, req *CreateMemberCollectRequest, opts ...client.CallOption) (*MemberCollect, error)
-	UpdateStatus(ctx context.Context, req *UpdateCollectStatusRequest, opts ...client.CallOption) (*MemberCollect, error)
-	Delete(ctx context.Context, req *DeleteMemberCollectRequest, opts ...client.CallOption) (*MemberCollect, error)
+	Create(ctx context.Context, req *CreateMemberCollectRequest, opts ...client.CallOption) (*MemberCollectResponse, error)
+	UpdateStatus(ctx context.Context, req *UpdateCollectStatusRequest, opts ...client.CallOption) (*MemberCollectResponse, error)
+	Delete(ctx context.Context, req *DeleteMemberCollectRequest, opts ...client.CallOption) (*MemberCollectResponse, error)
 	Get(ctx context.Context, req *GetMemberCollectRequest, opts ...client.CallOption) (*GetMemberCollectResponse, error)
 	GetListByUser(ctx context.Context, req *GetCollectListByUserRequest, opts ...client.CallOption) (*CollectListResponse, error)
 	CheckStatus(ctx context.Context, req *CheckCollectStatusRequest, opts ...client.CallOption) (*CheckCollectStatusResponse, error)
@@ -84,24 +84,24 @@ type MemberCollectServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *MemberCollectServiceImpl) Create(ctx context.Context, req *CreateMemberCollectRequest, opts ...client.CallOption) (*MemberCollect, error) {
-	resp := new(MemberCollect)
+func (c *MemberCollectServiceImpl) Create(ctx context.Context, req *CreateMemberCollectRequest, opts ...client.CallOption) (*MemberCollectResponse, error) {
+	resp := new(MemberCollectResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberCollectServiceImpl) UpdateStatus(ctx context.Context, req *UpdateCollectStatusRequest, opts ...client.CallOption) (*MemberCollect, error) {
-	resp := new(MemberCollect)
+func (c *MemberCollectServiceImpl) UpdateStatus(ctx context.Context, req *UpdateCollectStatusRequest, opts ...client.CallOption) (*MemberCollectResponse, error) {
+	resp := new(MemberCollectResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateStatus", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberCollectServiceImpl) Delete(ctx context.Context, req *DeleteMemberCollectRequest, opts ...client.CallOption) (*MemberCollect, error) {
-	resp := new(MemberCollect)
+func (c *MemberCollectServiceImpl) Delete(ctx context.Context, req *DeleteMemberCollectRequest, opts ...client.CallOption) (*MemberCollectResponse, error) {
+	resp := new(MemberCollectResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -143,9 +143,9 @@ var MemberCollectService_ClientInfo = client.ClientInfo{
 
 // MemberCollectServiceHandler is an implementation of the member.MemberCollectService service.
 type MemberCollectServiceHandler interface {
-	Create(context.Context, *CreateMemberCollectRequest) (*MemberCollect, error)
-	UpdateStatus(context.Context, *UpdateCollectStatusRequest) (*MemberCollect, error)
-	Delete(context.Context, *DeleteMemberCollectRequest) (*MemberCollect, error)
+	Create(context.Context, *CreateMemberCollectRequest) (*MemberCollectResponse, error)
+	UpdateStatus(context.Context, *UpdateCollectStatusRequest) (*MemberCollectResponse, error)
+	Delete(context.Context, *DeleteMemberCollectRequest) (*MemberCollectResponse, error)
 	Get(context.Context, *GetMemberCollectRequest) (*GetMemberCollectResponse, error)
 	GetListByUser(context.Context, *GetCollectListByUserRequest) (*CollectListResponse, error)
 	CheckStatus(context.Context, *CheckCollectStatusRequest) (*CheckCollectStatusResponse, error)

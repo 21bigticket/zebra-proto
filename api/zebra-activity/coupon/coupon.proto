@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package coupon;
 
 option go_package = "./api/zebra-activity/coupon;coupon";
@@ -80,7 +82,9 @@ message GetCouponRequest {
 
 // 获取优惠券响应
 message GetCouponResponse {
-  Coupon coupon = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Coupon coupon = 3;
 }
 
 // 列出优惠券请求
@@ -93,15 +97,22 @@ message ListCouponRequest {
 
 // 列出优惠券响应
 message ListCouponResponse {
-  repeated Coupon coupons = 1;
-  int32          total   = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Coupon coupons = 3;
+  int32          total   = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 优惠券服务
 service CouponService {
-  rpc Create(CreateCouponRequest) returns (Coupon);
-  rpc Update(UpdateCouponRequest) returns (Coupon);
-  rpc Delete(DeleteCouponRequest) returns (Coupon);
+  rpc Create(CreateCouponRequest) returns (Response);
+  rpc Update(UpdateCouponRequest) returns (Response);
+  rpc Delete(DeleteCouponRequest) returns (Response);
   rpc Get(GetCouponRequest) returns (GetCouponResponse);
   rpc List(ListCouponRequest) returns (ListCouponResponse);
 }

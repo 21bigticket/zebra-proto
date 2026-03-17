@@ -56,9 +56,9 @@ var (
 
 // AdminUserService is a client for the admin_user.AdminUserService service.
 type AdminUserService interface {
-	Create(ctx context.Context, req *CreateAdminUserRequest, opts ...client.CallOption) (*AdminUser, error)
-	Update(ctx context.Context, req *UpdateAdminUserRequest, opts ...client.CallOption) (*AdminUser, error)
-	Delete(ctx context.Context, req *DeleteAdminUserRequest, opts ...client.CallOption) (*AdminUser, error)
+	Create(ctx context.Context, req *CreateAdminUserRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateAdminUserRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteAdminUserRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetAdminUserRequest, opts ...client.CallOption) (*GetAdminUserResponse, error)
 	List(ctx context.Context, req *ListAdminUserRequest, opts ...client.CallOption) (*ListAdminUserResponse, error)
 	Login(ctx context.Context, req *LoginRequest, opts ...client.CallOption) (*LoginResponse, error)
@@ -84,24 +84,24 @@ type AdminUserServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *AdminUserServiceImpl) Create(ctx context.Context, req *CreateAdminUserRequest, opts ...client.CallOption) (*AdminUser, error) {
-	resp := new(AdminUser)
+func (c *AdminUserServiceImpl) Create(ctx context.Context, req *CreateAdminUserRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *AdminUserServiceImpl) Update(ctx context.Context, req *UpdateAdminUserRequest, opts ...client.CallOption) (*AdminUser, error) {
-	resp := new(AdminUser)
+func (c *AdminUserServiceImpl) Update(ctx context.Context, req *UpdateAdminUserRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *AdminUserServiceImpl) Delete(ctx context.Context, req *DeleteAdminUserRequest, opts ...client.CallOption) (*AdminUser, error) {
-	resp := new(AdminUser)
+func (c *AdminUserServiceImpl) Delete(ctx context.Context, req *DeleteAdminUserRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -143,9 +143,9 @@ var AdminUserService_ClientInfo = client.ClientInfo{
 
 // AdminUserServiceHandler is an implementation of the admin_user.AdminUserService service.
 type AdminUserServiceHandler interface {
-	Create(context.Context, *CreateAdminUserRequest) (*AdminUser, error)
-	Update(context.Context, *UpdateAdminUserRequest) (*AdminUser, error)
-	Delete(context.Context, *DeleteAdminUserRequest) (*AdminUser, error)
+	Create(context.Context, *CreateAdminUserRequest) (*Response, error)
+	Update(context.Context, *UpdateAdminUserRequest) (*Response, error)
+	Delete(context.Context, *DeleteAdminUserRequest) (*Response, error)
 	Get(context.Context, *GetAdminUserRequest) (*GetAdminUserResponse, error)
 	List(context.Context, *ListAdminUserRequest) (*ListAdminUserResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)

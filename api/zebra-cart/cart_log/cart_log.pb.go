@@ -25,6 +25,7 @@ package cart_log
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -255,7 +256,9 @@ func (x *GetLogRequest) GetLogId() int64 {
 // 获取日志响应
 type GetLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CartLog       *CartLog               `protobuf:"bytes,1,opt,name=cart_log,json=cartLog,proto3" json:"cart_log,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	CartLog       *CartLog               `protobuf:"bytes,3,opt,name=cart_log,json=cartLog,proto3" json:"cart_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -288,6 +291,20 @@ func (x *GetLogResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetLogResponse.ProtoReflect.Descriptor instead.
 func (*GetLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetLogResponse) GetCartLog() *CartLog {
@@ -393,8 +410,10 @@ func (x *ListLogRequest) GetEndTime() int64 {
 // 查询日志响应
 type ListLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CartLogs      []*CartLog             `protobuf:"bytes,1,rep,name=cart_logs,json=cartLogs,proto3" json:"cart_logs,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	CartLogs      []*CartLog             `protobuf:"bytes,3,rep,name=cart_logs,json=cartLogs,proto3" json:"cart_logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -429,6 +448,20 @@ func (*ListLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{5}
 }
 
+func (x *ListLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListLogResponse) GetCartLogs() []*CartLog {
 	if x != nil {
 		return x.CartLogs
@@ -441,6 +474,58 @@ func (x *ListLogResponse) GetTotal() int32 {
 		return x.Total
 	}
 	return 0
+}
+
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 // 按用户查询日志请求
@@ -457,7 +542,7 @@ type GetUserLogsRequest struct {
 
 func (x *GetUserLogsRequest) Reset() {
 	*x = GetUserLogsRequest{}
-	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[6]
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -469,7 +554,7 @@ func (x *GetUserLogsRequest) String() string {
 func (*GetUserLogsRequest) ProtoMessage() {}
 
 func (x *GetUserLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[6]
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -482,7 +567,7 @@ func (x *GetUserLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserLogsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserLogsRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{6}
+	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetUserLogsRequest) GetUserId() int64 {
@@ -534,7 +619,7 @@ type GetCartLogsRequest struct {
 
 func (x *GetCartLogsRequest) Reset() {
 	*x = GetCartLogsRequest{}
-	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[7]
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -546,7 +631,7 @@ func (x *GetCartLogsRequest) String() string {
 func (*GetCartLogsRequest) ProtoMessage() {}
 
 func (x *GetCartLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[7]
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -559,7 +644,7 @@ func (x *GetCartLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCartLogsRequest.ProtoReflect.Descriptor instead.
 func (*GetCartLogsRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{7}
+	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetCartLogsRequest) GetCartId() int64 {
@@ -601,7 +686,7 @@ var File_api_zebra_cart_cart_log_cart_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\n" +
-	"&api/zebra-cart/cart_log/cart_log.proto\x12\bcart_log\"\xc5\x01\n" +
+	"&api/zebra-cart/cart_log/cart_log.proto\x12\bcart_log\x1a\x1egoogle/protobuf/wrappers.proto\"\xc5\x01\n" +
 	"\aCartLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x17\n" +
@@ -620,9 +705,11 @@ const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\vaction_data\x18\x05 \x01(\tR\n" +
 	"actionData\"&\n" +
 	"\rGetLogRequest\x12\x15\n" +
-	"\x06log_id\x18\x01 \x01(\x03R\x05logId\">\n" +
-	"\x0eGetLogResponse\x12,\n" +
-	"\bcart_log\x18\x01 \x01(\v2\x11.cart_log.CartLogR\acartLog\"\xc5\x01\n" +
+	"\x06log_id\x18\x01 \x01(\x03R\x05logId\"\x81\x01\n" +
+	"\x0eGetLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12,\n" +
+	"\bcart_log\x18\x03 \x01(\v2\x11.cart_log.CartLogR\acartLog\"\xc5\x01\n" +
 	"\x0eListLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
@@ -631,10 +718,15 @@ const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\x06action\x18\x05 \x01(\tR\x06action\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\a \x01(\x03R\aendTime\"W\n" +
-	"\x0fListLogResponse\x12.\n" +
-	"\tcart_logs\x18\x01 \x03(\v2\x11.cart_log.CartLogR\bcartLogs\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"\x98\x01\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\x9a\x01\n" +
+	"\x0fListLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
+	"\tcart_logs\x18\x03 \x03(\v2\x11.cart_log.CartLogR\bcartLogs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"\x98\x01\n" +
 	"\x12GetUserLogsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -648,9 +740,9 @@ const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x05 \x01(\x03R\aendTime2\xd0\x02\n" +
-	"\x0eCartLogService\x127\n" +
-	"\x06Create\x12\x1a.cart_log.CreateLogRequest\x1a\x11.cart_log.CartLog\x128\n" +
+	"\bend_time\x18\x05 \x01(\x03R\aendTime2\xd1\x02\n" +
+	"\x0eCartLogService\x128\n" +
+	"\x06Create\x12\x1a.cart_log.CreateLogRequest\x1a\x12.cart_log.Response\x128\n" +
 	"\x03Get\x12\x17.cart_log.GetLogRequest\x1a\x18.cart_log.GetLogResponse\x12;\n" +
 	"\x04List\x12\x18.cart_log.ListLogRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
 	"\vGetUserLogs\x12\x1c.cart_log.GetUserLogsRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
@@ -668,35 +760,40 @@ func file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP() []byte {
 	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescData
 }
 
-var file_api_zebra_cart_cart_log_cart_log_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_cart_cart_log_cart_log_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_cart_cart_log_cart_log_proto_goTypes = []any{
-	(*CartLog)(nil),            // 0: cart_log.CartLog
-	(*CreateLogRequest)(nil),   // 1: cart_log.CreateLogRequest
-	(*GetLogRequest)(nil),      // 2: cart_log.GetLogRequest
-	(*GetLogResponse)(nil),     // 3: cart_log.GetLogResponse
-	(*ListLogRequest)(nil),     // 4: cart_log.ListLogRequest
-	(*ListLogResponse)(nil),    // 5: cart_log.ListLogResponse
-	(*GetUserLogsRequest)(nil), // 6: cart_log.GetUserLogsRequest
-	(*GetCartLogsRequest)(nil), // 7: cart_log.GetCartLogsRequest
+	(*CartLog)(nil),               // 0: cart_log.CartLog
+	(*CreateLogRequest)(nil),      // 1: cart_log.CreateLogRequest
+	(*GetLogRequest)(nil),         // 2: cart_log.GetLogRequest
+	(*GetLogResponse)(nil),        // 3: cart_log.GetLogResponse
+	(*ListLogRequest)(nil),        // 4: cart_log.ListLogRequest
+	(*ListLogResponse)(nil),       // 5: cart_log.ListLogResponse
+	(*Response)(nil),              // 6: cart_log.Response
+	(*GetUserLogsRequest)(nil),    // 7: cart_log.GetUserLogsRequest
+	(*GetCartLogsRequest)(nil),    // 8: cart_log.GetCartLogsRequest
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_cart_cart_log_cart_log_proto_depIdxs = []int32{
-	0, // 0: cart_log.GetLogResponse.cart_log:type_name -> cart_log.CartLog
-	0, // 1: cart_log.ListLogResponse.cart_logs:type_name -> cart_log.CartLog
-	1, // 2: cart_log.CartLogService.Create:input_type -> cart_log.CreateLogRequest
-	2, // 3: cart_log.CartLogService.Get:input_type -> cart_log.GetLogRequest
-	4, // 4: cart_log.CartLogService.List:input_type -> cart_log.ListLogRequest
-	6, // 5: cart_log.CartLogService.GetUserLogs:input_type -> cart_log.GetUserLogsRequest
-	7, // 6: cart_log.CartLogService.GetCartLogs:input_type -> cart_log.GetCartLogsRequest
-	0, // 7: cart_log.CartLogService.Create:output_type -> cart_log.CartLog
-	3, // 8: cart_log.CartLogService.Get:output_type -> cart_log.GetLogResponse
-	5, // 9: cart_log.CartLogService.List:output_type -> cart_log.ListLogResponse
-	5, // 10: cart_log.CartLogService.GetUserLogs:output_type -> cart_log.ListLogResponse
-	5, // 11: cart_log.CartLogService.GetCartLogs:output_type -> cart_log.ListLogResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: cart_log.GetLogResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: cart_log.GetLogResponse.cart_log:type_name -> cart_log.CartLog
+	9,  // 2: cart_log.ListLogResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: cart_log.ListLogResponse.cart_logs:type_name -> cart_log.CartLog
+	9,  // 4: cart_log.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: cart_log.CartLogService.Create:input_type -> cart_log.CreateLogRequest
+	2,  // 6: cart_log.CartLogService.Get:input_type -> cart_log.GetLogRequest
+	4,  // 7: cart_log.CartLogService.List:input_type -> cart_log.ListLogRequest
+	7,  // 8: cart_log.CartLogService.GetUserLogs:input_type -> cart_log.GetUserLogsRequest
+	8,  // 9: cart_log.CartLogService.GetCartLogs:input_type -> cart_log.GetCartLogsRequest
+	6,  // 10: cart_log.CartLogService.Create:output_type -> cart_log.Response
+	3,  // 11: cart_log.CartLogService.Get:output_type -> cart_log.GetLogResponse
+	5,  // 12: cart_log.CartLogService.List:output_type -> cart_log.ListLogResponse
+	5,  // 13: cart_log.CartLogService.GetUserLogs:output_type -> cart_log.ListLogResponse
+	5,  // 14: cart_log.CartLogService.GetCartLogs:output_type -> cart_log.ListLogResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_cart_cart_log_cart_log_proto_init() }
@@ -710,7 +807,7 @@ func file_api_zebra_cart_cart_log_cart_log_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_cart_cart_log_cart_log_proto_rawDesc), len(file_api_zebra_cart_cart_log_cart_log_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

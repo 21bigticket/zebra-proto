@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package goods;
 
 option go_package = "./api/zebra-goods/goods;goods";
@@ -73,7 +75,9 @@ message GetGoodsRequest {
 
 // 获取商品响应
 message GetGoodsResponse {
-  Goods goods = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Goods goods = 3;
 }
 
 // 列出商品请求
@@ -89,15 +93,22 @@ message ListGoodsRequest {
 
 // 列出商品响应
 message ListGoodsResponse {
-  repeated Goods goods = 1;
-  int32         total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Goods goods = 3;
+  int32         total = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 商品服务
 service GoodsService {
-  rpc Create(CreateGoodsRequest) returns (Goods);
-  rpc Update(UpdateGoodsRequest) returns (Goods);
-  rpc Delete(DeleteGoodsRequest) returns (Goods);
+  rpc Create(CreateGoodsRequest) returns (Response);
+  rpc Update(UpdateGoodsRequest) returns (Response);
+  rpc Delete(DeleteGoodsRequest) returns (Response);
   rpc Get(GetGoodsRequest) returns (GetGoodsResponse);
   rpc List(ListGoodsRequest) returns (ListGoodsResponse);
 }

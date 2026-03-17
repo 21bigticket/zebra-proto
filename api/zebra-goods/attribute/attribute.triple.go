@@ -54,9 +54,9 @@ var (
 
 // AttributeService is a client for the attribute.AttributeService service.
 type AttributeService interface {
-	Create(ctx context.Context, req *CreateAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error)
-	Update(ctx context.Context, req *UpdateAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error)
-	Delete(ctx context.Context, req *DeleteAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error)
+	Create(ctx context.Context, req *CreateAttributeRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateAttributeRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteAttributeRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetAttributeRequest, opts ...client.CallOption) (*GetAttributeResponse, error)
 	List(ctx context.Context, req *ListAttributeRequest, opts ...client.CallOption) (*ListAttributeResponse, error)
 }
@@ -81,24 +81,24 @@ type AttributeServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *AttributeServiceImpl) Create(ctx context.Context, req *CreateAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error) {
-	resp := new(GoodsAttribute)
+func (c *AttributeServiceImpl) Create(ctx context.Context, req *CreateAttributeRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *AttributeServiceImpl) Update(ctx context.Context, req *UpdateAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error) {
-	resp := new(GoodsAttribute)
+func (c *AttributeServiceImpl) Update(ctx context.Context, req *UpdateAttributeRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *AttributeServiceImpl) Delete(ctx context.Context, req *DeleteAttributeRequest, opts ...client.CallOption) (*GoodsAttribute, error) {
-	resp := new(GoodsAttribute)
+func (c *AttributeServiceImpl) Delete(ctx context.Context, req *DeleteAttributeRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var AttributeService_ClientInfo = client.ClientInfo{
 
 // AttributeServiceHandler is an implementation of the attribute.AttributeService service.
 type AttributeServiceHandler interface {
-	Create(context.Context, *CreateAttributeRequest) (*GoodsAttribute, error)
-	Update(context.Context, *UpdateAttributeRequest) (*GoodsAttribute, error)
-	Delete(context.Context, *DeleteAttributeRequest) (*GoodsAttribute, error)
+	Create(context.Context, *CreateAttributeRequest) (*Response, error)
+	Update(context.Context, *UpdateAttributeRequest) (*Response, error)
+	Delete(context.Context, *DeleteAttributeRequest) (*Response, error)
 	Get(context.Context, *GetAttributeRequest) (*GetAttributeResponse, error)
 	List(context.Context, *ListAttributeRequest) (*ListAttributeResponse, error)
 }

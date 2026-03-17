@@ -50,8 +50,8 @@ var (
 
 // MemberItemService is a client for the member.MemberItemService service.
 type MemberItemService interface {
-	Create(ctx context.Context, req *CreateMemberItemRequest, opts ...client.CallOption) (*MemberItem, error)
-	Update(ctx context.Context, req *UpdateMemberItemRequest, opts ...client.CallOption) (*MemberItem, error)
+	Create(ctx context.Context, req *CreateMemberItemRequest, opts ...client.CallOption) (*MemberItemResponse, error)
+	Update(ctx context.Context, req *UpdateMemberItemRequest, opts ...client.CallOption) (*MemberItemResponse, error)
 	Get(ctx context.Context, req *GetMemberItemRequest, opts ...client.CallOption) (*GetMemberItemResponse, error)
 }
 
@@ -75,16 +75,16 @@ type MemberItemServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *MemberItemServiceImpl) Create(ctx context.Context, req *CreateMemberItemRequest, opts ...client.CallOption) (*MemberItem, error) {
-	resp := new(MemberItem)
+func (c *MemberItemServiceImpl) Create(ctx context.Context, req *CreateMemberItemRequest, opts ...client.CallOption) (*MemberItemResponse, error) {
+	resp := new(MemberItemResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberItemServiceImpl) Update(ctx context.Context, req *UpdateMemberItemRequest, opts ...client.CallOption) (*MemberItem, error) {
-	resp := new(MemberItem)
+func (c *MemberItemServiceImpl) Update(ctx context.Context, req *UpdateMemberItemRequest, opts ...client.CallOption) (*MemberItemResponse, error) {
+	resp := new(MemberItemResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
@@ -110,8 +110,8 @@ var MemberItemService_ClientInfo = client.ClientInfo{
 
 // MemberItemServiceHandler is an implementation of the member.MemberItemService service.
 type MemberItemServiceHandler interface {
-	Create(context.Context, *CreateMemberItemRequest) (*MemberItem, error)
-	Update(context.Context, *UpdateMemberItemRequest) (*MemberItem, error)
+	Create(context.Context, *CreateMemberItemRequest) (*MemberItemResponse, error)
+	Update(context.Context, *UpdateMemberItemRequest) (*MemberItemResponse, error)
 	Get(context.Context, *GetMemberItemRequest) (*GetMemberItemResponse, error)
 }
 

@@ -25,6 +25,7 @@ package action_log
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -258,8 +259,10 @@ func (x *ListActionLogRequest) GetEndTime() int64 {
 // 查询操作日志响应
 type ListActionLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Logs          []*AdminActionLog      `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Logs          []*AdminActionLog      `protobuf:"bytes,3,rep,name=logs,proto3" json:"logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -294,6 +297,20 @@ func (*ListActionLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_action_log_action_log_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *ListActionLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListActionLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListActionLogResponse) GetLogs() []*AdminActionLog {
 	if x != nil {
 		return x.Logs
@@ -313,7 +330,7 @@ var File_api_zebra_passport_action_log_action_log_proto protoreflect.FileDescrip
 const file_api_zebra_passport_action_log_action_log_proto_rawDesc = "" +
 	"\n" +
 	".api/zebra-passport/action_log/action_log.proto\x12\n" +
-	"action_log\"\xb4\x02\n" +
+	"action_log\x1a\x1egoogle/protobuf/wrappers.proto\"\xb4\x02\n" +
 	"\x0eAdminActionLog\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\badmin_id\x18\x02 \x01(\x03R\aadminId\x12\x1d\n" +
@@ -339,10 +356,12 @@ const file_api_zebra_passport_action_log_action_log_proto_rawDesc = "" +
 	"\x06result\x18\x05 \x01(\x05R\x06result\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\a \x01(\x03R\aendTime\"]\n" +
-	"\x15ListActionLogResponse\x12.\n" +
-	"\x04logs\x18\x01 \x03(\v2\x1a.action_log.AdminActionLogR\x04logs\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2_\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\xa0\x01\n" +
+	"\x15ListActionLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
+	"\x04logs\x18\x03 \x03(\v2\x1a.action_log.AdminActionLogR\x04logs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2_\n" +
 	"\x10ActionLogService\x12K\n" +
 	"\x04List\x12 .action_log.ListActionLogRequest\x1a!.action_log.ListActionLogResponseB,Z*./api/zebra-passport/action_log;action_logb\x06proto3"
 
@@ -363,16 +382,18 @@ var file_api_zebra_passport_action_log_action_log_proto_goTypes = []any{
 	(*AdminActionLog)(nil),        // 0: action_log.AdminActionLog
 	(*ListActionLogRequest)(nil),  // 1: action_log.ListActionLogRequest
 	(*ListActionLogResponse)(nil), // 2: action_log.ListActionLogResponse
+	(*wrapperspb.Int32Value)(nil), // 3: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_action_log_action_log_proto_depIdxs = []int32{
-	0, // 0: action_log.ListActionLogResponse.logs:type_name -> action_log.AdminActionLog
-	1, // 1: action_log.ActionLogService.List:input_type -> action_log.ListActionLogRequest
-	2, // 2: action_log.ActionLogService.List:output_type -> action_log.ListActionLogResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: action_log.ListActionLogResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 1: action_log.ListActionLogResponse.logs:type_name -> action_log.AdminActionLog
+	1, // 2: action_log.ActionLogService.List:input_type -> action_log.ListActionLogRequest
+	2, // 3: action_log.ActionLogService.List:output_type -> action_log.ListActionLogResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_action_log_action_log_proto_init() }

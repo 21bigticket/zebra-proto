@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package log;
 
 option go_package = "./api/zebra-order/log;log";
@@ -42,8 +44,10 @@ message CreateOrderLogRequest {
 
 // 创建订单日志响应
 message CreateOrderLogResponse {
-  OrderLog log    = 1;
-  string   message = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  OrderLog log    = 3;
+  string   message = 4;
 }
 
 // 查询订单日志请求
@@ -56,8 +60,10 @@ message GetOrderLogsRequest {
 
 // 查询订单日志响应
 message GetOrderLogsResponse {
-  repeated OrderLog logs  = 1;
-  int32             total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated OrderLog logs  = 3;
+  int32             total = 4;
 }
 
 // 订单日志服务

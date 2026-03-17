@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package stock_log;
 
 option go_package = "./api/zebra-stock/stock_log;stock_log";
@@ -60,7 +62,9 @@ message GetLogRequest {
 
 // 获取库存日志响应
 message GetLogResponse {
-  StockLog stock_log = 1;  // 库存日志
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  StockLog stock_log = 3;  // 库存日志
 }
 
 // 查询库存日志列表请求
@@ -76,8 +80,10 @@ message ListLogRequest {
 
 // 查询库存日志列表响应
 message ListLogResponse {
-  repeated StockLog stock_logs = 1;  // 库存日志列表
-  int32            total     = 2;  // 总数
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated StockLog stock_logs = 3;  // 库存日志列表
+  int32            total     = 4;  // 总数
 }
 
 // 按SKU查询日志请求
@@ -103,10 +109,15 @@ message GetLogsByChangeTypeRequest {
   int32  page_size = 3;  // 页大小
 }
 
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+}
+
 // 库存日志服务
 service StockLogService {
   // 创建日志
-  rpc Create(CreateLogRequest) returns (StockLog);
+  rpc Create(CreateLogRequest) returns (Response);
   // 获取单条日志
   rpc Get(GetLogRequest) returns (GetLogResponse);
   // 查询日志列表

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package user_coupon;
 
 option go_package = "./api/zebra-activity/user_coupon;user_coupon";
@@ -45,8 +47,10 @@ message ReceiveCouponRequest {
 
 // 领取优惠券响应
 message ReceiveCouponResponse {
-  UserCoupon user_coupon = 1;
-  string    message      = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  UserCoupon user_coupon = 3;
+  string    message      = 4;
 }
 
 // 使用优惠券请求
@@ -58,9 +62,11 @@ message UseCouponRequest {
 
 // 使用优惠券响应
 message UseCouponResponse {
-  UserCoupon user_coupon = 1;
-  bool       success     = 2;
-  string     message     = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  UserCoupon user_coupon = 3;
+  bool       success     = 4;
+  string     message     = 5;
 }
 
 // 获取用户优惠券请求
@@ -70,7 +76,9 @@ message GetUserCouponRequest {
 
 // 获取用户优惠券响应
 message GetUserCouponResponse {
-  UserCoupon user_coupon = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  UserCoupon user_coupon = 3;
 }
 
 // 列出用户优惠券请求
@@ -83,8 +91,10 @@ message ListUserCouponRequest {
 
 // 列出用户优惠券响应
 message ListUserCouponResponse {
-  repeated UserCoupon user_coupons = 1;
-  int32              total        = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated UserCoupon user_coupons = 3;
+  int32              total        = 4;
 }
 
 // 查询可用优惠券请求（下单时）
@@ -95,7 +105,9 @@ message GetAvailableCouponsRequest {
 
 // 查询可用优惠券响应
 message GetAvailableCouponsResponse {
-  repeated UserCoupon user_coupons = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated UserCoupon user_coupons = 3;
 }
 
 // 用户优惠券服务

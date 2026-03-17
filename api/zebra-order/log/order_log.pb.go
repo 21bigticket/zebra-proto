@@ -25,6 +25,7 @@ package log
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -202,8 +203,10 @@ func (x *CreateOrderLogRequest) GetOperator() string {
 // 创建订单日志响应
 type CreateOrderLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Log           *OrderLog              `protobuf:"bytes,1,opt,name=log,proto3" json:"log,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Log           *OrderLog              `protobuf:"bytes,3,opt,name=log,proto3" json:"log,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -236,6 +239,20 @@ func (x *CreateOrderLogResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateOrderLogResponse.ProtoReflect.Descriptor instead.
 func (*CreateOrderLogResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_log_order_log_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateOrderLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *CreateOrderLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *CreateOrderLogResponse) GetLog() *OrderLog {
@@ -324,8 +341,10 @@ func (x *GetOrderLogsRequest) GetPageSize() int32 {
 // 查询订单日志响应
 type GetOrderLogsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Logs          []*OrderLog            `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Logs          []*OrderLog            `protobuf:"bytes,3,rep,name=logs,proto3" json:"logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -360,6 +379,20 @@ func (*GetOrderLogsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_log_order_log_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *GetOrderLogsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetOrderLogsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *GetOrderLogsResponse) GetLogs() []*OrderLog {
 	if x != nil {
 		return x.Logs
@@ -378,7 +411,7 @@ var File_api_zebra_order_log_order_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_order_log_order_log_proto_rawDesc = "" +
 	"\n" +
-	"#api/zebra-order/log/order_log.proto\x12\x03log\"\xd1\x01\n" +
+	"#api/zebra-order/log/order_log.proto\x12\x03log\x1a\x1egoogle/protobuf/wrappers.proto\"\xd1\x01\n" +
 	"\bOrderLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x19\n" +
 	"\border_no\x18\x02 \x01(\tR\aorderNo\x12\x16\n" +
@@ -395,18 +428,22 @@ const file_api_zebra_order_log_order_log_proto_rawDesc = "" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x1f\n" +
 	"\vaction_data\x18\x03 \x01(\tR\n" +
 	"actionData\x12\x1a\n" +
-	"\boperator\x18\x04 \x01(\tR\boperator\"S\n" +
-	"\x16CreateOrderLogResponse\x12\x1f\n" +
-	"\x03log\x18\x01 \x01(\v2\r.log.OrderLogR\x03log\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"y\n" +
+	"\boperator\x18\x04 \x01(\tR\boperator\"\x96\x01\n" +
+	"\x16CreateOrderLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
+	"\x03log\x18\x03 \x01(\v2\r.log.OrderLogR\x03log\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"y\n" +
 	"\x13GetOrderLogsRequest\x12\x19\n" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"O\n" +
-	"\x14GetOrderLogsResponse\x12!\n" +
-	"\x04logs\x18\x01 \x03(\v2\r.log.OrderLogR\x04logs\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\xa1\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x92\x01\n" +
+	"\x14GetOrderLogsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +
+	"\x04logs\x18\x03 \x03(\v2\r.log.OrderLogR\x04logs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2\xa1\x01\n" +
 	"\x0fOrderLogService\x12I\n" +
 	"\x0eCreateOrderLog\x12\x1a.log.CreateOrderLogRequest\x1a\x1b.log.CreateOrderLogResponse\x12C\n" +
 	"\fGetOrderLogs\x12\x18.log.GetOrderLogsRequest\x1a\x19.log.GetOrderLogsResponseB\x1bZ\x19./api/zebra-order/log;logb\x06proto3"
@@ -430,19 +467,22 @@ var file_api_zebra_order_log_order_log_proto_goTypes = []any{
 	(*CreateOrderLogResponse)(nil), // 2: log.CreateOrderLogResponse
 	(*GetOrderLogsRequest)(nil),    // 3: log.GetOrderLogsRequest
 	(*GetOrderLogsResponse)(nil),   // 4: log.GetOrderLogsResponse
+	(*wrapperspb.Int32Value)(nil),  // 5: google.protobuf.Int32Value
 }
 var file_api_zebra_order_log_order_log_proto_depIdxs = []int32{
-	0, // 0: log.CreateOrderLogResponse.log:type_name -> log.OrderLog
-	0, // 1: log.GetOrderLogsResponse.logs:type_name -> log.OrderLog
-	1, // 2: log.OrderLogService.CreateOrderLog:input_type -> log.CreateOrderLogRequest
-	3, // 3: log.OrderLogService.GetOrderLogs:input_type -> log.GetOrderLogsRequest
-	2, // 4: log.OrderLogService.CreateOrderLog:output_type -> log.CreateOrderLogResponse
-	4, // 5: log.OrderLogService.GetOrderLogs:output_type -> log.GetOrderLogsResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: log.CreateOrderLogResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 1: log.CreateOrderLogResponse.log:type_name -> log.OrderLog
+	5, // 2: log.GetOrderLogsResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 3: log.GetOrderLogsResponse.logs:type_name -> log.OrderLog
+	1, // 4: log.OrderLogService.CreateOrderLog:input_type -> log.CreateOrderLogRequest
+	3, // 5: log.OrderLogService.GetOrderLogs:input_type -> log.GetOrderLogsRequest
+	2, // 6: log.OrderLogService.CreateOrderLog:output_type -> log.CreateOrderLogResponse
+	4, // 7: log.OrderLogService.GetOrderLogs:output_type -> log.GetOrderLogsResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_order_log_order_log_proto_init() }

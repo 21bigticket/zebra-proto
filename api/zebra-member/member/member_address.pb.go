@@ -25,6 +25,7 @@ package member
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -449,7 +450,9 @@ func (x *GetMemberAddressRequest) GetId() int64 {
 // 获取地址响应
 type GetMemberAddressResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MemberAddress *MemberAddress         `protobuf:"bytes,1,opt,name=member_address,json=memberAddress,proto3" json:"member_address,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	MemberAddress *MemberAddress         `protobuf:"bytes,3,opt,name=member_address,json=memberAddress,proto3" json:"member_address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -482,6 +485,20 @@ func (x *GetMemberAddressResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetMemberAddressResponse.ProtoReflect.Descriptor instead.
 func (*GetMemberAddressResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_member_member_member_address_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetMemberAddressResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetMemberAddressResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetMemberAddressResponse) GetMemberAddress() *MemberAddress {
@@ -539,7 +556,9 @@ func (x *GetAddressListByUserRequest) GetUserId() int64 {
 // 地址列表响应
 type AddressListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Addresses     []*MemberAddress       `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Addresses     []*MemberAddress       `protobuf:"bytes,3,rep,name=addresses,proto3" json:"addresses,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -572,6 +591,20 @@ func (x *AddressListResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddressListResponse.ProtoReflect.Descriptor instead.
 func (*AddressListResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_member_member_member_address_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddressListResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *AddressListResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *AddressListResponse) GetAddresses() []*MemberAddress {
@@ -634,11 +667,63 @@ func (x *SetDefaultAddressRequest) GetUserId() int64 {
 	return 0
 }
 
+type MemberAddressResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MemberAddressResponse) Reset() {
+	*x = MemberAddressResponse{}
+	mi := &file_api_zebra_member_member_member_address_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MemberAddressResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemberAddressResponse) ProtoMessage() {}
+
+func (x *MemberAddressResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_member_member_member_address_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemberAddressResponse.ProtoReflect.Descriptor instead.
+func (*MemberAddressResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_member_member_member_address_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MemberAddressResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *MemberAddressResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_member_member_member_address_proto protoreflect.FileDescriptor
 
 const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-member/member/member_address.proto\x12\x06member\"\xe1\x02\n" +
+	",api/zebra-member/member/member_address.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xe1\x02\n" +
 	"\rMemberAddress\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
@@ -675,24 +760,31 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\x1aDeleteMemberAddressRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\")\n" +
 	"\x17GetMemberAddressRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"X\n" +
-	"\x18GetMemberAddressResponse\x12<\n" +
-	"\x0emember_address\x18\x01 \x01(\v2\x15.member.MemberAddressR\rmemberAddress\"6\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x9b\x01\n" +
+	"\x18GetMemberAddressResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12<\n" +
+	"\x0emember_address\x18\x03 \x01(\v2\x15.member.MemberAddressR\rmemberAddress\"6\n" +
 	"\x1bGetAddressListByUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"J\n" +
-	"\x13AddressListResponse\x123\n" +
-	"\taddresses\x18\x01 \x03(\v2\x15.member.MemberAddressR\taddresses\"C\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x8d\x01\n" +
+	"\x13AddressListResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\taddresses\x18\x03 \x03(\v2\x15.member.MemberAddressR\taddresses\"C\n" +
 	"\x18SetDefaultAddressRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId2\xc9\x03\n" +
-	"\x14MemberAddressService\x12C\n" +
-	"\x06Create\x12\".member.CreateMemberAddressRequest\x1a\x15.member.MemberAddress\x12C\n" +
-	"\x06Update\x12\".member.UpdateMemberAddressRequest\x1a\x15.member.MemberAddress\x12C\n" +
-	"\x06Delete\x12\".member.DeleteMemberAddressRequest\x1a\x15.member.MemberAddress\x12H\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"Z\n" +
+	"\x15MemberAddressResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xe9\x03\n" +
+	"\x14MemberAddressService\x12K\n" +
+	"\x06Create\x12\".member.CreateMemberAddressRequest\x1a\x1d.member.MemberAddressResponse\x12K\n" +
+	"\x06Update\x12\".member.UpdateMemberAddressRequest\x1a\x1d.member.MemberAddressResponse\x12K\n" +
+	"\x06Delete\x12\".member.DeleteMemberAddressRequest\x1a\x1d.member.MemberAddressResponse\x12H\n" +
 	"\x03Get\x12\x1f.member.GetMemberAddressRequest\x1a .member.GetMemberAddressResponse\x12Q\n" +
-	"\rGetListByUser\x12#.member.GetAddressListByUserRequest\x1a\x1b.member.AddressListResponse\x12E\n" +
+	"\rGetListByUser\x12#.member.GetAddressListByUserRequest\x1a\x1b.member.AddressListResponse\x12M\n" +
 	"\n" +
-	"SetDefault\x12 .member.SetDefaultAddressRequest\x1a\x15.member.MemberAddressB\"Z ./api/zebra-member/member;memberb\x06proto3"
+	"SetDefault\x12 .member.SetDefaultAddressRequest\x1a\x1d.member.MemberAddressResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
 	file_api_zebra_member_member_member_address_proto_rawDescOnce sync.Once
@@ -706,7 +798,7 @@ func file_api_zebra_member_member_member_address_proto_rawDescGZIP() []byte {
 	return file_api_zebra_member_member_member_address_proto_rawDescData
 }
 
-var file_api_zebra_member_member_member_address_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_api_zebra_member_member_member_address_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_zebra_member_member_member_address_proto_goTypes = []any{
 	(*MemberAddress)(nil),               // 0: member.MemberAddress
 	(*CreateMemberAddressRequest)(nil),  // 1: member.CreateMemberAddressRequest
@@ -717,27 +809,32 @@ var file_api_zebra_member_member_member_address_proto_goTypes = []any{
 	(*GetAddressListByUserRequest)(nil), // 6: member.GetAddressListByUserRequest
 	(*AddressListResponse)(nil),         // 7: member.AddressListResponse
 	(*SetDefaultAddressRequest)(nil),    // 8: member.SetDefaultAddressRequest
+	(*MemberAddressResponse)(nil),       // 9: member.MemberAddressResponse
+	(*wrapperspb.Int32Value)(nil),       // 10: google.protobuf.Int32Value
 }
 var file_api_zebra_member_member_member_address_proto_depIdxs = []int32{
-	0, // 0: member.GetMemberAddressResponse.member_address:type_name -> member.MemberAddress
-	0, // 1: member.AddressListResponse.addresses:type_name -> member.MemberAddress
-	1, // 2: member.MemberAddressService.Create:input_type -> member.CreateMemberAddressRequest
-	2, // 3: member.MemberAddressService.Update:input_type -> member.UpdateMemberAddressRequest
-	3, // 4: member.MemberAddressService.Delete:input_type -> member.DeleteMemberAddressRequest
-	4, // 5: member.MemberAddressService.Get:input_type -> member.GetMemberAddressRequest
-	6, // 6: member.MemberAddressService.GetListByUser:input_type -> member.GetAddressListByUserRequest
-	8, // 7: member.MemberAddressService.SetDefault:input_type -> member.SetDefaultAddressRequest
-	0, // 8: member.MemberAddressService.Create:output_type -> member.MemberAddress
-	0, // 9: member.MemberAddressService.Update:output_type -> member.MemberAddress
-	0, // 10: member.MemberAddressService.Delete:output_type -> member.MemberAddress
-	5, // 11: member.MemberAddressService.Get:output_type -> member.GetMemberAddressResponse
-	7, // 12: member.MemberAddressService.GetListByUser:output_type -> member.AddressListResponse
-	0, // 13: member.MemberAddressService.SetDefault:output_type -> member.MemberAddress
-	8, // [8:14] is the sub-list for method output_type
-	2, // [2:8] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	10, // 0: member.GetMemberAddressResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: member.GetMemberAddressResponse.member_address:type_name -> member.MemberAddress
+	10, // 2: member.AddressListResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: member.AddressListResponse.addresses:type_name -> member.MemberAddress
+	10, // 4: member.MemberAddressResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: member.MemberAddressService.Create:input_type -> member.CreateMemberAddressRequest
+	2,  // 6: member.MemberAddressService.Update:input_type -> member.UpdateMemberAddressRequest
+	3,  // 7: member.MemberAddressService.Delete:input_type -> member.DeleteMemberAddressRequest
+	4,  // 8: member.MemberAddressService.Get:input_type -> member.GetMemberAddressRequest
+	6,  // 9: member.MemberAddressService.GetListByUser:input_type -> member.GetAddressListByUserRequest
+	8,  // 10: member.MemberAddressService.SetDefault:input_type -> member.SetDefaultAddressRequest
+	9,  // 11: member.MemberAddressService.Create:output_type -> member.MemberAddressResponse
+	9,  // 12: member.MemberAddressService.Update:output_type -> member.MemberAddressResponse
+	9,  // 13: member.MemberAddressService.Delete:output_type -> member.MemberAddressResponse
+	5,  // 14: member.MemberAddressService.Get:output_type -> member.GetMemberAddressResponse
+	7,  // 15: member.MemberAddressService.GetListByUser:output_type -> member.AddressListResponse
+	9,  // 16: member.MemberAddressService.SetDefault:output_type -> member.MemberAddressResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_member_member_member_address_proto_init() }
@@ -751,7 +848,7 @@ func file_api_zebra_member_member_member_address_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_member_member_member_address_proto_rawDesc), len(file_api_zebra_member_member_member_address_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package order;
 
 option go_package = "./api/zebra-order/order;order";
@@ -91,8 +93,10 @@ message OrderItemReq {
 
 // 创建订单响应
 message CreateOrderResponse {
-  Order  order  = 1;
-  string message = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Order  order  = 3;
+  string message = 4;
 }
 
 // 取消订单请求
@@ -129,9 +133,11 @@ message GetOrderRequest {
 
 // 查询订单响应
 message GetOrderResponse {
-  Order             order        = 1;
-  repeated OrderItem items        = 2;
-  OrderDelivery     delivery     = 3;  // 添加发货信息
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Order             order        = 3;
+  repeated OrderItem items        = 4;
+  OrderDelivery     delivery     = 5;  // 添加发货信息
 }
 
 // 查询用户订单列表请求
@@ -144,15 +150,19 @@ message GetUserOrdersRequest {
 
 // 查询用户订单列表响应
 message GetUserOrdersResponse {
-  repeated Order orders = 1;
-  int32          total  = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Order orders = 3;
+  int32          total  = 4;
 }
 
 // 通用响应
 message OrderResponse {
-  bool   success = 1;
-  string message = 2;
-  Order  order    = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool   success = 3;
+  string message = 4;
+  Order  order    = 5;
 }
 
 // 订单服务

@@ -25,6 +25,7 @@ package attribute
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -377,7 +378,9 @@ func (x *GetAttributeRequest) GetId() int64 {
 // 获取属性响应
 type GetAttributeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Attribute     *GoodsAttribute        `protobuf:"bytes,1,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Attribute     *GoodsAttribute        `protobuf:"bytes,3,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -410,6 +413,20 @@ func (x *GetAttributeResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetAttributeResponse.ProtoReflect.Descriptor instead.
 func (*GetAttributeResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_attribute_attribute_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetAttributeResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetAttributeResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetAttributeResponse) GetAttribute() *GoodsAttribute {
@@ -499,8 +516,10 @@ func (x *ListAttributeRequest) GetStatus() int32 {
 // 列出属性响应
 type ListAttributeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Attributes    []*GoodsAttribute      `protobuf:"bytes,1,rep,name=attributes,proto3" json:"attributes,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Attributes    []*GoodsAttribute      `protobuf:"bytes,3,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -535,6 +554,20 @@ func (*ListAttributeResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_attribute_attribute_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListAttributeResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListAttributeResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListAttributeResponse) GetAttributes() []*GoodsAttribute {
 	if x != nil {
 		return x.Attributes
@@ -549,11 +582,63 @@ func (x *ListAttributeResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_goods_attribute_attribute_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_attribute_attribute_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_attribute_attribute_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_goods_attribute_attribute_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\"\xfd\x01\n" +
+	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\x1a\x1egoogle/protobuf/wrappers.proto\"\xfd\x01\n" +
 	"\x0eGoodsAttribute\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x12\n" +
@@ -583,24 +668,31 @@ const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\x16DeleteAttributeRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"%\n" +
 	"\x13GetAttributeRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"O\n" +
-	"\x14GetAttributeResponse\x127\n" +
-	"\tattribute\x18\x01 \x01(\v2\x19.attribute.GoodsAttributeR\tattribute\"\x90\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x92\x01\n" +
+	"\x14GetAttributeResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
+	"\tattribute\x18\x03 \x01(\v2\x19.attribute.GoodsAttributeR\tattribute\"\x90\x01\n" +
 	"\x14ListAttributeRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1b\n" +
 	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"h\n" +
-	"\x15ListAttributeResponse\x129\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"\xab\x01\n" +
+	"\x15ListAttributeResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x129\n" +
 	"\n" +
-	"attributes\x18\x01 \x03(\v2\x19.attribute.GoodsAttributeR\n" +
+	"attributes\x18\x03 \x03(\v2\x19.attribute.GoodsAttributeR\n" +
 	"attributes\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\xfd\x02\n" +
-	"\x10AttributeService\x12F\n" +
-	"\x06Create\x12!.attribute.CreateAttributeRequest\x1a\x19.attribute.GoodsAttribute\x12F\n" +
-	"\x06Update\x12!.attribute.UpdateAttributeRequest\x1a\x19.attribute.GoodsAttribute\x12F\n" +
-	"\x06Delete\x12!.attribute.DeleteAttributeRequest\x1a\x19.attribute.GoodsAttribute\x12F\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xeb\x02\n" +
+	"\x10AttributeService\x12@\n" +
+	"\x06Create\x12!.attribute.CreateAttributeRequest\x1a\x13.attribute.Response\x12@\n" +
+	"\x06Update\x12!.attribute.UpdateAttributeRequest\x1a\x13.attribute.Response\x12@\n" +
+	"\x06Delete\x12!.attribute.DeleteAttributeRequest\x1a\x13.attribute.Response\x12F\n" +
 	"\x03Get\x12\x1e.attribute.GetAttributeRequest\x1a\x1f.attribute.GetAttributeResponse\x12I\n" +
 	"\x04List\x12\x1f.attribute.ListAttributeRequest\x1a .attribute.ListAttributeResponseB'Z%./api/zebra-goods/attribute;attributeb\x06proto3"
 
@@ -616,7 +708,7 @@ func file_api_zebra_goods_attribute_attribute_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_attribute_attribute_proto_rawDescData
 }
 
-var file_api_zebra_goods_attribute_attribute_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_goods_attribute_attribute_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_goods_attribute_attribute_proto_goTypes = []any{
 	(*GoodsAttribute)(nil),         // 0: attribute.GoodsAttribute
 	(*CreateAttributeRequest)(nil), // 1: attribute.CreateAttributeRequest
@@ -626,25 +718,30 @@ var file_api_zebra_goods_attribute_attribute_proto_goTypes = []any{
 	(*GetAttributeResponse)(nil),   // 5: attribute.GetAttributeResponse
 	(*ListAttributeRequest)(nil),   // 6: attribute.ListAttributeRequest
 	(*ListAttributeResponse)(nil),  // 7: attribute.ListAttributeResponse
+	(*Response)(nil),               // 8: attribute.Response
+	(*wrapperspb.Int32Value)(nil),  // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_attribute_attribute_proto_depIdxs = []int32{
-	0, // 0: attribute.GetAttributeResponse.attribute:type_name -> attribute.GoodsAttribute
-	0, // 1: attribute.ListAttributeResponse.attributes:type_name -> attribute.GoodsAttribute
-	1, // 2: attribute.AttributeService.Create:input_type -> attribute.CreateAttributeRequest
-	2, // 3: attribute.AttributeService.Update:input_type -> attribute.UpdateAttributeRequest
-	3, // 4: attribute.AttributeService.Delete:input_type -> attribute.DeleteAttributeRequest
-	4, // 5: attribute.AttributeService.Get:input_type -> attribute.GetAttributeRequest
-	6, // 6: attribute.AttributeService.List:input_type -> attribute.ListAttributeRequest
-	0, // 7: attribute.AttributeService.Create:output_type -> attribute.GoodsAttribute
-	0, // 8: attribute.AttributeService.Update:output_type -> attribute.GoodsAttribute
-	0, // 9: attribute.AttributeService.Delete:output_type -> attribute.GoodsAttribute
-	5, // 10: attribute.AttributeService.Get:output_type -> attribute.GetAttributeResponse
-	7, // 11: attribute.AttributeService.List:output_type -> attribute.ListAttributeResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: attribute.GetAttributeResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: attribute.GetAttributeResponse.attribute:type_name -> attribute.GoodsAttribute
+	9,  // 2: attribute.ListAttributeResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: attribute.ListAttributeResponse.attributes:type_name -> attribute.GoodsAttribute
+	9,  // 4: attribute.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: attribute.AttributeService.Create:input_type -> attribute.CreateAttributeRequest
+	2,  // 6: attribute.AttributeService.Update:input_type -> attribute.UpdateAttributeRequest
+	3,  // 7: attribute.AttributeService.Delete:input_type -> attribute.DeleteAttributeRequest
+	4,  // 8: attribute.AttributeService.Get:input_type -> attribute.GetAttributeRequest
+	6,  // 9: attribute.AttributeService.List:input_type -> attribute.ListAttributeRequest
+	8,  // 10: attribute.AttributeService.Create:output_type -> attribute.Response
+	8,  // 11: attribute.AttributeService.Update:output_type -> attribute.Response
+	8,  // 12: attribute.AttributeService.Delete:output_type -> attribute.Response
+	5,  // 13: attribute.AttributeService.Get:output_type -> attribute.GetAttributeResponse
+	7,  // 14: attribute.AttributeService.List:output_type -> attribute.ListAttributeResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_attribute_attribute_proto_init() }
@@ -658,7 +755,7 @@ func file_api_zebra_goods_attribute_attribute_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_attribute_attribute_proto_rawDesc), len(file_api_zebra_goods_attribute_attribute_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

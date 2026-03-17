@@ -25,6 +25,7 @@ package user_coupon
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -226,8 +227,10 @@ func (x *ReceiveCouponRequest) GetCouponId() int64 {
 // 领取优惠券响应
 type ReceiveCouponResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserCoupon    *UserCoupon            `protobuf:"bytes,1,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	UserCoupon    *UserCoupon            `protobuf:"bytes,3,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -260,6 +263,20 @@ func (x *ReceiveCouponResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ReceiveCouponResponse.ProtoReflect.Descriptor instead.
 func (*ReceiveCouponResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ReceiveCouponResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ReceiveCouponResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *ReceiveCouponResponse) GetUserCoupon() *UserCoupon {
@@ -340,9 +357,11 @@ func (x *UseCouponRequest) GetOrderNo() string {
 // 使用优惠券响应
 type UseCouponResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserCoupon    *UserCoupon            `protobuf:"bytes,1,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
-	Success       bool                   `protobuf:"varint,2,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	UserCoupon    *UserCoupon            `protobuf:"bytes,3,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
+	Success       bool                   `protobuf:"varint,4,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -375,6 +394,20 @@ func (x *UseCouponResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UseCouponResponse.ProtoReflect.Descriptor instead.
 func (*UseCouponResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UseCouponResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *UseCouponResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *UseCouponResponse) GetUserCoupon() *UserCoupon {
@@ -446,7 +479,9 @@ func (x *GetUserCouponRequest) GetUserCouponId() int64 {
 // 获取用户优惠券响应
 type GetUserCouponResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserCoupon    *UserCoupon            `protobuf:"bytes,1,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	UserCoupon    *UserCoupon            `protobuf:"bytes,3,opt,name=user_coupon,json=userCoupon,proto3" json:"user_coupon,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -479,6 +514,20 @@ func (x *GetUserCouponResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetUserCouponResponse.ProtoReflect.Descriptor instead.
 func (*GetUserCouponResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetUserCouponResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetUserCouponResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetUserCouponResponse) GetUserCoupon() *UserCoupon {
@@ -560,8 +609,10 @@ func (x *ListUserCouponRequest) GetCouponStatus() int32 {
 // 列出用户优惠券响应
 type ListUserCouponResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserCoupons   []*UserCoupon          `protobuf:"bytes,1,rep,name=user_coupons,json=userCoupons,proto3" json:"user_coupons,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	UserCoupons   []*UserCoupon          `protobuf:"bytes,3,rep,name=user_coupons,json=userCoupons,proto3" json:"user_coupons,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -594,6 +645,20 @@ func (x *ListUserCouponResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListUserCouponResponse.ProtoReflect.Descriptor instead.
 func (*ListUserCouponResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListUserCouponResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListUserCouponResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *ListUserCouponResponse) GetUserCoupons() []*UserCoupon {
@@ -666,7 +731,9 @@ func (x *GetAvailableCouponsRequest) GetOrderAmount() int64 {
 // 查询可用优惠券响应
 type GetAvailableCouponsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserCoupons   []*UserCoupon          `protobuf:"bytes,1,rep,name=user_coupons,json=userCoupons,proto3" json:"user_coupons,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	UserCoupons   []*UserCoupon          `protobuf:"bytes,3,rep,name=user_coupons,json=userCoupons,proto3" json:"user_coupons,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -701,6 +768,20 @@ func (*GetAvailableCouponsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_user_coupon_user_coupon_proto_rawDescGZIP(), []int{10}
 }
 
+func (x *GetAvailableCouponsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetAvailableCouponsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *GetAvailableCouponsResponse) GetUserCoupons() []*UserCoupon {
 	if x != nil {
 		return x.UserCoupons
@@ -712,7 +793,7 @@ var File_api_zebra_activity_user_coupon_user_coupon_proto protoreflect.FileDescr
 
 const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\n" +
-	"0api/zebra-activity/user_coupon/user_coupon.proto\x12\vuser_coupon\"\xfb\x02\n" +
+	"0api/zebra-activity/user_coupon/user_coupon.proto\x12\vuser_coupon\x1a\x1egoogle/protobuf/wrappers.proto\"\xfb\x02\n" +
 	"\n" +
 	"UserCoupon\x12$\n" +
 	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\x12\x17\n" +
@@ -734,38 +815,48 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"is_deleted\x18\f \x01(\x05R\tisDeleted\"L\n" +
 	"\x14ReceiveCouponRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tcoupon_id\x18\x02 \x01(\x03R\bcouponId\"k\n" +
-	"\x15ReceiveCouponResponse\x128\n" +
-	"\vuser_coupon\x18\x01 \x01(\v2\x17.user_coupon.UserCouponR\n" +
+	"\tcoupon_id\x18\x02 \x01(\x03R\bcouponId\"\xae\x01\n" +
+	"\x15ReceiveCouponResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
+	"\vuser_coupon\x18\x03 \x01(\v2\x17.user_coupon.UserCouponR\n" +
 	"userCoupon\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"l\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"l\n" +
 	"\x10UseCouponRequest\x12$\n" +
 	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
-	"\border_no\x18\x03 \x01(\tR\aorderNo\"\x81\x01\n" +
-	"\x11UseCouponResponse\x128\n" +
-	"\vuser_coupon\x18\x01 \x01(\v2\x17.user_coupon.UserCouponR\n" +
+	"\border_no\x18\x03 \x01(\tR\aorderNo\"\xc4\x01\n" +
+	"\x11UseCouponResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
+	"\vuser_coupon\x18\x03 \x01(\v2\x17.user_coupon.UserCouponR\n" +
 	"userCoupon\x12\x18\n" +
-	"\asuccess\x18\x02 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\"<\n" +
+	"\asuccess\x18\x04 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x05 \x01(\tR\amessage\"<\n" +
 	"\x14GetUserCouponRequest\x12$\n" +
-	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\"Q\n" +
-	"\x15GetUserCouponResponse\x128\n" +
-	"\vuser_coupon\x18\x01 \x01(\v2\x17.user_coupon.UserCouponR\n" +
+	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\"\x94\x01\n" +
+	"\x15GetUserCouponResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
+	"\vuser_coupon\x18\x03 \x01(\v2\x17.user_coupon.UserCouponR\n" +
 	"userCoupon\"\x86\x01\n" +
 	"\x15ListUserCouponRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12#\n" +
-	"\rcoupon_status\x18\x04 \x01(\x05R\fcouponStatus\"j\n" +
-	"\x16ListUserCouponResponse\x12:\n" +
-	"\fuser_coupons\x18\x01 \x03(\v2\x17.user_coupon.UserCouponR\vuserCoupons\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"X\n" +
+	"\rcoupon_status\x18\x04 \x01(\x05R\fcouponStatus\"\xad\x01\n" +
+	"\x16ListUserCouponResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12:\n" +
+	"\fuser_coupons\x18\x03 \x03(\v2\x17.user_coupon.UserCouponR\vuserCoupons\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"X\n" +
 	"\x1aGetAvailableCouponsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
-	"\forder_amount\x18\x02 \x01(\x03R\vorderAmount\"Y\n" +
-	"\x1bGetAvailableCouponsResponse\x12:\n" +
-	"\fuser_coupons\x18\x01 \x03(\v2\x17.user_coupon.UserCouponR\vuserCoupons2\xad\x03\n" +
+	"\forder_amount\x18\x02 \x01(\x03R\vorderAmount\"\x9c\x01\n" +
+	"\x1bGetAvailableCouponsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12:\n" +
+	"\fuser_coupons\x18\x03 \x03(\v2\x17.user_coupon.UserCouponR\vuserCoupons2\xad\x03\n" +
 	"\x11UserCouponService\x12P\n" +
 	"\aReceive\x12!.user_coupon.ReceiveCouponRequest\x1a\".user_coupon.ReceiveCouponResponse\x12D\n" +
 	"\x03Use\x12\x1d.user_coupon.UseCouponRequest\x1a\x1e.user_coupon.UseCouponResponse\x12L\n" +
@@ -798,28 +889,34 @@ var file_api_zebra_activity_user_coupon_user_coupon_proto_goTypes = []any{
 	(*ListUserCouponResponse)(nil),      // 8: user_coupon.ListUserCouponResponse
 	(*GetAvailableCouponsRequest)(nil),  // 9: user_coupon.GetAvailableCouponsRequest
 	(*GetAvailableCouponsResponse)(nil), // 10: user_coupon.GetAvailableCouponsResponse
+	(*wrapperspb.Int32Value)(nil),       // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_user_coupon_user_coupon_proto_depIdxs = []int32{
-	0,  // 0: user_coupon.ReceiveCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
-	0,  // 1: user_coupon.UseCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
-	0,  // 2: user_coupon.GetUserCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
-	0,  // 3: user_coupon.ListUserCouponResponse.user_coupons:type_name -> user_coupon.UserCoupon
-	0,  // 4: user_coupon.GetAvailableCouponsResponse.user_coupons:type_name -> user_coupon.UserCoupon
-	1,  // 5: user_coupon.UserCouponService.Receive:input_type -> user_coupon.ReceiveCouponRequest
-	3,  // 6: user_coupon.UserCouponService.Use:input_type -> user_coupon.UseCouponRequest
-	5,  // 7: user_coupon.UserCouponService.Get:input_type -> user_coupon.GetUserCouponRequest
-	7,  // 8: user_coupon.UserCouponService.List:input_type -> user_coupon.ListUserCouponRequest
-	9,  // 9: user_coupon.UserCouponService.GetAvailable:input_type -> user_coupon.GetAvailableCouponsRequest
-	2,  // 10: user_coupon.UserCouponService.Receive:output_type -> user_coupon.ReceiveCouponResponse
-	4,  // 11: user_coupon.UserCouponService.Use:output_type -> user_coupon.UseCouponResponse
-	6,  // 12: user_coupon.UserCouponService.Get:output_type -> user_coupon.GetUserCouponResponse
-	8,  // 13: user_coupon.UserCouponService.List:output_type -> user_coupon.ListUserCouponResponse
-	10, // 14: user_coupon.UserCouponService.GetAvailable:output_type -> user_coupon.GetAvailableCouponsResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	11, // 0: user_coupon.ReceiveCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: user_coupon.ReceiveCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
+	11, // 2: user_coupon.UseCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: user_coupon.UseCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
+	11, // 4: user_coupon.GetUserCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: user_coupon.GetUserCouponResponse.user_coupon:type_name -> user_coupon.UserCoupon
+	11, // 6: user_coupon.ListUserCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: user_coupon.ListUserCouponResponse.user_coupons:type_name -> user_coupon.UserCoupon
+	11, // 8: user_coupon.GetAvailableCouponsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: user_coupon.GetAvailableCouponsResponse.user_coupons:type_name -> user_coupon.UserCoupon
+	1,  // 10: user_coupon.UserCouponService.Receive:input_type -> user_coupon.ReceiveCouponRequest
+	3,  // 11: user_coupon.UserCouponService.Use:input_type -> user_coupon.UseCouponRequest
+	5,  // 12: user_coupon.UserCouponService.Get:input_type -> user_coupon.GetUserCouponRequest
+	7,  // 13: user_coupon.UserCouponService.List:input_type -> user_coupon.ListUserCouponRequest
+	9,  // 14: user_coupon.UserCouponService.GetAvailable:input_type -> user_coupon.GetAvailableCouponsRequest
+	2,  // 15: user_coupon.UserCouponService.Receive:output_type -> user_coupon.ReceiveCouponResponse
+	4,  // 16: user_coupon.UserCouponService.Use:output_type -> user_coupon.UseCouponResponse
+	6,  // 17: user_coupon.UserCouponService.Get:output_type -> user_coupon.GetUserCouponResponse
+	8,  // 18: user_coupon.UserCouponService.List:output_type -> user_coupon.ListUserCouponResponse
+	10, // 19: user_coupon.UserCouponService.GetAvailable:output_type -> user_coupon.GetAvailableCouponsResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_user_coupon_user_coupon_proto_init() }

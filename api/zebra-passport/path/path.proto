@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package path;
 
 option go_package = "./api/zebra-passport/path;path";
@@ -64,7 +66,9 @@ message GetPathRequest {
 
 // 获取路径响应
 message GetPathResponse {
-  Path path = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Path path = 3;
 }
 
 // 列出路径请求
@@ -78,15 +82,22 @@ message ListPathRequest {
 
 // 列出路径响应
 message ListPathResponse {
-  repeated Path paths = 1;
-  int32        total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Path paths = 3;
+  int32        total = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 路径服务
 service PathService {
-  rpc Create(CreatePathRequest) returns (Path);
-  rpc Update(UpdatePathRequest) returns (Path);
-  rpc Delete(DeletePathRequest) returns (Path);
+  rpc Create(CreatePathRequest) returns (Response);
+  rpc Update(UpdatePathRequest) returns (Response);
+  rpc Delete(DeletePathRequest) returns (Response);
   rpc Get(GetPathRequest) returns (GetPathResponse);
   rpc List(ListPathRequest) returns (ListPathResponse);
 }

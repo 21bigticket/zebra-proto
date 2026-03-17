@@ -25,6 +25,7 @@ package brand
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -393,7 +394,9 @@ func (x *GetBrandRequest) GetId() int64 {
 // 获取品牌响应
 type GetBrandResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Brand         *Brand                 `protobuf:"bytes,1,opt,name=brand,proto3" json:"brand,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Brand         *Brand                 `protobuf:"bytes,3,opt,name=brand,proto3" json:"brand,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -426,6 +429,20 @@ func (x *GetBrandResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetBrandResponse.ProtoReflect.Descriptor instead.
 func (*GetBrandResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_brand_brand_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetBrandResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetBrandResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetBrandResponse) GetBrand() *Brand {
@@ -507,8 +524,10 @@ func (x *ListBrandRequest) GetStatus() int32 {
 // 列出品牌响应
 type ListBrandResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Brands        []*Brand               `protobuf:"bytes,1,rep,name=brands,proto3" json:"brands,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Brands        []*Brand               `protobuf:"bytes,3,rep,name=brands,proto3" json:"brands,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -543,6 +562,20 @@ func (*ListBrandResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_brand_brand_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListBrandResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListBrandResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListBrandResponse) GetBrands() []*Brand {
 	if x != nil {
 		return x.Brands
@@ -557,11 +590,63 @@ func (x *ListBrandResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_goods_brand_brand_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_brand_brand_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_brand_brand_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_goods_brand_brand_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_brand_brand_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-goods/brand/brand.proto\x12\x05brand\"\x80\x02\n" +
+	"!api/zebra-goods/brand/brand.proto\x12\x05brand\x1a\x1egoogle/protobuf/wrappers.proto\"\x80\x02\n" +
 	"\x05Brand\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
@@ -593,21 +678,28 @@ const file_api_zebra_goods_brand_brand_proto_rawDesc = "" +
 	"\x12DeleteBrandRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"!\n" +
 	"\x0fGetBrandRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"6\n" +
-	"\x10GetBrandResponse\x12\"\n" +
-	"\x05brand\x18\x01 \x01(\v2\f.brand.BrandR\x05brand\"~\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"y\n" +
+	"\x10GetBrandResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\"\n" +
+	"\x05brand\x18\x03 \x01(\v2\f.brand.BrandR\x05brand\"~\n" +
 	"\x10ListBrandRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
 	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"O\n" +
-	"\x11ListBrandResponse\x12$\n" +
-	"\x06brands\x18\x01 \x03(\v2\f.brand.BrandR\x06brands\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\x9a\x02\n" +
-	"\fBrandService\x121\n" +
-	"\x06Create\x12\x19.brand.CreateBrandRequest\x1a\f.brand.Brand\x121\n" +
-	"\x06Update\x12\x19.brand.UpdateBrandRequest\x1a\f.brand.Brand\x121\n" +
-	"\x06Delete\x12\x19.brand.DeleteBrandRequest\x1a\f.brand.Brand\x126\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"\x92\x01\n" +
+	"\x11ListBrandResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
+	"\x06brands\x18\x03 \x03(\v2\f.brand.BrandR\x06brands\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xa3\x02\n" +
+	"\fBrandService\x124\n" +
+	"\x06Create\x12\x19.brand.CreateBrandRequest\x1a\x0f.brand.Response\x124\n" +
+	"\x06Update\x12\x19.brand.UpdateBrandRequest\x1a\x0f.brand.Response\x124\n" +
+	"\x06Delete\x12\x19.brand.DeleteBrandRequest\x1a\x0f.brand.Response\x126\n" +
 	"\x03Get\x12\x16.brand.GetBrandRequest\x1a\x17.brand.GetBrandResponse\x129\n" +
 	"\x04List\x12\x17.brand.ListBrandRequest\x1a\x18.brand.ListBrandResponseB\x1fZ\x1d./api/zebra-goods/brand;brandb\x06proto3"
 
@@ -623,35 +715,40 @@ func file_api_zebra_goods_brand_brand_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_brand_brand_proto_rawDescData
 }
 
-var file_api_zebra_goods_brand_brand_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_goods_brand_brand_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_goods_brand_brand_proto_goTypes = []any{
-	(*Brand)(nil),              // 0: brand.Brand
-	(*CreateBrandRequest)(nil), // 1: brand.CreateBrandRequest
-	(*UpdateBrandRequest)(nil), // 2: brand.UpdateBrandRequest
-	(*DeleteBrandRequest)(nil), // 3: brand.DeleteBrandRequest
-	(*GetBrandRequest)(nil),    // 4: brand.GetBrandRequest
-	(*GetBrandResponse)(nil),   // 5: brand.GetBrandResponse
-	(*ListBrandRequest)(nil),   // 6: brand.ListBrandRequest
-	(*ListBrandResponse)(nil),  // 7: brand.ListBrandResponse
+	(*Brand)(nil),                 // 0: brand.Brand
+	(*CreateBrandRequest)(nil),    // 1: brand.CreateBrandRequest
+	(*UpdateBrandRequest)(nil),    // 2: brand.UpdateBrandRequest
+	(*DeleteBrandRequest)(nil),    // 3: brand.DeleteBrandRequest
+	(*GetBrandRequest)(nil),       // 4: brand.GetBrandRequest
+	(*GetBrandResponse)(nil),      // 5: brand.GetBrandResponse
+	(*ListBrandRequest)(nil),      // 6: brand.ListBrandRequest
+	(*ListBrandResponse)(nil),     // 7: brand.ListBrandResponse
+	(*Response)(nil),              // 8: brand.Response
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_brand_brand_proto_depIdxs = []int32{
-	0, // 0: brand.GetBrandResponse.brand:type_name -> brand.Brand
-	0, // 1: brand.ListBrandResponse.brands:type_name -> brand.Brand
-	1, // 2: brand.BrandService.Create:input_type -> brand.CreateBrandRequest
-	2, // 3: brand.BrandService.Update:input_type -> brand.UpdateBrandRequest
-	3, // 4: brand.BrandService.Delete:input_type -> brand.DeleteBrandRequest
-	4, // 5: brand.BrandService.Get:input_type -> brand.GetBrandRequest
-	6, // 6: brand.BrandService.List:input_type -> brand.ListBrandRequest
-	0, // 7: brand.BrandService.Create:output_type -> brand.Brand
-	0, // 8: brand.BrandService.Update:output_type -> brand.Brand
-	0, // 9: brand.BrandService.Delete:output_type -> brand.Brand
-	5, // 10: brand.BrandService.Get:output_type -> brand.GetBrandResponse
-	7, // 11: brand.BrandService.List:output_type -> brand.ListBrandResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: brand.GetBrandResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: brand.GetBrandResponse.brand:type_name -> brand.Brand
+	9,  // 2: brand.ListBrandResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: brand.ListBrandResponse.brands:type_name -> brand.Brand
+	9,  // 4: brand.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: brand.BrandService.Create:input_type -> brand.CreateBrandRequest
+	2,  // 6: brand.BrandService.Update:input_type -> brand.UpdateBrandRequest
+	3,  // 7: brand.BrandService.Delete:input_type -> brand.DeleteBrandRequest
+	4,  // 8: brand.BrandService.Get:input_type -> brand.GetBrandRequest
+	6,  // 9: brand.BrandService.List:input_type -> brand.ListBrandRequest
+	8,  // 10: brand.BrandService.Create:output_type -> brand.Response
+	8,  // 11: brand.BrandService.Update:output_type -> brand.Response
+	8,  // 12: brand.BrandService.Delete:output_type -> brand.Response
+	5,  // 13: brand.BrandService.Get:output_type -> brand.GetBrandResponse
+	7,  // 14: brand.BrandService.List:output_type -> brand.ListBrandResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_brand_brand_proto_init() }
@@ -665,7 +762,7 @@ func file_api_zebra_goods_brand_brand_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_brand_brand_proto_rawDesc), len(file_api_zebra_goods_brand_brand_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

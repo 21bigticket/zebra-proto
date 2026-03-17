@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package activity_goods;
 
 option go_package = "./api/zebra-activity/activity_goods;activity_goods";
@@ -78,7 +80,9 @@ message GetActivityGoodsRequest {
 
 // 获取活动商品响应
 message GetActivityGoodsResponse {
-  ActivityGoods activity_goods = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  ActivityGoods activity_goods = 3;
 }
 
 // 列出活动商品请求（按活动ID）
@@ -90,8 +94,15 @@ message ListActivityGoodsRequest {
 
 // 列出活动商品响应
 message ListActivityGoodsResponse {
-  repeated ActivityGoods activity_goods = 1;
-  int32                 total          = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated ActivityGoods activity_goods = 3;
+  int32                 total          = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 获取商品活动请求（按SKU ID）
@@ -101,7 +112,9 @@ message GetGoodsActivityRequest {
 
 // 获取商品活动响应
 message GetGoodsActivityResponse {
-  repeated ActivityGoods goods = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated ActivityGoods goods = 3;
 }
 
 // 验证活动请求
@@ -136,14 +149,14 @@ message ActivityGoodsResponse {
 
 // 活动商品服务
 service ActivityGoodsService {
-  rpc Create(CreateActivityGoodsRequest) returns (ActivityGoods);
+  rpc Create(CreateActivityGoodsRequest) returns (Response);
   rpc BatchCreate(BatchCreateActivityGoodsRequest) returns (ActivityGoodsResponse);
-  rpc Update(UpdateActivityGoodsRequest) returns (ActivityGoods);
-  rpc Delete(DeleteActivityGoodsRequest) returns (ActivityGoods);
+  rpc Update(UpdateActivityGoodsRequest) returns (Response);
+  rpc Delete(DeleteActivityGoodsRequest) returns (Response);
   rpc BatchDelete(BatchDeleteActivityGoodsRequest) returns (ActivityGoodsResponse);
   rpc Get(GetActivityGoodsRequest) returns (GetActivityGoodsResponse);
   rpc List(ListActivityGoodsRequest) returns (ListActivityGoodsResponse);
   rpc GetGoodsActivity(GetGoodsActivityRequest) returns (GetGoodsActivityResponse);
   rpc ValidateActivity(ValidateActivityRequest) returns (ValidateActivityResponse);
-  rpc DeductActivityStock(DeductActivityStockRequest) returns (ActivityGoodsResponse);
+  rpc DeductActivityStock(DeductActivityStockRequest) returns (Response);
 }

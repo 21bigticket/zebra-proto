@@ -56,7 +56,7 @@ var (
 
 // StockLogService is a client for the stock_log.StockLogService service.
 type StockLogService interface {
-	Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*StockLog, error)
+	Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetLogRequest, opts ...client.CallOption) (*GetLogResponse, error)
 	List(ctx context.Context, req *ListLogRequest, opts ...client.CallOption) (*ListLogResponse, error)
 	GetLogsBySku(ctx context.Context, req *GetLogsBySkuRequest, opts ...client.CallOption) (*ListLogResponse, error)
@@ -84,8 +84,8 @@ type StockLogServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *StockLogServiceImpl) Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*StockLog, error) {
-	resp := new(StockLog)
+func (c *StockLogServiceImpl) Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
@@ -143,7 +143,7 @@ var StockLogService_ClientInfo = client.ClientInfo{
 
 // StockLogServiceHandler is an implementation of the stock_log.StockLogService service.
 type StockLogServiceHandler interface {
-	Create(context.Context, *CreateLogRequest) (*StockLog, error)
+	Create(context.Context, *CreateLogRequest) (*Response, error)
 	Get(context.Context, *GetLogRequest) (*GetLogResponse, error)
 	List(context.Context, *ListLogRequest) (*ListLogResponse, error)
 	GetLogsBySku(context.Context, *GetLogsBySkuRequest) (*ListLogResponse, error)

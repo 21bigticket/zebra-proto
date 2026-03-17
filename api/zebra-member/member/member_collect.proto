@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package member;
 
 option go_package = "./api/zebra-member/member;member";
@@ -58,7 +60,9 @@ message GetMemberCollectRequest {
 
 // 获取收藏响应
 message GetMemberCollectResponse {
-  MemberCollect member_collect = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  MemberCollect member_collect = 3;
 }
 
 // 根据用户ID获取收藏列表请求
@@ -68,7 +72,9 @@ message GetCollectListByUserRequest {
 
 // 收藏列表响应
 message CollectListResponse {
-  repeated MemberCollect collects = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated MemberCollect collects = 3;
 }
 
 // 检查收藏状态请求
@@ -80,14 +86,21 @@ message CheckCollectStatusRequest {
 
 // 检查收藏状态响应
 message CheckCollectStatusResponse {
-  int32 collect_status = 1; // 0=未收藏, 1=已收藏
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  int32 collect_status = 3; // 0=未收藏, 1=已收藏
+}
+
+message MemberCollectResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 用户收藏服务
 service MemberCollectService {
-  rpc Create(CreateMemberCollectRequest) returns (MemberCollect);
-  rpc UpdateStatus(UpdateCollectStatusRequest) returns (MemberCollect);
-  rpc Delete(DeleteMemberCollectRequest) returns (MemberCollect);
+  rpc Create(CreateMemberCollectRequest) returns (MemberCollectResponse);
+  rpc UpdateStatus(UpdateCollectStatusRequest) returns (MemberCollectResponse);
+  rpc Delete(DeleteMemberCollectRequest) returns (MemberCollectResponse);
   rpc Get(GetMemberCollectRequest) returns (GetMemberCollectResponse);
   rpc GetListByUser(GetCollectListByUserRequest) returns (CollectListResponse);
   rpc CheckStatus(CheckCollectStatusRequest) returns (CheckCollectStatusResponse);

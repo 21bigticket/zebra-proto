@@ -56,12 +56,12 @@ var (
 
 // MemberAddressService is a client for the member.MemberAddressService service.
 type MemberAddressService interface {
-	Create(ctx context.Context, req *CreateMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error)
-	Update(ctx context.Context, req *UpdateMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error)
-	Delete(ctx context.Context, req *DeleteMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error)
+	Create(ctx context.Context, req *CreateMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
+	Update(ctx context.Context, req *UpdateMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
+	Delete(ctx context.Context, req *DeleteMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
 	Get(ctx context.Context, req *GetMemberAddressRequest, opts ...client.CallOption) (*GetMemberAddressResponse, error)
 	GetListByUser(ctx context.Context, req *GetAddressListByUserRequest, opts ...client.CallOption) (*AddressListResponse, error)
-	SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddress, error)
+	SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
 }
 
 // NewMemberAddressService constructs a client for the member.MemberAddressService service.
@@ -84,24 +84,24 @@ type MemberAddressServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *MemberAddressServiceImpl) Create(ctx context.Context, req *CreateMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error) {
-	resp := new(MemberAddress)
+func (c *MemberAddressServiceImpl) Create(ctx context.Context, req *CreateMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error) {
+	resp := new(MemberAddressResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberAddressServiceImpl) Update(ctx context.Context, req *UpdateMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error) {
-	resp := new(MemberAddress)
+func (c *MemberAddressServiceImpl) Update(ctx context.Context, req *UpdateMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error) {
+	resp := new(MemberAddressResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *MemberAddressServiceImpl) Delete(ctx context.Context, req *DeleteMemberAddressRequest, opts ...client.CallOption) (*MemberAddress, error) {
-	resp := new(MemberAddress)
+func (c *MemberAddressServiceImpl) Delete(ctx context.Context, req *DeleteMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error) {
+	resp := new(MemberAddressResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -124,8 +124,8 @@ func (c *MemberAddressServiceImpl) GetListByUser(ctx context.Context, req *GetAd
 	return resp, nil
 }
 
-func (c *MemberAddressServiceImpl) SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddress, error) {
-	resp := new(MemberAddress)
+func (c *MemberAddressServiceImpl) SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error) {
+	resp := new(MemberAddressResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "SetDefault", opts...); err != nil {
 		return nil, err
 	}
@@ -143,12 +143,12 @@ var MemberAddressService_ClientInfo = client.ClientInfo{
 
 // MemberAddressServiceHandler is an implementation of the member.MemberAddressService service.
 type MemberAddressServiceHandler interface {
-	Create(context.Context, *CreateMemberAddressRequest) (*MemberAddress, error)
-	Update(context.Context, *UpdateMemberAddressRequest) (*MemberAddress, error)
-	Delete(context.Context, *DeleteMemberAddressRequest) (*MemberAddress, error)
+	Create(context.Context, *CreateMemberAddressRequest) (*MemberAddressResponse, error)
+	Update(context.Context, *UpdateMemberAddressRequest) (*MemberAddressResponse, error)
+	Delete(context.Context, *DeleteMemberAddressRequest) (*MemberAddressResponse, error)
 	Get(context.Context, *GetMemberAddressRequest) (*GetMemberAddressResponse, error)
 	GetListByUser(context.Context, *GetAddressListByUserRequest) (*AddressListResponse, error)
-	SetDefault(context.Context, *SetDefaultAddressRequest) (*MemberAddress, error)
+	SetDefault(context.Context, *SetDefaultAddressRequest) (*MemberAddressResponse, error)
 }
 
 func RegisterMemberAddressServiceHandler(srv *server.Server, hdlr MemberAddressServiceHandler, opts ...server.ServiceOption) error {

@@ -54,9 +54,9 @@ var (
 
 // PathService is a client for the path.PathService service.
 type PathService interface {
-	Create(ctx context.Context, req *CreatePathRequest, opts ...client.CallOption) (*Path, error)
-	Update(ctx context.Context, req *UpdatePathRequest, opts ...client.CallOption) (*Path, error)
-	Delete(ctx context.Context, req *DeletePathRequest, opts ...client.CallOption) (*Path, error)
+	Create(ctx context.Context, req *CreatePathRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdatePathRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeletePathRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetPathRequest, opts ...client.CallOption) (*GetPathResponse, error)
 	List(ctx context.Context, req *ListPathRequest, opts ...client.CallOption) (*ListPathResponse, error)
 }
@@ -81,24 +81,24 @@ type PathServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *PathServiceImpl) Create(ctx context.Context, req *CreatePathRequest, opts ...client.CallOption) (*Path, error) {
-	resp := new(Path)
+func (c *PathServiceImpl) Create(ctx context.Context, req *CreatePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *PathServiceImpl) Update(ctx context.Context, req *UpdatePathRequest, opts ...client.CallOption) (*Path, error) {
-	resp := new(Path)
+func (c *PathServiceImpl) Update(ctx context.Context, req *UpdatePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *PathServiceImpl) Delete(ctx context.Context, req *DeletePathRequest, opts ...client.CallOption) (*Path, error) {
-	resp := new(Path)
+func (c *PathServiceImpl) Delete(ctx context.Context, req *DeletePathRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var PathService_ClientInfo = client.ClientInfo{
 
 // PathServiceHandler is an implementation of the path.PathService service.
 type PathServiceHandler interface {
-	Create(context.Context, *CreatePathRequest) (*Path, error)
-	Update(context.Context, *UpdatePathRequest) (*Path, error)
-	Delete(context.Context, *DeletePathRequest) (*Path, error)
+	Create(context.Context, *CreatePathRequest) (*Response, error)
+	Update(context.Context, *UpdatePathRequest) (*Response, error)
+	Delete(context.Context, *DeletePathRequest) (*Response, error)
 	Get(context.Context, *GetPathRequest) (*GetPathResponse, error)
 	List(context.Context, *ListPathRequest) (*ListPathResponse, error)
 }

@@ -54,9 +54,9 @@ var (
 
 // GoodsService is a client for the goods.GoodsService service.
 type GoodsService interface {
-	Create(ctx context.Context, req *CreateGoodsRequest, opts ...client.CallOption) (*Goods, error)
-	Update(ctx context.Context, req *UpdateGoodsRequest, opts ...client.CallOption) (*Goods, error)
-	Delete(ctx context.Context, req *DeleteGoodsRequest, opts ...client.CallOption) (*Goods, error)
+	Create(ctx context.Context, req *CreateGoodsRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateGoodsRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteGoodsRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetGoodsRequest, opts ...client.CallOption) (*GetGoodsResponse, error)
 	List(ctx context.Context, req *ListGoodsRequest, opts ...client.CallOption) (*ListGoodsResponse, error)
 }
@@ -81,24 +81,24 @@ type GoodsServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *GoodsServiceImpl) Create(ctx context.Context, req *CreateGoodsRequest, opts ...client.CallOption) (*Goods, error) {
-	resp := new(Goods)
+func (c *GoodsServiceImpl) Create(ctx context.Context, req *CreateGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *GoodsServiceImpl) Update(ctx context.Context, req *UpdateGoodsRequest, opts ...client.CallOption) (*Goods, error) {
-	resp := new(Goods)
+func (c *GoodsServiceImpl) Update(ctx context.Context, req *UpdateGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *GoodsServiceImpl) Delete(ctx context.Context, req *DeleteGoodsRequest, opts ...client.CallOption) (*Goods, error) {
-	resp := new(Goods)
+func (c *GoodsServiceImpl) Delete(ctx context.Context, req *DeleteGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var GoodsService_ClientInfo = client.ClientInfo{
 
 // GoodsServiceHandler is an implementation of the goods.GoodsService service.
 type GoodsServiceHandler interface {
-	Create(context.Context, *CreateGoodsRequest) (*Goods, error)
-	Update(context.Context, *UpdateGoodsRequest) (*Goods, error)
-	Delete(context.Context, *DeleteGoodsRequest) (*Goods, error)
+	Create(context.Context, *CreateGoodsRequest) (*Response, error)
+	Update(context.Context, *UpdateGoodsRequest) (*Response, error)
+	Delete(context.Context, *DeleteGoodsRequest) (*Response, error)
 	Get(context.Context, *GetGoodsRequest) (*GetGoodsResponse, error)
 	List(context.Context, *ListGoodsRequest) (*ListGoodsResponse, error)
 }

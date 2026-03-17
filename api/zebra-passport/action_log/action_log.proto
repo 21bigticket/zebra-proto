@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package action_log;
 
 option go_package = "./api/zebra-passport/action_log;action_log";
@@ -49,8 +51,10 @@ message ListActionLogRequest {
 
 // 查询操作日志响应
 message ListActionLogResponse {
-  repeated AdminActionLog logs  = 1;
-  int32                  total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated AdminActionLog logs  = 3;
+  int32                  total = 4;
 }
 
 // 操作日志服务

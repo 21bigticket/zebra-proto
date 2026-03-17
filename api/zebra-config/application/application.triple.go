@@ -54,9 +54,9 @@ var (
 
 // ApplicationService is a client for the application.ApplicationService service.
 type ApplicationService interface {
-	Create(ctx context.Context, req *CreateApplicationRequest, opts ...client.CallOption) (*Application, error)
-	Update(ctx context.Context, req *UpdateApplicationRequest, opts ...client.CallOption) (*Application, error)
-	Delete(ctx context.Context, req *DeleteApplicationRequest, opts ...client.CallOption) (*Application, error)
+	Create(ctx context.Context, req *CreateApplicationRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateApplicationRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteApplicationRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetApplicationRequest, opts ...client.CallOption) (*GetApplicationResponse, error)
 	List(ctx context.Context, req *ListApplicationRequest, opts ...client.CallOption) (*ListApplicationResponse, error)
 }
@@ -81,24 +81,24 @@ type ApplicationServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *ApplicationServiceImpl) Create(ctx context.Context, req *CreateApplicationRequest, opts ...client.CallOption) (*Application, error) {
-	resp := new(Application)
+func (c *ApplicationServiceImpl) Create(ctx context.Context, req *CreateApplicationRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ApplicationServiceImpl) Update(ctx context.Context, req *UpdateApplicationRequest, opts ...client.CallOption) (*Application, error) {
-	resp := new(Application)
+func (c *ApplicationServiceImpl) Update(ctx context.Context, req *UpdateApplicationRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ApplicationServiceImpl) Delete(ctx context.Context, req *DeleteApplicationRequest, opts ...client.CallOption) (*Application, error) {
-	resp := new(Application)
+func (c *ApplicationServiceImpl) Delete(ctx context.Context, req *DeleteApplicationRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var ApplicationService_ClientInfo = client.ClientInfo{
 
 // ApplicationServiceHandler is an implementation of the application.ApplicationService service.
 type ApplicationServiceHandler interface {
-	Create(context.Context, *CreateApplicationRequest) (*Application, error)
-	Update(context.Context, *UpdateApplicationRequest) (*Application, error)
-	Delete(context.Context, *DeleteApplicationRequest) (*Application, error)
+	Create(context.Context, *CreateApplicationRequest) (*Response, error)
+	Update(context.Context, *UpdateApplicationRequest) (*Response, error)
+	Delete(context.Context, *DeleteApplicationRequest) (*Response, error)
 	Get(context.Context, *GetApplicationRequest) (*GetApplicationResponse, error)
 	List(context.Context, *ListApplicationRequest) (*ListApplicationResponse, error)
 }

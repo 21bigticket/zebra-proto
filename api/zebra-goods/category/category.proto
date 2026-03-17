@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package category;
 
 option go_package = "./api/zebra-goods/category;category";
@@ -64,7 +66,9 @@ message GetCategoryRequest {
 
 // 获取分类响应
 message GetCategoryResponse {
-  GoodsCategory category = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  GoodsCategory category = 3;
 }
 
 // 列出分类请求
@@ -78,8 +82,10 @@ message ListCategoryRequest {
 
 // 列出分类响应
 message ListCategoryResponse {
-  repeated GoodsCategory categories = 1;
-  int32                   total     = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated GoodsCategory categories = 3;
+  int32                   total     = 4;
 }
 
 // 获取分类树请求
@@ -89,7 +95,9 @@ message GetCategoryTreeRequest {
 
 // 获取分类树响应
 message GetCategoryTreeResponse {
-  repeated GoodsCategoryTreeItem tree = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated GoodsCategoryTreeItem tree = 3;
 }
 
 // 分类树节点
@@ -98,11 +106,16 @@ message GoodsCategoryTreeItem {
   repeated GoodsCategoryTreeItem children = 2;
 }
 
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+}
+
 // 分类服务
 service CategoryService {
-  rpc Create(CreateCategoryRequest) returns (GoodsCategory);
-  rpc Update(UpdateCategoryRequest) returns (GoodsCategory);
-  rpc Delete(DeleteCategoryRequest) returns (GoodsCategory);
+  rpc Create(CreateCategoryRequest) returns (Response);
+  rpc Update(UpdateCategoryRequest) returns (Response);
+  rpc Delete(DeleteCategoryRequest) returns (Response);
   rpc Get(GetCategoryRequest) returns (GetCategoryResponse);
   rpc List(ListCategoryRequest) returns (ListCategoryResponse);
   rpc GetTree(GetCategoryTreeRequest) returns (GetCategoryTreeResponse);

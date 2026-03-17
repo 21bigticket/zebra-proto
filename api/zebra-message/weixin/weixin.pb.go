@@ -25,6 +25,7 @@ package weixin
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -210,9 +211,11 @@ func (x *SendWeixinRequest) GetPage() string {
 // 发送微信消息响应
 type SendWeixinResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	MsgId         string                 `protobuf:"bytes,3,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	MsgId         string                 `protobuf:"bytes,5,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -245,6 +248,20 @@ func (x *SendWeixinResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SendWeixinResponse.ProtoReflect.Descriptor instead.
 func (*SendWeixinResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SendWeixinResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *SendWeixinResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *SendWeixinResponse) GetSuccess() bool {
@@ -340,9 +357,11 @@ func (x *BatchSendWeixinRequest) GetPage() string {
 // 批量发送微信消息响应
 type BatchSendWeixinResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	MsgIds        []string               `protobuf:"bytes,3,rep,name=msg_ids,json=msgIds,proto3" json:"msg_ids,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	MsgIds        []string               `protobuf:"bytes,5,rep,name=msg_ids,json=msgIds,proto3" json:"msg_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -377,6 +396,20 @@ func (*BatchSendWeixinResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *BatchSendWeixinResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *BatchSendWeixinResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *BatchSendWeixinResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
@@ -402,7 +435,7 @@ var File_api_zebra_message_weixin_weixin_proto protoreflect.FileDescriptor
 
 const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\n" +
-	"%api/zebra-message/weixin/weixin.proto\x12\x06weixin\"\x81\x02\n" +
+	"%api/zebra-message/weixin/weixin.proto\x12\x06weixin\x1a\x1egoogle/protobuf/wrappers.proto\"\x81\x02\n" +
 	"\x0eWeixinTemplate\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12\x19\n" +
@@ -423,11 +456,13 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\tR\x04page\x1a7\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
-	"\x12SendWeixinResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\x15\n" +
-	"\x06msg_id\x18\x03 \x01(\tR\x05msgId\"\xd8\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa2\x01\n" +
+	"\x12SendWeixinResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\x15\n" +
+	"\x06msg_id\x18\x05 \x01(\tR\x05msgId\"\xd8\x01\n" +
 	"\x16BatchSendWeixinRequest\x12\x18\n" +
 	"\aopenids\x18\x01 \x03(\tR\aopenids\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12<\n" +
@@ -435,11 +470,13 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\tR\x04page\x1a7\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"f\n" +
-	"\x17BatchSendWeixinResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\x17\n" +
-	"\amsg_ids\x18\x03 \x03(\tR\x06msgIds2\xa8\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa9\x01\n" +
+	"\x17BatchSendWeixinResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\x17\n" +
+	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\xa8\x01\n" +
 	"\rWeixinService\x12C\n" +
 	"\n" +
 	"SendWeixin\x12\x19.weixin.SendWeixinRequest\x1a\x1a.weixin.SendWeixinResponse\x12R\n" +
@@ -466,19 +503,22 @@ var file_api_zebra_message_weixin_weixin_proto_goTypes = []any{
 	(*BatchSendWeixinResponse)(nil), // 4: weixin.BatchSendWeixinResponse
 	nil,                             // 5: weixin.SendWeixinRequest.DataEntry
 	nil,                             // 6: weixin.BatchSendWeixinRequest.DataEntry
+	(*wrapperspb.Int32Value)(nil),   // 7: google.protobuf.Int32Value
 }
 var file_api_zebra_message_weixin_weixin_proto_depIdxs = []int32{
 	5, // 0: weixin.SendWeixinRequest.data:type_name -> weixin.SendWeixinRequest.DataEntry
-	6, // 1: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
-	1, // 2: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
-	3, // 3: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
-	2, // 4: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
-	4, // 5: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	7, // 1: weixin.SendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	6, // 2: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
+	7, // 3: weixin.BatchSendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 4: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
+	3, // 5: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
+	2, // 6: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
+	4, // 7: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_weixin_weixin_proto_init() }

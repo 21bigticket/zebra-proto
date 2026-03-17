@@ -54,7 +54,7 @@ var (
 
 // CartLogService is a client for the cart_log.CartLogService service.
 type CartLogService interface {
-	Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*CartLog, error)
+	Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetLogRequest, opts ...client.CallOption) (*GetLogResponse, error)
 	List(ctx context.Context, req *ListLogRequest, opts ...client.CallOption) (*ListLogResponse, error)
 	GetUserLogs(ctx context.Context, req *GetUserLogsRequest, opts ...client.CallOption) (*ListLogResponse, error)
@@ -81,8 +81,8 @@ type CartLogServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *CartLogServiceImpl) Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*CartLog, error) {
-	resp := new(CartLog)
+func (c *CartLogServiceImpl) Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ var CartLogService_ClientInfo = client.ClientInfo{
 
 // CartLogServiceHandler is an implementation of the cart_log.CartLogService service.
 type CartLogServiceHandler interface {
-	Create(context.Context, *CreateLogRequest) (*CartLog, error)
+	Create(context.Context, *CreateLogRequest) (*Response, error)
 	Get(context.Context, *GetLogRequest) (*GetLogResponse, error)
 	List(context.Context, *ListLogRequest) (*ListLogResponse, error)
 	GetUserLogs(context.Context, *GetUserLogsRequest) (*ListLogResponse, error)

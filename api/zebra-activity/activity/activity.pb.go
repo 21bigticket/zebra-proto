@@ -25,6 +25,7 @@ package activity
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -409,7 +410,9 @@ func (x *GetActivityRequest) GetActivityId() int64 {
 // 获取活动响应
 type GetActivityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Activity      *Activity              `protobuf:"bytes,1,opt,name=activity,proto3" json:"activity,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Activity      *Activity              `protobuf:"bytes,3,opt,name=activity,proto3" json:"activity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -442,6 +445,20 @@ func (x *GetActivityResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetActivityResponse.ProtoReflect.Descriptor instead.
 func (*GetActivityResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetActivityResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetActivityResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetActivityResponse) GetActivity() *Activity {
@@ -523,8 +540,10 @@ func (x *ListActivityRequest) GetActivityStatus() int32 {
 // 列出活动响应
 type ListActivityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Activities    []*Activity            `protobuf:"bytes,1,rep,name=activities,proto3" json:"activities,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Activities    []*Activity            `protobuf:"bytes,3,rep,name=activities,proto3" json:"activities,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -559,6 +578,20 @@ func (*ListActivityResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListActivityResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListActivityResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListActivityResponse) GetActivities() []*Activity {
 	if x != nil {
 		return x.Activities
@@ -573,6 +606,58 @@ func (x *ListActivityResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 // 启动活动请求
 type StartActivityRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -583,7 +668,7 @@ type StartActivityRequest struct {
 
 func (x *StartActivityRequest) Reset() {
 	*x = StartActivityRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[8]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -595,7 +680,7 @@ func (x *StartActivityRequest) String() string {
 func (*StartActivityRequest) ProtoMessage() {}
 
 func (x *StartActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[8]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,7 +693,7 @@ func (x *StartActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartActivityRequest.ProtoReflect.Descriptor instead.
 func (*StartActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{8}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StartActivityRequest) GetActivityId() int64 {
@@ -629,7 +714,7 @@ type StartActivityResponse struct {
 
 func (x *StartActivityResponse) Reset() {
 	*x = StartActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[9]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -641,7 +726,7 @@ func (x *StartActivityResponse) String() string {
 func (*StartActivityResponse) ProtoMessage() {}
 
 func (x *StartActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[9]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,7 +739,7 @@ func (x *StartActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartActivityResponse.ProtoReflect.Descriptor instead.
 func (*StartActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{9}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StartActivityResponse) GetSuccess() bool {
@@ -681,7 +766,7 @@ type EndActivityRequest struct {
 
 func (x *EndActivityRequest) Reset() {
 	*x = EndActivityRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[10]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -693,7 +778,7 @@ func (x *EndActivityRequest) String() string {
 func (*EndActivityRequest) ProtoMessage() {}
 
 func (x *EndActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[10]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -706,7 +791,7 @@ func (x *EndActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndActivityRequest.ProtoReflect.Descriptor instead.
 func (*EndActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *EndActivityRequest) GetActivityId() int64 {
@@ -727,7 +812,7 @@ type EndActivityResponse struct {
 
 func (x *EndActivityResponse) Reset() {
 	*x = EndActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[11]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -739,7 +824,7 @@ func (x *EndActivityResponse) String() string {
 func (*EndActivityResponse) ProtoMessage() {}
 
 func (x *EndActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[11]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -752,7 +837,7 @@ func (x *EndActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndActivityResponse.ProtoReflect.Descriptor instead.
 func (*EndActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{11}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *EndActivityResponse) GetSuccess() bool {
@@ -779,7 +864,7 @@ type CancelActivityRequest struct {
 
 func (x *CancelActivityRequest) Reset() {
 	*x = CancelActivityRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[12]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +876,7 @@ func (x *CancelActivityRequest) String() string {
 func (*CancelActivityRequest) ProtoMessage() {}
 
 func (x *CancelActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[12]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +889,7 @@ func (x *CancelActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelActivityRequest.ProtoReflect.Descriptor instead.
 func (*CancelActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{12}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CancelActivityRequest) GetActivityId() int64 {
@@ -825,7 +910,7 @@ type CancelActivityResponse struct {
 
 func (x *CancelActivityResponse) Reset() {
 	*x = CancelActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[13]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +922,7 @@ func (x *CancelActivityResponse) String() string {
 func (*CancelActivityResponse) ProtoMessage() {}
 
 func (x *CancelActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[13]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -850,7 +935,7 @@ func (x *CancelActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelActivityResponse.ProtoReflect.Descriptor instead.
 func (*CancelActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{13}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CancelActivityResponse) GetSuccess() bool {
@@ -887,7 +972,7 @@ type ActivityGoods struct {
 
 func (x *ActivityGoods) Reset() {
 	*x = ActivityGoods{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[14]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -899,7 +984,7 @@ func (x *ActivityGoods) String() string {
 func (*ActivityGoods) ProtoMessage() {}
 
 func (x *ActivityGoods) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[14]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -912,7 +997,7 @@ func (x *ActivityGoods) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActivityGoods.ProtoReflect.Descriptor instead.
 func (*ActivityGoods) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{14}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ActivityGoods) GetActivityGoodsId() int64 {
@@ -1002,7 +1087,7 @@ type GetActivityGoodsRequest struct {
 
 func (x *GetActivityGoodsRequest) Reset() {
 	*x = GetActivityGoodsRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[15]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1014,7 +1099,7 @@ func (x *GetActivityGoodsRequest) String() string {
 func (*GetActivityGoodsRequest) ProtoMessage() {}
 
 func (x *GetActivityGoodsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[15]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1027,7 +1112,7 @@ func (x *GetActivityGoodsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActivityGoodsRequest.ProtoReflect.Descriptor instead.
 func (*GetActivityGoodsRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{15}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetActivityGoodsRequest) GetActivityId() int64 {
@@ -1040,14 +1125,16 @@ func (x *GetActivityGoodsRequest) GetActivityId() int64 {
 // 获取活动商品响应
 type GetActivityGoodsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Goods         []*ActivityGoods       `protobuf:"bytes,1,rep,name=goods,proto3" json:"goods,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Goods         []*ActivityGoods       `protobuf:"bytes,3,rep,name=goods,proto3" json:"goods,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetActivityGoodsResponse) Reset() {
 	*x = GetActivityGoodsResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[16]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1059,7 +1146,7 @@ func (x *GetActivityGoodsResponse) String() string {
 func (*GetActivityGoodsResponse) ProtoMessage() {}
 
 func (x *GetActivityGoodsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[16]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1072,7 +1159,21 @@ func (x *GetActivityGoodsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetActivityGoodsResponse.ProtoReflect.Descriptor instead.
 func (*GetActivityGoodsResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{16}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetActivityGoodsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetActivityGoodsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetActivityGoodsResponse) GetGoods() []*ActivityGoods {
@@ -1092,7 +1193,7 @@ type GetGoodsActivityRequest struct {
 
 func (x *GetGoodsActivityRequest) Reset() {
 	*x = GetGoodsActivityRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[17]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1104,7 +1205,7 @@ func (x *GetGoodsActivityRequest) String() string {
 func (*GetGoodsActivityRequest) ProtoMessage() {}
 
 func (x *GetGoodsActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[17]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1117,7 +1218,7 @@ func (x *GetGoodsActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGoodsActivityRequest.ProtoReflect.Descriptor instead.
 func (*GetGoodsActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{17}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetGoodsActivityRequest) GetSkuIds() []int64 {
@@ -1130,14 +1231,16 @@ func (x *GetGoodsActivityRequest) GetSkuIds() []int64 {
 // 获取商品活动响应
 type GetGoodsActivityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Goods         []*ActivityGoods       `protobuf:"bytes,1,rep,name=goods,proto3" json:"goods,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Goods         []*ActivityGoods       `protobuf:"bytes,3,rep,name=goods,proto3" json:"goods,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetGoodsActivityResponse) Reset() {
 	*x = GetGoodsActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[18]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1149,7 +1252,7 @@ func (x *GetGoodsActivityResponse) String() string {
 func (*GetGoodsActivityResponse) ProtoMessage() {}
 
 func (x *GetGoodsActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[18]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1162,7 +1265,21 @@ func (x *GetGoodsActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGoodsActivityResponse.ProtoReflect.Descriptor instead.
 func (*GetGoodsActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{18}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetGoodsActivityResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetGoodsActivityResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetGoodsActivityResponse) GetGoods() []*ActivityGoods {
@@ -1185,7 +1302,7 @@ type ValidateActivityRequest struct {
 
 func (x *ValidateActivityRequest) Reset() {
 	*x = ValidateActivityRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[19]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1197,7 +1314,7 @@ func (x *ValidateActivityRequest) String() string {
 func (*ValidateActivityRequest) ProtoMessage() {}
 
 func (x *ValidateActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[19]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1210,7 +1327,7 @@ func (x *ValidateActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateActivityRequest.ProtoReflect.Descriptor instead.
 func (*ValidateActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{19}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ValidateActivityRequest) GetActivityId() int64 {
@@ -1253,7 +1370,7 @@ type ValidateActivityResponse struct {
 
 func (x *ValidateActivityResponse) Reset() {
 	*x = ValidateActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[20]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1265,7 +1382,7 @@ func (x *ValidateActivityResponse) String() string {
 func (*ValidateActivityResponse) ProtoMessage() {}
 
 func (x *ValidateActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[20]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1278,7 +1395,7 @@ func (x *ValidateActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateActivityResponse.ProtoReflect.Descriptor instead.
 func (*ValidateActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{20}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ValidateActivityResponse) GetValid() bool {
@@ -1316,7 +1433,7 @@ type DeductActivityStockRequest struct {
 
 func (x *DeductActivityStockRequest) Reset() {
 	*x = DeductActivityStockRequest{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[21]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1328,7 +1445,7 @@ func (x *DeductActivityStockRequest) String() string {
 func (*DeductActivityStockRequest) ProtoMessage() {}
 
 func (x *DeductActivityStockRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[21]
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1341,7 +1458,7 @@ func (x *DeductActivityStockRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeductActivityStockRequest.ProtoReflect.Descriptor instead.
 func (*DeductActivityStockRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{21}
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DeductActivityStockRequest) GetActivityId() int64 {
@@ -1379,64 +1496,11 @@ func (x *DeductActivityStockRequest) GetOrderNo() string {
 	return ""
 }
 
-// 通用响应
-type ActivityResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ActivityResponse) Reset() {
-	*x = ActivityResponse{}
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ActivityResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ActivityResponse) ProtoMessage() {}
-
-func (x *ActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ActivityResponse.ProtoReflect.Descriptor instead.
-func (*ActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *ActivityResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
-func (x *ActivityResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
 var File_api_zebra_activity_activity_activity_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\n" +
-	"*api/zebra-activity/activity/activity.proto\x12\bactivity\"\xd1\x02\n" +
+	"*api/zebra-activity/activity/activity.proto\x12\bactivity\x1a\x1egoogle/protobuf/wrappers.proto\"\xd1\x02\n" +
 	"\bActivity\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12#\n" +
@@ -1475,19 +1539,26 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"activityId\"5\n" +
 	"\x12GetActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
-	"activityId\"E\n" +
-	"\x13GetActivityResponse\x12.\n" +
-	"\bactivity\x18\x01 \x01(\v2\x12.activity.ActivityR\bactivity\"\x94\x01\n" +
+	"activityId\"\x88\x01\n" +
+	"\x13GetActivityResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
+	"\bactivity\x18\x03 \x01(\v2\x12.activity.ActivityR\bactivity\"\x94\x01\n" +
 	"\x13ListActivityRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12#\n" +
 	"\ractivity_type\x18\x03 \x01(\x05R\factivityType\x12'\n" +
-	"\x0factivity_status\x18\x04 \x01(\x05R\x0eactivityStatus\"`\n" +
-	"\x14ListActivityResponse\x122\n" +
+	"\x0factivity_status\x18\x04 \x01(\x05R\x0eactivityStatus\"\xa3\x01\n" +
+	"\x14ListActivityResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
 	"\n" +
-	"activities\x18\x01 \x03(\v2\x12.activity.ActivityR\n" +
+	"activities\x18\x03 \x03(\v2\x12.activity.ActivityR\n" +
 	"activities\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"7\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"7\n" +
 	"\x14StartActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\"K\n" +
@@ -1527,13 +1598,17 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"is_deleted\x18\v \x01(\x05R\tisDeleted\":\n" +
 	"\x17GetActivityGoodsRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
-	"activityId\"I\n" +
-	"\x18GetActivityGoodsResponse\x12-\n" +
-	"\x05goods\x18\x01 \x03(\v2\x17.activity.ActivityGoodsR\x05goods\"2\n" +
+	"activityId\"\x8c\x01\n" +
+	"\x18GetActivityGoodsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12-\n" +
+	"\x05goods\x18\x03 \x03(\v2\x17.activity.ActivityGoodsR\x05goods\"2\n" +
 	"\x17GetGoodsActivityRequest\x12\x17\n" +
-	"\asku_ids\x18\x01 \x03(\x03R\x06skuIds\"I\n" +
-	"\x18GetGoodsActivityResponse\x12-\n" +
-	"\x05goods\x18\x01 \x03(\v2\x17.activity.ActivityGoodsR\x05goods\"\x86\x01\n" +
+	"\asku_ids\x18\x01 \x03(\x03R\x06skuIds\"\x8c\x01\n" +
+	"\x18GetGoodsActivityResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12-\n" +
+	"\x05goods\x18\x03 \x03(\v2\x17.activity.ActivityGoodsR\x05goods\"\x86\x01\n" +
 	"\x17ValidateActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x15\n" +
@@ -1550,14 +1625,11 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x06sku_id\x18\x02 \x01(\x03R\x05skuId\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\x05R\bquantity\x12\x19\n" +
-	"\border_no\x18\x05 \x01(\tR\aorderNo\"F\n" +
-	"\x10ActivityResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9e\a\n" +
+	"\border_no\x18\x05 \x01(\tR\aorderNo2\x96\a\n" +
 	"\x0fActivityService\x12=\n" +
-	"\x06Create\x12\x1f.activity.CreateActivityRequest\x1a\x12.activity.Activity\x12=\n" +
-	"\x06Update\x12\x1f.activity.UpdateActivityRequest\x1a\x12.activity.Activity\x12=\n" +
-	"\x06Delete\x12\x1f.activity.DeleteActivityRequest\x1a\x12.activity.Activity\x12B\n" +
+	"\x06Create\x12\x1f.activity.CreateActivityRequest\x1a\x12.activity.Response\x12=\n" +
+	"\x06Update\x12\x1f.activity.UpdateActivityRequest\x1a\x12.activity.Response\x12=\n" +
+	"\x06Delete\x12\x1f.activity.DeleteActivityRequest\x1a\x12.activity.Response\x12B\n" +
 	"\x03Get\x12\x1c.activity.GetActivityRequest\x1a\x1d.activity.GetActivityResponse\x12E\n" +
 	"\x04List\x12\x1d.activity.ListActivityRequest\x1a\x1e.activity.ListActivityResponse\x12H\n" +
 	"\x05Start\x12\x1e.activity.StartActivityRequest\x1a\x1f.activity.StartActivityResponse\x12B\n" +
@@ -1565,8 +1637,8 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x06Cancel\x12\x1f.activity.CancelActivityRequest\x1a .activity.CancelActivityResponse\x12Y\n" +
 	"\x10GetActivityGoods\x12!.activity.GetActivityGoodsRequest\x1a\".activity.GetActivityGoodsResponse\x12Y\n" +
 	"\x10GetGoodsActivity\x12!.activity.GetGoodsActivityRequest\x1a\".activity.GetGoodsActivityResponse\x12Y\n" +
-	"\x10ValidateActivity\x12!.activity.ValidateActivityRequest\x1a\".activity.ValidateActivityResponse\x12W\n" +
-	"\x13DeductActivityStock\x12$.activity.DeductActivityStockRequest\x1a\x1a.activity.ActivityResponseB(Z&./api/zebra-activity/activity;activityb\x06proto3"
+	"\x10ValidateActivity\x12!.activity.ValidateActivityRequest\x1a\".activity.ValidateActivityResponse\x12O\n" +
+	"\x13DeductActivityStock\x12$.activity.DeductActivityStockRequest\x1a\x12.activity.ResponseB(Z&./api/zebra-activity/activity;activityb\x06proto3"
 
 var (
 	file_api_zebra_activity_activity_activity_proto_rawDescOnce sync.Once
@@ -1590,56 +1662,62 @@ var file_api_zebra_activity_activity_activity_proto_goTypes = []any{
 	(*GetActivityResponse)(nil),        // 5: activity.GetActivityResponse
 	(*ListActivityRequest)(nil),        // 6: activity.ListActivityRequest
 	(*ListActivityResponse)(nil),       // 7: activity.ListActivityResponse
-	(*StartActivityRequest)(nil),       // 8: activity.StartActivityRequest
-	(*StartActivityResponse)(nil),      // 9: activity.StartActivityResponse
-	(*EndActivityRequest)(nil),         // 10: activity.EndActivityRequest
-	(*EndActivityResponse)(nil),        // 11: activity.EndActivityResponse
-	(*CancelActivityRequest)(nil),      // 12: activity.CancelActivityRequest
-	(*CancelActivityResponse)(nil),     // 13: activity.CancelActivityResponse
-	(*ActivityGoods)(nil),              // 14: activity.ActivityGoods
-	(*GetActivityGoodsRequest)(nil),    // 15: activity.GetActivityGoodsRequest
-	(*GetActivityGoodsResponse)(nil),   // 16: activity.GetActivityGoodsResponse
-	(*GetGoodsActivityRequest)(nil),    // 17: activity.GetGoodsActivityRequest
-	(*GetGoodsActivityResponse)(nil),   // 18: activity.GetGoodsActivityResponse
-	(*ValidateActivityRequest)(nil),    // 19: activity.ValidateActivityRequest
-	(*ValidateActivityResponse)(nil),   // 20: activity.ValidateActivityResponse
-	(*DeductActivityStockRequest)(nil), // 21: activity.DeductActivityStockRequest
-	(*ActivityResponse)(nil),           // 22: activity.ActivityResponse
+	(*Response)(nil),                   // 8: activity.Response
+	(*StartActivityRequest)(nil),       // 9: activity.StartActivityRequest
+	(*StartActivityResponse)(nil),      // 10: activity.StartActivityResponse
+	(*EndActivityRequest)(nil),         // 11: activity.EndActivityRequest
+	(*EndActivityResponse)(nil),        // 12: activity.EndActivityResponse
+	(*CancelActivityRequest)(nil),      // 13: activity.CancelActivityRequest
+	(*CancelActivityResponse)(nil),     // 14: activity.CancelActivityResponse
+	(*ActivityGoods)(nil),              // 15: activity.ActivityGoods
+	(*GetActivityGoodsRequest)(nil),    // 16: activity.GetActivityGoodsRequest
+	(*GetActivityGoodsResponse)(nil),   // 17: activity.GetActivityGoodsResponse
+	(*GetGoodsActivityRequest)(nil),    // 18: activity.GetGoodsActivityRequest
+	(*GetGoodsActivityResponse)(nil),   // 19: activity.GetGoodsActivityResponse
+	(*ValidateActivityRequest)(nil),    // 20: activity.ValidateActivityRequest
+	(*ValidateActivityResponse)(nil),   // 21: activity.ValidateActivityResponse
+	(*DeductActivityStockRequest)(nil), // 22: activity.DeductActivityStockRequest
+	(*wrapperspb.Int32Value)(nil),      // 23: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_activity_activity_proto_depIdxs = []int32{
-	0,  // 0: activity.GetActivityResponse.activity:type_name -> activity.Activity
-	0,  // 1: activity.ListActivityResponse.activities:type_name -> activity.Activity
-	14, // 2: activity.GetActivityGoodsResponse.goods:type_name -> activity.ActivityGoods
-	14, // 3: activity.GetGoodsActivityResponse.goods:type_name -> activity.ActivityGoods
-	1,  // 4: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
-	2,  // 5: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
-	3,  // 6: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
-	4,  // 7: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
-	6,  // 8: activity.ActivityService.List:input_type -> activity.ListActivityRequest
-	8,  // 9: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
-	10, // 10: activity.ActivityService.End:input_type -> activity.EndActivityRequest
-	12, // 11: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
-	15, // 12: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
-	17, // 13: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
-	19, // 14: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
-	21, // 15: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
-	0,  // 16: activity.ActivityService.Create:output_type -> activity.Activity
-	0,  // 17: activity.ActivityService.Update:output_type -> activity.Activity
-	0,  // 18: activity.ActivityService.Delete:output_type -> activity.Activity
-	5,  // 19: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
-	7,  // 20: activity.ActivityService.List:output_type -> activity.ListActivityResponse
-	9,  // 21: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
-	11, // 22: activity.ActivityService.End:output_type -> activity.EndActivityResponse
-	13, // 23: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
-	16, // 24: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
-	18, // 25: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
-	20, // 26: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
-	22, // 27: activity.ActivityService.DeductActivityStock:output_type -> activity.ActivityResponse
-	16, // [16:28] is the sub-list for method output_type
-	4,  // [4:16] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	23, // 0: activity.GetActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: activity.GetActivityResponse.activity:type_name -> activity.Activity
+	23, // 2: activity.ListActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: activity.ListActivityResponse.activities:type_name -> activity.Activity
+	23, // 4: activity.Response.code:type_name -> google.protobuf.Int32Value
+	23, // 5: activity.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	15, // 6: activity.GetActivityGoodsResponse.goods:type_name -> activity.ActivityGoods
+	23, // 7: activity.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
+	15, // 8: activity.GetGoodsActivityResponse.goods:type_name -> activity.ActivityGoods
+	1,  // 9: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
+	2,  // 10: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
+	3,  // 11: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
+	4,  // 12: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
+	6,  // 13: activity.ActivityService.List:input_type -> activity.ListActivityRequest
+	9,  // 14: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
+	11, // 15: activity.ActivityService.End:input_type -> activity.EndActivityRequest
+	13, // 16: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
+	16, // 17: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
+	18, // 18: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
+	20, // 19: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
+	22, // 20: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
+	8,  // 21: activity.ActivityService.Create:output_type -> activity.Response
+	8,  // 22: activity.ActivityService.Update:output_type -> activity.Response
+	8,  // 23: activity.ActivityService.Delete:output_type -> activity.Response
+	5,  // 24: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
+	7,  // 25: activity.ActivityService.List:output_type -> activity.ListActivityResponse
+	10, // 26: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
+	12, // 27: activity.ActivityService.End:output_type -> activity.EndActivityResponse
+	14, // 28: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
+	17, // 29: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
+	19, // 30: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
+	21, // 31: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
+	8,  // 32: activity.ActivityService.DeductActivityStock:output_type -> activity.Response
+	21, // [21:33] is the sub-list for method output_type
+	9,  // [9:21] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_activity_activity_proto_init() }

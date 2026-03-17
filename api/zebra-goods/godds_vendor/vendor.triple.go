@@ -54,9 +54,9 @@ var (
 
 // VendorService is a client for the vendor.VendorService service.
 type VendorService interface {
-	Create(ctx context.Context, req *CreateVendorRequest, opts ...client.CallOption) (*Vendor, error)
-	Update(ctx context.Context, req *UpdateVendorRequest, opts ...client.CallOption) (*Vendor, error)
-	Delete(ctx context.Context, req *DeleteVendorRequest, opts ...client.CallOption) (*Vendor, error)
+	Create(ctx context.Context, req *CreateVendorRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateVendorRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteVendorRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetVendorRequest, opts ...client.CallOption) (*GetVendorResponse, error)
 	List(ctx context.Context, req *ListVendorRequest, opts ...client.CallOption) (*ListVendorResponse, error)
 }
@@ -81,24 +81,24 @@ type VendorServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *VendorServiceImpl) Create(ctx context.Context, req *CreateVendorRequest, opts ...client.CallOption) (*Vendor, error) {
-	resp := new(Vendor)
+func (c *VendorServiceImpl) Create(ctx context.Context, req *CreateVendorRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *VendorServiceImpl) Update(ctx context.Context, req *UpdateVendorRequest, opts ...client.CallOption) (*Vendor, error) {
-	resp := new(Vendor)
+func (c *VendorServiceImpl) Update(ctx context.Context, req *UpdateVendorRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *VendorServiceImpl) Delete(ctx context.Context, req *DeleteVendorRequest, opts ...client.CallOption) (*Vendor, error) {
-	resp := new(Vendor)
+func (c *VendorServiceImpl) Delete(ctx context.Context, req *DeleteVendorRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var VendorService_ClientInfo = client.ClientInfo{
 
 // VendorServiceHandler is an implementation of the vendor.VendorService service.
 type VendorServiceHandler interface {
-	Create(context.Context, *CreateVendorRequest) (*Vendor, error)
-	Update(context.Context, *UpdateVendorRequest) (*Vendor, error)
-	Delete(context.Context, *DeleteVendorRequest) (*Vendor, error)
+	Create(context.Context, *CreateVendorRequest) (*Response, error)
+	Update(context.Context, *UpdateVendorRequest) (*Response, error)
+	Delete(context.Context, *DeleteVendorRequest) (*Response, error)
 	Get(context.Context, *GetVendorRequest) (*GetVendorResponse, error)
 	List(context.Context, *ListVendorRequest) (*ListVendorResponse, error)
 }

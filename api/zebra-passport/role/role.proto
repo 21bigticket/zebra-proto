@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package role;
 
 option go_package = "./api/zebra-passport/role;role";
@@ -60,8 +62,10 @@ message GetRoleRequest {
 
 // 获取角色响应
 message GetRoleResponse {
-  Role role = 1;
-  repeated int64 path_ids = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Role role = 3;
+  repeated int64 path_ids = 4;
 }
 
 // 列出角色请求
@@ -74,15 +78,22 @@ message ListRoleRequest {
 
 // 列出角色响应
 message ListRoleResponse {
-  repeated Role roles  = 1;
-  int32         total  = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Role roles  = 3;
+  int32         total  = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 角色服务
 service RoleService {
-  rpc Create(CreateRoleRequest) returns (Role);
-  rpc Update(UpdateRoleRequest) returns (Role);
-  rpc Delete(DeleteRoleRequest) returns (Role);
+  rpc Create(CreateRoleRequest) returns (Response);
+  rpc Update(UpdateRoleRequest) returns (Response);
+  rpc Delete(DeleteRoleRequest) returns (Response);
   rpc Get(GetRoleRequest) returns (GetRoleResponse);
   rpc List(ListRoleRequest) returns (ListRoleResponse);
 }

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package stock;
 
 option go_package = "./api/zebra-stock/stock;stock";
@@ -72,14 +74,18 @@ message GetStockRequest {
 
 // 批量库存查询响应
 message GetStockResponse {
-  repeated Stock stocks = 1;  // 库存信息列表
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Stock stocks = 3;  // 库存信息列表
 }
 
 // 通用响应
 message StockResponse {
-  bool   success = 1;  // 是否成功
-  string message = 2;  // 消息
-  Stock  stock   = 3;  // 库存信息
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool   success = 3;  // 是否成功
+  string message = 4;  // 消息
+  Stock  stock   = 5;  // 库存信息
 }
 
 // 库存服务

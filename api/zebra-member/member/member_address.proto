@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package member;
 
 option go_package = "./api/zebra-member/member;member";
@@ -71,7 +73,9 @@ message GetMemberAddressRequest {
 
 // 获取地址响应
 message GetMemberAddressResponse {
-  MemberAddress member_address = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  MemberAddress member_address = 3;
 }
 
 // 根据用户ID获取地址列表请求
@@ -81,7 +85,9 @@ message GetAddressListByUserRequest {
 
 // 地址列表响应
 message AddressListResponse {
-  repeated MemberAddress addresses = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated MemberAddress addresses = 3;
 }
 
 // 设置默认地址请求
@@ -90,12 +96,17 @@ message SetDefaultAddressRequest {
   int64 user_id = 2;
 }
 
+message MemberAddressResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+}
+
 // 用户地址服务
 service MemberAddressService {
-  rpc Create(CreateMemberAddressRequest) returns (MemberAddress);
-  rpc Update(UpdateMemberAddressRequest) returns (MemberAddress);
-  rpc Delete(DeleteMemberAddressRequest) returns (MemberAddress);
+  rpc Create(CreateMemberAddressRequest) returns (MemberAddressResponse);
+  rpc Update(UpdateMemberAddressRequest) returns (MemberAddressResponse);
+  rpc Delete(DeleteMemberAddressRequest) returns (MemberAddressResponse);
   rpc Get(GetMemberAddressRequest) returns (GetMemberAddressResponse);
   rpc GetListByUser(GetAddressListByUserRequest) returns (AddressListResponse);
-  rpc SetDefault(SetDefaultAddressRequest) returns (MemberAddress);
+  rpc SetDefault(SetDefaultAddressRequest) returns (MemberAddressResponse);
 }

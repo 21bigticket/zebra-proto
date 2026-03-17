@@ -64,14 +64,14 @@ var (
 
 // CartItemService is a client for the cart_item.CartItemService service.
 type CartItemService interface {
-	Create(ctx context.Context, req *CreateCartItemRequest, opts ...client.CallOption) (*CartItem, error)
-	Update(ctx context.Context, req *UpdateCartItemRequest, opts ...client.CallOption) (*CartItem, error)
-	Delete(ctx context.Context, req *DeleteCartItemRequest, opts ...client.CallOption) (*CartItem, error)
+	Create(ctx context.Context, req *CreateCartItemRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateCartItemRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteCartItemRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetCartItemRequest, opts ...client.CallOption) (*GetCartItemResponse, error)
 	List(ctx context.Context, req *ListCartItemRequest, opts ...client.CallOption) (*ListCartItemResponse, error)
 	GetUserItems(ctx context.Context, req *GetUserItemsRequest, opts ...client.CallOption) (*ListCartItemResponse, error)
 	GetCartItems(ctx context.Context, req *GetCartItemsRequest, opts ...client.CallOption) (*ListCartItemResponse, error)
-	UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*CartItem, error)
+	UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*Response, error)
 	BatchDelete(ctx context.Context, req *BatchDeleteRequest, opts ...client.CallOption) (*ListCartItemResponse, error)
 	ClearCartItems(ctx context.Context, req *ClearCartItemsRequest, opts ...client.CallOption) (*ListCartItemResponse, error)
 }
@@ -96,24 +96,24 @@ type CartItemServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *CartItemServiceImpl) Create(ctx context.Context, req *CreateCartItemRequest, opts ...client.CallOption) (*CartItem, error) {
-	resp := new(CartItem)
+func (c *CartItemServiceImpl) Create(ctx context.Context, req *CreateCartItemRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CartItemServiceImpl) Update(ctx context.Context, req *UpdateCartItemRequest, opts ...client.CallOption) (*CartItem, error) {
-	resp := new(CartItem)
+func (c *CartItemServiceImpl) Update(ctx context.Context, req *UpdateCartItemRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CartItemServiceImpl) Delete(ctx context.Context, req *DeleteCartItemRequest, opts ...client.CallOption) (*CartItem, error) {
-	resp := new(CartItem)
+func (c *CartItemServiceImpl) Delete(ctx context.Context, req *DeleteCartItemRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -152,8 +152,8 @@ func (c *CartItemServiceImpl) GetCartItems(ctx context.Context, req *GetCartItem
 	return resp, nil
 }
 
-func (c *CartItemServiceImpl) UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*CartItem, error) {
-	resp := new(CartItem)
+func (c *CartItemServiceImpl) UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateQuantity", opts...); err != nil {
 		return nil, err
 	}
@@ -187,14 +187,14 @@ var CartItemService_ClientInfo = client.ClientInfo{
 
 // CartItemServiceHandler is an implementation of the cart_item.CartItemService service.
 type CartItemServiceHandler interface {
-	Create(context.Context, *CreateCartItemRequest) (*CartItem, error)
-	Update(context.Context, *UpdateCartItemRequest) (*CartItem, error)
-	Delete(context.Context, *DeleteCartItemRequest) (*CartItem, error)
+	Create(context.Context, *CreateCartItemRequest) (*Response, error)
+	Update(context.Context, *UpdateCartItemRequest) (*Response, error)
+	Delete(context.Context, *DeleteCartItemRequest) (*Response, error)
 	Get(context.Context, *GetCartItemRequest) (*GetCartItemResponse, error)
 	List(context.Context, *ListCartItemRequest) (*ListCartItemResponse, error)
 	GetUserItems(context.Context, *GetUserItemsRequest) (*ListCartItemResponse, error)
 	GetCartItems(context.Context, *GetCartItemsRequest) (*ListCartItemResponse, error)
-	UpdateQuantity(context.Context, *UpdateQuantityRequest) (*CartItem, error)
+	UpdateQuantity(context.Context, *UpdateQuantityRequest) (*Response, error)
 	BatchDelete(context.Context, *BatchDeleteRequest) (*ListCartItemResponse, error)
 	ClearCartItems(context.Context, *ClearCartItemsRequest) (*ListCartItemResponse, error)
 }

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package cart;
 
 option go_package = "./api/zebra-cart/cart;cart";
@@ -80,8 +82,10 @@ message GetCartRequest {
 
 // 获取购物车响应
 message GetCartResponse {
-  Cart           cart        = 1;
-  repeated CartItem items    = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Cart           cart        = 3;
+  repeated CartItem items    = 4;
 }
 
 // 批量删除请求
@@ -90,19 +94,20 @@ message BatchRemoveRequest {
   repeated int64 item_ids = 2;
 }
 
-// 通用响应
-message CartResponse {
-  bool       success  = 1;
-  string     message  = 2;
-  CartItem   item     = 3;
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool       success  = 3;
+  string     message  = 4;
+  CartItem   item     = 5;
 }
 
 // 购物车服务
 service CartService {
-  rpc AddItem(AddItemRequest) returns (CartResponse);
-  rpc RemoveItem(RemoveItemRequest) returns (CartResponse);
-  rpc UpdateQuantity(UpdateQuantityRequest) returns (CartResponse);
-  rpc ClearCart(ClearCartRequest) returns (CartResponse);
+  rpc AddItem(AddItemRequest) returns (Response);
+  rpc RemoveItem(RemoveItemRequest) returns (Response);
+  rpc UpdateQuantity(UpdateQuantityRequest) returns (Response);
+  rpc ClearCart(ClearCartRequest) returns (Response);
   rpc GetCart(GetCartRequest) returns (GetCartResponse);
-  rpc BatchRemove(BatchRemoveRequest) returns (CartResponse);
+  rpc BatchRemove(BatchRemoveRequest) returns (Response);
 }

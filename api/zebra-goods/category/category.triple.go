@@ -56,9 +56,9 @@ var (
 
 // CategoryService is a client for the category.CategoryService service.
 type CategoryService interface {
-	Create(ctx context.Context, req *CreateCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error)
-	Update(ctx context.Context, req *UpdateCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error)
-	Delete(ctx context.Context, req *DeleteCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error)
+	Create(ctx context.Context, req *CreateCategoryRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateCategoryRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteCategoryRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetCategoryRequest, opts ...client.CallOption) (*GetCategoryResponse, error)
 	List(ctx context.Context, req *ListCategoryRequest, opts ...client.CallOption) (*ListCategoryResponse, error)
 	GetTree(ctx context.Context, req *GetCategoryTreeRequest, opts ...client.CallOption) (*GetCategoryTreeResponse, error)
@@ -84,24 +84,24 @@ type CategoryServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *CategoryServiceImpl) Create(ctx context.Context, req *CreateCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error) {
-	resp := new(GoodsCategory)
+func (c *CategoryServiceImpl) Create(ctx context.Context, req *CreateCategoryRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CategoryServiceImpl) Update(ctx context.Context, req *UpdateCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error) {
-	resp := new(GoodsCategory)
+func (c *CategoryServiceImpl) Update(ctx context.Context, req *UpdateCategoryRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *CategoryServiceImpl) Delete(ctx context.Context, req *DeleteCategoryRequest, opts ...client.CallOption) (*GoodsCategory, error) {
-	resp := new(GoodsCategory)
+func (c *CategoryServiceImpl) Delete(ctx context.Context, req *DeleteCategoryRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -143,9 +143,9 @@ var CategoryService_ClientInfo = client.ClientInfo{
 
 // CategoryServiceHandler is an implementation of the category.CategoryService service.
 type CategoryServiceHandler interface {
-	Create(context.Context, *CreateCategoryRequest) (*GoodsCategory, error)
-	Update(context.Context, *UpdateCategoryRequest) (*GoodsCategory, error)
-	Delete(context.Context, *DeleteCategoryRequest) (*GoodsCategory, error)
+	Create(context.Context, *CreateCategoryRequest) (*Response, error)
+	Update(context.Context, *UpdateCategoryRequest) (*Response, error)
+	Delete(context.Context, *DeleteCategoryRequest) (*Response, error)
 	Get(context.Context, *GetCategoryRequest) (*GetCategoryResponse, error)
 	List(context.Context, *ListCategoryRequest) (*ListCategoryResponse, error)
 	GetTree(context.Context, *GetCategoryTreeRequest) (*GetCategoryTreeResponse, error)

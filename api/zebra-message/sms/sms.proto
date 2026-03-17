@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package sms;
 
 option go_package = "./api/zebra-message/sms;sms";
@@ -42,9 +44,11 @@ message SendSmsRequest {
 
 // 发送短信响应
 message SendSmsResponse {
-  bool   success = 1;
-  string message = 2;
-  string msg_id  = 3;  // 消息ID
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool   success = 3;
+  string message = 4;
+  string msg_id  = 5;  // 消息ID
 }
 
 // 批量发送短信请求
@@ -56,9 +60,11 @@ message BatchSendSmsRequest {
 
 // 批量发送短信响应
 message BatchSendSmsResponse {
-  bool   success = 1;
-  string message = 2;
-  repeated string msg_ids = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool   success = 3;
+  string message = 4;
+  repeated string msg_ids = 5;
 }
 
 // 短信服务

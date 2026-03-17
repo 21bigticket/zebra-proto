@@ -25,6 +25,7 @@ package permission
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -101,7 +102,9 @@ func (x *HasPermissionRequest) GetMethod() string {
 // 权限检查响应
 type HasPermissionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	HasPermission bool                   `protobuf:"varint,1,opt,name=has_permission,json=hasPermission,proto3" json:"has_permission,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	HasPermission bool                   `protobuf:"varint,3,opt,name=has_permission,json=hasPermission,proto3" json:"has_permission,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -136,6 +139,20 @@ func (*HasPermissionResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_permission_permission_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *HasPermissionResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *HasPermissionResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *HasPermissionResponse) GetHasPermission() bool {
 	if x != nil {
 		return x.HasPermission
@@ -148,13 +165,15 @@ var File_api_zebra_passport_permission_permission_proto protoreflect.FileDescrip
 const file_api_zebra_passport_permission_permission_proto_rawDesc = "" +
 	"\n" +
 	".api/zebra-passport/permission/permission.proto\x12\n" +
-	"permission\"d\n" +
+	"permission\x1a\x1egoogle/protobuf/wrappers.proto\"d\n" +
 	"\x14HasPermissionRequest\x12\x19\n" +
 	"\badmin_id\x18\x01 \x01(\x03R\aadminId\x12\x19\n" +
 	"\bpath_url\x18\x02 \x01(\tR\apathUrl\x12\x16\n" +
-	"\x06method\x18\x03 \x01(\tR\x06method\">\n" +
-	"\x15HasPermissionResponse\x12%\n" +
-	"\x0ehas_permission\x18\x01 \x01(\bR\rhasPermission2i\n" +
+	"\x06method\x18\x03 \x01(\tR\x06method\"\x81\x01\n" +
+	"\x15HasPermissionResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12%\n" +
+	"\x0ehas_permission\x18\x03 \x01(\bR\rhasPermission2i\n" +
 	"\x11PermissionService\x12T\n" +
 	"\rHasPermission\x12 .permission.HasPermissionRequest\x1a!.permission.HasPermissionResponseB,Z*./api/zebra-passport/permission;permissionb\x06proto3"
 
@@ -174,15 +193,17 @@ var file_api_zebra_passport_permission_permission_proto_msgTypes = make([]protoi
 var file_api_zebra_passport_permission_permission_proto_goTypes = []any{
 	(*HasPermissionRequest)(nil),  // 0: permission.HasPermissionRequest
 	(*HasPermissionResponse)(nil), // 1: permission.HasPermissionResponse
+	(*wrapperspb.Int32Value)(nil), // 2: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_permission_permission_proto_depIdxs = []int32{
-	0, // 0: permission.PermissionService.HasPermission:input_type -> permission.HasPermissionRequest
-	1, // 1: permission.PermissionService.HasPermission:output_type -> permission.HasPermissionResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: permission.HasPermissionResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 1: permission.PermissionService.HasPermission:input_type -> permission.HasPermissionRequest
+	1, // 2: permission.PermissionService.HasPermission:output_type -> permission.HasPermissionResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_permission_permission_proto_init() }

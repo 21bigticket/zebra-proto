@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package activity;
 
 option go_package = "./api/zebra-activity/activity;activity";
@@ -66,7 +68,9 @@ message GetActivityRequest {
 
 // 获取活动响应
 message GetActivityResponse {
-  Activity activity = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Activity activity = 3;
 }
 
 // 列出活动请求
@@ -79,8 +83,15 @@ message ListActivityRequest {
 
 // 列出活动响应
 message ListActivityResponse {
-  repeated Activity activities = 1;
-  int32            total      = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Activity activities = 3;
+  int32            total      = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 启动活动请求
@@ -138,7 +149,9 @@ message GetActivityGoodsRequest {
 
 // 获取活动商品响应
 message GetActivityGoodsResponse {
-  repeated ActivityGoods goods = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated ActivityGoods goods = 3;
 }
 
 // 获取商品活动请求
@@ -148,7 +161,9 @@ message GetGoodsActivityRequest {
 
 // 获取商品活动响应
 message GetGoodsActivityResponse {
-  repeated ActivityGoods goods = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated ActivityGoods goods = 3;
 }
 
 // 验证活动请求
@@ -175,17 +190,11 @@ message DeductActivityStockRequest {
   string order_no   = 5;
 }
 
-// 通用响应
-message ActivityResponse {
-  bool   success = 1;
-  string message = 2;
-}
-
 // 活动服务
 service ActivityService {
-  rpc Create(CreateActivityRequest) returns (Activity);
-  rpc Update(UpdateActivityRequest) returns (Activity);
-  rpc Delete(DeleteActivityRequest) returns (Activity);
+  rpc Create(CreateActivityRequest) returns (Response);
+  rpc Update(UpdateActivityRequest) returns (Response);
+  rpc Delete(DeleteActivityRequest) returns (Response);
   rpc Get(GetActivityRequest) returns (GetActivityResponse);
   rpc List(ListActivityRequest) returns (ListActivityResponse);
   rpc Start(StartActivityRequest) returns (StartActivityResponse);
@@ -194,5 +203,5 @@ service ActivityService {
   rpc GetActivityGoods(GetActivityGoodsRequest) returns (GetActivityGoodsResponse);
   rpc GetGoodsActivity(GetGoodsActivityRequest) returns (GetGoodsActivityResponse);
   rpc ValidateActivity(ValidateActivityRequest) returns (ValidateActivityResponse);
-  rpc DeductActivityStock(DeductActivityStockRequest) returns (ActivityResponse);
+  rpc DeductActivityStock(DeductActivityStockRequest) returns (Response);
 }

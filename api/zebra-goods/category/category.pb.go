@@ -25,6 +25,7 @@ package category
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -393,7 +394,9 @@ func (x *GetCategoryRequest) GetId() int64 {
 // 获取分类响应
 type GetCategoryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Category      *GoodsCategory         `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Category      *GoodsCategory         `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -426,6 +429,20 @@ func (x *GetCategoryResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetCategoryResponse.ProtoReflect.Descriptor instead.
 func (*GetCategoryResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_category_category_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetCategoryResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetCategoryResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetCategoryResponse) GetCategory() *GoodsCategory {
@@ -515,8 +532,10 @@ func (x *ListCategoryRequest) GetStatus() int32 {
 // 列出分类响应
 type ListCategoryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Categories    []*GoodsCategory       `protobuf:"bytes,1,rep,name=categories,proto3" json:"categories,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Categories    []*GoodsCategory       `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -549,6 +568,20 @@ func (x *ListCategoryResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListCategoryResponse.ProtoReflect.Descriptor instead.
 func (*ListCategoryResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_category_category_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListCategoryResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListCategoryResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *ListCategoryResponse) GetCategories() []*GoodsCategory {
@@ -613,7 +646,9 @@ func (x *GetCategoryTreeRequest) GetParentId() int64 {
 // 获取分类树响应
 type GetCategoryTreeResponse struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Tree          []*GoodsCategoryTreeItem `protobuf:"bytes,1,rep,name=tree,proto3" json:"tree,omitempty"`
+	Code          *wrapperspb.Int32Value   `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                   `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Tree          []*GoodsCategoryTreeItem `protobuf:"bytes,3,rep,name=tree,proto3" json:"tree,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -646,6 +681,20 @@ func (x *GetCategoryTreeResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetCategoryTreeResponse.ProtoReflect.Descriptor instead.
 func (*GetCategoryTreeResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_category_category_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetCategoryTreeResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetCategoryTreeResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetCategoryTreeResponse) GetTree() []*GoodsCategoryTreeItem {
@@ -708,11 +757,63 @@ func (x *GoodsCategoryTreeItem) GetChildren() []*GoodsCategoryTreeItem {
 	return nil
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_goods_category_category_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_category_category_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_category_category_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_goods_category_category_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_category_category_proto_rawDesc = "" +
 	"\n" +
-	"'api/zebra-goods/category/category.proto\x12\bcategory\"\x99\x02\n" +
+	"'api/zebra-goods/category/category.proto\x12\bcategory\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x02\n" +
 	"\rGoodsCategory\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x12\n" +
@@ -745,31 +846,40 @@ const file_api_zebra_goods_category_category_proto_rawDesc = "" +
 	"\x15DeleteCategoryRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"$\n" +
 	"\x12GetCategoryRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"J\n" +
-	"\x13GetCategoryResponse\x123\n" +
-	"\bcategory\x18\x01 \x01(\v2\x17.category.GoodsCategoryR\bcategory\"\x91\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x8d\x01\n" +
+	"\x13GetCategoryResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\bcategory\x18\x03 \x01(\v2\x17.category.GoodsCategoryR\bcategory\"\x91\x01\n" +
 	"\x13ListCategoryRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1b\n" +
 	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x14\n" +
 	"\x05level\x18\x04 \x01(\x05R\x05level\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"e\n" +
-	"\x14ListCategoryResponse\x127\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"\xa8\x01\n" +
+	"\x14ListCategoryResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
 	"\n" +
-	"categories\x18\x01 \x03(\v2\x17.category.GoodsCategoryR\n" +
+	"categories\x18\x03 \x03(\v2\x17.category.GoodsCategoryR\n" +
 	"categories\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"5\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"5\n" +
 	"\x16GetCategoryTreeRequest\x12\x1b\n" +
-	"\tparent_id\x18\x01 \x01(\x03R\bparentId\"N\n" +
-	"\x17GetCategoryTreeResponse\x123\n" +
-	"\x04tree\x18\x01 \x03(\v2\x1f.category.GoodsCategoryTreeItemR\x04tree\"\x89\x01\n" +
+	"\tparent_id\x18\x01 \x01(\x03R\bparentId\"\x91\x01\n" +
+	"\x17GetCategoryTreeResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\x04tree\x18\x03 \x03(\v2\x1f.category.GoodsCategoryTreeItemR\x04tree\"\x89\x01\n" +
 	"\x15GoodsCategoryTreeItem\x123\n" +
 	"\bcategory\x18\x01 \x01(\v2\x17.category.GoodsCategoryR\bcategory\x12;\n" +
-	"\bchildren\x18\x02 \x03(\v2\x1f.category.GoodsCategoryTreeItemR\bchildren2\xb8\x03\n" +
-	"\x0fCategoryService\x12B\n" +
-	"\x06Create\x12\x1f.category.CreateCategoryRequest\x1a\x17.category.GoodsCategory\x12B\n" +
-	"\x06Update\x12\x1f.category.UpdateCategoryRequest\x1a\x17.category.GoodsCategory\x12B\n" +
-	"\x06Delete\x12\x1f.category.DeleteCategoryRequest\x1a\x17.category.GoodsCategory\x12B\n" +
+	"\bchildren\x18\x02 \x03(\v2\x1f.category.GoodsCategoryTreeItemR\bchildren\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xa9\x03\n" +
+	"\x0fCategoryService\x12=\n" +
+	"\x06Create\x12\x1f.category.CreateCategoryRequest\x1a\x12.category.Response\x12=\n" +
+	"\x06Update\x12\x1f.category.UpdateCategoryRequest\x1a\x12.category.Response\x12=\n" +
+	"\x06Delete\x12\x1f.category.DeleteCategoryRequest\x1a\x12.category.Response\x12B\n" +
 	"\x03Get\x12\x1c.category.GetCategoryRequest\x1a\x1d.category.GetCategoryResponse\x12E\n" +
 	"\x04List\x12\x1d.category.ListCategoryRequest\x1a\x1e.category.ListCategoryResponse\x12N\n" +
 	"\aGetTree\x12 .category.GetCategoryTreeRequest\x1a!.category.GetCategoryTreeResponseB%Z#./api/zebra-goods/category;categoryb\x06proto3"
@@ -786,7 +896,7 @@ func file_api_zebra_goods_category_category_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_category_category_proto_rawDescData
 }
 
-var file_api_zebra_goods_category_category_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_api_zebra_goods_category_category_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_api_zebra_goods_category_category_proto_goTypes = []any{
 	(*GoodsCategory)(nil),           // 0: category.GoodsCategory
 	(*CreateCategoryRequest)(nil),   // 1: category.CreateCategoryRequest
@@ -799,30 +909,36 @@ var file_api_zebra_goods_category_category_proto_goTypes = []any{
 	(*GetCategoryTreeRequest)(nil),  // 8: category.GetCategoryTreeRequest
 	(*GetCategoryTreeResponse)(nil), // 9: category.GetCategoryTreeResponse
 	(*GoodsCategoryTreeItem)(nil),   // 10: category.GoodsCategoryTreeItem
+	(*Response)(nil),                // 11: category.Response
+	(*wrapperspb.Int32Value)(nil),   // 12: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_category_category_proto_depIdxs = []int32{
-	0,  // 0: category.GetCategoryResponse.category:type_name -> category.GoodsCategory
-	0,  // 1: category.ListCategoryResponse.categories:type_name -> category.GoodsCategory
-	10, // 2: category.GetCategoryTreeResponse.tree:type_name -> category.GoodsCategoryTreeItem
-	0,  // 3: category.GoodsCategoryTreeItem.category:type_name -> category.GoodsCategory
-	10, // 4: category.GoodsCategoryTreeItem.children:type_name -> category.GoodsCategoryTreeItem
-	1,  // 5: category.CategoryService.Create:input_type -> category.CreateCategoryRequest
-	2,  // 6: category.CategoryService.Update:input_type -> category.UpdateCategoryRequest
-	3,  // 7: category.CategoryService.Delete:input_type -> category.DeleteCategoryRequest
-	4,  // 8: category.CategoryService.Get:input_type -> category.GetCategoryRequest
-	6,  // 9: category.CategoryService.List:input_type -> category.ListCategoryRequest
-	8,  // 10: category.CategoryService.GetTree:input_type -> category.GetCategoryTreeRequest
-	0,  // 11: category.CategoryService.Create:output_type -> category.GoodsCategory
-	0,  // 12: category.CategoryService.Update:output_type -> category.GoodsCategory
-	0,  // 13: category.CategoryService.Delete:output_type -> category.GoodsCategory
-	5,  // 14: category.CategoryService.Get:output_type -> category.GetCategoryResponse
-	7,  // 15: category.CategoryService.List:output_type -> category.ListCategoryResponse
-	9,  // 16: category.CategoryService.GetTree:output_type -> category.GetCategoryTreeResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	12, // 0: category.GetCategoryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: category.GetCategoryResponse.category:type_name -> category.GoodsCategory
+	12, // 2: category.ListCategoryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: category.ListCategoryResponse.categories:type_name -> category.GoodsCategory
+	12, // 4: category.GetCategoryTreeResponse.code:type_name -> google.protobuf.Int32Value
+	10, // 5: category.GetCategoryTreeResponse.tree:type_name -> category.GoodsCategoryTreeItem
+	0,  // 6: category.GoodsCategoryTreeItem.category:type_name -> category.GoodsCategory
+	10, // 7: category.GoodsCategoryTreeItem.children:type_name -> category.GoodsCategoryTreeItem
+	12, // 8: category.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 9: category.CategoryService.Create:input_type -> category.CreateCategoryRequest
+	2,  // 10: category.CategoryService.Update:input_type -> category.UpdateCategoryRequest
+	3,  // 11: category.CategoryService.Delete:input_type -> category.DeleteCategoryRequest
+	4,  // 12: category.CategoryService.Get:input_type -> category.GetCategoryRequest
+	6,  // 13: category.CategoryService.List:input_type -> category.ListCategoryRequest
+	8,  // 14: category.CategoryService.GetTree:input_type -> category.GetCategoryTreeRequest
+	11, // 15: category.CategoryService.Create:output_type -> category.Response
+	11, // 16: category.CategoryService.Update:output_type -> category.Response
+	11, // 17: category.CategoryService.Delete:output_type -> category.Response
+	5,  // 18: category.CategoryService.Get:output_type -> category.GetCategoryResponse
+	7,  // 19: category.CategoryService.List:output_type -> category.ListCategoryResponse
+	9,  // 20: category.CategoryService.GetTree:output_type -> category.GetCategoryTreeResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_category_category_proto_init() }
@@ -836,7 +952,7 @@ func file_api_zebra_goods_category_category_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_category_category_proto_rawDesc), len(file_api_zebra_goods_category_category_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

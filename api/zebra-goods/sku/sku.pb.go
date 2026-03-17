@@ -25,6 +25,7 @@ package sku
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -425,7 +426,9 @@ func (x *GetSkuRequest) GetId() int64 {
 // 获取SKU响应
 type GetSkuResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Sku           *GoodsSku              `protobuf:"bytes,1,opt,name=sku,proto3" json:"sku,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Sku           *GoodsSku              `protobuf:"bytes,3,opt,name=sku,proto3" json:"sku,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -458,6 +461,20 @@ func (x *GetSkuResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetSkuResponse.ProtoReflect.Descriptor instead.
 func (*GetSkuResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetSkuResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetSkuResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetSkuResponse) GetSku() *GoodsSku {
@@ -539,8 +556,10 @@ func (x *ListSkuRequest) GetStatus() int32 {
 // 列出SKU响应
 type ListSkuResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Skus          []*GoodsSku            `protobuf:"bytes,1,rep,name=skus,proto3" json:"skus,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Skus          []*GoodsSku            `protobuf:"bytes,3,rep,name=skus,proto3" json:"skus,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -575,6 +594,20 @@ func (*ListSkuResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListSkuResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListSkuResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListSkuResponse) GetSkus() []*GoodsSku {
 	if x != nil {
 		return x.Skus
@@ -589,11 +622,63 @@ func (x *ListSkuResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_goods_sku_sku_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\n" +
-	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\"\xaf\x02\n" +
+	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\x1a\x1egoogle/protobuf/wrappers.proto\"\xaf\x02\n" +
 	"\bGoodsSku\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x19\n" +
@@ -630,22 +715,29 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x10DeleteSkuRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1f\n" +
 	"\rGetSkuRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
-	"\x0eGetSkuResponse\x12\x1f\n" +
-	"\x03sku\x18\x01 \x01(\v2\r.sku.GoodsSkuR\x03sku\"t\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"t\n" +
+	"\x0eGetSkuResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
+	"\x03sku\x18\x03 \x01(\v2\r.sku.GoodsSkuR\x03sku\"t\n" +
 	"\x0eListSkuRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x19\n" +
 	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"J\n" +
-	"\x0fListSkuResponse\x12!\n" +
-	"\x04skus\x18\x01 \x03(\v2\r.sku.GoodsSkuR\x04skus\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\xff\x01\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"\x8d\x01\n" +
+	"\x0fListSkuResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +
+	"\x04skus\x18\x03 \x03(\v2\r.sku.GoodsSkuR\x04skus\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xff\x01\n" +
 	"\n" +
 	"SkuService\x12.\n" +
-	"\x06Create\x12\x15.sku.CreateSkuRequest\x1a\r.sku.GoodsSku\x12.\n" +
-	"\x06Update\x12\x15.sku.UpdateSkuRequest\x1a\r.sku.GoodsSku\x12.\n" +
-	"\x06Delete\x12\x15.sku.DeleteSkuRequest\x1a\r.sku.GoodsSku\x12.\n" +
+	"\x06Create\x12\x15.sku.CreateSkuRequest\x1a\r.sku.Response\x12.\n" +
+	"\x06Update\x12\x15.sku.UpdateSkuRequest\x1a\r.sku.Response\x12.\n" +
+	"\x06Delete\x12\x15.sku.DeleteSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x03Get\x12\x12.sku.GetSkuRequest\x1a\x13.sku.GetSkuResponse\x121\n" +
 	"\x04List\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponseB\x1bZ\x19./api/zebra-goods/sku;skub\x06proto3"
 
@@ -661,35 +753,40 @@ func file_api_zebra_goods_sku_sku_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_sku_sku_proto_rawDescData
 }
 
-var file_api_zebra_goods_sku_sku_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_goods_sku_sku_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_goods_sku_sku_proto_goTypes = []any{
-	(*GoodsSku)(nil),         // 0: sku.GoodsSku
-	(*CreateSkuRequest)(nil), // 1: sku.CreateSkuRequest
-	(*UpdateSkuRequest)(nil), // 2: sku.UpdateSkuRequest
-	(*DeleteSkuRequest)(nil), // 3: sku.DeleteSkuRequest
-	(*GetSkuRequest)(nil),    // 4: sku.GetSkuRequest
-	(*GetSkuResponse)(nil),   // 5: sku.GetSkuResponse
-	(*ListSkuRequest)(nil),   // 6: sku.ListSkuRequest
-	(*ListSkuResponse)(nil),  // 7: sku.ListSkuResponse
+	(*GoodsSku)(nil),              // 0: sku.GoodsSku
+	(*CreateSkuRequest)(nil),      // 1: sku.CreateSkuRequest
+	(*UpdateSkuRequest)(nil),      // 2: sku.UpdateSkuRequest
+	(*DeleteSkuRequest)(nil),      // 3: sku.DeleteSkuRequest
+	(*GetSkuRequest)(nil),         // 4: sku.GetSkuRequest
+	(*GetSkuResponse)(nil),        // 5: sku.GetSkuResponse
+	(*ListSkuRequest)(nil),        // 6: sku.ListSkuRequest
+	(*ListSkuResponse)(nil),       // 7: sku.ListSkuResponse
+	(*Response)(nil),              // 8: sku.Response
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_sku_sku_proto_depIdxs = []int32{
-	0, // 0: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
-	0, // 1: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
-	1, // 2: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
-	2, // 3: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
-	3, // 4: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
-	4, // 5: sku.SkuService.Get:input_type -> sku.GetSkuRequest
-	6, // 6: sku.SkuService.List:input_type -> sku.ListSkuRequest
-	0, // 7: sku.SkuService.Create:output_type -> sku.GoodsSku
-	0, // 8: sku.SkuService.Update:output_type -> sku.GoodsSku
-	0, // 9: sku.SkuService.Delete:output_type -> sku.GoodsSku
-	5, // 10: sku.SkuService.Get:output_type -> sku.GetSkuResponse
-	7, // 11: sku.SkuService.List:output_type -> sku.ListSkuResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: sku.GetSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
+	9,  // 2: sku.ListSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
+	9,  // 4: sku.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
+	2,  // 6: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
+	3,  // 7: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
+	4,  // 8: sku.SkuService.Get:input_type -> sku.GetSkuRequest
+	6,  // 9: sku.SkuService.List:input_type -> sku.ListSkuRequest
+	8,  // 10: sku.SkuService.Create:output_type -> sku.Response
+	8,  // 11: sku.SkuService.Update:output_type -> sku.Response
+	8,  // 12: sku.SkuService.Delete:output_type -> sku.Response
+	5,  // 13: sku.SkuService.Get:output_type -> sku.GetSkuResponse
+	7,  // 14: sku.SkuService.List:output_type -> sku.ListSkuResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_sku_sku_proto_init() }
@@ -703,7 +800,7 @@ func file_api_zebra_goods_sku_sku_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_sku_sku_proto_rawDesc), len(file_api_zebra_goods_sku_sku_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

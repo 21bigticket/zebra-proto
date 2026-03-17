@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package config;
 
 option go_package = "./api/zebra-config/config;config";
@@ -63,7 +65,9 @@ message GetConfigRequest {
 
 // 获取配置响应
 message GetConfigResponse {
-  Config config = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Config config = 3;
 }
 
 // 根据应用和配置key获取请求
@@ -83,8 +87,10 @@ message ListConfigRequest {
 
 // 列出配置响应
 message ListConfigResponse {
-  repeated Config configs = 1;
-  int32 total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Config configs = 3;
+  int32 total = 4;
 }
 
 // 批量获取配置请求（根据 appid）
@@ -94,7 +100,9 @@ message BatchGetConfigRequest {
 
 // 批量获取配置响应
 message BatchGetConfigResponse {
-  repeated Config configs = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Config configs = 3;
 }
 
 // 根据应用和批量配置key获取
@@ -103,11 +111,16 @@ message GetConfigListByAppRequest {
   repeated string config_key = 2;
 }
 
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+}
+
 // 配置服务
 service ConfigService {
-  rpc Create(CreateConfigRequest) returns (Config);
-  rpc Update(UpdateConfigRequest) returns (Config);
-  rpc Delete(DeleteConfigRequest) returns (Config);
+  rpc Create(CreateConfigRequest) returns (Response);
+  rpc Update(UpdateConfigRequest) returns (Response);
+  rpc Delete(DeleteConfigRequest) returns (Response);
   rpc Get(GetConfigRequest) returns (GetConfigResponse);
   rpc GetByAppAndKey(GetConfigByAppRequest) returns (GetConfigResponse);
   rpc List(ListConfigRequest) returns (ListConfigResponse);

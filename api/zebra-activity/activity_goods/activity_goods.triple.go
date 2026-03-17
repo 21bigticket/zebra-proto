@@ -64,16 +64,16 @@ var (
 
 // ActivityGoodsService is a client for the activity_goods.ActivityGoodsService service.
 type ActivityGoodsService interface {
-	Create(ctx context.Context, req *CreateActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error)
+	Create(ctx context.Context, req *CreateActivityGoodsRequest, opts ...client.CallOption) (*Response, error)
 	BatchCreate(ctx context.Context, req *BatchCreateActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoodsResponse, error)
-	Update(ctx context.Context, req *UpdateActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error)
-	Delete(ctx context.Context, req *DeleteActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error)
+	Update(ctx context.Context, req *UpdateActivityGoodsRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteActivityGoodsRequest, opts ...client.CallOption) (*Response, error)
 	BatchDelete(ctx context.Context, req *BatchDeleteActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoodsResponse, error)
 	Get(ctx context.Context, req *GetActivityGoodsRequest, opts ...client.CallOption) (*GetActivityGoodsResponse, error)
 	List(ctx context.Context, req *ListActivityGoodsRequest, opts ...client.CallOption) (*ListActivityGoodsResponse, error)
 	GetGoodsActivity(ctx context.Context, req *GetGoodsActivityRequest, opts ...client.CallOption) (*GetGoodsActivityResponse, error)
 	ValidateActivity(ctx context.Context, req *ValidateActivityRequest, opts ...client.CallOption) (*ValidateActivityResponse, error)
-	DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*ActivityGoodsResponse, error)
+	DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error)
 }
 
 // NewActivityGoodsService constructs a client for the activity_goods.ActivityGoodsService service.
@@ -96,8 +96,8 @@ type ActivityGoodsServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *ActivityGoodsServiceImpl) Create(ctx context.Context, req *CreateActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error) {
-	resp := new(ActivityGoods)
+func (c *ActivityGoodsServiceImpl) Create(ctx context.Context, req *CreateActivityGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
@@ -112,16 +112,16 @@ func (c *ActivityGoodsServiceImpl) BatchCreate(ctx context.Context, req *BatchCr
 	return resp, nil
 }
 
-func (c *ActivityGoodsServiceImpl) Update(ctx context.Context, req *UpdateActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error) {
-	resp := new(ActivityGoods)
+func (c *ActivityGoodsServiceImpl) Update(ctx context.Context, req *UpdateActivityGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ActivityGoodsServiceImpl) Delete(ctx context.Context, req *DeleteActivityGoodsRequest, opts ...client.CallOption) (*ActivityGoods, error) {
-	resp := new(ActivityGoods)
+func (c *ActivityGoodsServiceImpl) Delete(ctx context.Context, req *DeleteActivityGoodsRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -168,8 +168,8 @@ func (c *ActivityGoodsServiceImpl) ValidateActivity(ctx context.Context, req *Va
 	return resp, nil
 }
 
-func (c *ActivityGoodsServiceImpl) DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*ActivityGoodsResponse, error) {
-	resp := new(ActivityGoodsResponse)
+func (c *ActivityGoodsServiceImpl) DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeductActivityStock", opts...); err != nil {
 		return nil, err
 	}
@@ -187,16 +187,16 @@ var ActivityGoodsService_ClientInfo = client.ClientInfo{
 
 // ActivityGoodsServiceHandler is an implementation of the activity_goods.ActivityGoodsService service.
 type ActivityGoodsServiceHandler interface {
-	Create(context.Context, *CreateActivityGoodsRequest) (*ActivityGoods, error)
+	Create(context.Context, *CreateActivityGoodsRequest) (*Response, error)
 	BatchCreate(context.Context, *BatchCreateActivityGoodsRequest) (*ActivityGoodsResponse, error)
-	Update(context.Context, *UpdateActivityGoodsRequest) (*ActivityGoods, error)
-	Delete(context.Context, *DeleteActivityGoodsRequest) (*ActivityGoods, error)
+	Update(context.Context, *UpdateActivityGoodsRequest) (*Response, error)
+	Delete(context.Context, *DeleteActivityGoodsRequest) (*Response, error)
 	BatchDelete(context.Context, *BatchDeleteActivityGoodsRequest) (*ActivityGoodsResponse, error)
 	Get(context.Context, *GetActivityGoodsRequest) (*GetActivityGoodsResponse, error)
 	List(context.Context, *ListActivityGoodsRequest) (*ListActivityGoodsResponse, error)
 	GetGoodsActivity(context.Context, *GetGoodsActivityRequest) (*GetGoodsActivityResponse, error)
 	ValidateActivity(context.Context, *ValidateActivityRequest) (*ValidateActivityResponse, error)
-	DeductActivityStock(context.Context, *DeductActivityStockRequest) (*ActivityGoodsResponse, error)
+	DeductActivityStock(context.Context, *DeductActivityStockRequest) (*Response, error)
 }
 
 func RegisterActivityGoodsServiceHandler(srv *server.Server, hdlr ActivityGoodsServiceHandler, opts ...server.ServiceOption) error {

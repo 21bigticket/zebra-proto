@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package sku;
 
 option go_package = "./api/zebra-goods/sku;sku";
@@ -68,7 +70,9 @@ message GetSkuRequest {
 
 // 获取SKU响应
 message GetSkuResponse {
-  GoodsSku sku = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  GoodsSku sku = 3;
 }
 
 // 列出SKU请求
@@ -81,15 +85,22 @@ message ListSkuRequest {
 
 // 列出SKU响应
 message ListSkuResponse {
-  repeated GoodsSku skus  = 1;
-  int32          total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated GoodsSku skus  = 3;
+  int32          total = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // SKU服务
 service SkuService {
-  rpc Create(CreateSkuRequest) returns (GoodsSku);
-  rpc Update(UpdateSkuRequest) returns (GoodsSku);
-  rpc Delete(DeleteSkuRequest) returns (GoodsSku);
+  rpc Create(CreateSkuRequest) returns (Response);
+  rpc Update(UpdateSkuRequest) returns (Response);
+  rpc Delete(DeleteSkuRequest) returns (Response);
   rpc Get(GetSkuRequest) returns (GetSkuResponse);
   rpc List(ListSkuRequest) returns (ListSkuResponse);
 }

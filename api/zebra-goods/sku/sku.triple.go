@@ -54,9 +54,9 @@ var (
 
 // SkuService is a client for the sku.SkuService service.
 type SkuService interface {
-	Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*GoodsSku, error)
-	Update(ctx context.Context, req *UpdateSkuRequest, opts ...client.CallOption) (*GoodsSku, error)
-	Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*GoodsSku, error)
+	Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateSkuRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetSkuRequest, opts ...client.CallOption) (*GetSkuResponse, error)
 	List(ctx context.Context, req *ListSkuRequest, opts ...client.CallOption) (*ListSkuResponse, error)
 }
@@ -81,24 +81,24 @@ type SkuServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *SkuServiceImpl) Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*GoodsSku, error) {
-	resp := new(GoodsSku)
+func (c *SkuServiceImpl) Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *SkuServiceImpl) Update(ctx context.Context, req *UpdateSkuRequest, opts ...client.CallOption) (*GoodsSku, error) {
-	resp := new(GoodsSku)
+func (c *SkuServiceImpl) Update(ctx context.Context, req *UpdateSkuRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *SkuServiceImpl) Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*GoodsSku, error) {
-	resp := new(GoodsSku)
+func (c *SkuServiceImpl) Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var SkuService_ClientInfo = client.ClientInfo{
 
 // SkuServiceHandler is an implementation of the sku.SkuService service.
 type SkuServiceHandler interface {
-	Create(context.Context, *CreateSkuRequest) (*GoodsSku, error)
-	Update(context.Context, *UpdateSkuRequest) (*GoodsSku, error)
-	Delete(context.Context, *DeleteSkuRequest) (*GoodsSku, error)
+	Create(context.Context, *CreateSkuRequest) (*Response, error)
+	Update(context.Context, *UpdateSkuRequest) (*Response, error)
+	Delete(context.Context, *DeleteSkuRequest) (*Response, error)
 	Get(context.Context, *GetSkuRequest) (*GetSkuResponse, error)
 	List(context.Context, *ListSkuRequest) (*ListSkuResponse, error)
 }

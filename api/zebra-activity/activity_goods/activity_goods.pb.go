@@ -25,6 +25,7 @@ package activity_goods
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -515,7 +516,9 @@ func (x *GetActivityGoodsRequest) GetActivityGoodsId() int64 {
 // 获取活动商品响应
 type GetActivityGoodsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActivityGoods *ActivityGoods         `protobuf:"bytes,1,opt,name=activity_goods,json=activityGoods,proto3" json:"activity_goods,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	ActivityGoods *ActivityGoods         `protobuf:"bytes,3,opt,name=activity_goods,json=activityGoods,proto3" json:"activity_goods,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -548,6 +551,20 @@ func (x *GetActivityGoodsResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetActivityGoodsResponse.ProtoReflect.Descriptor instead.
 func (*GetActivityGoodsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetActivityGoodsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetActivityGoodsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetActivityGoodsResponse) GetActivityGoods() *ActivityGoods {
@@ -621,8 +638,10 @@ func (x *ListActivityGoodsRequest) GetPageSize() int32 {
 // 列出活动商品响应
 type ListActivityGoodsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActivityGoods []*ActivityGoods       `protobuf:"bytes,1,rep,name=activity_goods,json=activityGoods,proto3" json:"activity_goods,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	ActivityGoods []*ActivityGoods       `protobuf:"bytes,3,rep,name=activity_goods,json=activityGoods,proto3" json:"activity_goods,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -657,6 +676,20 @@ func (*ListActivityGoodsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{9}
 }
 
+func (x *ListActivityGoodsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListActivityGoodsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListActivityGoodsResponse) GetActivityGoods() []*ActivityGoods {
 	if x != nil {
 		return x.ActivityGoods
@@ -671,6 +704,58 @@ func (x *ListActivityGoodsResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 // 获取商品活动请求（按SKU ID）
 type GetGoodsActivityRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -681,7 +766,7 @@ type GetGoodsActivityRequest struct {
 
 func (x *GetGoodsActivityRequest) Reset() {
 	*x = GetGoodsActivityRequest{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[10]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -693,7 +778,7 @@ func (x *GetGoodsActivityRequest) String() string {
 func (*GetGoodsActivityRequest) ProtoMessage() {}
 
 func (x *GetGoodsActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[10]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -706,7 +791,7 @@ func (x *GetGoodsActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGoodsActivityRequest.ProtoReflect.Descriptor instead.
 func (*GetGoodsActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetGoodsActivityRequest) GetSkuIds() []int64 {
@@ -719,14 +804,16 @@ func (x *GetGoodsActivityRequest) GetSkuIds() []int64 {
 // 获取商品活动响应
 type GetGoodsActivityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Goods         []*ActivityGoods       `protobuf:"bytes,1,rep,name=goods,proto3" json:"goods,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Goods         []*ActivityGoods       `protobuf:"bytes,3,rep,name=goods,proto3" json:"goods,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetGoodsActivityResponse) Reset() {
 	*x = GetGoodsActivityResponse{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[11]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -738,7 +825,7 @@ func (x *GetGoodsActivityResponse) String() string {
 func (*GetGoodsActivityResponse) ProtoMessage() {}
 
 func (x *GetGoodsActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[11]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -751,7 +838,21 @@ func (x *GetGoodsActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGoodsActivityResponse.ProtoReflect.Descriptor instead.
 func (*GetGoodsActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{11}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetGoodsActivityResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetGoodsActivityResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetGoodsActivityResponse) GetGoods() []*ActivityGoods {
@@ -774,7 +875,7 @@ type ValidateActivityRequest struct {
 
 func (x *ValidateActivityRequest) Reset() {
 	*x = ValidateActivityRequest{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[12]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +887,7 @@ func (x *ValidateActivityRequest) String() string {
 func (*ValidateActivityRequest) ProtoMessage() {}
 
 func (x *ValidateActivityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[12]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -799,7 +900,7 @@ func (x *ValidateActivityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateActivityRequest.ProtoReflect.Descriptor instead.
 func (*ValidateActivityRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{12}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ValidateActivityRequest) GetActivityId() int64 {
@@ -842,7 +943,7 @@ type ValidateActivityResponse struct {
 
 func (x *ValidateActivityResponse) Reset() {
 	*x = ValidateActivityResponse{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[13]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -854,7 +955,7 @@ func (x *ValidateActivityResponse) String() string {
 func (*ValidateActivityResponse) ProtoMessage() {}
 
 func (x *ValidateActivityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[13]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -867,7 +968,7 @@ func (x *ValidateActivityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateActivityResponse.ProtoReflect.Descriptor instead.
 func (*ValidateActivityResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{13}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ValidateActivityResponse) GetValid() bool {
@@ -905,7 +1006,7 @@ type DeductActivityStockRequest struct {
 
 func (x *DeductActivityStockRequest) Reset() {
 	*x = DeductActivityStockRequest{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[14]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -917,7 +1018,7 @@ func (x *DeductActivityStockRequest) String() string {
 func (*DeductActivityStockRequest) ProtoMessage() {}
 
 func (x *DeductActivityStockRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[14]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -930,7 +1031,7 @@ func (x *DeductActivityStockRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeductActivityStockRequest.ProtoReflect.Descriptor instead.
 func (*DeductActivityStockRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{14}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DeductActivityStockRequest) GetActivityId() int64 {
@@ -979,7 +1080,7 @@ type ActivityGoodsResponse struct {
 
 func (x *ActivityGoodsResponse) Reset() {
 	*x = ActivityGoodsResponse{}
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[15]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -991,7 +1092,7 @@ func (x *ActivityGoodsResponse) String() string {
 func (*ActivityGoodsResponse) ProtoMessage() {}
 
 func (x *ActivityGoodsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[15]
+	mi := &file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1004,7 +1105,7 @@ func (x *ActivityGoodsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActivityGoodsResponse.ProtoReflect.Descriptor instead.
 func (*ActivityGoodsResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{15}
+	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ActivityGoodsResponse) GetSuccess() bool {
@@ -1025,7 +1126,7 @@ var File_api_zebra_activity_activity_goods_activity_goods_proto protoreflect.Fil
 
 const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\n" +
-	"6api/zebra-activity/activity_goods/activity_goods.proto\x12\x0eactivity_goods\"\x86\x03\n" +
+	"6api/zebra-activity/activity_goods/activity_goods.proto\x12\x0eactivity_goods\x1a\x1egoogle/protobuf/wrappers.proto\"\x86\x03\n" +
 	"\rActivityGoods\x12*\n" +
 	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\x12\x1f\n" +
 	"\vactivity_id\x18\x02 \x01(\x03R\n" +
@@ -1072,21 +1173,30 @@ const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\x1fBatchDeleteActivityGoodsRequest\x12,\n" +
 	"\x12activity_goods_ids\x18\x01 \x03(\x03R\x10activityGoodsIds\"E\n" +
 	"\x17GetActivityGoodsRequest\x12*\n" +
-	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\"`\n" +
-	"\x18GetActivityGoodsResponse\x12D\n" +
-	"\x0eactivity_goods\x18\x01 \x01(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\"l\n" +
+	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\"\xa3\x01\n" +
+	"\x18GetActivityGoodsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12D\n" +
+	"\x0eactivity_goods\x18\x03 \x01(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\"l\n" +
 	"\x18ListActivityGoodsRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"w\n" +
-	"\x19ListActivityGoodsResponse\x12D\n" +
-	"\x0eactivity_goods\x18\x01 \x03(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"2\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"\xba\x01\n" +
+	"\x19ListActivityGoodsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12D\n" +
+	"\x0eactivity_goods\x18\x03 \x03(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"2\n" +
 	"\x17GetGoodsActivityRequest\x12\x17\n" +
-	"\asku_ids\x18\x01 \x03(\x03R\x06skuIds\"O\n" +
-	"\x18GetGoodsActivityResponse\x123\n" +
-	"\x05goods\x18\x01 \x03(\v2\x1d.activity_goods.ActivityGoodsR\x05goods\"\x86\x01\n" +
+	"\asku_ids\x18\x01 \x03(\x03R\x06skuIds\"\x92\x01\n" +
+	"\x18GetGoodsActivityResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\x05goods\x18\x03 \x03(\v2\x1d.activity_goods.ActivityGoodsR\x05goods\"\x86\x01\n" +
 	"\x17ValidateActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x15\n" +
@@ -1106,18 +1216,18 @@ const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\border_no\x18\x05 \x01(\tR\aorderNo\"K\n" +
 	"\x15ActivityGoodsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xd2\a\n" +
-	"\x14ActivityGoodsService\x12S\n" +
-	"\x06Create\x12*.activity_goods.CreateActivityGoodsRequest\x1a\x1d.activity_goods.ActivityGoods\x12e\n" +
-	"\vBatchCreate\x12/.activity_goods.BatchCreateActivityGoodsRequest\x1a%.activity_goods.ActivityGoodsResponse\x12S\n" +
-	"\x06Update\x12*.activity_goods.UpdateActivityGoodsRequest\x1a\x1d.activity_goods.ActivityGoods\x12S\n" +
-	"\x06Delete\x12*.activity_goods.DeleteActivityGoodsRequest\x1a\x1d.activity_goods.ActivityGoods\x12e\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xb6\a\n" +
+	"\x14ActivityGoodsService\x12N\n" +
+	"\x06Create\x12*.activity_goods.CreateActivityGoodsRequest\x1a\x18.activity_goods.Response\x12e\n" +
+	"\vBatchCreate\x12/.activity_goods.BatchCreateActivityGoodsRequest\x1a%.activity_goods.ActivityGoodsResponse\x12N\n" +
+	"\x06Update\x12*.activity_goods.UpdateActivityGoodsRequest\x1a\x18.activity_goods.Response\x12N\n" +
+	"\x06Delete\x12*.activity_goods.DeleteActivityGoodsRequest\x1a\x18.activity_goods.Response\x12e\n" +
 	"\vBatchDelete\x12/.activity_goods.BatchDeleteActivityGoodsRequest\x1a%.activity_goods.ActivityGoodsResponse\x12X\n" +
 	"\x03Get\x12'.activity_goods.GetActivityGoodsRequest\x1a(.activity_goods.GetActivityGoodsResponse\x12[\n" +
 	"\x04List\x12(.activity_goods.ListActivityGoodsRequest\x1a).activity_goods.ListActivityGoodsResponse\x12e\n" +
 	"\x10GetGoodsActivity\x12'.activity_goods.GetGoodsActivityRequest\x1a(.activity_goods.GetGoodsActivityResponse\x12e\n" +
-	"\x10ValidateActivity\x12'.activity_goods.ValidateActivityRequest\x1a(.activity_goods.ValidateActivityResponse\x12h\n" +
-	"\x13DeductActivityStock\x12*.activity_goods.DeductActivityStockRequest\x1a%.activity_goods.ActivityGoodsResponseB4Z2./api/zebra-activity/activity_goods;activity_goodsb\x06proto3"
+	"\x10ValidateActivity\x12'.activity_goods.ValidateActivityRequest\x1a(.activity_goods.ValidateActivityResponse\x12[\n" +
+	"\x13DeductActivityStock\x12*.activity_goods.DeductActivityStockRequest\x1a\x18.activity_goods.ResponseB4Z2./api/zebra-activity/activity_goods;activity_goodsb\x06proto3"
 
 var (
 	file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescOnce sync.Once
@@ -1131,7 +1241,7 @@ func file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescGZIP() [
 	return file_api_zebra_activity_activity_goods_activity_goods_proto_rawDescData
 }
 
-var file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_api_zebra_activity_activity_goods_activity_goods_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_api_zebra_activity_activity_goods_activity_goods_proto_goTypes = []any{
 	(*ActivityGoods)(nil),                   // 0: activity_goods.ActivityGoods
 	(*CreateActivityGoodsRequest)(nil),      // 1: activity_goods.CreateActivityGoodsRequest
@@ -1143,43 +1253,49 @@ var file_api_zebra_activity_activity_goods_activity_goods_proto_goTypes = []any{
 	(*GetActivityGoodsResponse)(nil),        // 7: activity_goods.GetActivityGoodsResponse
 	(*ListActivityGoodsRequest)(nil),        // 8: activity_goods.ListActivityGoodsRequest
 	(*ListActivityGoodsResponse)(nil),       // 9: activity_goods.ListActivityGoodsResponse
-	(*GetGoodsActivityRequest)(nil),         // 10: activity_goods.GetGoodsActivityRequest
-	(*GetGoodsActivityResponse)(nil),        // 11: activity_goods.GetGoodsActivityResponse
-	(*ValidateActivityRequest)(nil),         // 12: activity_goods.ValidateActivityRequest
-	(*ValidateActivityResponse)(nil),        // 13: activity_goods.ValidateActivityResponse
-	(*DeductActivityStockRequest)(nil),      // 14: activity_goods.DeductActivityStockRequest
-	(*ActivityGoodsResponse)(nil),           // 15: activity_goods.ActivityGoodsResponse
+	(*Response)(nil),                        // 10: activity_goods.Response
+	(*GetGoodsActivityRequest)(nil),         // 11: activity_goods.GetGoodsActivityRequest
+	(*GetGoodsActivityResponse)(nil),        // 12: activity_goods.GetGoodsActivityResponse
+	(*ValidateActivityRequest)(nil),         // 13: activity_goods.ValidateActivityRequest
+	(*ValidateActivityResponse)(nil),        // 14: activity_goods.ValidateActivityResponse
+	(*DeductActivityStockRequest)(nil),      // 15: activity_goods.DeductActivityStockRequest
+	(*ActivityGoodsResponse)(nil),           // 16: activity_goods.ActivityGoodsResponse
+	(*wrapperspb.Int32Value)(nil),           // 17: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_activity_goods_activity_goods_proto_depIdxs = []int32{
 	1,  // 0: activity_goods.BatchCreateActivityGoodsRequest.goods:type_name -> activity_goods.CreateActivityGoodsRequest
-	0,  // 1: activity_goods.GetActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
-	0,  // 2: activity_goods.ListActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
-	0,  // 3: activity_goods.GetGoodsActivityResponse.goods:type_name -> activity_goods.ActivityGoods
-	1,  // 4: activity_goods.ActivityGoodsService.Create:input_type -> activity_goods.CreateActivityGoodsRequest
-	2,  // 5: activity_goods.ActivityGoodsService.BatchCreate:input_type -> activity_goods.BatchCreateActivityGoodsRequest
-	3,  // 6: activity_goods.ActivityGoodsService.Update:input_type -> activity_goods.UpdateActivityGoodsRequest
-	4,  // 7: activity_goods.ActivityGoodsService.Delete:input_type -> activity_goods.DeleteActivityGoodsRequest
-	5,  // 8: activity_goods.ActivityGoodsService.BatchDelete:input_type -> activity_goods.BatchDeleteActivityGoodsRequest
-	6,  // 9: activity_goods.ActivityGoodsService.Get:input_type -> activity_goods.GetActivityGoodsRequest
-	8,  // 10: activity_goods.ActivityGoodsService.List:input_type -> activity_goods.ListActivityGoodsRequest
-	10, // 11: activity_goods.ActivityGoodsService.GetGoodsActivity:input_type -> activity_goods.GetGoodsActivityRequest
-	12, // 12: activity_goods.ActivityGoodsService.ValidateActivity:input_type -> activity_goods.ValidateActivityRequest
-	14, // 13: activity_goods.ActivityGoodsService.DeductActivityStock:input_type -> activity_goods.DeductActivityStockRequest
-	0,  // 14: activity_goods.ActivityGoodsService.Create:output_type -> activity_goods.ActivityGoods
-	15, // 15: activity_goods.ActivityGoodsService.BatchCreate:output_type -> activity_goods.ActivityGoodsResponse
-	0,  // 16: activity_goods.ActivityGoodsService.Update:output_type -> activity_goods.ActivityGoods
-	0,  // 17: activity_goods.ActivityGoodsService.Delete:output_type -> activity_goods.ActivityGoods
-	15, // 18: activity_goods.ActivityGoodsService.BatchDelete:output_type -> activity_goods.ActivityGoodsResponse
-	7,  // 19: activity_goods.ActivityGoodsService.Get:output_type -> activity_goods.GetActivityGoodsResponse
-	9,  // 20: activity_goods.ActivityGoodsService.List:output_type -> activity_goods.ListActivityGoodsResponse
-	11, // 21: activity_goods.ActivityGoodsService.GetGoodsActivity:output_type -> activity_goods.GetGoodsActivityResponse
-	13, // 22: activity_goods.ActivityGoodsService.ValidateActivity:output_type -> activity_goods.ValidateActivityResponse
-	15, // 23: activity_goods.ActivityGoodsService.DeductActivityStock:output_type -> activity_goods.ActivityGoodsResponse
-	14, // [14:24] is the sub-list for method output_type
-	4,  // [4:14] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	17, // 1: activity_goods.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 2: activity_goods.GetActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
+	17, // 3: activity_goods.ListActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: activity_goods.ListActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
+	17, // 5: activity_goods.Response.code:type_name -> google.protobuf.Int32Value
+	17, // 6: activity_goods.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: activity_goods.GetGoodsActivityResponse.goods:type_name -> activity_goods.ActivityGoods
+	1,  // 8: activity_goods.ActivityGoodsService.Create:input_type -> activity_goods.CreateActivityGoodsRequest
+	2,  // 9: activity_goods.ActivityGoodsService.BatchCreate:input_type -> activity_goods.BatchCreateActivityGoodsRequest
+	3,  // 10: activity_goods.ActivityGoodsService.Update:input_type -> activity_goods.UpdateActivityGoodsRequest
+	4,  // 11: activity_goods.ActivityGoodsService.Delete:input_type -> activity_goods.DeleteActivityGoodsRequest
+	5,  // 12: activity_goods.ActivityGoodsService.BatchDelete:input_type -> activity_goods.BatchDeleteActivityGoodsRequest
+	6,  // 13: activity_goods.ActivityGoodsService.Get:input_type -> activity_goods.GetActivityGoodsRequest
+	8,  // 14: activity_goods.ActivityGoodsService.List:input_type -> activity_goods.ListActivityGoodsRequest
+	11, // 15: activity_goods.ActivityGoodsService.GetGoodsActivity:input_type -> activity_goods.GetGoodsActivityRequest
+	13, // 16: activity_goods.ActivityGoodsService.ValidateActivity:input_type -> activity_goods.ValidateActivityRequest
+	15, // 17: activity_goods.ActivityGoodsService.DeductActivityStock:input_type -> activity_goods.DeductActivityStockRequest
+	10, // 18: activity_goods.ActivityGoodsService.Create:output_type -> activity_goods.Response
+	16, // 19: activity_goods.ActivityGoodsService.BatchCreate:output_type -> activity_goods.ActivityGoodsResponse
+	10, // 20: activity_goods.ActivityGoodsService.Update:output_type -> activity_goods.Response
+	10, // 21: activity_goods.ActivityGoodsService.Delete:output_type -> activity_goods.Response
+	16, // 22: activity_goods.ActivityGoodsService.BatchDelete:output_type -> activity_goods.ActivityGoodsResponse
+	7,  // 23: activity_goods.ActivityGoodsService.Get:output_type -> activity_goods.GetActivityGoodsResponse
+	9,  // 24: activity_goods.ActivityGoodsService.List:output_type -> activity_goods.ListActivityGoodsResponse
+	12, // 25: activity_goods.ActivityGoodsService.GetGoodsActivity:output_type -> activity_goods.GetGoodsActivityResponse
+	14, // 26: activity_goods.ActivityGoodsService.ValidateActivity:output_type -> activity_goods.ValidateActivityResponse
+	10, // 27: activity_goods.ActivityGoodsService.DeductActivityStock:output_type -> activity_goods.Response
+	18, // [18:28] is the sub-list for method output_type
+	8,  // [8:18] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_activity_goods_activity_goods_proto_init() }
@@ -1193,7 +1309,7 @@ func file_api_zebra_activity_activity_goods_activity_goods_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc), len(file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

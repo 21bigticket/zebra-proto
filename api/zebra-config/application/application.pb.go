@@ -25,6 +25,7 @@ package application
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -407,7 +408,9 @@ func (*GetApplicationRequest_Appid) isGetApplicationRequest_Query() {}
 // 获取应用响应
 type GetApplicationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Application   *Application           `protobuf:"bytes,1,opt,name=application,proto3" json:"application,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Application   *Application           `protobuf:"bytes,3,opt,name=application,proto3" json:"application,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -440,6 +443,20 @@ func (x *GetApplicationResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetApplicationResponse.ProtoReflect.Descriptor instead.
 func (*GetApplicationResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_config_application_application_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetApplicationResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetApplicationResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetApplicationResponse) GetApplication() *Application {
@@ -513,8 +530,10 @@ func (x *ListApplicationRequest) GetNameKeyword() string {
 // 列出应用响应
 type ListApplicationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Applications  []*Application         `protobuf:"bytes,1,rep,name=applications,proto3" json:"applications,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Applications  []*Application         `protobuf:"bytes,3,rep,name=applications,proto3" json:"applications,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -549,6 +568,20 @@ func (*ListApplicationResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_config_application_application_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListApplicationResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListApplicationResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListApplicationResponse) GetApplications() []*Application {
 	if x != nil {
 		return x.Applications
@@ -563,11 +596,63 @@ func (x *ListApplicationResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_config_application_application_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_config_application_application_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_config_application_application_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_config_application_application_proto protoreflect.FileDescriptor
 
 const file_api_zebra_config_application_application_proto_rawDesc = "" +
 	"\n" +
-	".api/zebra-config/application/application.proto\x12\vapplication\"\xd5\x01\n" +
+	".api/zebra-config/application/application.proto\x12\vapplication\x1a\x1egoogle/protobuf/wrappers.proto\"\xd5\x01\n" +
 	"\vApplication\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05appid\x18\x02 \x01(\tR\x05appid\x12\x12\n" +
@@ -595,20 +680,27 @@ const file_api_zebra_config_application_application_proto_rawDesc = "" +
 	"\x15GetApplicationRequest\x12\x10\n" +
 	"\x02id\x18\x01 \x01(\x03H\x00R\x02id\x12\x16\n" +
 	"\x05appid\x18\x02 \x01(\tH\x00R\x05appidB\a\n" +
-	"\x05query\"T\n" +
-	"\x16GetApplicationResponse\x12:\n" +
-	"\vapplication\x18\x01 \x01(\v2\x18.application.ApplicationR\vapplication\"l\n" +
+	"\x05query\"\x97\x01\n" +
+	"\x16GetApplicationResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12:\n" +
+	"\vapplication\x18\x03 \x01(\v2\x18.application.ApplicationR\vapplication\"l\n" +
 	"\x16ListApplicationRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
-	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\"m\n" +
-	"\x17ListApplicationResponse\x12<\n" +
-	"\fapplications\x18\x01 \x03(\v2\x18.application.ApplicationR\fapplications\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\x98\x03\n" +
-	"\x12ApplicationService\x12I\n" +
-	"\x06Create\x12%.application.CreateApplicationRequest\x1a\x18.application.Application\x12I\n" +
-	"\x06Update\x12%.application.UpdateApplicationRequest\x1a\x18.application.Application\x12I\n" +
-	"\x06Delete\x12%.application.DeleteApplicationRequest\x1a\x18.application.Application\x12N\n" +
+	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\"\xb0\x01\n" +
+	"\x17ListApplicationResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12<\n" +
+	"\fapplications\x18\x03 \x03(\v2\x18.application.ApplicationR\fapplications\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\x8f\x03\n" +
+	"\x12ApplicationService\x12F\n" +
+	"\x06Create\x12%.application.CreateApplicationRequest\x1a\x15.application.Response\x12F\n" +
+	"\x06Update\x12%.application.UpdateApplicationRequest\x1a\x15.application.Response\x12F\n" +
+	"\x06Delete\x12%.application.DeleteApplicationRequest\x1a\x15.application.Response\x12N\n" +
 	"\x03Get\x12\".application.GetApplicationRequest\x1a#.application.GetApplicationResponse\x12Q\n" +
 	"\x04List\x12#.application.ListApplicationRequest\x1a$.application.ListApplicationResponseB,Z*./api/zebra-config/application;applicationb\x06proto3"
 
@@ -624,7 +716,7 @@ func file_api_zebra_config_application_application_proto_rawDescGZIP() []byte {
 	return file_api_zebra_config_application_application_proto_rawDescData
 }
 
-var file_api_zebra_config_application_application_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_config_application_application_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_config_application_application_proto_goTypes = []any{
 	(*Application)(nil),              // 0: application.Application
 	(*CreateApplicationRequest)(nil), // 1: application.CreateApplicationRequest
@@ -634,25 +726,30 @@ var file_api_zebra_config_application_application_proto_goTypes = []any{
 	(*GetApplicationResponse)(nil),   // 5: application.GetApplicationResponse
 	(*ListApplicationRequest)(nil),   // 6: application.ListApplicationRequest
 	(*ListApplicationResponse)(nil),  // 7: application.ListApplicationResponse
+	(*Response)(nil),                 // 8: application.Response
+	(*wrapperspb.Int32Value)(nil),    // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_config_application_application_proto_depIdxs = []int32{
-	0, // 0: application.GetApplicationResponse.application:type_name -> application.Application
-	0, // 1: application.ListApplicationResponse.applications:type_name -> application.Application
-	1, // 2: application.ApplicationService.Create:input_type -> application.CreateApplicationRequest
-	2, // 3: application.ApplicationService.Update:input_type -> application.UpdateApplicationRequest
-	3, // 4: application.ApplicationService.Delete:input_type -> application.DeleteApplicationRequest
-	4, // 5: application.ApplicationService.Get:input_type -> application.GetApplicationRequest
-	6, // 6: application.ApplicationService.List:input_type -> application.ListApplicationRequest
-	0, // 7: application.ApplicationService.Create:output_type -> application.Application
-	0, // 8: application.ApplicationService.Update:output_type -> application.Application
-	0, // 9: application.ApplicationService.Delete:output_type -> application.Application
-	5, // 10: application.ApplicationService.Get:output_type -> application.GetApplicationResponse
-	7, // 11: application.ApplicationService.List:output_type -> application.ListApplicationResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: application.GetApplicationResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: application.GetApplicationResponse.application:type_name -> application.Application
+	9,  // 2: application.ListApplicationResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: application.ListApplicationResponse.applications:type_name -> application.Application
+	9,  // 4: application.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: application.ApplicationService.Create:input_type -> application.CreateApplicationRequest
+	2,  // 6: application.ApplicationService.Update:input_type -> application.UpdateApplicationRequest
+	3,  // 7: application.ApplicationService.Delete:input_type -> application.DeleteApplicationRequest
+	4,  // 8: application.ApplicationService.Get:input_type -> application.GetApplicationRequest
+	6,  // 9: application.ApplicationService.List:input_type -> application.ListApplicationRequest
+	8,  // 10: application.ApplicationService.Create:output_type -> application.Response
+	8,  // 11: application.ApplicationService.Update:output_type -> application.Response
+	8,  // 12: application.ApplicationService.Delete:output_type -> application.Response
+	5,  // 13: application.ApplicationService.Get:output_type -> application.GetApplicationResponse
+	7,  // 14: application.ApplicationService.List:output_type -> application.ListApplicationResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_config_application_application_proto_init() }
@@ -670,7 +767,7 @@ func file_api_zebra_config_application_application_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_config_application_application_proto_rawDesc), len(file_api_zebra_config_application_application_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

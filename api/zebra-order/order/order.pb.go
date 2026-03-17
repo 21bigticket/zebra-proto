@@ -25,6 +25,7 @@ package order
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -609,8 +610,10 @@ func (x *OrderItemReq) GetQuantity() int32 {
 // 创建订单响应
 type CreateOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Order         *Order                 `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Order         *Order                 `protobuf:"bytes,3,opt,name=order,proto3" json:"order,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -643,6 +646,20 @@ func (x *CreateOrderResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateOrderResponse.ProtoReflect.Descriptor instead.
 func (*CreateOrderResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateOrderResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *CreateOrderResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *CreateOrderResponse) GetOrder() *Order {
@@ -957,9 +974,11 @@ func (*GetOrderRequest_OrderId) isGetOrderRequest_Query() {}
 // 查询订单响应
 type GetOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Order         *Order                 `protobuf:"bytes,1,opt,name=order,proto3" json:"order,omitempty"`
-	Items         []*OrderItem           `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
-	Delivery      *OrderDelivery         `protobuf:"bytes,3,opt,name=delivery,proto3" json:"delivery,omitempty"` // 添加发货信息
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Order         *Order                 `protobuf:"bytes,3,opt,name=order,proto3" json:"order,omitempty"`
+	Items         []*OrderItem           `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	Delivery      *OrderDelivery         `protobuf:"bytes,5,opt,name=delivery,proto3" json:"delivery,omitempty"` // 添加发货信息
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -992,6 +1011,20 @@ func (x *GetOrderResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetOrderResponse.ProtoReflect.Descriptor instead.
 func (*GetOrderResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetOrderResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetOrderResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetOrderResponse) GetOrder() *Order {
@@ -1087,8 +1120,10 @@ func (x *GetUserOrdersRequest) GetPageSize() int32 {
 // 查询用户订单列表响应
 type GetUserOrdersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Orders        []*Order               `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Orders        []*Order               `protobuf:"bytes,3,rep,name=orders,proto3" json:"orders,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1123,6 +1158,20 @@ func (*GetUserOrdersResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{13}
 }
 
+func (x *GetUserOrdersResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetUserOrdersResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *GetUserOrdersResponse) GetOrders() []*Order {
 	if x != nil {
 		return x.Orders
@@ -1140,9 +1189,11 @@ func (x *GetUserOrdersResponse) GetTotal() int32 {
 // 通用响应
 type OrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	Order         *Order                 `protobuf:"bytes,3,opt,name=order,proto3" json:"order,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	Order         *Order                 `protobuf:"bytes,5,opt,name=order,proto3" json:"order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1177,6 +1228,20 @@ func (*OrderResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{14}
 }
 
+func (x *OrderResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *OrderResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *OrderResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
@@ -1202,7 +1267,7 @@ var File_api_zebra_order_order_order_proto protoreflect.FileDescriptor
 
 const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-order/order/order.proto\x12\x05order\"\xe5\x04\n" +
+	"!api/zebra-order/order/order.proto\x12\x05order\x1a\x1egoogle/protobuf/wrappers.proto\"\xe5\x04\n" +
 	"\x05Order\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\x03R\aorderId\x12\x19\n" +
 	"\border_no\x18\x02 \x01(\tR\aorderNo\x12\x17\n" +
@@ -1272,10 +1337,12 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\x10receiver_address\x18\a \x01(\tR\x0freceiverAddress\"A\n" +
 	"\fOrderItemReq\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x05R\bquantity\"S\n" +
-	"\x13CreateOrderResponse\x12\"\n" +
-	"\x05order\x18\x01 \x01(\v2\f.order.OrderR\x05order\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"H\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"\x96\x01\n" +
+	"\x13CreateOrderResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\"\n" +
+	"\x05order\x18\x03 \x01(\v2\f.order.OrderR\x05order\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"H\n" +
 	"\x12CancelOrderRequest\x12\x19\n" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"E\n" +
@@ -1292,23 +1359,29 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\x0fGetOrderRequest\x12\x1b\n" +
 	"\border_no\x18\x01 \x01(\tH\x00R\aorderNo\x12\x1b\n" +
 	"\border_id\x18\x02 \x01(\x03H\x00R\aorderIdB\a\n" +
-	"\x05query\"\x90\x01\n" +
-	"\x10GetOrderResponse\x12\"\n" +
-	"\x05order\x18\x01 \x01(\v2\f.order.OrderR\x05order\x12&\n" +
-	"\x05items\x18\x02 \x03(\v2\x10.order.OrderItemR\x05items\x120\n" +
-	"\bdelivery\x18\x03 \x01(\v2\x14.order.OrderDeliveryR\bdelivery\"\x83\x01\n" +
+	"\x05query\"\xd3\x01\n" +
+	"\x10GetOrderResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\"\n" +
+	"\x05order\x18\x03 \x01(\v2\f.order.OrderR\x05order\x12&\n" +
+	"\x05items\x18\x04 \x03(\v2\x10.order.OrderItemR\x05items\x120\n" +
+	"\bdelivery\x18\x05 \x01(\v2\x14.order.OrderDeliveryR\bdelivery\"\x83\x01\n" +
 	"\x14GetUserOrdersRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
 	"\forder_status\x18\x02 \x01(\x05R\vorderStatus\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"S\n" +
-	"\x15GetUserOrdersResponse\x12$\n" +
-	"\x06orders\x18\x01 \x03(\v2\f.order.OrderR\x06orders\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"g\n" +
-	"\rOrderResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\"\n" +
-	"\x05order\x18\x03 \x01(\v2\f.order.OrderR\x05order2\xd9\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x96\x01\n" +
+	"\x15GetUserOrdersResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
+	"\x06orders\x18\x03 \x03(\v2\f.order.OrderR\x06orders\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xaa\x01\n" +
+	"\rOrderResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\"\n" +
+	"\x05order\x18\x05 \x01(\v2\f.order.OrderR\x05order2\xd9\x03\n" +
 	"\fOrderService\x12D\n" +
 	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x1a.order.CreateOrderResponse\x12>\n" +
 	"\vCancelOrder\x12\x19.order.CancelOrderRequest\x1a\x14.order.OrderResponse\x128\n" +
@@ -1347,34 +1420,39 @@ var file_api_zebra_order_order_order_proto_goTypes = []any{
 	(*GetUserOrdersRequest)(nil),  // 12: order.GetUserOrdersRequest
 	(*GetUserOrdersResponse)(nil), // 13: order.GetUserOrdersResponse
 	(*OrderResponse)(nil),         // 14: order.OrderResponse
+	(*wrapperspb.Int32Value)(nil), // 15: google.protobuf.Int32Value
 }
 var file_api_zebra_order_order_order_proto_depIdxs = []int32{
 	4,  // 0: order.CreateOrderRequest.items:type_name -> order.OrderItemReq
-	0,  // 1: order.CreateOrderResponse.order:type_name -> order.Order
-	0,  // 2: order.GetOrderResponse.order:type_name -> order.Order
-	1,  // 3: order.GetOrderResponse.items:type_name -> order.OrderItem
-	2,  // 4: order.GetOrderResponse.delivery:type_name -> order.OrderDelivery
-	0,  // 5: order.GetUserOrdersResponse.orders:type_name -> order.Order
-	0,  // 6: order.OrderResponse.order:type_name -> order.Order
-	3,  // 7: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
-	6,  // 8: order.OrderService.CancelOrder:input_type -> order.CancelOrderRequest
-	7,  // 9: order.OrderService.PayOrder:input_type -> order.PayOrderRequest
-	8,  // 10: order.OrderService.DeliverOrder:input_type -> order.DeliverOrderRequest
-	9,  // 11: order.OrderService.FinishOrder:input_type -> order.FinishOrderRequest
-	10, // 12: order.OrderService.GetOrder:input_type -> order.GetOrderRequest
-	12, // 13: order.OrderService.GetUserOrders:input_type -> order.GetUserOrdersRequest
-	5,  // 14: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
-	14, // 15: order.OrderService.CancelOrder:output_type -> order.OrderResponse
-	14, // 16: order.OrderService.PayOrder:output_type -> order.OrderResponse
-	14, // 17: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
-	14, // 18: order.OrderService.FinishOrder:output_type -> order.OrderResponse
-	11, // 19: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
-	13, // 20: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	15, // 1: order.CreateOrderResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 2: order.CreateOrderResponse.order:type_name -> order.Order
+	15, // 3: order.GetOrderResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: order.GetOrderResponse.order:type_name -> order.Order
+	1,  // 5: order.GetOrderResponse.items:type_name -> order.OrderItem
+	2,  // 6: order.GetOrderResponse.delivery:type_name -> order.OrderDelivery
+	15, // 7: order.GetUserOrdersResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 8: order.GetUserOrdersResponse.orders:type_name -> order.Order
+	15, // 9: order.OrderResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 10: order.OrderResponse.order:type_name -> order.Order
+	3,  // 11: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
+	6,  // 12: order.OrderService.CancelOrder:input_type -> order.CancelOrderRequest
+	7,  // 13: order.OrderService.PayOrder:input_type -> order.PayOrderRequest
+	8,  // 14: order.OrderService.DeliverOrder:input_type -> order.DeliverOrderRequest
+	9,  // 15: order.OrderService.FinishOrder:input_type -> order.FinishOrderRequest
+	10, // 16: order.OrderService.GetOrder:input_type -> order.GetOrderRequest
+	12, // 17: order.OrderService.GetUserOrders:input_type -> order.GetUserOrdersRequest
+	5,  // 18: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
+	14, // 19: order.OrderService.CancelOrder:output_type -> order.OrderResponse
+	14, // 20: order.OrderService.PayOrder:output_type -> order.OrderResponse
+	14, // 21: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
+	14, // 22: order.OrderService.FinishOrder:output_type -> order.OrderResponse
+	11, // 23: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
+	13, // 24: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
+	18, // [18:25] is the sub-list for method output_type
+	11, // [11:18] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_order_order_order_proto_init() }

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package attribute;
 
 option go_package = "./api/zebra-goods/attribute;attribute";
@@ -62,7 +64,9 @@ message GetAttributeRequest {
 
 // 获取属性响应
 message GetAttributeResponse {
-  GoodsAttribute attribute = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  GoodsAttribute attribute = 3;
 }
 
 // 列出属性请求
@@ -76,15 +80,22 @@ message ListAttributeRequest {
 
 // 列出属性响应
 message ListAttributeResponse {
-  repeated GoodsAttribute attributes = 1;
-  int32                   total      = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated GoodsAttribute attributes = 3;
+  int32                   total      = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 属性服务
 service AttributeService {
-  rpc Create(CreateAttributeRequest) returns (GoodsAttribute);
-  rpc Update(UpdateAttributeRequest) returns (GoodsAttribute);
-  rpc Delete(DeleteAttributeRequest) returns (GoodsAttribute);
+  rpc Create(CreateAttributeRequest) returns (Response);
+  rpc Update(UpdateAttributeRequest) returns (Response);
+  rpc Delete(DeleteAttributeRequest) returns (Response);
   rpc Get(GetAttributeRequest) returns (GetAttributeResponse);
   rpc List(ListAttributeRequest) returns (ListAttributeResponse);
 }

@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package application;
 
 option go_package = "./api/zebra-config/application;application";
@@ -64,7 +66,9 @@ message GetApplicationRequest {
 
 // 获取应用响应
 message GetApplicationResponse {
-  Application application = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Application application = 3;
 }
 
 // 列出应用请求
@@ -76,15 +80,22 @@ message ListApplicationRequest {
 
 // 列出应用响应
 message ListApplicationResponse {
-  repeated Application applications = 1;
-  int32 total = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated Application applications = 3;
+  int32 total = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 应用服务
 service ApplicationService {
-  rpc Create(CreateApplicationRequest) returns (Application);
-  rpc Update(UpdateApplicationRequest) returns (Application);
-  rpc Delete(DeleteApplicationRequest) returns (Application);
+  rpc Create(CreateApplicationRequest) returns (Response);
+  rpc Update(UpdateApplicationRequest) returns (Response);
+  rpc Delete(DeleteApplicationRequest) returns (Response);
   rpc Get(GetApplicationRequest) returns (GetApplicationResponse);
   rpc List(ListApplicationRequest) returns (ListApplicationResponse);
 }

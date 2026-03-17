@@ -54,9 +54,9 @@ var (
 
 // RoleService is a client for the role.RoleService service.
 type RoleService interface {
-	Create(ctx context.Context, req *CreateRoleRequest, opts ...client.CallOption) (*Role, error)
-	Update(ctx context.Context, req *UpdateRoleRequest, opts ...client.CallOption) (*Role, error)
-	Delete(ctx context.Context, req *DeleteRoleRequest, opts ...client.CallOption) (*Role, error)
+	Create(ctx context.Context, req *CreateRoleRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateRoleRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteRoleRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetRoleRequest, opts ...client.CallOption) (*GetRoleResponse, error)
 	List(ctx context.Context, req *ListRoleRequest, opts ...client.CallOption) (*ListRoleResponse, error)
 }
@@ -81,24 +81,24 @@ type RoleServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *RoleServiceImpl) Create(ctx context.Context, req *CreateRoleRequest, opts ...client.CallOption) (*Role, error) {
-	resp := new(Role)
+func (c *RoleServiceImpl) Create(ctx context.Context, req *CreateRoleRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *RoleServiceImpl) Update(ctx context.Context, req *UpdateRoleRequest, opts ...client.CallOption) (*Role, error) {
-	resp := new(Role)
+func (c *RoleServiceImpl) Update(ctx context.Context, req *UpdateRoleRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *RoleServiceImpl) Delete(ctx context.Context, req *DeleteRoleRequest, opts ...client.CallOption) (*Role, error) {
-	resp := new(Role)
+func (c *RoleServiceImpl) Delete(ctx context.Context, req *DeleteRoleRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var RoleService_ClientInfo = client.ClientInfo{
 
 // RoleServiceHandler is an implementation of the role.RoleService service.
 type RoleServiceHandler interface {
-	Create(context.Context, *CreateRoleRequest) (*Role, error)
-	Update(context.Context, *UpdateRoleRequest) (*Role, error)
-	Delete(context.Context, *DeleteRoleRequest) (*Role, error)
+	Create(context.Context, *CreateRoleRequest) (*Response, error)
+	Update(context.Context, *UpdateRoleRequest) (*Response, error)
+	Delete(context.Context, *DeleteRoleRequest) (*Response, error)
 	Get(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
 	List(context.Context, *ListRoleRequest) (*ListRoleResponse, error)
 }

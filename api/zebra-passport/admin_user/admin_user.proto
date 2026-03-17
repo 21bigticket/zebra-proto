@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package admin_user;
 
 option go_package = "./api/zebra-passport/admin_user;admin_user";
@@ -67,8 +69,10 @@ message GetAdminUserRequest {
 
 // 获取管理员响应
 message GetAdminUserResponse {
-  AdminUser admin_user = 1;
-  repeated int64 role_ids = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  AdminUser admin_user = 3;
+  repeated int64 role_ids = 4;
 }
 
 // 列出管理员请求
@@ -81,8 +85,10 @@ message ListAdminUserRequest {
 
 // 列出管理员响应
 message ListAdminUserResponse {
-  repeated AdminUser admin_users = 1;
-  int32                 total     = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  repeated AdminUser admin_users = 3;
+  int32                 total     = 4;
 }
 
 // 登录请求
@@ -93,15 +99,22 @@ message LoginRequest {
 
 // 登录响应
 message LoginResponse {
-  AdminUser admin_user = 1;
-  string token         = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  AdminUser admin_user = 3;
+  string token         = 4;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
 }
 
 // 管理员用户服务
 service AdminUserService {
-  rpc Create(CreateAdminUserRequest) returns (AdminUser);
-  rpc Update(UpdateAdminUserRequest) returns (AdminUser);
-  rpc Delete(DeleteAdminUserRequest) returns (AdminUser);
+  rpc Create(CreateAdminUserRequest) returns (Response);
+  rpc Update(UpdateAdminUserRequest) returns (Response);
+  rpc Delete(DeleteAdminUserRequest) returns (Response);
   rpc Get(GetAdminUserRequest) returns (GetAdminUserResponse);
   rpc List(ListAdminUserRequest) returns (ListAdminUserResponse);
   rpc Login(LoginRequest) returns (LoginResponse);

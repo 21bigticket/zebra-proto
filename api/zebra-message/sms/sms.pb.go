@@ -25,6 +25,7 @@ package sms
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -202,9 +203,11 @@ func (x *SendSmsRequest) GetParams() map[string]string {
 // 发送短信响应
 type SendSmsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	MsgId         string                 `protobuf:"bytes,3,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"` // 消息ID
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	MsgId         string                 `protobuf:"bytes,5,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"` // 消息ID
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -237,6 +240,20 @@ func (x *SendSmsResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SendSmsResponse.ProtoReflect.Descriptor instead.
 func (*SendSmsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SendSmsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *SendSmsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *SendSmsResponse) GetSuccess() bool {
@@ -324,9 +341,11 @@ func (x *BatchSendSmsRequest) GetParams() map[string]string {
 // 批量发送短信响应
 type BatchSendSmsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	MsgIds        []string               `protobuf:"bytes,3,rep,name=msg_ids,json=msgIds,proto3" json:"msg_ids,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Success       bool                   `protobuf:"varint,3,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	MsgIds        []string               `protobuf:"bytes,5,rep,name=msg_ids,json=msgIds,proto3" json:"msg_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -361,6 +380,20 @@ func (*BatchSendSmsResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *BatchSendSmsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *BatchSendSmsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *BatchSendSmsResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
@@ -386,7 +419,7 @@ var File_api_zebra_message_sms_sms_proto protoreflect.FileDescriptor
 
 const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\n" +
-	"\x1fapi/zebra-message/sms/sms.proto\x12\x03sms\"\xfb\x01\n" +
+	"\x1fapi/zebra-message/sms/sms.proto\x12\x03sms\x1a\x1egoogle/protobuf/wrappers.proto\"\xfb\x01\n" +
 	"\vSmsTemplate\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12\x19\n" +
@@ -407,22 +440,26 @@ const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\x06params\x18\x03 \x03(\v2\x1f.sms.SendSmsRequest.ParamsEntryR\x06params\x1a9\n" +
 	"\vParamsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\\\n" +
-	"\x0fSendSmsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\x15\n" +
-	"\x06msg_id\x18\x03 \x01(\tR\x05msgId\"\xc1\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9f\x01\n" +
+	"\x0fSendSmsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\x15\n" +
+	"\x06msg_id\x18\x05 \x01(\tR\x05msgId\"\xc1\x01\n" +
 	"\x13BatchSendSmsRequest\x12\x16\n" +
 	"\x06phones\x18\x01 \x03(\tR\x06phones\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12<\n" +
 	"\x06params\x18\x03 \x03(\v2$.sms.BatchSendSmsRequest.ParamsEntryR\x06params\x1a9\n" +
 	"\vParamsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"c\n" +
-	"\x14BatchSendSmsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\x17\n" +
-	"\amsg_ids\x18\x03 \x03(\tR\x06msgIds2\x87\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa6\x01\n" +
+	"\x14BatchSendSmsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
+	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12\x17\n" +
+	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\x87\x01\n" +
 	"\n" +
 	"SmsService\x124\n" +
 	"\aSendSms\x12\x13.sms.SendSmsRequest\x1a\x14.sms.SendSmsResponse\x12C\n" +
@@ -442,26 +479,29 @@ func file_api_zebra_message_sms_sms_proto_rawDescGZIP() []byte {
 
 var file_api_zebra_message_sms_sms_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_api_zebra_message_sms_sms_proto_goTypes = []any{
-	(*SmsTemplate)(nil),          // 0: sms.SmsTemplate
-	(*SendSmsRequest)(nil),       // 1: sms.SendSmsRequest
-	(*SendSmsResponse)(nil),      // 2: sms.SendSmsResponse
-	(*BatchSendSmsRequest)(nil),  // 3: sms.BatchSendSmsRequest
-	(*BatchSendSmsResponse)(nil), // 4: sms.BatchSendSmsResponse
-	nil,                          // 5: sms.SendSmsRequest.ParamsEntry
-	nil,                          // 6: sms.BatchSendSmsRequest.ParamsEntry
+	(*SmsTemplate)(nil),           // 0: sms.SmsTemplate
+	(*SendSmsRequest)(nil),        // 1: sms.SendSmsRequest
+	(*SendSmsResponse)(nil),       // 2: sms.SendSmsResponse
+	(*BatchSendSmsRequest)(nil),   // 3: sms.BatchSendSmsRequest
+	(*BatchSendSmsResponse)(nil),  // 4: sms.BatchSendSmsResponse
+	nil,                           // 5: sms.SendSmsRequest.ParamsEntry
+	nil,                           // 6: sms.BatchSendSmsRequest.ParamsEntry
+	(*wrapperspb.Int32Value)(nil), // 7: google.protobuf.Int32Value
 }
 var file_api_zebra_message_sms_sms_proto_depIdxs = []int32{
 	5, // 0: sms.SendSmsRequest.params:type_name -> sms.SendSmsRequest.ParamsEntry
-	6, // 1: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
-	1, // 2: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
-	3, // 3: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
-	2, // 4: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
-	4, // 5: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	7, // 1: sms.SendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	6, // 2: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
+	7, // 3: sms.BatchSendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 4: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
+	3, // 5: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
+	2, // 6: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
+	4, // 7: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_sms_sms_proto_init() }

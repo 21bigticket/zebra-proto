@@ -25,6 +25,7 @@ package admin_user
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -417,8 +418,10 @@ func (x *GetAdminUserRequest) GetId() int64 {
 // 获取管理员响应
 type GetAdminUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AdminUser     *AdminUser             `protobuf:"bytes,1,opt,name=admin_user,json=adminUser,proto3" json:"admin_user,omitempty"`
-	RoleIds       []int64                `protobuf:"varint,2,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	AdminUser     *AdminUser             `protobuf:"bytes,3,opt,name=admin_user,json=adminUser,proto3" json:"admin_user,omitempty"`
+	RoleIds       []int64                `protobuf:"varint,4,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -451,6 +454,20 @@ func (x *GetAdminUserResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetAdminUserResponse.ProtoReflect.Descriptor instead.
 func (*GetAdminUserResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetAdminUserResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetAdminUserResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetAdminUserResponse) GetAdminUser() *AdminUser {
@@ -539,8 +556,10 @@ func (x *ListAdminUserRequest) GetStatus() int32 {
 // 列出管理员响应
 type ListAdminUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AdminUsers    []*AdminUser           `protobuf:"bytes,1,rep,name=admin_users,json=adminUsers,proto3" json:"admin_users,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	AdminUsers    []*AdminUser           `protobuf:"bytes,3,rep,name=admin_users,json=adminUsers,proto3" json:"admin_users,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -573,6 +592,20 @@ func (x *ListAdminUserResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListAdminUserResponse.ProtoReflect.Descriptor instead.
 func (*ListAdminUserResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListAdminUserResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListAdminUserResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *ListAdminUserResponse) GetAdminUsers() []*AdminUser {
@@ -645,8 +678,10 @@ func (x *LoginRequest) GetPassword() string {
 // 登录响应
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AdminUser     *AdminUser             `protobuf:"bytes,1,opt,name=admin_user,json=adminUser,proto3" json:"admin_user,omitempty"`
-	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	AdminUser     *AdminUser             `protobuf:"bytes,3,opt,name=admin_user,json=adminUser,proto3" json:"admin_user,omitempty"`
+	Token         string                 `protobuf:"bytes,4,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -681,6 +716,20 @@ func (*LoginResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{9}
 }
 
+func (x *LoginResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *LoginResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *LoginResponse) GetAdminUser() *AdminUser {
 	if x != nil {
 		return x.AdminUser
@@ -695,12 +744,64 @@ func (x *LoginResponse) GetToken() string {
 	return ""
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_passport_admin_user_admin_user_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_admin_user_admin_user_proto_rawDesc = "" +
 	"\n" +
 	".api/zebra-passport/admin_user/admin_user.proto\x12\n" +
-	"admin_user\"\x96\x02\n" +
+	"admin_user\x1a\x1egoogle/protobuf/wrappers.proto\"\x96\x02\n" +
 	"\tAdminUser\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1a\n" +
@@ -733,31 +834,40 @@ const file_api_zebra_passport_admin_user_admin_user_proto_rawDesc = "" +
 	"\x16DeleteAdminUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"%\n" +
 	"\x13GetAdminUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"g\n" +
-	"\x14GetAdminUserResponse\x124\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\xaa\x01\n" +
+	"\x14GetAdminUserResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x124\n" +
 	"\n" +
-	"admin_user\x18\x01 \x01(\v2\x15.admin_user.AdminUserR\tadminUser\x12\x19\n" +
-	"\brole_ids\x18\x02 \x03(\x03R\aroleIds\"\x82\x01\n" +
+	"admin_user\x18\x03 \x01(\v2\x15.admin_user.AdminUserR\tadminUser\x12\x19\n" +
+	"\brole_ids\x18\x04 \x03(\x03R\aroleIds\"\x82\x01\n" +
 	"\x14ListAdminUserRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
 	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"e\n" +
-	"\x15ListAdminUserResponse\x126\n" +
-	"\vadmin_users\x18\x01 \x03(\v2\x15.admin_user.AdminUserR\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\"\xa8\x01\n" +
+	"\x15ListAdminUserResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x126\n" +
+	"\vadmin_users\x18\x03 \x03(\v2\x15.admin_user.AdminUserR\n" +
 	"adminUsers\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"G\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"G\n" +
 	"\fLoginRequest\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"[\n" +
-	"\rLoginResponse\x124\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"\x9e\x01\n" +
+	"\rLoginResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x124\n" +
 	"\n" +
-	"admin_user\x18\x01 \x01(\v2\x15.admin_user.AdminUserR\tadminUser\x12\x14\n" +
-	"\x05token\x18\x02 \x01(\tR\x05token2\xb6\x03\n" +
-	"\x10AdminUserService\x12C\n" +
-	"\x06Create\x12\".admin_user.CreateAdminUserRequest\x1a\x15.admin_user.AdminUser\x12C\n" +
-	"\x06Update\x12\".admin_user.UpdateAdminUserRequest\x1a\x15.admin_user.AdminUser\x12C\n" +
-	"\x06Delete\x12\".admin_user.DeleteAdminUserRequest\x1a\x15.admin_user.AdminUser\x12H\n" +
+	"admin_user\x18\x03 \x01(\v2\x15.admin_user.AdminUserR\tadminUser\x12\x14\n" +
+	"\x05token\x18\x04 \x01(\tR\x05token\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xb3\x03\n" +
+	"\x10AdminUserService\x12B\n" +
+	"\x06Create\x12\".admin_user.CreateAdminUserRequest\x1a\x14.admin_user.Response\x12B\n" +
+	"\x06Update\x12\".admin_user.UpdateAdminUserRequest\x1a\x14.admin_user.Response\x12B\n" +
+	"\x06Delete\x12\".admin_user.DeleteAdminUserRequest\x1a\x14.admin_user.Response\x12H\n" +
 	"\x03Get\x12\x1f.admin_user.GetAdminUserRequest\x1a .admin_user.GetAdminUserResponse\x12K\n" +
 	"\x04List\x12 .admin_user.ListAdminUserRequest\x1a!.admin_user.ListAdminUserResponse\x12<\n" +
 	"\x05Login\x12\x18.admin_user.LoginRequest\x1a\x19.admin_user.LoginResponseB,Z*./api/zebra-passport/admin_user;admin_userb\x06proto3"
@@ -774,7 +884,7 @@ func file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescData
 }
 
-var file_api_zebra_passport_admin_user_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_api_zebra_passport_admin_user_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_api_zebra_passport_admin_user_admin_user_proto_goTypes = []any{
 	(*AdminUser)(nil),              // 0: admin_user.AdminUser
 	(*CreateAdminUserRequest)(nil), // 1: admin_user.CreateAdminUserRequest
@@ -786,28 +896,34 @@ var file_api_zebra_passport_admin_user_admin_user_proto_goTypes = []any{
 	(*ListAdminUserResponse)(nil),  // 7: admin_user.ListAdminUserResponse
 	(*LoginRequest)(nil),           // 8: admin_user.LoginRequest
 	(*LoginResponse)(nil),          // 9: admin_user.LoginResponse
+	(*Response)(nil),               // 10: admin_user.Response
+	(*wrapperspb.Int32Value)(nil),  // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_admin_user_admin_user_proto_depIdxs = []int32{
-	0, // 0: admin_user.GetAdminUserResponse.admin_user:type_name -> admin_user.AdminUser
-	0, // 1: admin_user.ListAdminUserResponse.admin_users:type_name -> admin_user.AdminUser
-	0, // 2: admin_user.LoginResponse.admin_user:type_name -> admin_user.AdminUser
-	1, // 3: admin_user.AdminUserService.Create:input_type -> admin_user.CreateAdminUserRequest
-	2, // 4: admin_user.AdminUserService.Update:input_type -> admin_user.UpdateAdminUserRequest
-	3, // 5: admin_user.AdminUserService.Delete:input_type -> admin_user.DeleteAdminUserRequest
-	4, // 6: admin_user.AdminUserService.Get:input_type -> admin_user.GetAdminUserRequest
-	6, // 7: admin_user.AdminUserService.List:input_type -> admin_user.ListAdminUserRequest
-	8, // 8: admin_user.AdminUserService.Login:input_type -> admin_user.LoginRequest
-	0, // 9: admin_user.AdminUserService.Create:output_type -> admin_user.AdminUser
-	0, // 10: admin_user.AdminUserService.Update:output_type -> admin_user.AdminUser
-	0, // 11: admin_user.AdminUserService.Delete:output_type -> admin_user.AdminUser
-	5, // 12: admin_user.AdminUserService.Get:output_type -> admin_user.GetAdminUserResponse
-	7, // 13: admin_user.AdminUserService.List:output_type -> admin_user.ListAdminUserResponse
-	9, // 14: admin_user.AdminUserService.Login:output_type -> admin_user.LoginResponse
-	9, // [9:15] is the sub-list for method output_type
-	3, // [3:9] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	11, // 0: admin_user.GetAdminUserResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: admin_user.GetAdminUserResponse.admin_user:type_name -> admin_user.AdminUser
+	11, // 2: admin_user.ListAdminUserResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: admin_user.ListAdminUserResponse.admin_users:type_name -> admin_user.AdminUser
+	11, // 4: admin_user.LoginResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: admin_user.LoginResponse.admin_user:type_name -> admin_user.AdminUser
+	11, // 6: admin_user.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 7: admin_user.AdminUserService.Create:input_type -> admin_user.CreateAdminUserRequest
+	2,  // 8: admin_user.AdminUserService.Update:input_type -> admin_user.UpdateAdminUserRequest
+	3,  // 9: admin_user.AdminUserService.Delete:input_type -> admin_user.DeleteAdminUserRequest
+	4,  // 10: admin_user.AdminUserService.Get:input_type -> admin_user.GetAdminUserRequest
+	6,  // 11: admin_user.AdminUserService.List:input_type -> admin_user.ListAdminUserRequest
+	8,  // 12: admin_user.AdminUserService.Login:input_type -> admin_user.LoginRequest
+	10, // 13: admin_user.AdminUserService.Create:output_type -> admin_user.Response
+	10, // 14: admin_user.AdminUserService.Update:output_type -> admin_user.Response
+	10, // 15: admin_user.AdminUserService.Delete:output_type -> admin_user.Response
+	5,  // 16: admin_user.AdminUserService.Get:output_type -> admin_user.GetAdminUserResponse
+	7,  // 17: admin_user.AdminUserService.List:output_type -> admin_user.ListAdminUserResponse
+	9,  // 18: admin_user.AdminUserService.Login:output_type -> admin_user.LoginResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_admin_user_admin_user_proto_init() }
@@ -821,7 +937,7 @@ func file_api_zebra_passport_admin_user_admin_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_admin_user_admin_user_proto_rawDesc), len(file_api_zebra_passport_admin_user_admin_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

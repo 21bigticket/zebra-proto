@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package permission;
 
 option go_package = "./api/zebra-passport/permission;permission";
@@ -30,7 +32,9 @@ message HasPermissionRequest {
 
 // 权限检查响应
 message HasPermissionResponse {
-  bool has_permission = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool has_permission = 3;
 }
 
 // 权限服务

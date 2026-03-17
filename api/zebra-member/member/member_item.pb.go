@@ -25,6 +25,7 @@ package member
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -324,7 +325,9 @@ func (x *GetMemberItemRequest) GetUserId() int64 {
 // 获取用户详细信息响应
 type GetMemberItemResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MemberItem    *MemberItem            `protobuf:"bytes,1,opt,name=member_item,json=memberItem,proto3" json:"member_item,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	MemberItem    *MemberItem            `protobuf:"bytes,3,opt,name=member_item,json=memberItem,proto3" json:"member_item,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -359,6 +362,20 @@ func (*GetMemberItemResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_member_member_member_item_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *GetMemberItemResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetMemberItemResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *GetMemberItemResponse) GetMemberItem() *MemberItem {
 	if x != nil {
 		return x.MemberItem
@@ -366,11 +383,63 @@ func (x *GetMemberItemResponse) GetMemberItem() *MemberItem {
 	return nil
 }
 
+type MemberItemResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MemberItemResponse) Reset() {
+	*x = MemberItemResponse{}
+	mi := &file_api_zebra_member_member_member_item_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MemberItemResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemberItemResponse) ProtoMessage() {}
+
+func (x *MemberItemResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_member_member_member_item_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemberItemResponse.ProtoReflect.Descriptor instead.
+func (*MemberItemResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_member_member_member_item_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *MemberItemResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *MemberItemResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_member_member_member_item_proto protoreflect.FileDescriptor
 
 const file_api_zebra_member_member_member_item_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-member/member/member_item.proto\x12\x06member\"\xdc\x01\n" +
+	")api/zebra-member/member/member_item.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xdc\x01\n" +
 	"\n" +
 	"MemberItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
@@ -395,13 +464,18 @@ const file_api_zebra_member_member_member_item_proto_rawDesc = "" +
 	"\x03age\x18\x03 \x01(\x05R\x03age\x12\x1a\n" +
 	"\bbirthday\x18\x04 \x01(\x03R\bbirthday\"/\n" +
 	"\x14GetMemberItemRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"L\n" +
-	"\x15GetMemberItemResponse\x123\n" +
-	"\vmember_item\x18\x01 \x01(\v2\x12.member.MemberItemR\n" +
-	"memberItem2\xd5\x01\n" +
-	"\x11MemberItemService\x12=\n" +
-	"\x06Create\x12\x1f.member.CreateMemberItemRequest\x1a\x12.member.MemberItem\x12=\n" +
-	"\x06Update\x12\x1f.member.UpdateMemberItemRequest\x1a\x12.member.MemberItem\x12B\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x8f\x01\n" +
+	"\x15GetMemberItemResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\vmember_item\x18\x03 \x01(\v2\x12.member.MemberItemR\n" +
+	"memberItem\"W\n" +
+	"\x12MemberItemResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xe5\x01\n" +
+	"\x11MemberItemService\x12E\n" +
+	"\x06Create\x12\x1f.member.CreateMemberItemRequest\x1a\x1a.member.MemberItemResponse\x12E\n" +
+	"\x06Update\x12\x1f.member.UpdateMemberItemRequest\x1a\x1a.member.MemberItemResponse\x12B\n" +
 	"\x03Get\x12\x1c.member.GetMemberItemRequest\x1a\x1d.member.GetMemberItemResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
@@ -416,27 +490,31 @@ func file_api_zebra_member_member_member_item_proto_rawDescGZIP() []byte {
 	return file_api_zebra_member_member_member_item_proto_rawDescData
 }
 
-var file_api_zebra_member_member_member_item_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_api_zebra_member_member_member_item_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_api_zebra_member_member_member_item_proto_goTypes = []any{
 	(*MemberItem)(nil),              // 0: member.MemberItem
 	(*CreateMemberItemRequest)(nil), // 1: member.CreateMemberItemRequest
 	(*UpdateMemberItemRequest)(nil), // 2: member.UpdateMemberItemRequest
 	(*GetMemberItemRequest)(nil),    // 3: member.GetMemberItemRequest
 	(*GetMemberItemResponse)(nil),   // 4: member.GetMemberItemResponse
+	(*MemberItemResponse)(nil),      // 5: member.MemberItemResponse
+	(*wrapperspb.Int32Value)(nil),   // 6: google.protobuf.Int32Value
 }
 var file_api_zebra_member_member_member_item_proto_depIdxs = []int32{
-	0, // 0: member.GetMemberItemResponse.member_item:type_name -> member.MemberItem
-	1, // 1: member.MemberItemService.Create:input_type -> member.CreateMemberItemRequest
-	2, // 2: member.MemberItemService.Update:input_type -> member.UpdateMemberItemRequest
-	3, // 3: member.MemberItemService.Get:input_type -> member.GetMemberItemRequest
-	0, // 4: member.MemberItemService.Create:output_type -> member.MemberItem
-	0, // 5: member.MemberItemService.Update:output_type -> member.MemberItem
-	4, // 6: member.MemberItemService.Get:output_type -> member.GetMemberItemResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 0: member.GetMemberItemResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 1: member.GetMemberItemResponse.member_item:type_name -> member.MemberItem
+	6, // 2: member.MemberItemResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 3: member.MemberItemService.Create:input_type -> member.CreateMemberItemRequest
+	2, // 4: member.MemberItemService.Update:input_type -> member.UpdateMemberItemRequest
+	3, // 5: member.MemberItemService.Get:input_type -> member.GetMemberItemRequest
+	5, // 6: member.MemberItemService.Create:output_type -> member.MemberItemResponse
+	5, // 7: member.MemberItemService.Update:output_type -> member.MemberItemResponse
+	4, // 8: member.MemberItemService.Get:output_type -> member.GetMemberItemResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_member_member_member_item_proto_init() }
@@ -450,7 +528,7 @@ func file_api_zebra_member_member_member_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_member_member_member_item_proto_rawDesc), len(file_api_zebra_member_member_member_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

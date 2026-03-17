@@ -25,6 +25,7 @@ package path
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -393,7 +394,9 @@ func (x *GetPathRequest) GetId() int64 {
 // 获取路径响应
 type GetPathResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          *Path                  `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Path          *Path                  `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -426,6 +429,20 @@ func (x *GetPathResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetPathResponse.ProtoReflect.Descriptor instead.
 func (*GetPathResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_path_path_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetPathResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetPathResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
 }
 
 func (x *GetPathResponse) GetPath() *Path {
@@ -515,8 +532,10 @@ func (x *ListPathRequest) GetStatus() int32 {
 // 列出路径响应
 type ListPathResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paths         []*Path                `protobuf:"bytes,1,rep,name=paths,proto3" json:"paths,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Paths         []*Path                `protobuf:"bytes,3,rep,name=paths,proto3" json:"paths,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -551,6 +570,20 @@ func (*ListPathResponse) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_path_path_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *ListPathResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListPathResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 func (x *ListPathResponse) GetPaths() []*Path {
 	if x != nil {
 		return x.Paths
@@ -565,11 +598,63 @@ func (x *ListPathResponse) GetTotal() int32 {
 	return 0
 }
 
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_api_zebra_passport_path_path_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_path_path_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_path_path_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Response) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *Response) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_passport_path_path_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_path_path_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-passport/path/path.proto\x12\x04path\"\x81\x02\n" +
+	"\"api/zebra-passport/path/path.proto\x12\x04path\x1a\x1egoogle/protobuf/wrappers.proto\"\x81\x02\n" +
 	"\x04Path\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tpath_name\x18\x02 \x01(\tR\bpathName\x12\x19\n" +
@@ -598,27 +683,31 @@ const file_api_zebra_passport_path_path_proto_rawDesc = "" +
 	"\x11DeletePathRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x0eGetPathRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"1\n" +
-	"\x0fGetPathResponse\x12\x1e\n" +
-	"\x04path\x18\x01 \x01(\v2\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"t\n" +
+	"\x0fGetPathResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1e\n" +
+	"\x04path\x18\x03 \x01(\v2\n" +
 	".path.PathR\x04path\"\x95\x01\n" +
 	"\x0fListPathRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
 	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"J\n" +
-	"\x10ListPathResponse\x12 \n" +
-	"\x05paths\x18\x01 \x03(\v2\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"\x8d\x01\n" +
+	"\x10ListPathResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12 \n" +
+	"\x05paths\x18\x03 \x03(\v2\n" +
 	".path.PathR\x05paths\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total2\x85\x02\n" +
-	"\vPathService\x12-\n" +
-	"\x06Create\x12\x17.path.CreatePathRequest\x1a\n" +
-	".path.Path\x12-\n" +
-	"\x06Update\x12\x17.path.UpdatePathRequest\x1a\n" +
-	".path.Path\x12-\n" +
-	"\x06Delete\x12\x17.path.DeletePathRequest\x1a\n" +
-	".path.Path\x122\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
+	"\bResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\x91\x02\n" +
+	"\vPathService\x121\n" +
+	"\x06Create\x12\x17.path.CreatePathRequest\x1a\x0e.path.Response\x121\n" +
+	"\x06Update\x12\x17.path.UpdatePathRequest\x1a\x0e.path.Response\x121\n" +
+	"\x06Delete\x12\x17.path.DeletePathRequest\x1a\x0e.path.Response\x122\n" +
 	"\x03Get\x12\x14.path.GetPathRequest\x1a\x15.path.GetPathResponse\x125\n" +
 	"\x04List\x12\x15.path.ListPathRequest\x1a\x16.path.ListPathResponseB Z\x1e./api/zebra-passport/path;pathb\x06proto3"
 
@@ -634,35 +723,40 @@ func file_api_zebra_passport_path_path_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_path_path_proto_rawDescData
 }
 
-var file_api_zebra_passport_path_path_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_passport_path_path_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_api_zebra_passport_path_path_proto_goTypes = []any{
-	(*Path)(nil),              // 0: path.Path
-	(*CreatePathRequest)(nil), // 1: path.CreatePathRequest
-	(*UpdatePathRequest)(nil), // 2: path.UpdatePathRequest
-	(*DeletePathRequest)(nil), // 3: path.DeletePathRequest
-	(*GetPathRequest)(nil),    // 4: path.GetPathRequest
-	(*GetPathResponse)(nil),   // 5: path.GetPathResponse
-	(*ListPathRequest)(nil),   // 6: path.ListPathRequest
-	(*ListPathResponse)(nil),  // 7: path.ListPathResponse
+	(*Path)(nil),                  // 0: path.Path
+	(*CreatePathRequest)(nil),     // 1: path.CreatePathRequest
+	(*UpdatePathRequest)(nil),     // 2: path.UpdatePathRequest
+	(*DeletePathRequest)(nil),     // 3: path.DeletePathRequest
+	(*GetPathRequest)(nil),        // 4: path.GetPathRequest
+	(*GetPathResponse)(nil),       // 5: path.GetPathResponse
+	(*ListPathRequest)(nil),       // 6: path.ListPathRequest
+	(*ListPathResponse)(nil),      // 7: path.ListPathResponse
+	(*Response)(nil),              // 8: path.Response
+	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_path_path_proto_depIdxs = []int32{
-	0, // 0: path.GetPathResponse.path:type_name -> path.Path
-	0, // 1: path.ListPathResponse.paths:type_name -> path.Path
-	1, // 2: path.PathService.Create:input_type -> path.CreatePathRequest
-	2, // 3: path.PathService.Update:input_type -> path.UpdatePathRequest
-	3, // 4: path.PathService.Delete:input_type -> path.DeletePathRequest
-	4, // 5: path.PathService.Get:input_type -> path.GetPathRequest
-	6, // 6: path.PathService.List:input_type -> path.ListPathRequest
-	0, // 7: path.PathService.Create:output_type -> path.Path
-	0, // 8: path.PathService.Update:output_type -> path.Path
-	0, // 9: path.PathService.Delete:output_type -> path.Path
-	5, // 10: path.PathService.Get:output_type -> path.GetPathResponse
-	7, // 11: path.PathService.List:output_type -> path.ListPathResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: path.GetPathResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: path.GetPathResponse.path:type_name -> path.Path
+	9,  // 2: path.ListPathResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: path.ListPathResponse.paths:type_name -> path.Path
+	9,  // 4: path.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: path.PathService.Create:input_type -> path.CreatePathRequest
+	2,  // 6: path.PathService.Update:input_type -> path.UpdatePathRequest
+	3,  // 7: path.PathService.Delete:input_type -> path.DeletePathRequest
+	4,  // 8: path.PathService.Get:input_type -> path.GetPathRequest
+	6,  // 9: path.PathService.List:input_type -> path.ListPathRequest
+	8,  // 10: path.PathService.Create:output_type -> path.Response
+	8,  // 11: path.PathService.Update:output_type -> path.Response
+	8,  // 12: path.PathService.Delete:output_type -> path.Response
+	5,  // 13: path.PathService.Get:output_type -> path.GetPathResponse
+	7,  // 14: path.PathService.List:output_type -> path.ListPathResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_path_path_proto_init() }
@@ -676,7 +770,7 @@ func file_api_zebra_passport_path_path_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_path_path_proto_rawDesc), len(file_api_zebra_passport_path_path_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

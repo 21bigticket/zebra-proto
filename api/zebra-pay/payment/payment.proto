@@ -17,6 +17,8 @@
 
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 package payment;
 
 option go_package = "./api/zebra-pay/payment;payment";
@@ -78,9 +80,11 @@ message CreatePaymentRequest {
 
 // 创建支付响应
 message CreatePaymentResponse {
-  Payment payment     = 1;
-  string  pay_url     = 2;  // 支付URL
-  string  message     = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Payment payment     = 3;
+  string  pay_url     = 4;  // 支付URL
+  string  message     = 5;
 }
 
 // 支付回调请求
@@ -107,8 +111,10 @@ message RefundItemReq {
 
 // 创建退款响应
 message CreateRefundResponse {
-  Refund refund  = 1;
-  string message = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Refund refund  = 3;
+  string message = 4;
 }
 
 // 查询支付请求
@@ -121,7 +127,9 @@ message GetPaymentRequest {
 
 // 查询支付响应
 message GetPaymentResponse {
-  Payment payment = 1;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Payment payment = 3;
 }
 
 // 查询退款请求
@@ -134,8 +142,10 @@ message GetRefundRequest {
 
 // 查询退款响应
 message GetRefundResponse {
-  Refund                refund = 1;
-  repeated RefundItem   items  = 2;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  Refund                refund = 3;
+  repeated RefundItem   items  = 4;
 }
 
 // 支付日志记录
@@ -160,16 +170,20 @@ message LogPaymentRequest {
 
 // 记录支付日志响应
 message LogPaymentResponse {
-  bool   success = 1;
-  string message = 2;
-  PaymentLog log = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool   success = 3;
+  string message = 4;
+  PaymentLog log = 5;
 }
 
 // 通用响应
 message PaymentResponse {
-  bool    success = 1;
-  string  message = 2;
-  Payment payment = 3;
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;  // 提示语
+  bool    success = 3;
+  string  message = 4;
+  Payment payment = 5;
 }
 
 // 支付服务

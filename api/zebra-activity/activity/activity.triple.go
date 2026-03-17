@@ -68,9 +68,9 @@ var (
 
 // ActivityService is a client for the activity.ActivityService service.
 type ActivityService interface {
-	Create(ctx context.Context, req *CreateActivityRequest, opts ...client.CallOption) (*Activity, error)
-	Update(ctx context.Context, req *UpdateActivityRequest, opts ...client.CallOption) (*Activity, error)
-	Delete(ctx context.Context, req *DeleteActivityRequest, opts ...client.CallOption) (*Activity, error)
+	Create(ctx context.Context, req *CreateActivityRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateActivityRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteActivityRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetActivityRequest, opts ...client.CallOption) (*GetActivityResponse, error)
 	List(ctx context.Context, req *ListActivityRequest, opts ...client.CallOption) (*ListActivityResponse, error)
 	Start(ctx context.Context, req *StartActivityRequest, opts ...client.CallOption) (*StartActivityResponse, error)
@@ -79,7 +79,7 @@ type ActivityService interface {
 	GetActivityGoods(ctx context.Context, req *GetActivityGoodsRequest, opts ...client.CallOption) (*GetActivityGoodsResponse, error)
 	GetGoodsActivity(ctx context.Context, req *GetGoodsActivityRequest, opts ...client.CallOption) (*GetGoodsActivityResponse, error)
 	ValidateActivity(ctx context.Context, req *ValidateActivityRequest, opts ...client.CallOption) (*ValidateActivityResponse, error)
-	DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*ActivityResponse, error)
+	DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error)
 }
 
 // NewActivityService constructs a client for the activity.ActivityService service.
@@ -102,24 +102,24 @@ type ActivityServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *ActivityServiceImpl) Create(ctx context.Context, req *CreateActivityRequest, opts ...client.CallOption) (*Activity, error) {
-	resp := new(Activity)
+func (c *ActivityServiceImpl) Create(ctx context.Context, req *CreateActivityRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ActivityServiceImpl) Update(ctx context.Context, req *UpdateActivityRequest, opts ...client.CallOption) (*Activity, error) {
-	resp := new(Activity)
+func (c *ActivityServiceImpl) Update(ctx context.Context, req *UpdateActivityRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *ActivityServiceImpl) Delete(ctx context.Context, req *DeleteActivityRequest, opts ...client.CallOption) (*Activity, error) {
-	resp := new(Activity)
+func (c *ActivityServiceImpl) Delete(ctx context.Context, req *DeleteActivityRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -190,8 +190,8 @@ func (c *ActivityServiceImpl) ValidateActivity(ctx context.Context, req *Validat
 	return resp, nil
 }
 
-func (c *ActivityServiceImpl) DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*ActivityResponse, error) {
-	resp := new(ActivityResponse)
+func (c *ActivityServiceImpl) DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeductActivityStock", opts...); err != nil {
 		return nil, err
 	}
@@ -209,9 +209,9 @@ var ActivityService_ClientInfo = client.ClientInfo{
 
 // ActivityServiceHandler is an implementation of the activity.ActivityService service.
 type ActivityServiceHandler interface {
-	Create(context.Context, *CreateActivityRequest) (*Activity, error)
-	Update(context.Context, *UpdateActivityRequest) (*Activity, error)
-	Delete(context.Context, *DeleteActivityRequest) (*Activity, error)
+	Create(context.Context, *CreateActivityRequest) (*Response, error)
+	Update(context.Context, *UpdateActivityRequest) (*Response, error)
+	Delete(context.Context, *DeleteActivityRequest) (*Response, error)
 	Get(context.Context, *GetActivityRequest) (*GetActivityResponse, error)
 	List(context.Context, *ListActivityRequest) (*ListActivityResponse, error)
 	Start(context.Context, *StartActivityRequest) (*StartActivityResponse, error)
@@ -220,7 +220,7 @@ type ActivityServiceHandler interface {
 	GetActivityGoods(context.Context, *GetActivityGoodsRequest) (*GetActivityGoodsResponse, error)
 	GetGoodsActivity(context.Context, *GetGoodsActivityRequest) (*GetGoodsActivityResponse, error)
 	ValidateActivity(context.Context, *ValidateActivityRequest) (*ValidateActivityResponse, error)
-	DeductActivityStock(context.Context, *DeductActivityStockRequest) (*ActivityResponse, error)
+	DeductActivityStock(context.Context, *DeductActivityStockRequest) (*Response, error)
 }
 
 func RegisterActivityServiceHandler(srv *server.Server, hdlr ActivityServiceHandler, opts ...server.ServiceOption) error {

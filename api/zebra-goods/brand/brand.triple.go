@@ -54,9 +54,9 @@ var (
 
 // BrandService is a client for the brand.BrandService service.
 type BrandService interface {
-	Create(ctx context.Context, req *CreateBrandRequest, opts ...client.CallOption) (*Brand, error)
-	Update(ctx context.Context, req *UpdateBrandRequest, opts ...client.CallOption) (*Brand, error)
-	Delete(ctx context.Context, req *DeleteBrandRequest, opts ...client.CallOption) (*Brand, error)
+	Create(ctx context.Context, req *CreateBrandRequest, opts ...client.CallOption) (*Response, error)
+	Update(ctx context.Context, req *UpdateBrandRequest, opts ...client.CallOption) (*Response, error)
+	Delete(ctx context.Context, req *DeleteBrandRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetBrandRequest, opts ...client.CallOption) (*GetBrandResponse, error)
 	List(ctx context.Context, req *ListBrandRequest, opts ...client.CallOption) (*ListBrandResponse, error)
 }
@@ -81,24 +81,24 @@ type BrandServiceImpl struct {
 	conn *client.Connection
 }
 
-func (c *BrandServiceImpl) Create(ctx context.Context, req *CreateBrandRequest, opts ...client.CallOption) (*Brand, error) {
-	resp := new(Brand)
+func (c *BrandServiceImpl) Create(ctx context.Context, req *CreateBrandRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *BrandServiceImpl) Update(ctx context.Context, req *UpdateBrandRequest, opts ...client.CallOption) (*Brand, error) {
-	resp := new(Brand)
+func (c *BrandServiceImpl) Update(ctx context.Context, req *UpdateBrandRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Update", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
 }
 
-func (c *BrandServiceImpl) Delete(ctx context.Context, req *DeleteBrandRequest, opts ...client.CallOption) (*Brand, error) {
-	resp := new(Brand)
+func (c *BrandServiceImpl) Delete(ctx context.Context, req *DeleteBrandRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Delete", opts...); err != nil {
 		return nil, err
 	}
@@ -132,9 +132,9 @@ var BrandService_ClientInfo = client.ClientInfo{
 
 // BrandServiceHandler is an implementation of the brand.BrandService service.
 type BrandServiceHandler interface {
-	Create(context.Context, *CreateBrandRequest) (*Brand, error)
-	Update(context.Context, *UpdateBrandRequest) (*Brand, error)
-	Delete(context.Context, *DeleteBrandRequest) (*Brand, error)
+	Create(context.Context, *CreateBrandRequest) (*Response, error)
+	Update(context.Context, *UpdateBrandRequest) (*Response, error)
+	Delete(context.Context, *DeleteBrandRequest) (*Response, error)
 	Get(context.Context, *GetBrandRequest) (*GetBrandResponse, error)
 	List(context.Context, *ListBrandRequest) (*ListBrandResponse, error)
 }
