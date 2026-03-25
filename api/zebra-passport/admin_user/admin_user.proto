@@ -105,6 +105,12 @@ message LoginResponse {
   string token         = 4;
 }
 
+// 登出请求
+message LogoutRequest {
+  int64  admin_id = 1;  // 管理员用户ID
+  string token    = 2;  // 要注销的token（可选，如果为空则注销该用户所有token）
+}
+
 message Response {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
   string  msg = 2;  // 提示语
@@ -118,4 +124,5 @@ service AdminUserService {
   rpc Get(GetAdminUserRequest) returns (GetAdminUserResponse);
   rpc List(ListAdminUserRequest) returns (ListAdminUserResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (Response);
 }

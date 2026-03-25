@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+package token;
+option go_package = "./api/zebra-passport/token;token";
+
+// CreateTokenRequest
+message CreateTokenRequest {
+  int64 user_id = 1;
+  string user_name = 2;
+}
+
+message RefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message CheckTokenRequest {
+  string access_token = 1;
+}
+
+message Response {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;
+}
+
+message TokenResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string  msg = 2;
+  string access_token = 3;
+  string refresh_token = 4;
+  int64 expires_in = 5;
+  string token_type = 6;
+}
+
+// TokenService
+service TokenService {
+  rpc Create(CreateTokenRequest) returns (TokenResponse);
+  rpc Refresh(RefreshTokenRequest) returns (TokenResponse);
+  rpc Check(CheckTokenRequest) returns (Response);
+}

@@ -48,6 +48,8 @@ const (
 	AdminUserServiceListProcedure = "/admin_user.AdminUserService/List"
 	// AdminUserServiceLoginProcedure is the fully-qualified name of the AdminUserService's Login RPC.
 	AdminUserServiceLoginProcedure = "/admin_user.AdminUserService/Login"
+	// AdminUserServiceLogoutProcedure is the fully-qualified name of the AdminUserService's Logout RPC.
+	AdminUserServiceLogoutProcedure = "/admin_user.AdminUserService/Logout"
 )
 
 var (
@@ -62,6 +64,7 @@ type AdminUserService interface {
 	Get(ctx context.Context, req *GetAdminUserRequest, opts ...client.CallOption) (*GetAdminUserResponse, error)
 	List(ctx context.Context, req *ListAdminUserRequest, opts ...client.CallOption) (*ListAdminUserResponse, error)
 	Login(ctx context.Context, req *LoginRequest, opts ...client.CallOption) (*LoginResponse, error)
+	Logout(ctx context.Context, req *LogoutRequest, opts ...client.CallOption) (*Response, error)
 }
 
 // NewAdminUserService constructs a client for the admin_user.AdminUserService service.
@@ -132,9 +135,17 @@ func (c *AdminUserServiceImpl) Login(ctx context.Context, req *LoginRequest, opt
 	return resp, nil
 }
 
+func (c *AdminUserServiceImpl) Logout(ctx context.Context, req *LogoutRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Logout", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var AdminUserService_ClientInfo = client.ClientInfo{
 	InterfaceName: "admin_user.AdminUserService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "Login"},
+	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "Login", "Logout"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*AdminUserServiceImpl)
 		dubboCli.conn = conn
@@ -149,6 +160,7 @@ type AdminUserServiceHandler interface {
 	Get(context.Context, *GetAdminUserRequest) (*GetAdminUserResponse, error)
 	List(context.Context, *ListAdminUserRequest) (*ListAdminUserResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Logout(context.Context, *LogoutRequest) (*Response, error)
 }
 
 func RegisterAdminUserServiceHandler(srv *server.Server, hdlr AdminUserServiceHandler, opts ...server.ServiceOption) error {
@@ -247,6 +259,21 @@ var AdminUserService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*LoginRequest)
 				res, err := handler.(AdminUserServiceHandler).Login(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Logout",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(LogoutRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*LogoutRequest)
+				res, err := handler.(AdminUserServiceHandler).Logout(ctx, req)
 				if err != nil {
 					return nil, err
 				}

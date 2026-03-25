@@ -38,18 +38,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// API路径信息
+// API路径信息（同时支持菜单和资源）
 type Path struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	PathName      string                 `protobuf:"bytes,2,opt,name=path_name,json=pathName,proto3" json:"path_name,omitempty"`
-	PathUrl       string                 `protobuf:"bytes,3,opt,name=path_url,json=pathUrl,proto3" json:"path_url,omitempty"`
-	Method        string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"` // GET, POST, PUT, DELETE
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
-	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime    int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	IsDeleted     int32                  `protobuf:"varint,9,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	PathName    string                 `protobuf:"bytes,2,opt,name=path_name,json=pathName,proto3" json:"path_name,omitempty"`
+	PathUrl     string                 `protobuf:"bytes,3,opt,name=path_url,json=pathUrl,proto3" json:"path_url,omitempty"`
+	Method      string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"` // GET, POST, PUT, DELETE
+	Description string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Status      int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
+	CreateTime  int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime  int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	IsDeleted   int32                  `protobuf:"varint,9,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	// 菜单相关字段（新增）
+	Type          int32  `protobuf:"varint,10,opt,name=type,proto3" json:"type,omitempty"`                         // 1=菜单, 2=资源
+	ParentId      int64  `protobuf:"varint,11,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 父级菜单ID
+	Level         int32  `protobuf:"varint,12,opt,name=level,proto3" json:"level,omitempty"`                       // 菜单级数: 0=一级, 1=二级
+	Sort          int32  `protobuf:"varint,13,opt,name=sort,proto3" json:"sort,omitempty"`                         // 排序
+	Icon          string `protobuf:"bytes,14,opt,name=icon,proto3" json:"icon,omitempty"`                          // 前端图标class
+	Hidden        int32  `protobuf:"varint,15,opt,name=hidden,proto3" json:"hidden,omitempty"`                     // 是否隐藏: 0=显示, 1=隐藏
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -147,6 +154,48 @@ func (x *Path) GetIsDeleted() int32 {
 	return 0
 }
 
+func (x *Path) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *Path) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *Path) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *Path) GetSort() int32 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *Path) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *Path) GetHidden() int32 {
+	if x != nil {
+		return x.Hidden
+	}
+	return 0
+}
+
 // 创建路径请求
 type CreatePathRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -154,6 +203,12 @@ type CreatePathRequest struct {
 	PathUrl       string                 `protobuf:"bytes,2,opt,name=path_url,json=pathUrl,proto3" json:"path_url,omitempty"`
 	Method        string                 `protobuf:"bytes,3,opt,name=method,proto3" json:"method,omitempty"`
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Type          int32                  `protobuf:"varint,5,opt,name=type,proto3" json:"type,omitempty"`                         // 1=菜单, 2=资源
+	ParentId      int64                  `protobuf:"varint,6,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 父级菜单ID
+	Level         int32                  `protobuf:"varint,7,opt,name=level,proto3" json:"level,omitempty"`                       // 菜单级数
+	Sort          int32                  `protobuf:"varint,8,opt,name=sort,proto3" json:"sort,omitempty"`                         // 排序
+	Icon          string                 `protobuf:"bytes,9,opt,name=icon,proto3" json:"icon,omitempty"`                          // 前端图标
+	Hidden        int32                  `protobuf:"varint,10,opt,name=hidden,proto3" json:"hidden,omitempty"`                    // 是否隐藏
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -216,6 +271,48 @@ func (x *CreatePathRequest) GetDescription() string {
 	return ""
 }
 
+func (x *CreatePathRequest) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *CreatePathRequest) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *CreatePathRequest) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *CreatePathRequest) GetSort() int32 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *CreatePathRequest) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *CreatePathRequest) GetHidden() int32 {
+	if x != nil {
+		return x.Hidden
+	}
+	return 0
+}
+
 // 更新路径请求
 type UpdatePathRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -225,6 +322,12 @@ type UpdatePathRequest struct {
 	Method        string                 `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	Type          int32                  `protobuf:"varint,7,opt,name=type,proto3" json:"type,omitempty"`                         // 1=菜单, 2=资源
+	ParentId      int64                  `protobuf:"varint,8,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 父级菜单ID
+	Level         int32                  `protobuf:"varint,9,opt,name=level,proto3" json:"level,omitempty"`                       // 菜单级数
+	Sort          int32                  `protobuf:"varint,10,opt,name=sort,proto3" json:"sort,omitempty"`                        // 排序
+	Icon          string                 `protobuf:"bytes,11,opt,name=icon,proto3" json:"icon,omitempty"`                         // 前端图标
+	Hidden        int32                  `protobuf:"varint,12,opt,name=hidden,proto3" json:"hidden,omitempty"`                    // 是否隐藏
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -297,6 +400,48 @@ func (x *UpdatePathRequest) GetDescription() string {
 func (x *UpdatePathRequest) GetStatus() int32 {
 	if x != nil {
 		return x.Status
+	}
+	return 0
+}
+
+func (x *UpdatePathRequest) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *UpdatePathRequest) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *UpdatePathRequest) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *UpdatePathRequest) GetSort() int32 {
+	if x != nil {
+		return x.Sort
+	}
+	return 0
+}
+
+func (x *UpdatePathRequest) GetIcon() string {
+	if x != nil {
+		return x.Icon
+	}
+	return ""
+}
+
+func (x *UpdatePathRequest) GetHidden() int32 {
+	if x != nil {
+		return x.Hidden
 	}
 	return 0
 }
@@ -654,7 +799,7 @@ var File_api_zebra_passport_path_path_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_path_path_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-passport/path/path.proto\x12\x04path\x1a\x1egoogle/protobuf/wrappers.proto\"\x81\x02\n" +
+	"\"api/zebra-passport/path/path.proto\x12\x04path\x1a\x1egoogle/protobuf/wrappers.proto\"\x88\x03\n" +
 	"\x04Path\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tpath_name\x18\x02 \x01(\tR\bpathName\x12\x19\n" +
@@ -667,19 +812,40 @@ const file_api_zebra_passport_path_path_proto_rawDesc = "" +
 	"\vupdate_time\x18\b \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\t \x01(\x05R\tisDeleted\"\x85\x01\n" +
+	"is_deleted\x18\t \x01(\x05R\tisDeleted\x12\x12\n" +
+	"\x04type\x18\n" +
+	" \x01(\x05R\x04type\x12\x1b\n" +
+	"\tparent_id\x18\v \x01(\x03R\bparentId\x12\x14\n" +
+	"\x05level\x18\f \x01(\x05R\x05level\x12\x12\n" +
+	"\x04sort\x18\r \x01(\x05R\x04sort\x12\x12\n" +
+	"\x04icon\x18\x0e \x01(\tR\x04icon\x12\x16\n" +
+	"\x06hidden\x18\x0f \x01(\x05R\x06hidden\"\x8c\x02\n" +
 	"\x11CreatePathRequest\x12\x1b\n" +
 	"\tpath_name\x18\x01 \x01(\tR\bpathName\x12\x19\n" +
 	"\bpath_url\x18\x02 \x01(\tR\apathUrl\x12\x16\n" +
 	"\x06method\x18\x03 \x01(\tR\x06method\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\"\xad\x01\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x12\n" +
+	"\x04type\x18\x05 \x01(\x05R\x04type\x12\x1b\n" +
+	"\tparent_id\x18\x06 \x01(\x03R\bparentId\x12\x14\n" +
+	"\x05level\x18\a \x01(\x05R\x05level\x12\x12\n" +
+	"\x04sort\x18\b \x01(\x05R\x04sort\x12\x12\n" +
+	"\x04icon\x18\t \x01(\tR\x04icon\x12\x16\n" +
+	"\x06hidden\x18\n" +
+	" \x01(\x05R\x06hidden\"\xb4\x02\n" +
 	"\x11UpdatePathRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tpath_name\x18\x02 \x01(\tR\bpathName\x12\x19\n" +
 	"\bpath_url\x18\x03 \x01(\tR\apathUrl\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\"#\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x12\n" +
+	"\x04type\x18\a \x01(\x05R\x04type\x12\x1b\n" +
+	"\tparent_id\x18\b \x01(\x03R\bparentId\x12\x14\n" +
+	"\x05level\x18\t \x01(\x05R\x05level\x12\x12\n" +
+	"\x04sort\x18\n" +
+	" \x01(\x05R\x04sort\x12\x12\n" +
+	"\x04icon\x18\v \x01(\tR\x04icon\x12\x16\n" +
+	"\x06hidden\x18\f \x01(\x05R\x06hidden\"#\n" +
 	"\x11DeletePathRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x0eGetPathRequest\x12\x0e\n" +

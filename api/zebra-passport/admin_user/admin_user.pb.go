@@ -744,6 +744,59 @@ func (x *LoginResponse) GetToken() string {
 	return ""
 }
 
+// 登出请求
+type LogoutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AdminId       int64                  `protobuf:"varint,1,opt,name=admin_id,json=adminId,proto3" json:"admin_id,omitempty"` // 管理员用户ID
+	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`                     // 要注销的token（可选，如果为空则注销该用户所有token）
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogoutRequest) Reset() {
+	*x = LogoutRequest{}
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogoutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogoutRequest) ProtoMessage() {}
+
+func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
+func (*LogoutRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *LogoutRequest) GetAdminId() int64 {
+	if x != nil {
+		return x.AdminId
+	}
+	return 0
+}
+
+func (x *LogoutRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
 type Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -754,7 +807,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -766,7 +819,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[10]
+	mi := &file_api_zebra_passport_admin_user_admin_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -779,7 +832,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -860,17 +913,21 @@ const file_api_zebra_passport_admin_user_admin_user_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x124\n" +
 	"\n" +
 	"admin_user\x18\x03 \x01(\v2\x15.admin_user.AdminUserR\tadminUser\x12\x14\n" +
-	"\x05token\x18\x04 \x01(\tR\x05token\"M\n" +
+	"\x05token\x18\x04 \x01(\tR\x05token\"@\n" +
+	"\rLogoutRequest\x12\x19\n" +
+	"\badmin_id\x18\x01 \x01(\x03R\aadminId\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\xb3\x03\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xee\x03\n" +
 	"\x10AdminUserService\x12B\n" +
 	"\x06Create\x12\".admin_user.CreateAdminUserRequest\x1a\x14.admin_user.Response\x12B\n" +
 	"\x06Update\x12\".admin_user.UpdateAdminUserRequest\x1a\x14.admin_user.Response\x12B\n" +
 	"\x06Delete\x12\".admin_user.DeleteAdminUserRequest\x1a\x14.admin_user.Response\x12H\n" +
 	"\x03Get\x12\x1f.admin_user.GetAdminUserRequest\x1a .admin_user.GetAdminUserResponse\x12K\n" +
 	"\x04List\x12 .admin_user.ListAdminUserRequest\x1a!.admin_user.ListAdminUserResponse\x12<\n" +
-	"\x05Login\x12\x18.admin_user.LoginRequest\x1a\x19.admin_user.LoginResponseB,Z*./api/zebra-passport/admin_user;admin_userb\x06proto3"
+	"\x05Login\x12\x18.admin_user.LoginRequest\x1a\x19.admin_user.LoginResponse\x129\n" +
+	"\x06Logout\x12\x19.admin_user.LogoutRequest\x1a\x14.admin_user.ResponseB,Z*./api/zebra-passport/admin_user;admin_userb\x06proto3"
 
 var (
 	file_api_zebra_passport_admin_user_admin_user_proto_rawDescOnce sync.Once
@@ -884,7 +941,7 @@ func file_api_zebra_passport_admin_user_admin_user_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_admin_user_admin_user_proto_rawDescData
 }
 
-var file_api_zebra_passport_admin_user_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_api_zebra_passport_admin_user_admin_user_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_api_zebra_passport_admin_user_admin_user_proto_goTypes = []any{
 	(*AdminUser)(nil),              // 0: admin_user.AdminUser
 	(*CreateAdminUserRequest)(nil), // 1: admin_user.CreateAdminUserRequest
@@ -896,31 +953,34 @@ var file_api_zebra_passport_admin_user_admin_user_proto_goTypes = []any{
 	(*ListAdminUserResponse)(nil),  // 7: admin_user.ListAdminUserResponse
 	(*LoginRequest)(nil),           // 8: admin_user.LoginRequest
 	(*LoginResponse)(nil),          // 9: admin_user.LoginResponse
-	(*Response)(nil),               // 10: admin_user.Response
-	(*wrapperspb.Int32Value)(nil),  // 11: google.protobuf.Int32Value
+	(*LogoutRequest)(nil),          // 10: admin_user.LogoutRequest
+	(*Response)(nil),               // 11: admin_user.Response
+	(*wrapperspb.Int32Value)(nil),  // 12: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_admin_user_admin_user_proto_depIdxs = []int32{
-	11, // 0: admin_user.GetAdminUserResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 0: admin_user.GetAdminUserResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: admin_user.GetAdminUserResponse.admin_user:type_name -> admin_user.AdminUser
-	11, // 2: admin_user.ListAdminUserResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 2: admin_user.ListAdminUserResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: admin_user.ListAdminUserResponse.admin_users:type_name -> admin_user.AdminUser
-	11, // 4: admin_user.LoginResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 4: admin_user.LoginResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 5: admin_user.LoginResponse.admin_user:type_name -> admin_user.AdminUser
-	11, // 6: admin_user.Response.code:type_name -> google.protobuf.Int32Value
+	12, // 6: admin_user.Response.code:type_name -> google.protobuf.Int32Value
 	1,  // 7: admin_user.AdminUserService.Create:input_type -> admin_user.CreateAdminUserRequest
 	2,  // 8: admin_user.AdminUserService.Update:input_type -> admin_user.UpdateAdminUserRequest
 	3,  // 9: admin_user.AdminUserService.Delete:input_type -> admin_user.DeleteAdminUserRequest
 	4,  // 10: admin_user.AdminUserService.Get:input_type -> admin_user.GetAdminUserRequest
 	6,  // 11: admin_user.AdminUserService.List:input_type -> admin_user.ListAdminUserRequest
 	8,  // 12: admin_user.AdminUserService.Login:input_type -> admin_user.LoginRequest
-	10, // 13: admin_user.AdminUserService.Create:output_type -> admin_user.Response
-	10, // 14: admin_user.AdminUserService.Update:output_type -> admin_user.Response
-	10, // 15: admin_user.AdminUserService.Delete:output_type -> admin_user.Response
-	5,  // 16: admin_user.AdminUserService.Get:output_type -> admin_user.GetAdminUserResponse
-	7,  // 17: admin_user.AdminUserService.List:output_type -> admin_user.ListAdminUserResponse
-	9,  // 18: admin_user.AdminUserService.Login:output_type -> admin_user.LoginResponse
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
+	10, // 13: admin_user.AdminUserService.Logout:input_type -> admin_user.LogoutRequest
+	11, // 14: admin_user.AdminUserService.Create:output_type -> admin_user.Response
+	11, // 15: admin_user.AdminUserService.Update:output_type -> admin_user.Response
+	11, // 16: admin_user.AdminUserService.Delete:output_type -> admin_user.Response
+	5,  // 17: admin_user.AdminUserService.Get:output_type -> admin_user.GetAdminUserResponse
+	7,  // 18: admin_user.AdminUserService.List:output_type -> admin_user.ListAdminUserResponse
+	9,  // 19: admin_user.AdminUserService.Login:output_type -> admin_user.LoginResponse
+	11, // 20: admin_user.AdminUserService.Logout:output_type -> admin_user.Response
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -937,7 +997,7 @@ func file_api_zebra_passport_admin_user_admin_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_admin_user_admin_user_proto_rawDesc), len(file_api_zebra_passport_admin_user_admin_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
