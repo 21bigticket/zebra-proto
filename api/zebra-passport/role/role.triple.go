@@ -46,6 +46,20 @@ const (
 	RoleServiceGetProcedure = "/role.RoleService/Get"
 	// RoleServiceListProcedure is the fully-qualified name of the RoleService's List RPC.
 	RoleServiceListProcedure = "/role.RoleService/List"
+	// RoleServiceDataScopeProcedure is the fully-qualified name of the RoleService's DataScope RPC.
+	RoleServiceDataScopeProcedure = "/role.RoleService/DataScope"
+	// RoleServiceChangeStatusProcedure is the fully-qualified name of the RoleService's ChangeStatus RPC.
+	RoleServiceChangeStatusProcedure = "/role.RoleService/ChangeStatus"
+	// RoleServiceAllocatedUserListProcedure is the fully-qualified name of the RoleService's AllocatedUserList RPC.
+	RoleServiceAllocatedUserListProcedure = "/role.RoleService/AllocatedUserList"
+	// RoleServiceUnallocatedUserListProcedure is the fully-qualified name of the RoleService's UnallocatedUserList RPC.
+	RoleServiceUnallocatedUserListProcedure = "/role.RoleService/UnallocatedUserList"
+	// RoleServiceAuthUserCancelProcedure is the fully-qualified name of the RoleService's AuthUserCancel RPC.
+	RoleServiceAuthUserCancelProcedure = "/role.RoleService/AuthUserCancel"
+	// RoleServiceAuthUserCancelAllProcedure is the fully-qualified name of the RoleService's AuthUserCancelAll RPC.
+	RoleServiceAuthUserCancelAllProcedure = "/role.RoleService/AuthUserCancelAll"
+	// RoleServiceAuthUserSelectAllProcedure is the fully-qualified name of the RoleService's AuthUserSelectAll RPC.
+	RoleServiceAuthUserSelectAllProcedure = "/role.RoleService/AuthUserSelectAll"
 )
 
 var (
@@ -59,6 +73,13 @@ type RoleService interface {
 	Delete(ctx context.Context, req *DeleteRoleRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetRoleRequest, opts ...client.CallOption) (*GetRoleResponse, error)
 	List(ctx context.Context, req *ListRoleRequest, opts ...client.CallOption) (*ListRoleResponse, error)
+	DataScope(ctx context.Context, req *DataScopeRequest, opts ...client.CallOption) (*Response, error)
+	ChangeStatus(ctx context.Context, req *ChangeStatusRequest, opts ...client.CallOption) (*Response, error)
+	AllocatedUserList(ctx context.Context, req *AllocatedUserListRequest, opts ...client.CallOption) (*AllocatedUserListResponse, error)
+	UnallocatedUserList(ctx context.Context, req *AllocatedUserListRequest, opts ...client.CallOption) (*AllocatedUserListResponse, error)
+	AuthUserCancel(ctx context.Context, req *AuthUserCancelRequest, opts ...client.CallOption) (*Response, error)
+	AuthUserCancelAll(ctx context.Context, req *AuthUserCancelAllRequest, opts ...client.CallOption) (*Response, error)
+	AuthUserSelectAll(ctx context.Context, req *AuthUserSelectAllRequest, opts ...client.CallOption) (*Response, error)
 }
 
 // NewRoleService constructs a client for the role.RoleService service.
@@ -121,9 +142,65 @@ func (c *RoleServiceImpl) List(ctx context.Context, req *ListRoleRequest, opts .
 	return resp, nil
 }
 
+func (c *RoleServiceImpl) DataScope(ctx context.Context, req *DataScopeRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DataScope", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) ChangeStatus(ctx context.Context, req *ChangeStatusRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ChangeStatus", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) AllocatedUserList(ctx context.Context, req *AllocatedUserListRequest, opts ...client.CallOption) (*AllocatedUserListResponse, error) {
+	resp := new(AllocatedUserListResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "AllocatedUserList", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) UnallocatedUserList(ctx context.Context, req *AllocatedUserListRequest, opts ...client.CallOption) (*AllocatedUserListResponse, error) {
+	resp := new(AllocatedUserListResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UnallocatedUserList", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) AuthUserCancel(ctx context.Context, req *AuthUserCancelRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "AuthUserCancel", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) AuthUserCancelAll(ctx context.Context, req *AuthUserCancelAllRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "AuthUserCancelAll", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *RoleServiceImpl) AuthUserSelectAll(ctx context.Context, req *AuthUserSelectAllRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "AuthUserSelectAll", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var RoleService_ClientInfo = client.ClientInfo{
 	InterfaceName: "role.RoleService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List"},
+	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "DataScope", "ChangeStatus", "AllocatedUserList", "UnallocatedUserList", "AuthUserCancel", "AuthUserCancelAll", "AuthUserSelectAll"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*RoleServiceImpl)
 		dubboCli.conn = conn
@@ -137,6 +214,13 @@ type RoleServiceHandler interface {
 	Delete(context.Context, *DeleteRoleRequest) (*Response, error)
 	Get(context.Context, *GetRoleRequest) (*GetRoleResponse, error)
 	List(context.Context, *ListRoleRequest) (*ListRoleResponse, error)
+	DataScope(context.Context, *DataScopeRequest) (*Response, error)
+	ChangeStatus(context.Context, *ChangeStatusRequest) (*Response, error)
+	AllocatedUserList(context.Context, *AllocatedUserListRequest) (*AllocatedUserListResponse, error)
+	UnallocatedUserList(context.Context, *AllocatedUserListRequest) (*AllocatedUserListResponse, error)
+	AuthUserCancel(context.Context, *AuthUserCancelRequest) (*Response, error)
+	AuthUserCancelAll(context.Context, *AuthUserCancelAllRequest) (*Response, error)
+	AuthUserSelectAll(context.Context, *AuthUserSelectAllRequest) (*Response, error)
 }
 
 func RegisterRoleServiceHandler(srv *server.Server, hdlr RoleServiceHandler, opts ...server.ServiceOption) error {
@@ -220,6 +304,111 @@ var RoleService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListRoleRequest)
 				res, err := handler.(RoleServiceHandler).List(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "DataScope",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(DataScopeRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*DataScopeRequest)
+				res, err := handler.(RoleServiceHandler).DataScope(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ChangeStatus",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ChangeStatusRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ChangeStatusRequest)
+				res, err := handler.(RoleServiceHandler).ChangeStatus(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "AllocatedUserList",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(AllocatedUserListRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*AllocatedUserListRequest)
+				res, err := handler.(RoleServiceHandler).AllocatedUserList(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "UnallocatedUserList",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(AllocatedUserListRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*AllocatedUserListRequest)
+				res, err := handler.(RoleServiceHandler).UnallocatedUserList(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "AuthUserCancel",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(AuthUserCancelRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*AuthUserCancelRequest)
+				res, err := handler.(RoleServiceHandler).AuthUserCancel(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "AuthUserCancelAll",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(AuthUserCancelAllRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*AuthUserCancelAllRequest)
+				res, err := handler.(RoleServiceHandler).AuthUserCancelAll(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "AuthUserSelectAll",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(AuthUserSelectAllRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*AuthUserSelectAllRequest)
+				res, err := handler.(RoleServiceHandler).AuthUserSelectAll(ctx, req)
 				if err != nil {
 					return nil, err
 				}

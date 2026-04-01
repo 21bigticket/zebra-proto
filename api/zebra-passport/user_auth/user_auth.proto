@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package user_auth;
+
+option go_package = "./api/zebra-passport/user_auth;user_auth";
+
+// 登录请求
+message LoginRequest {
+  string user_name = 1;
+  string password  = 2;
+  string code      = 3;  // 验证码
+  string uuid      = 4;  // 验证码唯一标识
+}
+
+// 登录响应
+message LoginResponse {
+  google.protobuf.Int32Value code  = 1;  // 业务状态码: 0=成功, -1=失败
+  string msg     = 2;
+  string token   = 3;
+  int64  user_id = 4;  // 登录用户ID
+}
+
+// 退出请求
+message LogoutRequest {
+  int64 user_id = 1;
+}
+
+// 通用响应
+message Response {
+  google.protobuf.Int32Value code = 1;
+  string msg  = 2;
+}
+
+// 获取用户详情请求
+message GetUserRequest {
+  int64 user_id = 1;
+}
+
+// 用户信息
+message User {
+  int64  user_id        = 1;
+  int64  dept_id        = 2;
+  string user_name      = 3;
+  string nick_name      = 4;
+  string user_type      = 5;
+  string email          = 6;
+  string phonenumber    = 7;
+  string sex            = 8;
+  string avatar         = 9;
+  string password       = 10;
+  string status         = 11;
+  string del_flag       = 12;
+  string login_ip       = 13;
+  int64  login_date     = 14;
+  int64  pwd_update_date = 15;
+  string create_by      = 16;
+  int64  create_time    = 17;
+  string update_by      = 18;
+  int64  update_time    = 19;
+  string remark         = 20;
+  string dept_name      = 21;
+  repeated int64 role_ids = 22;
+  repeated int64 post_ids = 23;
+}
+
+// 获取用户信息响应（匹配 RuoYi /getInfo 格式）
+message GetInfoResponse {
+  google.protobuf.Int32Value code  = 1;
+  string msg         = 2;
+  User   user        = 3;
+  repeated string roles       = 4;
+  repeated string permissions = 5;
+}
+
+// 用户认证服务
+service UserAuthService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (Response);
+  rpc GetInfo(GetUserRequest) returns (GetInfoResponse);
+}

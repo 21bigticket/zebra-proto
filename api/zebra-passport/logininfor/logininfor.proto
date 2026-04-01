@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package logininfor;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/logininfor;logininfor";
+
+// 登录日志（对应 sys_logininfor 表）
+message Logininfor {
+  int64  info_id     = 1;
+  string user_name   = 2;
+  string ipaddr      = 3;
+  string status      = 4; // 登录状态（0成功 1失败）
+  string msg         = 5;
+  int64  access_time = 6;
+}
+
+// 查询登录日志请求
+message ListLogininforRequest {
+  int32  page        = 1;
+  int32  page_size   = 2;
+  string user_name   = 3;
+  string ipaddr      = 4;
+  string status      = 5;
+  string begin_time  = 6;
+  string end_time    = 7;
+}
+
+// 查询登录日志响应
+message ListLogininforResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated Logininfor infos = 3;
+  int32  total = 4;
+}
+
+// 删除登录日志请求
+message DeleteLogininforRequest {
+  repeated int64 info_ids = 1;
+}
+
+// 解锁用户请求
+message UnlockUserRequest {
+  string user_name = 1;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 登录日志服务
+service LogininforService {
+  rpc List(ListLogininforRequest) returns (ListLogininforResponse);
+  rpc Delete(DeleteLogininforRequest) returns (Response);
+  rpc Clean(DeleteLogininforRequest) returns (Response);
+  rpc Unlock(UnlockUserRequest) returns (Response);
+}

@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package oper_log;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/oper_log;oper_log";
+
+// 操作日志信息（对应 sys_oper_log 表）
+message OperLog {
+  int64  oper_id         = 1;
+  string title           = 2;  // 模块标题
+  int32  business_type   = 3;  // 业务类型（0其它 1新增 2修改 3删除）
+  string method          = 4;  // 方法名称
+  string request_method  = 5;  // 请求方式
+  int32  operator_type   = 6;  // 操作类别（0其它 1后台用户 2手机端用户）
+  string oper_name       = 7;  // 操作人员
+  string dept_name       = 8;  // 部门名称
+  string oper_url        = 9;  // 请求URL
+  string oper_ip         = 10; // 主机地址
+  string oper_location   = 11; // 操作地点
+  string oper_param      = 12; // 请求参数
+  string json_result     = 13; // 返回参数
+  int32  status          = 14; // 操作状态（0正常 1异常）
+  string error_msg       = 15; // 错误消息
+  int64  oper_time       = 16; // 操作时间
+  int64  cost_time       = 17; // 消耗时间
+}
+
+// 查询操作日志请求
+message ListOperLogRequest {
+  int32  page          = 1;
+  int32  page_size     = 2;
+  string title         = 3;
+  int32  business_type = 4;
+  string oper_name     = 5;
+  int32  status        = 6;
+  string begin_time    = 7;
+  string end_time      = 8;
+}
+
+// 查询操作日志响应
+message ListOperLogResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated OperLog logs = 3;
+  int32  total = 4;
+}
+
+// 删除操作日志请求
+message DeleteOperLogRequest {
+  repeated int64 oper_ids = 1;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 操作日志服务
+service OperLogService {
+  rpc List(ListOperLogRequest) returns (ListOperLogResponse);
+  rpc Delete(DeleteOperLogRequest) returns (Response);
+  rpc Clean(DeleteOperLogRequest) returns (Response);
+}

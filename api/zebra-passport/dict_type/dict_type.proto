@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+package dict_type;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/dict_type;dict_type";
+
+// 字典类型（对应 sys_dict_type 表）
+message DictType {
+  int64  dict_id     = 1;
+  string dict_name   = 2;
+  string dict_type   = 3;
+  string status      = 4; // 状态（0正常 1停用）
+  string create_by   = 5;
+  int64  create_time = 6;
+  string update_by   = 7;
+  int64  update_time = 8;
+  string remark      = 9;
+}
+
+// 列出字典类型请求
+message ListDictTypeRequest {
+  int32  page      = 1;
+  int32  page_size = 2;
+  string dict_name = 3;
+  string dict_type = 4;
+  string status    = 5;
+  string begin_time = 6;
+  string end_time   = 7;
+}
+
+// 列出字典类型响应
+message ListDictTypeResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated DictType dict_types = 3;
+  int32  total = 4;
+}
+
+// 获取字典类型请求
+message GetDictTypeRequest {
+  int64 dict_id = 1;
+}
+
+// 获取字典类型响应
+message GetDictTypeResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string   msg       = 2;
+  DictType dict_type = 3;
+}
+
+// 创建字典类型请求
+message CreateDictTypeRequest {
+  string dict_name = 1;
+  string dict_type = 2;
+  string status    = 3;
+  string remark    = 4;
+}
+
+// 更新字典类型请求
+message UpdateDictTypeRequest {
+  int64  dict_id   = 1;
+  optional string dict_name = 2;
+  optional string dict_type = 3;
+  optional string status    = 4;
+  optional string remark    = 5;
+}
+
+// 删除字典类型请求
+message DeleteDictTypeRequest {
+  repeated int64 dict_ids = 1;
+}
+
+// 字典类型选项（用于下拉选择）
+message DictTypeOption {
+  int64  dict_id   = 1;
+  string dict_name = 2;
+  string dict_type = 3;
+}
+
+// 选项列表响应
+message OptionSelectResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated DictTypeOption dict_types = 3;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 字典类型服务
+service DictTypeService {
+  rpc List(ListDictTypeRequest) returns (ListDictTypeResponse);
+  rpc Get(GetDictTypeRequest) returns (GetDictTypeResponse);
+  rpc Create(CreateDictTypeRequest) returns (Response);
+  rpc Update(UpdateDictTypeRequest) returns (Response);
+  rpc Delete(DeleteDictTypeRequest) returns (Response);
+  rpc RefreshCache(GetDictTypeRequest) returns (Response);
+  rpc OptionSelect(GetDictTypeRequest) returns (OptionSelectResponse);
+}

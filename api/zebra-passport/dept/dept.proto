@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package dept;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/dept;dept";
+
+// 部门信息（对应 sys_dept 表）
+message Dept {
+  int64  dept_id     = 1;
+  int64  parent_id   = 2;
+  string ancestors   = 3;  // 祖级列表
+  string dept_name   = 4;
+  int32  order_num   = 5;
+  string leader      = 6;  // 负责人
+  string phone       = 7;
+  string email       = 8;
+  string status      = 9;  // 状态（0正常 1停用）
+  string del_flag    = 10; // 删除标志（0存在 2删除）
+  string create_by   = 11;
+  int64  create_time = 12;
+  string update_by   = 13;
+  int64  update_time = 14;
+  // 非数据库字段
+  repeated Dept children = 15;
+}
+
+// 列出部门请求
+message ListDeptRequest {
+  string dept_name  = 1;
+  string status     = 2;
+}
+
+// 列出部门响应
+message ListDeptResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated Dept depts = 3;
+}
+
+// 排除节点列出部门请求
+message ListDeptExcludeChildRequest {
+  int64 dept_id = 1;
+}
+
+// 获取部门请求
+message GetDeptRequest {
+  int64 dept_id = 1;
+}
+
+// 获取部门响应
+message GetDeptResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  Dept   dept  = 3;
+}
+
+// 创建部门请求
+message CreateDeptRequest {
+  int64  parent_id = 1;
+  string dept_name = 2;
+  int32  order_num = 3;
+  string leader    = 4;
+  string phone     = 5;
+  string email     = 6;
+  string status    = 7;
+}
+
+// 更新部门请求
+message UpdateDeptRequest {
+  int64  dept_id   = 1;
+  optional int64  parent_id = 2;
+  optional string dept_name = 3;
+  optional int32  order_num = 4;
+  optional string leader    = 5;
+  optional string phone     = 6;
+  optional string email     = 7;
+  optional string status    = 8;
+}
+
+// 删除部门请求
+message DeleteDeptRequest {
+  int64 dept_id = 1;
+}
+
+// 更新部门排序请求
+message UpdateDeptSortRequest {
+  repeated DeptSortItem items = 1;
+}
+
+message DeptSortItem {
+  int64 dept_id   = 1;
+  int32 order_num = 2;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 部门服务
+service DeptService {
+  rpc List(ListDeptRequest) returns (ListDeptResponse);
+  rpc ListExcludeChild(ListDeptExcludeChildRequest) returns (ListDeptResponse);
+  rpc Get(GetDeptRequest) returns (GetDeptResponse);
+  rpc Create(CreateDeptRequest) returns (Response);
+  rpc Update(UpdateDeptRequest) returns (Response);
+  rpc UpdateSort(UpdateDeptSortRequest) returns (Response);
+  rpc Delete(DeleteDeptRequest) returns (Response);
+}

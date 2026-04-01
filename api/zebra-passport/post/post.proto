@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package post;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/post;post";
+
+// 岗位信息（对应 sys_post 表）
+message Post {
+  int64  post_id     = 1;
+  string post_code   = 2;
+  string post_name   = 3;
+  int32  post_sort   = 4;
+  string status      = 5; // 状态（0正常 1停用）
+  string create_by   = 6;
+  int64  create_time = 7;
+  string update_by   = 8;
+  int64  update_time = 9;
+  string remark      = 10;
+}
+
+// 列出岗位请求
+message ListPostRequest {
+  int32  page      = 1;
+  int32  page_size = 2;
+  string post_code = 3;
+  string post_name = 4;
+  string status    = 5;
+}
+
+// 列出岗位响应
+message ListPostResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated Post posts = 3;
+  int32  total = 4;
+}
+
+// 获取岗位请求
+message GetPostRequest {
+  int64 post_id = 1;
+}
+
+// 获取岗位响应
+message GetPostResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  Post   post  = 3;
+}
+
+// 创建岗位请求
+message CreatePostRequest {
+  string post_code = 1;
+  string post_name = 2;
+  int32  post_sort = 3;
+  string status    = 4;
+  string remark    = 5;
+}
+
+// 更新岗位请求
+message UpdatePostRequest {
+  int64  post_id   = 1;
+  optional string post_code = 2;
+  optional string post_name = 3;
+  optional int32  post_sort = 4;
+  optional string status    = 5;
+  optional string remark    = 6;
+}
+
+// 删除岗位请求
+message DeletePostRequest {
+  repeated int64 post_ids = 1;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 岗位服务
+service PostService {
+  rpc List(ListPostRequest) returns (ListPostResponse);
+  rpc Get(GetPostRequest) returns (GetPostResponse);
+  rpc Create(CreatePostRequest) returns (Response);
+  rpc Update(UpdatePostRequest) returns (Response);
+  rpc Delete(DeletePostRequest) returns (Response);
+}

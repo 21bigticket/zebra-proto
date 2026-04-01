@@ -42,7 +42,17 @@
       "Bash(ls -la api/zebra-member/member/*.pb.go | wc -l && echo \"---\" && head -20 api/zebra-member/member/member.pb.go | grep -E \"package|message|type\")",
       "Bash(go test:*)",
       "Bash(git reset:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)",
+      "Bash(grep -h \"zebra-proto\" /Users/mac/code/goroot/zebra/zebra-*/go.mod | sort | uniq)",
+      "Bash(cd /Users/mac/code/goroot/zebra && for dir in zebra-member zebra-goods zebra-order zebra-passport zebra-pay zebra-stock; do\n  echo \"=== Building $dir ===\"\n  cd \"$dir\" && go build -o ./bin/$dir ./cmd/ 2>&1 | head -30 && cd ..\ndone)",
+      "Bash(grep -l \"message Response\" api/zebra-goods/*/*.proto)",
+      "Bash(grep -l \"message Response\" /Users/mac/code/goroot/zebra-proto/api/zebra-passport/*/*.proto)",
+      "Bash(echo \"=== zebra-proto 版本验证 ===\" && grep -h \"zebra-proto\" /Users/mac/code/goroot/zebra/zebra-*/go.mod | sort | uniq)",
+      "Bash(echo \"=== 构建产物验证 ===\" && find /Users/mac/code/goroot/zebra/zebra-*/bin -type f -name \"zebra-*\" 2>/dev/null | wc -l && echo \"个可执行文件已生成\")",
+      "Bash(find /Users/mac/code/goroot/zebra/zebra-*/scripts/run.sh -type f)"
     ]
   }
 }

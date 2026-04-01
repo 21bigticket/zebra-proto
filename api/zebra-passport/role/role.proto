@@ -1,92 +1,155 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 syntax = "proto3";
-
-import "google/protobuf/wrappers.proto";
 
 package role;
 
+import "google/protobuf/wrappers.proto";
+
 option go_package = "./api/zebra-passport/role;role";
 
-// 角色信息
+// 角色信息（对应 sys_role 表）
 message Role {
-  int64  id          = 1;
-  string role_name   = 2;
-  string description = 3;
-  int32  status      = 4; // 0=禁用, 1=启用
-  int64  create_time = 5;
-  int64  update_time = 6;
-  int32  is_deleted  = 7;
+  int64  role_id             = 1;
+  string role_name           = 2;
+  string role_key            = 3;
+  int32  role_sort           = 4;
+  string data_scope          = 5;  // 数据范围（1:全部 2:自定 3:本部门 4:本部门及以下）
+  bool   menu_check_strictly = 6;
+  bool   dept_check_strictly = 7;
+  string status              = 8;  // 状态（0正常 1停用）
+  string del_flag            = 9;
+  string create_by           = 10;
+  int64  create_time         = 11;
+  string update_by           = 12;
+  int64  update_time         = 13;
+  string remark              = 14;
+  // 非数据库字段
+  repeated int64 menu_ids    = 15;
+  repeated int64 dept_ids    = 16;
 }
 
 // 创建角色请求
 message CreateRoleRequest {
-  string role_name   = 1;
-  string description = 2;
-  repeated int64 path_ids = 3;
+  string role_name  = 1;
+  string role_key   = 2;
+  int32  role_sort  = 3;
+  string status     = 4;
+  string remark     = 5;
+  repeated int64 menu_ids = 6;
+  repeated int64 dept_ids = 7;
 }
 
 // 更新角色请求
 message UpdateRoleRequest {
-  int64  id          = 1;
-  string role_name   = 2;
-  string description = 3;
-  int32  status      = 4;
-  repeated int64 path_ids = 5;
+  int64  role_id    = 1;
+  optional string role_name  = 2;
+  optional string role_key   = 3;
+  optional int32  role_sort  = 4;
+  optional string status     = 5;
+  optional string remark     = 6;
+  repeated int64 menu_ids = 7;
+  repeated int64 dept_ids = 8;
 }
 
 // 删除角色请求
 message DeleteRoleRequest {
-  int64 id = 1;
+  repeated int64 role_ids = 1;
 }
 
 // 获取角色请求
 message GetRoleRequest {
-  int64 id = 1;
+  int64 role_id = 1;
 }
 
 // 获取角色响应
 message GetRoleResponse {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
-  Role role = 3;
-  repeated int64 path_ids = 4;
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  Role   role  = 3;
+  repeated int64 menu_ids = 4;
+  repeated int64 dept_ids = 5;
 }
 
 // 列出角色请求
 message ListRoleRequest {
-  int32  page          = 1;
-  int32  page_size     = 2;
-  string name_keyword  = 3;
-  int32  status        = 4;
+  int32  page       = 1;
+  int32  page_size  = 2;
+  string role_name  = 3;
+  string role_key   = 4;
+  string status     = 5;
+  string begin_time = 6;
+  string end_time   = 7;
 }
 
 // 列出角色响应
 message ListRoleResponse {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
-  repeated Role roles  = 3;
-  int32         total  = 4;
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated Role roles = 3;
+  int32  total = 4;
+}
+
+// 数据权限请求
+message DataScopeRequest {
+  int64  role_id    = 1;
+  string data_scope = 2;
+  repeated int64 dept_ids = 3;
+}
+
+// 修改角色状态请求
+message ChangeStatusRequest {
+  int64  role_id = 1;
+  string status  = 2;
+}
+
+// 已授权用户列表请求
+message AllocatedUserListRequest {
+  int32  page      = 1;
+  int32  page_size = 2;
+  int64  role_id   = 3;
+  string user_name = 4;
+  string phonenumber = 5;
+}
+
+// 已授权用户列表响应
+message AllocatedUserListResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated UserInfo users = 3;
+  int32  total = 4;
+}
+
+message UserInfo {
+  int64  user_id     = 1;
+  string user_name   = 2;
+  string nick_name   = 3;
+  string email       = 4;
+  string phonenumber = 5;
+  string status      = 6;
+  int64  create_time = 7;
+  string dept_name   = 8;
+}
+
+// 取消用户授权请求
+message AuthUserCancelRequest {
+  int64 user_id = 1;
+  int64 role_id = 2;
+}
+
+// 批量取消用户授权请求
+message AuthUserCancelAllRequest {
+  int64  role_id  = 1;
+  repeated int64 user_ids = 2;
+}
+
+// 批量选择用户授权请求
+message AuthUserSelectAllRequest {
+  int64  role_id  = 1;
+  repeated int64 user_ids = 2;
 }
 
 message Response {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
 }
 
 // 角色服务
@@ -96,4 +159,11 @@ service RoleService {
   rpc Delete(DeleteRoleRequest) returns (Response);
   rpc Get(GetRoleRequest) returns (GetRoleResponse);
   rpc List(ListRoleRequest) returns (ListRoleResponse);
+  rpc DataScope(DataScopeRequest) returns (Response);
+  rpc ChangeStatus(ChangeStatusRequest) returns (Response);
+  rpc AllocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
+  rpc UnallocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
+  rpc AuthUserCancel(AuthUserCancelRequest) returns (Response);
+  rpc AuthUserCancelAll(AuthUserCancelAllRequest) returns (Response);
+  rpc AuthUserSelectAll(AuthUserSelectAllRequest) returns (Response);
 }

@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package user_profile;
+
+option go_package = "./api/zebra-passport/user_profile;user_profile";
+
+// 通用响应
+message Response {
+  google.protobuf.Int32Value code = 1;
+  string msg  = 2;
+}
+
+// 获取用户详情请求
+message GetUserRequest {
+  int64 user_id = 1;
+}
+
+// 用户信息
+message User {
+  int64  user_id        = 1;
+  int64  dept_id        = 2;
+  string user_name      = 3;
+  string nick_name      = 4;
+  string user_type      = 5;
+  string email          = 6;
+  string phonenumber    = 7;
+  string sex            = 8;
+  string avatar         = 9;
+  string password       = 10;
+  string status         = 11;
+  string del_flag       = 12;
+  string login_ip       = 13;
+  int64  login_date     = 14;
+  int64  pwd_update_date = 15;
+  string create_by      = 16;
+  int64  create_time    = 17;
+  string update_by      = 18;
+  int64  update_time    = 19;
+  string remark         = 20;
+  string dept_name      = 21;
+  repeated int64 role_ids = 22;
+  repeated int64 post_ids = 23;
+}
+
+// 角色简要信息
+message RoleInfo {
+  int64  role_id   = 1;
+  string role_name = 2;
+  string role_key  = 3;
+}
+
+// 岗位简要信息
+message PostInfo {
+  int64  post_id   = 1;
+  string post_code = 2;
+  string post_name = 3;
+}
+
+// 获取个人信息响应
+message GetProfileResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg        = 2;
+  User   user       = 3;
+  repeated RoleInfo roles    = 4;
+  repeated PostInfo posts    = 5;
+  string role_group = 6;
+}
+
+// 更新个人信息请求（optional 字段表示可部分更新）
+message UpdateProfileRequest {
+  optional string nick_name   = 1;
+  optional string email       = 2;
+  optional string phonenumber = 3;
+  optional string sex         = 4;
+}
+
+// 修改密码请求
+message UpdatePwdRequest {
+  string old_password = 1;
+  string new_password = 2;
+}
+
+// 上传头像请求
+message UploadAvatarRequest {
+  bytes  avatar_data = 1;
+  string file_name   = 2;
+}
+
+// 上传头像响应
+message UploadAvatarResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg        = 2;
+  string img_url    = 3;
+}
+
+// 获取用户授权角色响应
+message GetAuthRoleResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg        = 2;
+  User   user       = 3;
+  repeated RoleInfo roles = 4;
+}
+
+// 更新授权角色请求
+message UpdateAuthRoleRequest {
+  int64  user_id = 1;
+  repeated int64 role_ids = 2;
+}
+
+// 部门树节点
+message DeptTreeOption {
+  int64  dept_id   = 1;
+  string dept_name = 2;
+  int64  parent_id = 3;
+  repeated DeptTreeOption children = 4;
+}
+
+// 部门树响应
+message DeptTreeResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg   = 2;
+  repeated DeptTreeOption depts = 3;
+}
+
+// 用户个人资料服务
+service UserProfileService {
+  rpc GetProfile(GetUserRequest) returns (GetProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (Response);
+  rpc UpdatePwd(UpdatePwdRequest) returns (Response);
+  rpc UploadAvatar(UploadAvatarRequest) returns (UploadAvatarResponse);
+  rpc GetAuthRole(GetUserRequest) returns (GetAuthRoleResponse);
+  rpc UpdateAuthRole(UpdateAuthRoleRequest) returns (Response);
+  rpc DeptTreeSelect(GetUserRequest) returns (DeptTreeResponse);
+}

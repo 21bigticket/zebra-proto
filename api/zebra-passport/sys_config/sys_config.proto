@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package sys_config;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/sys_config;sys_config";
+
+// 参数配置（对应 sys_config 表）
+message SysConfig {
+  int64  config_id    = 1;
+  string config_name  = 2;
+  string config_key   = 3;
+  string config_value = 4;
+  string config_type  = 5; // 系统内置（Y是 N否）
+  string create_by    = 6;
+  int64  create_time  = 7;
+  string update_by    = 8;
+  int64  update_time  = 9;
+  string remark       = 10;
+}
+
+// 列出参数配置请求
+message ListSysConfigRequest {
+  int32  page        = 1;
+  int32  page_size   = 2;
+  string config_name = 3;
+  string config_key  = 4;
+  string config_type = 5;
+  string begin_time  = 6;
+  string end_time    = 7;
+}
+
+// 列出参数配置响应
+message ListSysConfigResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg   = 2;
+  repeated SysConfig configs = 3;
+  int32  total = 4;
+}
+
+// 获取参数配置请求
+message GetSysConfigRequest {
+  int64 config_id = 1;
+}
+
+// 获取参数配置响应
+message GetSysConfigResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string    msg    = 2;
+  SysConfig config = 3;
+}
+
+// 根据键名查询请求
+message GetConfigByKeyRequest {
+  string config_key = 1;
+}
+
+// 根据键名查询响应
+message GetConfigByKeyResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg          = 2;
+  string config_value = 3;
+}
+
+// 创建参数配置请求
+message CreateSysConfigRequest {
+  string config_name  = 1;
+  string config_key   = 2;
+  string config_value = 3;
+  string config_type  = 4;
+  string remark       = 5;
+}
+
+// 更新参数配置请求
+message UpdateSysConfigRequest {
+  int64  config_id    = 1;
+  optional string config_name  = 2;
+  optional string config_key   = 3;
+  optional string config_value = 4;
+  optional string config_type  = 5;
+  optional string remark       = 6;
+}
+
+// 删除参数配置请求
+message DeleteSysConfigRequest {
+  repeated int64 config_ids = 1;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg  = 2;
+}
+
+// 参数配置服务
+service SysConfigService {
+  rpc List(ListSysConfigRequest) returns (ListSysConfigResponse);
+  rpc Get(GetSysConfigRequest) returns (GetSysConfigResponse);
+  rpc GetByKey(GetConfigByKeyRequest) returns (GetConfigByKeyResponse);
+  rpc Create(CreateSysConfigRequest) returns (Response);
+  rpc Update(UpdateSysConfigRequest) returns (Response);
+  rpc Delete(DeleteSysConfigRequest) returns (Response);
+  rpc RefreshCache(GetSysConfigRequest) returns (Response);
+}
