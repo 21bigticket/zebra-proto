@@ -101,58 +101,12 @@ message ChangeStatusRequest {
   string status  = 2;
 }
 
-// 已授权用户列表请求
-message AllocatedUserListRequest {
-  int32  page      = 1;
-  int32  page_size = 2;
-  int64  role_id   = 3;
-  string user_name = 4;
-  string phonenumber = 5;
-}
-
-// 已授权用户列表响应
-message AllocatedUserListResponse {
-  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string msg   = 2;
-  repeated UserInfo users = 3;
-  int32  total = 4;
-}
-
-message UserInfo {
-  int64  user_id     = 1;
-  string user_name   = 2;
-  string nick_name   = 3;
-  string email       = 4;
-  string phonenumber = 5;
-  string status      = 6;
-  int64  create_time = 7;
-  string dept_name   = 8;
-}
-
-// 取消用户授权请求
-message AuthUserCancelRequest {
-  int64 user_id = 1;
-  int64 role_id = 2;
-}
-
-// 批量取消用户授权请求
-message AuthUserCancelAllRequest {
-  int64  role_id  = 1;
-  repeated int64 user_ids = 2;
-}
-
-// 批量选择用户授权请求
-message AuthUserSelectAllRequest {
-  int64  role_id  = 1;
-  repeated int64 user_ids = 2;
-}
-
 message Response {
   google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
   string msg  = 2;
 }
 
-// 角色服务
+// 角色服务（核心 CRUD）
 service RoleService {
   rpc Create(CreateRoleRequest) returns (Response);
   rpc Update(UpdateRoleRequest) returns (Response);
@@ -161,9 +115,4 @@ service RoleService {
   rpc List(ListRoleRequest) returns (ListRoleResponse);
   rpc DataScope(DataScopeRequest) returns (Response);
   rpc ChangeStatus(ChangeStatusRequest) returns (Response);
-  rpc AllocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
-  rpc UnallocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
-  rpc AuthUserCancel(AuthUserCancelRequest) returns (Response);
-  rpc AuthUserCancelAll(AuthUserCancelAllRequest) returns (Response);
-  rpc AuthUserSelectAll(AuthUserSelectAllRequest) returns (Response);
 }

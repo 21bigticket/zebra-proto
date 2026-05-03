@@ -139,6 +139,786 @@ func (x *SmsTemplate) GetIsDeleted() int32 {
 	return 0
 }
 
+// 创建短信模板请求
+type CreateSmsTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplCode       string                 `protobuf:"bytes,1,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
+	TplContent    string                 `protobuf:"bytes,3,opt,name=tpl_content,json=tplContent,proto3" json:"tpl_content,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSmsTemplateRequest) Reset() {
+	*x = CreateSmsTemplateRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSmsTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSmsTemplateRequest) ProtoMessage() {}
+
+func (x *CreateSmsTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSmsTemplateRequest.ProtoReflect.Descriptor instead.
+func (*CreateSmsTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateSmsTemplateRequest) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *CreateSmsTemplateRequest) GetTplName() string {
+	if x != nil {
+		return x.TplName
+	}
+	return ""
+}
+
+func (x *CreateSmsTemplateRequest) GetTplContent() string {
+	if x != nil {
+		return x.TplContent
+	}
+	return ""
+}
+
+func (x *CreateSmsTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 更新短信模板请求
+type UpdateSmsTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
+	TplContent    string                 `protobuf:"bytes,3,opt,name=tpl_content,json=tplContent,proto3" json:"tpl_content,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateSmsTemplateRequest) Reset() {
+	*x = UpdateSmsTemplateRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateSmsTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateSmsTemplateRequest) ProtoMessage() {}
+
+func (x *UpdateSmsTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateSmsTemplateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateSmsTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateSmsTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		return x.TplId
+	}
+	return 0
+}
+
+func (x *UpdateSmsTemplateRequest) GetTplName() string {
+	if x != nil {
+		return x.TplName
+	}
+	return ""
+}
+
+func (x *UpdateSmsTemplateRequest) GetTplContent() string {
+	if x != nil {
+		return x.TplContent
+	}
+	return ""
+}
+
+func (x *UpdateSmsTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 删除短信模板请求
+type DeleteSmsTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteSmsTemplateRequest) Reset() {
+	*x = DeleteSmsTemplateRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteSmsTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteSmsTemplateRequest) ProtoMessage() {}
+
+func (x *DeleteSmsTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteSmsTemplateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteSmsTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DeleteSmsTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		return x.TplId
+	}
+	return 0
+}
+
+// 获取短信模板请求
+type GetSmsTemplateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Query:
+	//
+	//	*GetSmsTemplateRequest_TplId
+	//	*GetSmsTemplateRequest_TplCode
+	Query         isGetSmsTemplateRequest_Query `protobuf_oneof:"query"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSmsTemplateRequest) Reset() {
+	*x = GetSmsTemplateRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSmsTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSmsTemplateRequest) ProtoMessage() {}
+
+func (x *GetSmsTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSmsTemplateRequest.ProtoReflect.Descriptor instead.
+func (*GetSmsTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetSmsTemplateRequest) GetQuery() isGetSmsTemplateRequest_Query {
+	if x != nil {
+		return x.Query
+	}
+	return nil
+}
+
+func (x *GetSmsTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		if x, ok := x.Query.(*GetSmsTemplateRequest_TplId); ok {
+			return x.TplId
+		}
+	}
+	return 0
+}
+
+func (x *GetSmsTemplateRequest) GetTplCode() string {
+	if x != nil {
+		if x, ok := x.Query.(*GetSmsTemplateRequest_TplCode); ok {
+			return x.TplCode
+		}
+	}
+	return ""
+}
+
+type isGetSmsTemplateRequest_Query interface {
+	isGetSmsTemplateRequest_Query()
+}
+
+type GetSmsTemplateRequest_TplId struct {
+	TplId int64 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3,oneof"`
+}
+
+type GetSmsTemplateRequest_TplCode struct {
+	TplCode string `protobuf:"bytes,2,opt,name=tpl_code,json=tplCode,proto3,oneof"`
+}
+
+func (*GetSmsTemplateRequest_TplId) isGetSmsTemplateRequest_Query() {}
+
+func (*GetSmsTemplateRequest_TplCode) isGetSmsTemplateRequest_Query() {}
+
+// 获取短信模板响应
+type GetSmsTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Template      *SmsTemplate           `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSmsTemplateResponse) Reset() {
+	*x = GetSmsTemplateResponse{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSmsTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSmsTemplateResponse) ProtoMessage() {}
+
+func (x *GetSmsTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSmsTemplateResponse.ProtoReflect.Descriptor instead.
+func (*GetSmsTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetSmsTemplateResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetSmsTemplateResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetSmsTemplateResponse) GetTemplate() *SmsTemplate {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
+// 短信模板分页查询请求
+type ListSmsTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSmsTemplateRequest) Reset() {
+	*x = ListSmsTemplateRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSmsTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSmsTemplateRequest) ProtoMessage() {}
+
+func (x *ListSmsTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSmsTemplateRequest.ProtoReflect.Descriptor instead.
+func (*ListSmsTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListSmsTemplateRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListSmsTemplateRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListSmsTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 短信模板分页查询响应
+type ListSmsTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Templates     []*SmsTemplate         `protobuf:"bytes,3,rep,name=templates,proto3" json:"templates,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSmsTemplateResponse) Reset() {
+	*x = ListSmsTemplateResponse{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSmsTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSmsTemplateResponse) ProtoMessage() {}
+
+func (x *ListSmsTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSmsTemplateResponse.ProtoReflect.Descriptor instead.
+func (*ListSmsTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListSmsTemplateResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListSmsTemplateResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListSmsTemplateResponse) GetTemplates() []*SmsTemplate {
+	if x != nil {
+		return x.Templates
+	}
+	return nil
+}
+
+func (x *ListSmsTemplateResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// 消息发送记录
+type SmsLog struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LogId         int64                  `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
+	MsgId         string                 `protobuf:"bytes,2,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"`
+	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	RetryCount    int32                  `protobuf:"varint,7,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
+	Remark        string                 `protobuf:"bytes,8,opt,name=remark,proto3" json:"remark,omitempty"`
+	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SmsLog) Reset() {
+	*x = SmsLog{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SmsLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SmsLog) ProtoMessage() {}
+
+func (x *SmsLog) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SmsLog.ProtoReflect.Descriptor instead.
+func (*SmsLog) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *SmsLog) GetLogId() int64 {
+	if x != nil {
+		return x.LogId
+	}
+	return 0
+}
+
+func (x *SmsLog) GetMsgId() string {
+	if x != nil {
+		return x.MsgId
+	}
+	return ""
+}
+
+func (x *SmsLog) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *SmsLog) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *SmsLog) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *SmsLog) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *SmsLog) GetRetryCount() int32 {
+	if x != nil {
+		return x.RetryCount
+	}
+	return 0
+}
+
+func (x *SmsLog) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *SmsLog) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+// 短信发送记录分页查询请求
+type ListSmsLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSmsLogRequest) Reset() {
+	*x = ListSmsLogRequest{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSmsLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSmsLogRequest) ProtoMessage() {}
+
+func (x *ListSmsLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSmsLogRequest.ProtoReflect.Descriptor instead.
+func (*ListSmsLogRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListSmsLogRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListSmsLogRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListSmsLogRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *ListSmsLogRequest) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *ListSmsLogRequest) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *ListSmsLogRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListSmsLogRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 短信发送记录分页查询响应
+type ListSmsLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Logs          []*SmsLog              `protobuf:"bytes,3,rep,name=logs,proto3" json:"logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSmsLogResponse) Reset() {
+	*x = ListSmsLogResponse{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSmsLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSmsLogResponse) ProtoMessage() {}
+
+func (x *ListSmsLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSmsLogResponse.ProtoReflect.Descriptor instead.
+func (*ListSmsLogResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListSmsLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListSmsLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListSmsLogResponse) GetLogs() []*SmsLog {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+func (x *ListSmsLogResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type SmsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SmsResponse) Reset() {
+	*x = SmsResponse{}
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SmsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SmsResponse) ProtoMessage() {}
+
+func (x *SmsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SmsResponse.ProtoReflect.Descriptor instead.
+func (*SmsResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SmsResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *SmsResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 // 发送短信请求
 type SendSmsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -151,7 +931,7 @@ type SendSmsRequest struct {
 
 func (x *SendSmsRequest) Reset() {
 	*x = SendSmsRequest{}
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[1]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -163,7 +943,7 @@ func (x *SendSmsRequest) String() string {
 func (*SendSmsRequest) ProtoMessage() {}
 
 func (x *SendSmsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[1]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -176,7 +956,7 @@ func (x *SendSmsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendSmsRequest.ProtoReflect.Descriptor instead.
 func (*SendSmsRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{1}
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SendSmsRequest) GetPhone() string {
@@ -214,7 +994,7 @@ type SendSmsResponse struct {
 
 func (x *SendSmsResponse) Reset() {
 	*x = SendSmsResponse{}
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[2]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -226,7 +1006,7 @@ func (x *SendSmsResponse) String() string {
 func (*SendSmsResponse) ProtoMessage() {}
 
 func (x *SendSmsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[2]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -239,7 +1019,7 @@ func (x *SendSmsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendSmsResponse.ProtoReflect.Descriptor instead.
 func (*SendSmsResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{2}
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SendSmsResponse) GetCode() *wrapperspb.Int32Value {
@@ -289,7 +1069,7 @@ type BatchSendSmsRequest struct {
 
 func (x *BatchSendSmsRequest) Reset() {
 	*x = BatchSendSmsRequest{}
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[3]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -301,7 +1081,7 @@ func (x *BatchSendSmsRequest) String() string {
 func (*BatchSendSmsRequest) ProtoMessage() {}
 
 func (x *BatchSendSmsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[3]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,7 +1094,7 @@ func (x *BatchSendSmsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchSendSmsRequest.ProtoReflect.Descriptor instead.
 func (*BatchSendSmsRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{3}
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchSendSmsRequest) GetPhones() []string {
@@ -352,7 +1132,7 @@ type BatchSendSmsResponse struct {
 
 func (x *BatchSendSmsResponse) Reset() {
 	*x = BatchSendSmsResponse{}
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[4]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -364,7 +1144,7 @@ func (x *BatchSendSmsResponse) String() string {
 func (*BatchSendSmsResponse) ProtoMessage() {}
 
 func (x *BatchSendSmsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[4]
+	mi := &file_api_zebra_message_sms_sms_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -377,7 +1157,7 @@ func (x *BatchSendSmsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchSendSmsResponse.ProtoReflect.Descriptor instead.
 func (*BatchSendSmsResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{4}
+	return file_api_zebra_message_sms_sms_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BatchSendSmsResponse) GetCode() *wrapperspb.Int32Value {
@@ -433,7 +1213,70 @@ const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\vupdate_time\x18\a \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\xb5\x01\n" +
+	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\x90\x01\n" +
+	"\x18CreateSmsTemplateRequest\x12\x19\n" +
+	"\btpl_code\x18\x01 \x01(\tR\atplCode\x12\x19\n" +
+	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x1f\n" +
+	"\vtpl_content\x18\x03 \x01(\tR\n" +
+	"tplContent\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"\x8c\x01\n" +
+	"\x18UpdateSmsTemplateRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
+	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x1f\n" +
+	"\vtpl_content\x18\x03 \x01(\tR\n" +
+	"tplContent\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"1\n" +
+	"\x18DeleteSmsTemplateRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\"V\n" +
+	"\x15GetSmsTemplateRequest\x12\x17\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03H\x00R\x05tplId\x12\x1b\n" +
+	"\btpl_code\x18\x02 \x01(\tH\x00R\atplCodeB\a\n" +
+	"\x05query\"\x89\x01\n" +
+	"\x16GetSmsTemplateResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12,\n" +
+	"\btemplate\x18\x03 \x01(\v2\x10.sms.SmsTemplateR\btemplate\"h\n" +
+	"\x16ListSmsTemplateRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x03 \x01(\x05R\ttplStatus\"\xa2\x01\n" +
+	"\x17ListSmsTemplateResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
+	"\ttemplates\x18\x03 \x03(\v2\x10.sms.SmsTemplateR\ttemplates\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xf3\x01\n" +
+	"\x06SmsLog\x12\x15\n" +
+	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
+	"\x06msg_id\x18\x02 \x01(\tR\x05msgId\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x19\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x18\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1f\n" +
+	"\vretry_count\x18\a \x01(\x05R\n" +
+	"retryCount\x12\x16\n" +
+	"\x06remark\x18\b \x01(\tR\x06remark\x12\x1f\n" +
+	"\vcreate_time\x18\t \x01(\x03R\n" +
+	"createTime\"\xc7\x01\n" +
+	"\x11ListSmsLogRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x19\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\x8e\x01\n" +
+	"\x12ListSmsLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
+	"\x04logs\x18\x03 \x03(\v2\v.sms.SmsLogR\x04logs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"P\n" +
+	"\vSmsResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"\xb5\x01\n" +
 	"\x0eSendSmsRequest\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x127\n" +
@@ -459,11 +1302,17 @@ const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\x17\n" +
-	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\x87\x01\n" +
+	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\xa1\x04\n" +
 	"\n" +
 	"SmsService\x124\n" +
 	"\aSendSms\x12\x13.sms.SendSmsRequest\x1a\x14.sms.SendSmsResponse\x12C\n" +
-	"\fBatchSendSms\x12\x18.sms.BatchSendSmsRequest\x1a\x19.sms.BatchSendSmsResponseB\x1dZ\x1b./api/zebra-message/sms;smsb\x06proto3"
+	"\fBatchSendSms\x12\x18.sms.BatchSendSmsRequest\x1a\x19.sms.BatchSendSmsResponse\x12A\n" +
+	"\x0eCreateTemplate\x12\x1d.sms.CreateSmsTemplateRequest\x1a\x10.sms.SmsResponse\x12A\n" +
+	"\x0eUpdateTemplate\x12\x1d.sms.UpdateSmsTemplateRequest\x1a\x10.sms.SmsResponse\x12A\n" +
+	"\x0eDeleteTemplate\x12\x1d.sms.DeleteSmsTemplateRequest\x1a\x10.sms.SmsResponse\x12F\n" +
+	"\vGetTemplate\x12\x1a.sms.GetSmsTemplateRequest\x1a\x1b.sms.GetSmsTemplateResponse\x12J\n" +
+	"\rListTemplates\x12\x1b.sms.ListSmsTemplateRequest\x1a\x1c.sms.ListSmsTemplateResponse\x12;\n" +
+	"\bListLogs\x12\x16.sms.ListSmsLogRequest\x1a\x17.sms.ListSmsLogResponseB\x1dZ\x1b./api/zebra-message/sms;smsb\x06proto3"
 
 var (
 	file_api_zebra_message_sms_sms_proto_rawDescOnce sync.Once
@@ -477,31 +1326,61 @@ func file_api_zebra_message_sms_sms_proto_rawDescGZIP() []byte {
 	return file_api_zebra_message_sms_sms_proto_rawDescData
 }
 
-var file_api_zebra_message_sms_sms_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_api_zebra_message_sms_sms_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_api_zebra_message_sms_sms_proto_goTypes = []any{
-	(*SmsTemplate)(nil),           // 0: sms.SmsTemplate
-	(*SendSmsRequest)(nil),        // 1: sms.SendSmsRequest
-	(*SendSmsResponse)(nil),       // 2: sms.SendSmsResponse
-	(*BatchSendSmsRequest)(nil),   // 3: sms.BatchSendSmsRequest
-	(*BatchSendSmsResponse)(nil),  // 4: sms.BatchSendSmsResponse
-	nil,                           // 5: sms.SendSmsRequest.ParamsEntry
-	nil,                           // 6: sms.BatchSendSmsRequest.ParamsEntry
-	(*wrapperspb.Int32Value)(nil), // 7: google.protobuf.Int32Value
+	(*SmsTemplate)(nil),              // 0: sms.SmsTemplate
+	(*CreateSmsTemplateRequest)(nil), // 1: sms.CreateSmsTemplateRequest
+	(*UpdateSmsTemplateRequest)(nil), // 2: sms.UpdateSmsTemplateRequest
+	(*DeleteSmsTemplateRequest)(nil), // 3: sms.DeleteSmsTemplateRequest
+	(*GetSmsTemplateRequest)(nil),    // 4: sms.GetSmsTemplateRequest
+	(*GetSmsTemplateResponse)(nil),   // 5: sms.GetSmsTemplateResponse
+	(*ListSmsTemplateRequest)(nil),   // 6: sms.ListSmsTemplateRequest
+	(*ListSmsTemplateResponse)(nil),  // 7: sms.ListSmsTemplateResponse
+	(*SmsLog)(nil),                   // 8: sms.SmsLog
+	(*ListSmsLogRequest)(nil),        // 9: sms.ListSmsLogRequest
+	(*ListSmsLogResponse)(nil),       // 10: sms.ListSmsLogResponse
+	(*SmsResponse)(nil),              // 11: sms.SmsResponse
+	(*SendSmsRequest)(nil),           // 12: sms.SendSmsRequest
+	(*SendSmsResponse)(nil),          // 13: sms.SendSmsResponse
+	(*BatchSendSmsRequest)(nil),      // 14: sms.BatchSendSmsRequest
+	(*BatchSendSmsResponse)(nil),     // 15: sms.BatchSendSmsResponse
+	nil,                              // 16: sms.SendSmsRequest.ParamsEntry
+	nil,                              // 17: sms.BatchSendSmsRequest.ParamsEntry
+	(*wrapperspb.Int32Value)(nil),    // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_message_sms_sms_proto_depIdxs = []int32{
-	5, // 0: sms.SendSmsRequest.params:type_name -> sms.SendSmsRequest.ParamsEntry
-	7, // 1: sms.SendSmsResponse.code:type_name -> google.protobuf.Int32Value
-	6, // 2: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
-	7, // 3: sms.BatchSendSmsResponse.code:type_name -> google.protobuf.Int32Value
-	1, // 4: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
-	3, // 5: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
-	2, // 6: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
-	4, // 7: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	18, // 0: sms.GetSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: sms.GetSmsTemplateResponse.template:type_name -> sms.SmsTemplate
+	18, // 2: sms.ListSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: sms.ListSmsTemplateResponse.templates:type_name -> sms.SmsTemplate
+	18, // 4: sms.ListSmsLogResponse.code:type_name -> google.protobuf.Int32Value
+	8,  // 5: sms.ListSmsLogResponse.logs:type_name -> sms.SmsLog
+	18, // 6: sms.SmsResponse.code:type_name -> google.protobuf.Int32Value
+	16, // 7: sms.SendSmsRequest.params:type_name -> sms.SendSmsRequest.ParamsEntry
+	18, // 8: sms.SendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 9: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
+	18, // 10: sms.BatchSendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 11: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
+	14, // 12: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
+	1,  // 13: sms.SmsService.CreateTemplate:input_type -> sms.CreateSmsTemplateRequest
+	2,  // 14: sms.SmsService.UpdateTemplate:input_type -> sms.UpdateSmsTemplateRequest
+	3,  // 15: sms.SmsService.DeleteTemplate:input_type -> sms.DeleteSmsTemplateRequest
+	4,  // 16: sms.SmsService.GetTemplate:input_type -> sms.GetSmsTemplateRequest
+	6,  // 17: sms.SmsService.ListTemplates:input_type -> sms.ListSmsTemplateRequest
+	9,  // 18: sms.SmsService.ListLogs:input_type -> sms.ListSmsLogRequest
+	13, // 19: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
+	15, // 20: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
+	11, // 21: sms.SmsService.CreateTemplate:output_type -> sms.SmsResponse
+	11, // 22: sms.SmsService.UpdateTemplate:output_type -> sms.SmsResponse
+	11, // 23: sms.SmsService.DeleteTemplate:output_type -> sms.SmsResponse
+	5,  // 24: sms.SmsService.GetTemplate:output_type -> sms.GetSmsTemplateResponse
+	7,  // 25: sms.SmsService.ListTemplates:output_type -> sms.ListSmsTemplateResponse
+	10, // 26: sms.SmsService.ListLogs:output_type -> sms.ListSmsLogResponse
+	19, // [19:27] is the sub-list for method output_type
+	11, // [11:19] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_sms_sms_proto_init() }
@@ -509,13 +1388,17 @@ func file_api_zebra_message_sms_sms_proto_init() {
 	if File_api_zebra_message_sms_sms_proto != nil {
 		return
 	}
+	file_api_zebra_message_sms_sms_proto_msgTypes[4].OneofWrappers = []any{
+		(*GetSmsTemplateRequest_TplId)(nil),
+		(*GetSmsTemplateRequest_TplCode)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_message_sms_sms_proto_rawDesc), len(file_api_zebra_message_sms_sms_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

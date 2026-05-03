@@ -521,6 +521,136 @@ func (x *GetStockResponse) GetStocks() []*Stock {
 	return nil
 }
 
+// 库存分页查询请求
+type ListStockRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`                         // 页码
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // 页大小
+	SkuId         int64                  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`          // SKU ID，0表示全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListStockRequest) Reset() {
+	*x = ListStockRequest{}
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListStockRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListStockRequest) ProtoMessage() {}
+
+func (x *ListStockRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListStockRequest.ProtoReflect.Descriptor instead.
+func (*ListStockRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_stock_stock_stock_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListStockRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListStockRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListStockRequest) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
+	}
+	return 0
+}
+
+// 库存分页查询响应
+type ListStockResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Stocks        []*Stock               `protobuf:"bytes,3,rep,name=stocks,proto3" json:"stocks,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListStockResponse) Reset() {
+	*x = ListStockResponse{}
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListStockResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListStockResponse) ProtoMessage() {}
+
+func (x *ListStockResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListStockResponse.ProtoReflect.Descriptor instead.
+func (*ListStockResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_stock_stock_stock_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListStockResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListStockResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListStockResponse) GetStocks() []*Stock {
+	if x != nil {
+		return x.Stocks
+	}
+	return nil
+}
+
+func (x *ListStockResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 通用响应
 type StockResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -535,7 +665,7 @@ type StockResponse struct {
 
 func (x *StockResponse) Reset() {
 	*x = StockResponse{}
-	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[7]
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -547,7 +677,7 @@ func (x *StockResponse) String() string {
 func (*StockResponse) ProtoMessage() {}
 
 func (x *StockResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[7]
+	mi := &file_api_zebra_stock_stock_stock_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -560,7 +690,7 @@ func (x *StockResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockResponse.ProtoReflect.Descriptor instead.
 func (*StockResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_stock_stock_stock_proto_rawDescGZIP(), []int{7}
+	return file_api_zebra_stock_stock_stock_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StockResponse) GetCode() *wrapperspb.Int32Value {
@@ -641,19 +771,29 @@ const file_api_zebra_stock_stock_stock_proto_rawDesc = "" +
 	"\x10GetStockResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
-	"\x06stocks\x18\x03 \x03(\v2\f.stock.StockR\x06stocks\"\xaa\x01\n" +
+	"\x06stocks\x18\x03 \x03(\v2\f.stock.StockR\x06stocks\"Z\n" +
+	"\x10ListStockRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
+	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"\x92\x01\n" +
+	"\x11ListStockResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
+	"\x06stocks\x18\x03 \x03(\v2\f.stock.StockR\x06stocks\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xaa\x01\n" +
 	"\rStockResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\"\n" +
-	"\x05stock\x18\x05 \x01(\v2\f.stock.StockR\x05stock2\xab\x02\n" +
+	"\x05stock\x18\x05 \x01(\v2\f.stock.StockR\x05stock2\xe6\x02\n" +
 	"\fStockService\x126\n" +
 	"\aInbound\x12\x15.stock.InboundRequest\x1a\x14.stock.StockResponse\x128\n" +
 	"\bOutbound\x12\x16.stock.OutboundRequest\x1a\x14.stock.StockResponse\x124\n" +
 	"\x06Freeze\x12\x14.stock.FreezeRequest\x1a\x14.stock.StockResponse\x126\n" +
 	"\aRelease\x12\x15.stock.ReleaseRequest\x1a\x14.stock.StockResponse\x12;\n" +
-	"\bGetStock\x12\x16.stock.GetStockRequest\x1a\x17.stock.GetStockResponseB\x1fZ\x1d./api/zebra-stock/stock;stockb\x06proto3"
+	"\bGetStock\x12\x16.stock.GetStockRequest\x1a\x17.stock.GetStockResponse\x129\n" +
+	"\x04List\x12\x17.stock.ListStockRequest\x1a\x18.stock.ListStockResponseB\x1fZ\x1d./api/zebra-stock/stock;stockb\x06proto3"
 
 var (
 	file_api_zebra_stock_stock_stock_proto_rawDescOnce sync.Once
@@ -667,7 +807,7 @@ func file_api_zebra_stock_stock_stock_proto_rawDescGZIP() []byte {
 	return file_api_zebra_stock_stock_stock_proto_rawDescData
 }
 
-var file_api_zebra_stock_stock_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_zebra_stock_stock_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_zebra_stock_stock_stock_proto_goTypes = []any{
 	(*Stock)(nil),                 // 0: stock.Stock
 	(*InboundRequest)(nil),        // 1: stock.InboundRequest
@@ -676,29 +816,35 @@ var file_api_zebra_stock_stock_stock_proto_goTypes = []any{
 	(*ReleaseRequest)(nil),        // 4: stock.ReleaseRequest
 	(*GetStockRequest)(nil),       // 5: stock.GetStockRequest
 	(*GetStockResponse)(nil),      // 6: stock.GetStockResponse
-	(*StockResponse)(nil),         // 7: stock.StockResponse
-	(*wrapperspb.Int32Value)(nil), // 8: google.protobuf.Int32Value
+	(*ListStockRequest)(nil),      // 7: stock.ListStockRequest
+	(*ListStockResponse)(nil),     // 8: stock.ListStockResponse
+	(*StockResponse)(nil),         // 9: stock.StockResponse
+	(*wrapperspb.Int32Value)(nil), // 10: google.protobuf.Int32Value
 }
 var file_api_zebra_stock_stock_stock_proto_depIdxs = []int32{
-	8, // 0: stock.GetStockResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 1: stock.GetStockResponse.stocks:type_name -> stock.Stock
-	8, // 2: stock.StockResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 3: stock.StockResponse.stock:type_name -> stock.Stock
-	1, // 4: stock.StockService.Inbound:input_type -> stock.InboundRequest
-	2, // 5: stock.StockService.Outbound:input_type -> stock.OutboundRequest
-	3, // 6: stock.StockService.Freeze:input_type -> stock.FreezeRequest
-	4, // 7: stock.StockService.Release:input_type -> stock.ReleaseRequest
-	5, // 8: stock.StockService.GetStock:input_type -> stock.GetStockRequest
-	7, // 9: stock.StockService.Inbound:output_type -> stock.StockResponse
-	7, // 10: stock.StockService.Outbound:output_type -> stock.StockResponse
-	7, // 11: stock.StockService.Freeze:output_type -> stock.StockResponse
-	7, // 12: stock.StockService.Release:output_type -> stock.StockResponse
-	6, // 13: stock.StockService.GetStock:output_type -> stock.GetStockResponse
-	9, // [9:14] is the sub-list for method output_type
-	4, // [4:9] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	10, // 0: stock.GetStockResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: stock.GetStockResponse.stocks:type_name -> stock.Stock
+	10, // 2: stock.ListStockResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: stock.ListStockResponse.stocks:type_name -> stock.Stock
+	10, // 4: stock.StockResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: stock.StockResponse.stock:type_name -> stock.Stock
+	1,  // 6: stock.StockService.Inbound:input_type -> stock.InboundRequest
+	2,  // 7: stock.StockService.Outbound:input_type -> stock.OutboundRequest
+	3,  // 8: stock.StockService.Freeze:input_type -> stock.FreezeRequest
+	4,  // 9: stock.StockService.Release:input_type -> stock.ReleaseRequest
+	5,  // 10: stock.StockService.GetStock:input_type -> stock.GetStockRequest
+	7,  // 11: stock.StockService.List:input_type -> stock.ListStockRequest
+	9,  // 12: stock.StockService.Inbound:output_type -> stock.StockResponse
+	9,  // 13: stock.StockService.Outbound:output_type -> stock.StockResponse
+	9,  // 14: stock.StockService.Freeze:output_type -> stock.StockResponse
+	9,  // 15: stock.StockService.Release:output_type -> stock.StockResponse
+	6,  // 16: stock.StockService.GetStock:output_type -> stock.GetStockResponse
+	8,  // 17: stock.StockService.List:output_type -> stock.ListStockResponse
+	12, // [12:18] is the sub-list for method output_type
+	6,  // [6:12] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_stock_stock_stock_proto_init() }
@@ -712,7 +858,7 @@ func file_api_zebra_stock_stock_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_stock_stock_stock_proto_rawDesc), len(file_api_zebra_stock_stock_stock_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -488,6 +488,7 @@ func (x *ClearCartRequest) GetUserId() int64 {
 type GetCartRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserCouponId  int64                  `protobuf:"varint,2,opt,name=user_coupon_id,json=userCouponId,proto3" json:"user_coupon_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -529,15 +530,26 @@ func (x *GetCartRequest) GetUserId() int64 {
 	return 0
 }
 
+func (x *GetCartRequest) GetUserCouponId() int64 {
+	if x != nil {
+		return x.UserCouponId
+	}
+	return 0
+}
+
 // 获取购物车响应
 type GetCartResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
-	Cart          *Cart                  `protobuf:"bytes,3,opt,name=cart,proto3" json:"cart,omitempty"`
-	Items         []*CartItem            `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Code                *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg                 string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Cart                *Cart                  `protobuf:"bytes,3,opt,name=cart,proto3" json:"cart,omitempty"`
+	Items               []*CartItem            `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	TotalAmount         int64                  `protobuf:"varint,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	DiscountAmount      int64                  `protobuf:"varint,6,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	PayAmount           int64                  `protobuf:"varint,7,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
+	AppliedUserCouponId int64                  `protobuf:"varint,8,opt,name=applied_user_coupon_id,json=appliedUserCouponId,proto3" json:"applied_user_coupon_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetCartResponse) Reset() {
@@ -598,6 +610,164 @@ func (x *GetCartResponse) GetItems() []*CartItem {
 	return nil
 }
 
+func (x *GetCartResponse) GetTotalAmount() int64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *GetCartResponse) GetDiscountAmount() int64 {
+	if x != nil {
+		return x.DiscountAmount
+	}
+	return 0
+}
+
+func (x *GetCartResponse) GetPayAmount() int64 {
+	if x != nil {
+		return x.PayAmount
+	}
+	return 0
+}
+
+func (x *GetCartResponse) GetAppliedUserCouponId() int64 {
+	if x != nil {
+		return x.AppliedUserCouponId
+	}
+	return 0
+}
+
+// 购物车分页查询请求
+type ListCartRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 用户ID，0表示全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCartRequest) Reset() {
+	*x = ListCartRequest{}
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCartRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCartRequest) ProtoMessage() {}
+
+func (x *ListCartRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCartRequest.ProtoReflect.Descriptor instead.
+func (*ListCartRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListCartRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListCartRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCartRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+// 购物车分页查询响应
+type ListCartResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Carts         []*Cart                `protobuf:"bytes,3,rep,name=carts,proto3" json:"carts,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCartResponse) Reset() {
+	*x = ListCartResponse{}
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCartResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCartResponse) ProtoMessage() {}
+
+func (x *ListCartResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCartResponse.ProtoReflect.Descriptor instead.
+func (*ListCartResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListCartResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListCartResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListCartResponse) GetCarts() []*Cart {
+	if x != nil {
+		return x.Carts
+	}
+	return nil
+}
+
+func (x *ListCartResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 批量删除请求
 type BatchRemoveRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -609,7 +779,7 @@ type BatchRemoveRequest struct {
 
 func (x *BatchRemoveRequest) Reset() {
 	*x = BatchRemoveRequest{}
-	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[8]
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -621,7 +791,7 @@ func (x *BatchRemoveRequest) String() string {
 func (*BatchRemoveRequest) ProtoMessage() {}
 
 func (x *BatchRemoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[8]
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -634,7 +804,7 @@ func (x *BatchRemoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchRemoveRequest.ProtoReflect.Descriptor instead.
 func (*BatchRemoveRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{8}
+	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *BatchRemoveRequest) GetUserId() int64 {
@@ -664,7 +834,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[9]
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -676,7 +846,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[9]
+	mi := &file_api_zebra_cart_cart_cart_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -689,7 +859,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{9}
+	return file_api_zebra_cart_cart_cart_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -772,15 +942,31 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\aitem_id\x18\x02 \x01(\x03R\x06itemId\x12\x1a\n" +
 	"\bquantity\x18\x03 \x01(\x05R\bquantity\"+\n" +
 	"\x10ClearCartRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\")\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"O\n" +
 	"\x0eGetCartRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x9a\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12$\n" +
+	"\x0euser_coupon_id\x18\x02 \x01(\x03R\fuserCouponId\"\xba\x02\n" +
 	"\x0fGetCartResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1e\n" +
 	"\x04cart\x18\x03 \x01(\v2\n" +
 	".cart.CartR\x04cart\x12$\n" +
-	"\x05items\x18\x04 \x03(\v2\x0e.cart.CartItemR\x05items\"H\n" +
+	"\x05items\x18\x04 \x03(\v2\x0e.cart.CartItemR\x05items\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\x03R\vtotalAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x06 \x01(\x03R\x0ediscountAmount\x12\x1d\n" +
+	"\n" +
+	"pay_amount\x18\a \x01(\x03R\tpayAmount\x123\n" +
+	"\x16applied_user_coupon_id\x18\b \x01(\x03R\x13appliedUserCouponId\"[\n" +
+	"\x0fListCartRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"\x8d\x01\n" +
+	"\x10ListCartResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12 \n" +
+	"\x05carts\x18\x03 \x03(\v2\n" +
+	".cart.CartR\x05carts\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"H\n" +
 	"\x12BatchRemoveRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x19\n" +
 	"\bitem_ids\x18\x02 \x03(\x03R\aitemIds\"\xa5\x01\n" +
@@ -789,14 +975,15 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\"\n" +
-	"\x04item\x18\x05 \x01(\v2\x0e.cart.CartItemR\x04item2\xda\x02\n" +
+	"\x04item\x18\x05 \x01(\v2\x0e.cart.CartItemR\x04item2\x91\x03\n" +
 	"\vCartService\x12/\n" +
 	"\aAddItem\x12\x14.cart.AddItemRequest\x1a\x0e.cart.Response\x125\n" +
 	"\n" +
 	"RemoveItem\x12\x17.cart.RemoveItemRequest\x1a\x0e.cart.Response\x12=\n" +
 	"\x0eUpdateQuantity\x12\x1b.cart.UpdateQuantityRequest\x1a\x0e.cart.Response\x123\n" +
 	"\tClearCart\x12\x16.cart.ClearCartRequest\x1a\x0e.cart.Response\x126\n" +
-	"\aGetCart\x12\x14.cart.GetCartRequest\x1a\x15.cart.GetCartResponse\x127\n" +
+	"\aGetCart\x12\x14.cart.GetCartRequest\x1a\x15.cart.GetCartResponse\x125\n" +
+	"\x04List\x12\x15.cart.ListCartRequest\x1a\x16.cart.ListCartResponse\x127\n" +
 	"\vBatchRemove\x12\x18.cart.BatchRemoveRequest\x1a\x0e.cart.ResponseB\x1cZ\x1a./api/zebra-cart/cart;cartb\x06proto3"
 
 var (
@@ -811,7 +998,7 @@ func file_api_zebra_cart_cart_cart_proto_rawDescGZIP() []byte {
 	return file_api_zebra_cart_cart_cart_proto_rawDescData
 }
 
-var file_api_zebra_cart_cart_cart_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_api_zebra_cart_cart_cart_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_api_zebra_cart_cart_cart_proto_goTypes = []any{
 	(*Cart)(nil),                  // 0: cart.Cart
 	(*CartItem)(nil),              // 1: cart.CartItem
@@ -821,33 +1008,39 @@ var file_api_zebra_cart_cart_cart_proto_goTypes = []any{
 	(*ClearCartRequest)(nil),      // 5: cart.ClearCartRequest
 	(*GetCartRequest)(nil),        // 6: cart.GetCartRequest
 	(*GetCartResponse)(nil),       // 7: cart.GetCartResponse
-	(*BatchRemoveRequest)(nil),    // 8: cart.BatchRemoveRequest
-	(*Response)(nil),              // 9: cart.Response
-	(*wrapperspb.Int32Value)(nil), // 10: google.protobuf.Int32Value
+	(*ListCartRequest)(nil),       // 8: cart.ListCartRequest
+	(*ListCartResponse)(nil),      // 9: cart.ListCartResponse
+	(*BatchRemoveRequest)(nil),    // 10: cart.BatchRemoveRequest
+	(*Response)(nil),              // 11: cart.Response
+	(*wrapperspb.Int32Value)(nil), // 12: google.protobuf.Int32Value
 }
 var file_api_zebra_cart_cart_cart_proto_depIdxs = []int32{
-	10, // 0: cart.GetCartResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 0: cart.GetCartResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: cart.GetCartResponse.cart:type_name -> cart.Cart
 	1,  // 2: cart.GetCartResponse.items:type_name -> cart.CartItem
-	10, // 3: cart.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 4: cart.Response.item:type_name -> cart.CartItem
-	2,  // 5: cart.CartService.AddItem:input_type -> cart.AddItemRequest
-	3,  // 6: cart.CartService.RemoveItem:input_type -> cart.RemoveItemRequest
-	4,  // 7: cart.CartService.UpdateQuantity:input_type -> cart.UpdateQuantityRequest
-	5,  // 8: cart.CartService.ClearCart:input_type -> cart.ClearCartRequest
-	6,  // 9: cart.CartService.GetCart:input_type -> cart.GetCartRequest
-	8,  // 10: cart.CartService.BatchRemove:input_type -> cart.BatchRemoveRequest
-	9,  // 11: cart.CartService.AddItem:output_type -> cart.Response
-	9,  // 12: cart.CartService.RemoveItem:output_type -> cart.Response
-	9,  // 13: cart.CartService.UpdateQuantity:output_type -> cart.Response
-	9,  // 14: cart.CartService.ClearCart:output_type -> cart.Response
-	7,  // 15: cart.CartService.GetCart:output_type -> cart.GetCartResponse
-	9,  // 16: cart.CartService.BatchRemove:output_type -> cart.Response
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	12, // 3: cart.ListCartResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: cart.ListCartResponse.carts:type_name -> cart.Cart
+	12, // 5: cart.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 6: cart.Response.item:type_name -> cart.CartItem
+	2,  // 7: cart.CartService.AddItem:input_type -> cart.AddItemRequest
+	3,  // 8: cart.CartService.RemoveItem:input_type -> cart.RemoveItemRequest
+	4,  // 9: cart.CartService.UpdateQuantity:input_type -> cart.UpdateQuantityRequest
+	5,  // 10: cart.CartService.ClearCart:input_type -> cart.ClearCartRequest
+	6,  // 11: cart.CartService.GetCart:input_type -> cart.GetCartRequest
+	8,  // 12: cart.CartService.List:input_type -> cart.ListCartRequest
+	10, // 13: cart.CartService.BatchRemove:input_type -> cart.BatchRemoveRequest
+	11, // 14: cart.CartService.AddItem:output_type -> cart.Response
+	11, // 15: cart.CartService.RemoveItem:output_type -> cart.Response
+	11, // 16: cart.CartService.UpdateQuantity:output_type -> cart.Response
+	11, // 17: cart.CartService.ClearCart:output_type -> cart.Response
+	7,  // 18: cart.CartService.GetCart:output_type -> cart.GetCartResponse
+	9,  // 19: cart.CartService.List:output_type -> cart.ListCartResponse
+	11, // 20: cart.CartService.BatchRemove:output_type -> cart.Response
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_cart_cart_cart_proto_init() }
@@ -861,7 +1054,7 @@ func file_api_zebra_cart_cart_cart_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_cart_cart_cart_proto_rawDesc), len(file_api_zebra_cart_cart_cart_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

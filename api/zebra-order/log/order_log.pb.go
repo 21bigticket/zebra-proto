@@ -276,6 +276,8 @@ type GetOrderLogsRequest struct {
 	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`                  // 操作类型
 	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	StartTime     int64                  `protobuf:"varint,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -334,6 +336,20 @@ func (x *GetOrderLogsRequest) GetPage() int32 {
 func (x *GetOrderLogsRequest) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetOrderLogsRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *GetOrderLogsRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
 	}
 	return 0
 }
@@ -433,12 +449,15 @@ const file_api_zebra_order_log_order_log_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
 	"\x03log\x18\x03 \x01(\v2\r.log.OrderLogR\x03log\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\"y\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"\xb3\x01\n" +
 	"\x13GetOrderLogsRequest\x12\x19\n" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x92\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\x06 \x01(\x03R\aendTime\"\x92\x01\n" +
 	"\x14GetOrderLogsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +

@@ -40,22 +40,25 @@ const (
 
 // 商品(SPU)信息
 type Goods struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CategoryId    int64                  `protobuf:"varint,2,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	VendorId      int64                  `protobuf:"varint,3,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	BrandId       int64                  `protobuf:"varint,4,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	SubTitle      string                 `protobuf:"bytes,6,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
-	MainImage     string                 `protobuf:"bytes,7,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
-	Detail        string                 `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail,omitempty"` // 富文本详情
-	SortOrder     int32                  `protobuf:"varint,9,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"` // 0=下架, 1=上架
-	CreateTime    int64                  `protobuf:"varint,11,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime    int64                  `protobuf:"varint,12,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	IsDeleted     int32                  `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CategoryId        int64                  `protobuf:"varint,2,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	VendorId          int64                  `protobuf:"varint,3,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	BrandId           int64                  `protobuf:"varint,4,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	Name              string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	SubTitle          string                 `protobuf:"bytes,6,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
+	MainImage         string                 `protobuf:"bytes,7,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
+	Detail            string                 `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail,omitempty"` // 富文本详情
+	SortOrder         int32                  `protobuf:"varint,9,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status            int32                  `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"` // 0=下架, 1=上架
+	CreateTime        int64                  `protobuf:"varint,11,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime        int64                  `protobuf:"varint,12,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	IsDeleted         int32                  `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	GalleryImages     []string               `protobuf:"bytes,14,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`                     // 商品图集
+	AttributeTemplate []int64                `protobuf:"varint,15,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"` // 规格属性模板，存父属性ID
+	SkuNameRule       string                 `protobuf:"bytes,16,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`                         // SKU自动命名规则
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Goods) Reset() {
@@ -179,19 +182,43 @@ func (x *Goods) GetIsDeleted() int32 {
 	return 0
 }
 
+func (x *Goods) GetGalleryImages() []string {
+	if x != nil {
+		return x.GalleryImages
+	}
+	return nil
+}
+
+func (x *Goods) GetAttributeTemplate() []int64 {
+	if x != nil {
+		return x.AttributeTemplate
+	}
+	return nil
+}
+
+func (x *Goods) GetSkuNameRule() string {
+	if x != nil {
+		return x.SkuNameRule
+	}
+	return ""
+}
+
 // 创建商品请求
 type CreateGoodsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CategoryId    int64                  `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
-	VendorId      int64                  `protobuf:"varint,2,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
-	BrandId       int64                  `protobuf:"varint,3,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
-	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	SubTitle      string                 `protobuf:"bytes,5,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
-	MainImage     string                 `protobuf:"bytes,6,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
-	Detail        string                 `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CategoryId        int64                  `protobuf:"varint,1,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	VendorId          int64                  `protobuf:"varint,2,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	BrandId           int64                  `protobuf:"varint,3,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	Name              string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	SubTitle          string                 `protobuf:"bytes,5,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
+	MainImage         string                 `protobuf:"bytes,6,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
+	Detail            string                 `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail,omitempty"`
+	SortOrder         int32                  `protobuf:"varint,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	GalleryImages     []string               `protobuf:"bytes,9,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`
+	AttributeTemplate []int64                `protobuf:"varint,10,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"`
+	SkuNameRule       string                 `protobuf:"bytes,11,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreateGoodsRequest) Reset() {
@@ -280,18 +307,45 @@ func (x *CreateGoodsRequest) GetSortOrder() int32 {
 	return 0
 }
 
+func (x *CreateGoodsRequest) GetGalleryImages() []string {
+	if x != nil {
+		return x.GalleryImages
+	}
+	return nil
+}
+
+func (x *CreateGoodsRequest) GetAttributeTemplate() []int64 {
+	if x != nil {
+		return x.AttributeTemplate
+	}
+	return nil
+}
+
+func (x *CreateGoodsRequest) GetSkuNameRule() string {
+	if x != nil {
+		return x.SkuNameRule
+	}
+	return ""
+}
+
 // 更新商品请求
 type UpdateGoodsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	SubTitle      string                 `protobuf:"bytes,3,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
-	MainImage     string                 `protobuf:"bytes,4,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
-	Detail        string                 `protobuf:"bytes,5,opt,name=detail,proto3" json:"detail,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	SubTitle          string                 `protobuf:"bytes,3,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
+	MainImage         string                 `protobuf:"bytes,4,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
+	Detail            string                 `protobuf:"bytes,5,opt,name=detail,proto3" json:"detail,omitempty"`
+	SortOrder         int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status            int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	GalleryImages     []string               `protobuf:"bytes,8,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`
+	AttributeTemplate []int64                `protobuf:"varint,9,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"`
+	SkuNameRule       string                 `protobuf:"bytes,10,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`
+	CategoryId        int64                  `protobuf:"varint,11,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
+	BrandId           int64                  `protobuf:"varint,12,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	VendorId          int64                  `protobuf:"varint,13,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdateGoodsRequest) Reset() {
@@ -369,6 +423,48 @@ func (x *UpdateGoodsRequest) GetSortOrder() int32 {
 func (x *UpdateGoodsRequest) GetStatus() int32 {
 	if x != nil {
 		return x.Status
+	}
+	return 0
+}
+
+func (x *UpdateGoodsRequest) GetGalleryImages() []string {
+	if x != nil {
+		return x.GalleryImages
+	}
+	return nil
+}
+
+func (x *UpdateGoodsRequest) GetAttributeTemplate() []int64 {
+	if x != nil {
+		return x.AttributeTemplate
+	}
+	return nil
+}
+
+func (x *UpdateGoodsRequest) GetSkuNameRule() string {
+	if x != nil {
+		return x.SkuNameRule
+	}
+	return ""
+}
+
+func (x *UpdateGoodsRequest) GetCategoryId() int64 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+func (x *UpdateGoodsRequest) GetBrandId() int64 {
+	if x != nil {
+		return x.BrandId
+	}
+	return 0
+}
+
+func (x *UpdateGoodsRequest) GetVendorId() int64 {
+	if x != nil {
+		return x.VendorId
 	}
 	return 0
 }
@@ -742,7 +838,7 @@ var File_api_zebra_goods_goods_goods_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x02\n" +
+	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xea\x03\n" +
 	"\x05Goods\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vcategory_id\x18\x02 \x01(\x03R\n" +
@@ -763,7 +859,10 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\vupdate_time\x18\f \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\r \x01(\x05R\tisDeleted\"\xf4\x01\n" +
+	"is_deleted\x18\r \x01(\x05R\tisDeleted\x12%\n" +
+	"\x0egallery_images\x18\x0e \x03(\tR\rgalleryImages\x12-\n" +
+	"\x12attribute_template\x18\x0f \x03(\x03R\x11attributeTemplate\x12\"\n" +
+	"\rsku_name_rule\x18\x10 \x01(\tR\vskuNameRule\"\xee\x02\n" +
 	"\x12CreateGoodsRequest\x12\x1f\n" +
 	"\vcategory_id\x18\x01 \x01(\x03R\n" +
 	"categoryId\x12\x1b\n" +
@@ -775,7 +874,11 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"main_image\x18\x06 \x01(\tR\tmainImage\x12\x16\n" +
 	"\x06detail\x18\a \x01(\tR\x06detail\x12\x1d\n" +
 	"\n" +
-	"sort_order\x18\b \x01(\x05R\tsortOrder\"\xc3\x01\n" +
+	"sort_order\x18\b \x01(\x05R\tsortOrder\x12%\n" +
+	"\x0egallery_images\x18\t \x03(\tR\rgalleryImages\x12-\n" +
+	"\x12attribute_template\x18\n" +
+	" \x03(\x03R\x11attributeTemplate\x12\"\n" +
+	"\rsku_name_rule\x18\v \x01(\tR\vskuNameRule\"\x96\x03\n" +
 	"\x12UpdateGoodsRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -785,7 +888,15 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\x06detail\x18\x05 \x01(\tR\x06detail\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\a \x01(\x05R\x06status\"$\n" +
+	"\x06status\x18\a \x01(\x05R\x06status\x12%\n" +
+	"\x0egallery_images\x18\b \x03(\tR\rgalleryImages\x12-\n" +
+	"\x12attribute_template\x18\t \x03(\x03R\x11attributeTemplate\x12\"\n" +
+	"\rsku_name_rule\x18\n" +
+	" \x01(\tR\vskuNameRule\x12\x1f\n" +
+	"\vcategory_id\x18\v \x01(\x03R\n" +
+	"categoryId\x12\x19\n" +
+	"\bbrand_id\x18\f \x01(\x03R\abrandId\x12\x1b\n" +
+	"\tvendor_id\x18\r \x01(\x03R\bvendorId\"$\n" +
 	"\x12DeleteGoodsRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"!\n" +
 	"\x0fGetGoodsRequest\x12\x0e\n" +

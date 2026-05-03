@@ -46,6 +46,8 @@ const (
 	AfterSalesServiceGetAfterSalesProcedure = "/after_sales.AfterSalesService/GetAfterSales"
 	// AfterSalesServiceGetUserAfterSalesProcedure is the fully-qualified name of the AfterSalesService's GetUserAfterSales RPC.
 	AfterSalesServiceGetUserAfterSalesProcedure = "/after_sales.AfterSalesService/GetUserAfterSales"
+	// AfterSalesServiceListAfterSalesProcedure is the fully-qualified name of the AfterSalesService's ListAfterSales RPC.
+	AfterSalesServiceListAfterSalesProcedure = "/after_sales.AfterSalesService/ListAfterSales"
 )
 
 var (
@@ -59,6 +61,7 @@ type AfterSalesService interface {
 	Refund(ctx context.Context, req *RefundRequest, opts ...client.CallOption) (*AfterSalesResponse, error)
 	GetAfterSales(ctx context.Context, req *GetAfterSalesRequest, opts ...client.CallOption) (*GetAfterSalesResponse, error)
 	GetUserAfterSales(ctx context.Context, req *GetUserAfterSalesRequest, opts ...client.CallOption) (*GetUserAfterSalesResponse, error)
+	ListAfterSales(ctx context.Context, req *ListAfterSalesRequest, opts ...client.CallOption) (*ListAfterSalesResponse, error)
 }
 
 // NewAfterSalesService constructs a client for the after_sales.AfterSalesService service.
@@ -121,9 +124,17 @@ func (c *AfterSalesServiceImpl) GetUserAfterSales(ctx context.Context, req *GetU
 	return resp, nil
 }
 
+func (c *AfterSalesServiceImpl) ListAfterSales(ctx context.Context, req *ListAfterSalesRequest, opts ...client.CallOption) (*ListAfterSalesResponse, error) {
+	resp := new(ListAfterSalesResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListAfterSales", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var AfterSalesService_ClientInfo = client.ClientInfo{
 	InterfaceName: "after_sales.AfterSalesService",
-	MethodNames:   []string{"CreateAfterSales", "AuditAfterSales", "Refund", "GetAfterSales", "GetUserAfterSales"},
+	MethodNames:   []string{"CreateAfterSales", "AuditAfterSales", "Refund", "GetAfterSales", "GetUserAfterSales", "ListAfterSales"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*AfterSalesServiceImpl)
 		dubboCli.conn = conn
@@ -137,6 +148,7 @@ type AfterSalesServiceHandler interface {
 	Refund(context.Context, *RefundRequest) (*AfterSalesResponse, error)
 	GetAfterSales(context.Context, *GetAfterSalesRequest) (*GetAfterSalesResponse, error)
 	GetUserAfterSales(context.Context, *GetUserAfterSalesRequest) (*GetUserAfterSalesResponse, error)
+	ListAfterSales(context.Context, *ListAfterSalesRequest) (*ListAfterSalesResponse, error)
 }
 
 func RegisterAfterSalesServiceHandler(srv *server.Server, hdlr AfterSalesServiceHandler, opts ...server.ServiceOption) error {
@@ -220,6 +232,21 @@ var AfterSalesService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetUserAfterSalesRequest)
 				res, err := handler.(AfterSalesServiceHandler).GetUserAfterSales(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListAfterSales",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListAfterSalesRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListAfterSalesRequest)
+				res, err := handler.(AfterSalesServiceHandler).ListAfterSales(ctx, req)
 				if err != nil {
 					return nil, err
 				}

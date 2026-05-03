@@ -35,6 +35,94 @@ message WeixinTemplate {
   int32  is_deleted   = 8;
 }
 
+// 创建微信模板请求
+message CreateWeixinTemplateRequest {
+  string tpl_code = 1;
+  string tpl_name = 2;
+  string tpl_id_weixin = 3;
+  int32 tpl_status = 4;
+}
+
+// 更新微信模板请求
+message UpdateWeixinTemplateRequest {
+  int64 tpl_id = 1;
+  string tpl_name = 2;
+  string tpl_id_weixin = 3;
+  int32 tpl_status = 4;
+}
+
+// 删除微信模板请求
+message DeleteWeixinTemplateRequest {
+  int64 tpl_id = 1;
+}
+
+// 获取微信模板请求
+message GetWeixinTemplateRequest {
+  oneof query {
+    int64 tpl_id = 1;
+    string tpl_code = 2;
+  }
+}
+
+// 获取微信模板响应
+message GetWeixinTemplateResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  WeixinTemplate template = 3;
+}
+
+// 微信模板分页查询请求
+message ListWeixinTemplateRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 tpl_status = 3; // -1表示全部
+}
+
+// 微信模板分页查询响应
+message ListWeixinTemplateResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated WeixinTemplate templates = 3;
+  int32 total = 4;
+}
+
+// 微信消息发送记录
+message WeixinLog {
+  int64 log_id = 1;
+  string msg_id = 2;
+  string openid = 3;
+  string tpl_code = 4;
+  string content = 5;
+  int32 status = 6;
+  int32 retry_count = 7;
+  string remark = 8;
+  int64 create_time = 9;
+}
+
+// 微信消息发送记录分页查询请求
+message ListWeixinLogRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string openid = 3;
+  string tpl_code = 4;
+  int32 status = 5; // -1表示全部
+  int64 start_time = 6;
+  int64 end_time = 7;
+}
+
+// 微信消息发送记录分页查询响应
+message ListWeixinLogResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated WeixinLog logs = 3;
+  int32 total = 4;
+}
+
+message WeixinResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+}
+
 // 发送微信消息请求
 message SendWeixinRequest {
   string openid    = 1;
@@ -73,4 +161,10 @@ message BatchSendWeixinResponse {
 service WeixinService {
   rpc SendWeixin(SendWeixinRequest) returns (SendWeixinResponse);
   rpc BatchSendWeixin(BatchSendWeixinRequest) returns (BatchSendWeixinResponse);
+  rpc CreateTemplate(CreateWeixinTemplateRequest) returns (WeixinResponse);
+  rpc UpdateTemplate(UpdateWeixinTemplateRequest) returns (WeixinResponse);
+  rpc DeleteTemplate(DeleteWeixinTemplateRequest) returns (WeixinResponse);
+  rpc GetTemplate(GetWeixinTemplateRequest) returns (GetWeixinTemplateResponse);
+  rpc ListTemplates(ListWeixinTemplateRequest) returns (ListWeixinTemplateResponse);
+  rpc ListLogs(ListWeixinLogRequest) returns (ListWeixinLogResponse);
 }

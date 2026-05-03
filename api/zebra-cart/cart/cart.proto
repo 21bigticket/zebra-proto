@@ -78,6 +78,7 @@ message ClearCartRequest {
 // 获取购物车请求
 message GetCartRequest {
   int64 user_id = 1;
+  int64 user_coupon_id = 2;
 }
 
 // 获取购物车响应
@@ -86,6 +87,25 @@ message GetCartResponse {
   string  msg = 2;  // 提示语
   Cart           cart        = 3;
   repeated CartItem items    = 4;
+  int64 total_amount = 5;
+  int64 discount_amount = 6;
+  int64 pay_amount = 7;
+  int64 applied_user_coupon_id = 8;
+}
+
+// 购物车分页查询请求
+message ListCartRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+}
+
+// 购物车分页查询响应
+message ListCartResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Cart carts = 3;
+  int32 total = 4;
 }
 
 // 批量删除请求
@@ -109,5 +129,6 @@ service CartService {
   rpc UpdateQuantity(UpdateQuantityRequest) returns (Response);
   rpc ClearCart(ClearCartRequest) returns (Response);
   rpc GetCart(GetCartRequest) returns (GetCartResponse);
+  rpc List(ListCartRequest) returns (ListCartResponse);
   rpc BatchRemove(BatchRemoveRequest) returns (Response);
 }

@@ -77,6 +77,24 @@ message CollectListResponse {
   repeated MemberCollect collects = 3;
 }
 
+// 分页查询收藏请求
+message ListMemberCollectRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+  int64 goods_id = 4; // 商品ID，0表示全部
+  int64 sku_id = 5; // SKU ID，0表示全部
+  int32 collect_status = 6; // -1表示全部
+}
+
+// 分页查询收藏响应
+message ListMemberCollectResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated MemberCollect collects = 3;
+  int32 total = 4;
+}
+
 // 检查收藏状态请求
 message CheckCollectStatusRequest {
   int64 user_id  = 1;
@@ -103,5 +121,6 @@ service MemberCollectService {
   rpc Delete(DeleteMemberCollectRequest) returns (MemberCollectResponse);
   rpc Get(GetMemberCollectRequest) returns (GetMemberCollectResponse);
   rpc GetListByUser(GetCollectListByUserRequest) returns (CollectListResponse);
+  rpc List(ListMemberCollectRequest) returns (ListMemberCollectResponse);
   rpc CheckStatus(CheckCollectStatusRequest) returns (CheckCollectStatusResponse);
 }

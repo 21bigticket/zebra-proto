@@ -46,6 +46,8 @@ const (
 	CartServiceClearCartProcedure = "/cart.CartService/ClearCart"
 	// CartServiceGetCartProcedure is the fully-qualified name of the CartService's GetCart RPC.
 	CartServiceGetCartProcedure = "/cart.CartService/GetCart"
+	// CartServiceListProcedure is the fully-qualified name of the CartService's List RPC.
+	CartServiceListProcedure = "/cart.CartService/List"
 	// CartServiceBatchRemoveProcedure is the fully-qualified name of the CartService's BatchRemove RPC.
 	CartServiceBatchRemoveProcedure = "/cart.CartService/BatchRemove"
 )
@@ -61,6 +63,7 @@ type CartService interface {
 	UpdateQuantity(ctx context.Context, req *UpdateQuantityRequest, opts ...client.CallOption) (*Response, error)
 	ClearCart(ctx context.Context, req *ClearCartRequest, opts ...client.CallOption) (*Response, error)
 	GetCart(ctx context.Context, req *GetCartRequest, opts ...client.CallOption) (*GetCartResponse, error)
+	List(ctx context.Context, req *ListCartRequest, opts ...client.CallOption) (*ListCartResponse, error)
 	BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*Response, error)
 }
 
@@ -124,6 +127,14 @@ func (c *CartServiceImpl) GetCart(ctx context.Context, req *GetCartRequest, opts
 	return resp, nil
 }
 
+func (c *CartServiceImpl) List(ctx context.Context, req *ListCartRequest, opts ...client.CallOption) (*ListCartResponse, error) {
+	resp := new(ListCartResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "List", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *CartServiceImpl) BatchRemove(ctx context.Context, req *BatchRemoveRequest, opts ...client.CallOption) (*Response, error) {
 	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchRemove", opts...); err != nil {
@@ -134,7 +145,7 @@ func (c *CartServiceImpl) BatchRemove(ctx context.Context, req *BatchRemoveReque
 
 var CartService_ClientInfo = client.ClientInfo{
 	InterfaceName: "cart.CartService",
-	MethodNames:   []string{"AddItem", "RemoveItem", "UpdateQuantity", "ClearCart", "GetCart", "BatchRemove"},
+	MethodNames:   []string{"AddItem", "RemoveItem", "UpdateQuantity", "ClearCart", "GetCart", "List", "BatchRemove"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*CartServiceImpl)
 		dubboCli.conn = conn
@@ -148,6 +159,7 @@ type CartServiceHandler interface {
 	UpdateQuantity(context.Context, *UpdateQuantityRequest) (*Response, error)
 	ClearCart(context.Context, *ClearCartRequest) (*Response, error)
 	GetCart(context.Context, *GetCartRequest) (*GetCartResponse, error)
+	List(context.Context, *ListCartRequest) (*ListCartResponse, error)
 	BatchRemove(context.Context, *BatchRemoveRequest) (*Response, error)
 }
 
@@ -232,6 +244,21 @@ var CartService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetCartRequest)
 				res, err := handler.(CartServiceHandler).GetCart(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "List",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListCartRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListCartRequest)
+				res, err := handler.(CartServiceHandler).List(ctx, req)
 				if err != nil {
 					return nil, err
 				}

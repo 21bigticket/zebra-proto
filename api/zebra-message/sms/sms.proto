@@ -35,6 +35,94 @@ message SmsTemplate {
   int32  is_deleted   = 8;
 }
 
+// 创建短信模板请求
+message CreateSmsTemplateRequest {
+  string tpl_code = 1;
+  string tpl_name = 2;
+  string tpl_content = 3;
+  int32 tpl_status = 4;
+}
+
+// 更新短信模板请求
+message UpdateSmsTemplateRequest {
+  int64 tpl_id = 1;
+  string tpl_name = 2;
+  string tpl_content = 3;
+  int32 tpl_status = 4;
+}
+
+// 删除短信模板请求
+message DeleteSmsTemplateRequest {
+  int64 tpl_id = 1;
+}
+
+// 获取短信模板请求
+message GetSmsTemplateRequest {
+  oneof query {
+    int64 tpl_id = 1;
+    string tpl_code = 2;
+  }
+}
+
+// 获取短信模板响应
+message GetSmsTemplateResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  SmsTemplate template = 3;
+}
+
+// 短信模板分页查询请求
+message ListSmsTemplateRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 tpl_status = 3; // -1表示全部
+}
+
+// 短信模板分页查询响应
+message ListSmsTemplateResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated SmsTemplate templates = 3;
+  int32 total = 4;
+}
+
+// 消息发送记录
+message SmsLog {
+  int64 log_id = 1;
+  string msg_id = 2;
+  string phone = 3;
+  string tpl_code = 4;
+  string content = 5;
+  int32 status = 6;
+  int32 retry_count = 7;
+  string remark = 8;
+  int64 create_time = 9;
+}
+
+// 短信发送记录分页查询请求
+message ListSmsLogRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string phone = 3;
+  string tpl_code = 4;
+  int32 status = 5; // -1表示全部
+  int64 start_time = 6;
+  int64 end_time = 7;
+}
+
+// 短信发送记录分页查询响应
+message ListSmsLogResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated SmsLog logs = 3;
+  int32 total = 4;
+}
+
+message SmsResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+}
+
 // 发送短信请求
 message SendSmsRequest {
   string phone    = 1;
@@ -71,4 +159,10 @@ message BatchSendSmsResponse {
 service SmsService {
   rpc SendSms(SendSmsRequest) returns (SendSmsResponse);
   rpc BatchSendSms(BatchSendSmsRequest) returns (BatchSendSmsResponse);
+  rpc CreateTemplate(CreateSmsTemplateRequest) returns (SmsResponse);
+  rpc UpdateTemplate(UpdateSmsTemplateRequest) returns (SmsResponse);
+  rpc DeleteTemplate(DeleteSmsTemplateRequest) returns (SmsResponse);
+  rpc GetTemplate(GetSmsTemplateRequest) returns (GetSmsTemplateResponse);
+  rpc ListTemplates(ListSmsTemplateRequest) returns (ListSmsTemplateResponse);
+  rpc ListLogs(ListSmsLogRequest) returns (ListSmsLogResponse);
 }

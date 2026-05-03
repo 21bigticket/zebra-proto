@@ -52,6 +52,8 @@ type GoodsSku struct {
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	Specs         string                 `protobuf:"bytes,12,opt,name=specs,proto3" json:"specs,omitempty"`                        // 规格组合JSON
+	StockNum      int32                  `protobuf:"varint,13,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"` // 库存
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -163,6 +165,20 @@ func (x *GoodsSku) GetIsDeleted() int32 {
 	return 0
 }
 
+func (x *GoodsSku) GetSpecs() string {
+	if x != nil {
+		return x.Specs
+	}
+	return ""
+}
+
+func (x *GoodsSku) GetStockNum() int32 {
+	if x != nil {
+		return x.StockNum
+	}
+	return 0
+}
+
 // 创建SKU请求
 type CreateSkuRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -172,6 +188,8 @@ type CreateSkuRequest struct {
 	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
 	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Specs         string                 `protobuf:"bytes,7,opt,name=specs,proto3" json:"specs,omitempty"`
+	StockNum      int32                  `protobuf:"varint,8,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,6 +266,20 @@ func (x *CreateSkuRequest) GetSortOrder() int32 {
 	return 0
 }
 
+func (x *CreateSkuRequest) GetSpecs() string {
+	if x != nil {
+		return x.Specs
+	}
+	return ""
+}
+
+func (x *CreateSkuRequest) GetStockNum() int32 {
+	if x != nil {
+		return x.StockNum
+	}
+	return 0
+}
+
 // 更新SKU请求
 type UpdateSkuRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -257,6 +289,8 @@ type UpdateSkuRequest struct {
 	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	Specs         string                 `protobuf:"bytes,7,opt,name=specs,proto3" json:"specs,omitempty"`
+	StockNum      int32                  `protobuf:"varint,8,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -333,6 +367,284 @@ func (x *UpdateSkuRequest) GetStatus() int32 {
 	return 0
 }
 
+func (x *UpdateSkuRequest) GetSpecs() string {
+	if x != nil {
+		return x.Specs
+	}
+	return ""
+}
+
+func (x *UpdateSkuRequest) GetStockNum() int32 {
+	if x != nil {
+		return x.StockNum
+	}
+	return 0
+}
+
+type BatchCreateSkuItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GoodsId       int64                  `protobuf:"varint,1,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
+	SkuCode       string                 `protobuf:"bytes,2,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Specs         string                 `protobuf:"bytes,7,opt,name=specs,proto3" json:"specs,omitempty"`
+	StockNum      int32                  `protobuf:"varint,8,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateSkuItem) Reset() {
+	*x = BatchCreateSkuItem{}
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateSkuItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateSkuItem) ProtoMessage() {}
+
+func (x *BatchCreateSkuItem) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateSkuItem.ProtoReflect.Descriptor instead.
+func (*BatchCreateSkuItem) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *BatchCreateSkuItem) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *BatchCreateSkuItem) GetSkuCode() string {
+	if x != nil {
+		return x.SkuCode
+	}
+	return ""
+}
+
+func (x *BatchCreateSkuItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *BatchCreateSkuItem) GetPrice() int64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *BatchCreateSkuItem) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *BatchCreateSkuItem) GetSortOrder() int32 {
+	if x != nil {
+		return x.SortOrder
+	}
+	return 0
+}
+
+func (x *BatchCreateSkuItem) GetSpecs() string {
+	if x != nil {
+		return x.Specs
+	}
+	return ""
+}
+
+func (x *BatchCreateSkuItem) GetStockNum() int32 {
+	if x != nil {
+		return x.StockNum
+	}
+	return 0
+}
+
+type BatchCreateSkuRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*BatchCreateSkuItem  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateSkuRequest) Reset() {
+	*x = BatchCreateSkuRequest{}
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateSkuRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateSkuRequest) ProtoMessage() {}
+
+func (x *BatchCreateSkuRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateSkuRequest.ProtoReflect.Descriptor instead.
+func (*BatchCreateSkuRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BatchCreateSkuRequest) GetItems() []*BatchCreateSkuItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type BatchUpdateSkuItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
+	StockNum      int32                  `protobuf:"varint,3,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
+	SortOrder     int32                  `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchUpdateSkuItem) Reset() {
+	*x = BatchUpdateSkuItem{}
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchUpdateSkuItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchUpdateSkuItem) ProtoMessage() {}
+
+func (x *BatchUpdateSkuItem) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchUpdateSkuItem.ProtoReflect.Descriptor instead.
+func (*BatchUpdateSkuItem) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *BatchUpdateSkuItem) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *BatchUpdateSkuItem) GetPrice() int64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *BatchUpdateSkuItem) GetStockNum() int32 {
+	if x != nil {
+		return x.StockNum
+	}
+	return 0
+}
+
+func (x *BatchUpdateSkuItem) GetSortOrder() int32 {
+	if x != nil {
+		return x.SortOrder
+	}
+	return 0
+}
+
+func (x *BatchUpdateSkuItem) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+type BatchUpdateSkuRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*BatchUpdateSkuItem  `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchUpdateSkuRequest) Reset() {
+	*x = BatchUpdateSkuRequest{}
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchUpdateSkuRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchUpdateSkuRequest) ProtoMessage() {}
+
+func (x *BatchUpdateSkuRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchUpdateSkuRequest.ProtoReflect.Descriptor instead.
+func (*BatchUpdateSkuRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BatchUpdateSkuRequest) GetItems() []*BatchUpdateSkuItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // 删除SKU请求
 type DeleteSkuRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -343,7 +655,7 @@ type DeleteSkuRequest struct {
 
 func (x *DeleteSkuRequest) Reset() {
 	*x = DeleteSkuRequest{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[3]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +667,7 @@ func (x *DeleteSkuRequest) String() string {
 func (*DeleteSkuRequest) ProtoMessage() {}
 
 func (x *DeleteSkuRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[3]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +680,7 @@ func (x *DeleteSkuRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSkuRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSkuRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{3}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteSkuRequest) GetId() int64 {
@@ -388,7 +700,7 @@ type GetSkuRequest struct {
 
 func (x *GetSkuRequest) Reset() {
 	*x = GetSkuRequest{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[4]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -400,7 +712,7 @@ func (x *GetSkuRequest) String() string {
 func (*GetSkuRequest) ProtoMessage() {}
 
 func (x *GetSkuRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[4]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +725,7 @@ func (x *GetSkuRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSkuRequest.ProtoReflect.Descriptor instead.
 func (*GetSkuRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{4}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetSkuRequest) GetId() int64 {
@@ -435,7 +747,7 @@ type GetSkuResponse struct {
 
 func (x *GetSkuResponse) Reset() {
 	*x = GetSkuResponse{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[5]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -447,7 +759,7 @@ func (x *GetSkuResponse) String() string {
 func (*GetSkuResponse) ProtoMessage() {}
 
 func (x *GetSkuResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[5]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -460,7 +772,7 @@ func (x *GetSkuResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSkuResponse.ProtoReflect.Descriptor instead.
 func (*GetSkuResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{5}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetSkuResponse) GetCode() *wrapperspb.Int32Value {
@@ -497,7 +809,7 @@ type ListSkuRequest struct {
 
 func (x *ListSkuRequest) Reset() {
 	*x = ListSkuRequest{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[6]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -509,7 +821,7 @@ func (x *ListSkuRequest) String() string {
 func (*ListSkuRequest) ProtoMessage() {}
 
 func (x *ListSkuRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[6]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +834,7 @@ func (x *ListSkuRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSkuRequest.ProtoReflect.Descriptor instead.
 func (*ListSkuRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{6}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListSkuRequest) GetPage() int32 {
@@ -566,7 +878,7 @@ type ListSkuResponse struct {
 
 func (x *ListSkuResponse) Reset() {
 	*x = ListSkuResponse{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[7]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -578,7 +890,7 @@ func (x *ListSkuResponse) String() string {
 func (*ListSkuResponse) ProtoMessage() {}
 
 func (x *ListSkuResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[7]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -591,7 +903,7 @@ func (x *ListSkuResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSkuResponse.ProtoReflect.Descriptor instead.
 func (*ListSkuResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{7}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListSkuResponse) GetCode() *wrapperspb.Int32Value {
@@ -632,7 +944,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -644,7 +956,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[8]
+	mi := &file_api_zebra_goods_sku_sku_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +969,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{8}
+	return file_api_zebra_goods_sku_sku_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -678,7 +990,7 @@ var File_api_zebra_goods_sku_sku_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\n" +
-	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\x1a\x1egoogle/protobuf/wrappers.proto\"\xaf\x02\n" +
+	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\x1a\x1egoogle/protobuf/wrappers.proto\"\xe2\x02\n" +
 	"\bGoodsSku\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x19\n" +
@@ -695,7 +1007,9 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	" \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\v \x01(\x05R\tisDeleted\"\xae\x01\n" +
+	"is_deleted\x18\v \x01(\x05R\tisDeleted\x12\x14\n" +
+	"\x05specs\x18\f \x01(\tR\x05specs\x12\x1b\n" +
+	"\tstock_num\x18\r \x01(\x05R\bstockNum\"\xe1\x01\n" +
 	"\x10CreateSkuRequest\x12\x19\n" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
@@ -703,7 +1017,9 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
 	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12\x1d\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\"\xa0\x01\n" +
+	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x14\n" +
+	"\x05specs\x18\a \x01(\tR\x05specs\x12\x1b\n" +
+	"\tstock_num\x18\b \x01(\x05R\bstockNum\"\xd3\x01\n" +
 	"\x10UpdateSkuRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -711,7 +1027,30 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\"\"\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x14\n" +
+	"\x05specs\x18\a \x01(\tR\x05specs\x12\x1b\n" +
+	"\tstock_num\x18\b \x01(\x05R\bstockNum\"\xe3\x01\n" +
+	"\x12BatchCreateSkuItem\x12\x19\n" +
+	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
+	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
+	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
+	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x14\n" +
+	"\x05specs\x18\a \x01(\tR\x05specs\x12\x1b\n" +
+	"\tstock_num\x18\b \x01(\x05R\bstockNum\"F\n" +
+	"\x15BatchCreateSkuRequest\x12-\n" +
+	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchCreateSkuItemR\x05items\"\x8e\x01\n" +
+	"\x12BatchUpdateSkuItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x05price\x18\x02 \x01(\x03R\x05price\x12\x1b\n" +
+	"\tstock_num\x18\x03 \x01(\x05R\bstockNum\x12\x1d\n" +
+	"\n" +
+	"sort_order\x18\x04 \x01(\x05R\tsortOrder\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"F\n" +
+	"\x15BatchUpdateSkuRequest\x12-\n" +
+	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchUpdateSkuItemR\x05items\"\"\n" +
 	"\x10DeleteSkuRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1f\n" +
 	"\rGetSkuRequest\x12\x0e\n" +
@@ -732,10 +1071,12 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\xff\x01\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xf3\x02\n" +
 	"\n" +
 	"SkuService\x12.\n" +
-	"\x06Create\x12\x15.sku.CreateSkuRequest\x1a\r.sku.Response\x12.\n" +
+	"\x06Create\x12\x15.sku.CreateSkuRequest\x1a\r.sku.Response\x128\n" +
+	"\vBatchCreate\x12\x1a.sku.BatchCreateSkuRequest\x1a\r.sku.Response\x128\n" +
+	"\vBatchUpdate\x12\x1a.sku.BatchUpdateSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x06Update\x12\x15.sku.UpdateSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x06Delete\x12\x15.sku.DeleteSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x03Get\x12\x12.sku.GetSkuRequest\x1a\x13.sku.GetSkuResponse\x121\n" +
@@ -753,40 +1094,50 @@ func file_api_zebra_goods_sku_sku_proto_rawDescGZIP() []byte {
 	return file_api_zebra_goods_sku_sku_proto_rawDescData
 }
 
-var file_api_zebra_goods_sku_sku_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_api_zebra_goods_sku_sku_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_api_zebra_goods_sku_sku_proto_goTypes = []any{
 	(*GoodsSku)(nil),              // 0: sku.GoodsSku
 	(*CreateSkuRequest)(nil),      // 1: sku.CreateSkuRequest
 	(*UpdateSkuRequest)(nil),      // 2: sku.UpdateSkuRequest
-	(*DeleteSkuRequest)(nil),      // 3: sku.DeleteSkuRequest
-	(*GetSkuRequest)(nil),         // 4: sku.GetSkuRequest
-	(*GetSkuResponse)(nil),        // 5: sku.GetSkuResponse
-	(*ListSkuRequest)(nil),        // 6: sku.ListSkuRequest
-	(*ListSkuResponse)(nil),       // 7: sku.ListSkuResponse
-	(*Response)(nil),              // 8: sku.Response
-	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
+	(*BatchCreateSkuItem)(nil),    // 3: sku.BatchCreateSkuItem
+	(*BatchCreateSkuRequest)(nil), // 4: sku.BatchCreateSkuRequest
+	(*BatchUpdateSkuItem)(nil),    // 5: sku.BatchUpdateSkuItem
+	(*BatchUpdateSkuRequest)(nil), // 6: sku.BatchUpdateSkuRequest
+	(*DeleteSkuRequest)(nil),      // 7: sku.DeleteSkuRequest
+	(*GetSkuRequest)(nil),         // 8: sku.GetSkuRequest
+	(*GetSkuResponse)(nil),        // 9: sku.GetSkuResponse
+	(*ListSkuRequest)(nil),        // 10: sku.ListSkuRequest
+	(*ListSkuResponse)(nil),       // 11: sku.ListSkuResponse
+	(*Response)(nil),              // 12: sku.Response
+	(*wrapperspb.Int32Value)(nil), // 13: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_sku_sku_proto_depIdxs = []int32{
-	9,  // 0: sku.GetSkuResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
-	9,  // 2: sku.ListSkuResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
-	9,  // 4: sku.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
-	2,  // 6: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
-	3,  // 7: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
-	4,  // 8: sku.SkuService.Get:input_type -> sku.GetSkuRequest
-	6,  // 9: sku.SkuService.List:input_type -> sku.ListSkuRequest
-	8,  // 10: sku.SkuService.Create:output_type -> sku.Response
-	8,  // 11: sku.SkuService.Update:output_type -> sku.Response
-	8,  // 12: sku.SkuService.Delete:output_type -> sku.Response
-	5,  // 13: sku.SkuService.Get:output_type -> sku.GetSkuResponse
-	7,  // 14: sku.SkuService.List:output_type -> sku.ListSkuResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	3,  // 0: sku.BatchCreateSkuRequest.items:type_name -> sku.BatchCreateSkuItem
+	5,  // 1: sku.BatchUpdateSkuRequest.items:type_name -> sku.BatchUpdateSkuItem
+	13, // 2: sku.GetSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
+	13, // 4: sku.ListSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
+	13, // 6: sku.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 7: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
+	4,  // 8: sku.SkuService.BatchCreate:input_type -> sku.BatchCreateSkuRequest
+	6,  // 9: sku.SkuService.BatchUpdate:input_type -> sku.BatchUpdateSkuRequest
+	2,  // 10: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
+	7,  // 11: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
+	8,  // 12: sku.SkuService.Get:input_type -> sku.GetSkuRequest
+	10, // 13: sku.SkuService.List:input_type -> sku.ListSkuRequest
+	12, // 14: sku.SkuService.Create:output_type -> sku.Response
+	12, // 15: sku.SkuService.BatchCreate:output_type -> sku.Response
+	12, // 16: sku.SkuService.BatchUpdate:output_type -> sku.Response
+	12, // 17: sku.SkuService.Update:output_type -> sku.Response
+	12, // 18: sku.SkuService.Delete:output_type -> sku.Response
+	9,  // 19: sku.SkuService.Get:output_type -> sku.GetSkuResponse
+	11, // 20: sku.SkuService.List:output_type -> sku.ListSkuResponse
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_sku_sku_proto_init() }
@@ -800,7 +1151,7 @@ func file_api_zebra_goods_sku_sku_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_goods_sku_sku_proto_rawDesc), len(file_api_zebra_goods_sku_sku_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package role_user;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "./api/zebra-passport/role_user;role_user";
+
+// 已授权用户列表请求
+message AllocatedUserListRequest {
+  int32  page        = 1;
+  int32  page_size   = 2;
+  int64  role_id     = 3;
+  string user_name   = 4;
+  string phonenumber = 5;
+}
+
+// 用户信息
+message UserInfo {
+  int64  user_id     = 1;
+  string user_name   = 2;
+  string nick_name   = 3;
+  string email       = 4;
+  string phonenumber = 5;
+  string status      = 6;
+  int64  create_time = 7;
+  string dept_name   = 8;
+}
+
+// 已授权用户列表响应
+message AllocatedUserListResponse {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg             = 2;
+  repeated UserInfo users = 3;
+  int32  total           = 4;
+}
+
+// 取消用户授权请求
+message AuthUserCancelRequest {
+  int64 user_id = 1;
+  int64 role_id = 2;
+}
+
+// 批量取消用户授权请求
+message AuthUserCancelAllRequest {
+  int64  role_id          = 1;
+  repeated int64 user_ids = 2;
+}
+
+// 批量选择用户授权请求
+message AuthUserSelectAllRequest {
+  int64  role_id          = 1;
+  repeated int64 user_ids = 2;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
+  string msg = 2;
+}
+
+// 角色用户授权服务
+service RoleUserService {
+  rpc AllocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
+  rpc UnallocatedUserList(AllocatedUserListRequest) returns (AllocatedUserListResponse);
+  rpc AuthUserCancel(AuthUserCancelRequest) returns (Response);
+  rpc AuthUserCancelAll(AuthUserCancelAllRequest) returns (Response);
+  rpc AuthUserSelectAll(AuthUserSelectAllRequest) returns (Response);
+}

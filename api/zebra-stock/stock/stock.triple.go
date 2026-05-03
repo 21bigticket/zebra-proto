@@ -46,6 +46,8 @@ const (
 	StockServiceReleaseProcedure = "/stock.StockService/Release"
 	// StockServiceGetStockProcedure is the fully-qualified name of the StockService's GetStock RPC.
 	StockServiceGetStockProcedure = "/stock.StockService/GetStock"
+	// StockServiceListProcedure is the fully-qualified name of the StockService's List RPC.
+	StockServiceListProcedure = "/stock.StockService/List"
 )
 
 var (
@@ -59,6 +61,7 @@ type StockService interface {
 	Freeze(ctx context.Context, req *FreezeRequest, opts ...client.CallOption) (*StockResponse, error)
 	Release(ctx context.Context, req *ReleaseRequest, opts ...client.CallOption) (*StockResponse, error)
 	GetStock(ctx context.Context, req *GetStockRequest, opts ...client.CallOption) (*GetStockResponse, error)
+	List(ctx context.Context, req *ListStockRequest, opts ...client.CallOption) (*ListStockResponse, error)
 }
 
 // NewStockService constructs a client for the stock.StockService service.
@@ -121,9 +124,17 @@ func (c *StockServiceImpl) GetStock(ctx context.Context, req *GetStockRequest, o
 	return resp, nil
 }
 
+func (c *StockServiceImpl) List(ctx context.Context, req *ListStockRequest, opts ...client.CallOption) (*ListStockResponse, error) {
+	resp := new(ListStockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "List", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var StockService_ClientInfo = client.ClientInfo{
 	InterfaceName: "stock.StockService",
-	MethodNames:   []string{"Inbound", "Outbound", "Freeze", "Release", "GetStock"},
+	MethodNames:   []string{"Inbound", "Outbound", "Freeze", "Release", "GetStock", "List"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*StockServiceImpl)
 		dubboCli.conn = conn
@@ -137,6 +148,7 @@ type StockServiceHandler interface {
 	Freeze(context.Context, *FreezeRequest) (*StockResponse, error)
 	Release(context.Context, *ReleaseRequest) (*StockResponse, error)
 	GetStock(context.Context, *GetStockRequest) (*GetStockResponse, error)
+	List(context.Context, *ListStockRequest) (*ListStockResponse, error)
 }
 
 func RegisterStockServiceHandler(srv *server.Server, hdlr StockServiceHandler, opts ...server.ServiceOption) error {
@@ -220,6 +232,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetStockRequest)
 				res, err := handler.(StockServiceHandler).GetStock(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "List",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListStockRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListStockRequest)
+				res, err := handler.(StockServiceHandler).List(ctx, req)
 				if err != nil {
 					return nil, err
 				}

@@ -118,6 +118,26 @@ message GetUserAfterSalesResponse {
   int32              total            = 4;
 }
 
+// 后台售后分页查询请求
+message ListAfterSalesRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+  string order_no = 4; // 订单号，空表示全部
+  string sales_no = 5; // 售后单号，空表示全部
+  int32 sales_status = 6; // -1=全部
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+// 后台售后分页查询响应
+message ListAfterSalesResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated AfterSales after_sales_list = 3;
+  int32 total = 4;
+}
+
 // 通用响应
 message AfterSalesResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -134,4 +154,5 @@ service AfterSalesService {
   rpc Refund(RefundRequest) returns (AfterSalesResponse);
   rpc GetAfterSales(GetAfterSalesRequest) returns (GetAfterSalesResponse);
   rpc GetUserAfterSales(GetUserAfterSalesRequest) returns (GetUserAfterSalesResponse);
+  rpc ListAfterSales(ListAfterSalesRequest) returns (ListAfterSalesResponse);
 }

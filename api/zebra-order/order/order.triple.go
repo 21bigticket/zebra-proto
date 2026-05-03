@@ -50,6 +50,8 @@ const (
 	OrderServiceGetOrderProcedure = "/order.OrderService/GetOrder"
 	// OrderServiceGetUserOrdersProcedure is the fully-qualified name of the OrderService's GetUserOrders RPC.
 	OrderServiceGetUserOrdersProcedure = "/order.OrderService/GetUserOrders"
+	// OrderServiceListOrdersProcedure is the fully-qualified name of the OrderService's ListOrders RPC.
+	OrderServiceListOrdersProcedure = "/order.OrderService/ListOrders"
 )
 
 var (
@@ -65,6 +67,7 @@ type OrderService interface {
 	FinishOrder(ctx context.Context, req *FinishOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	GetOrder(ctx context.Context, req *GetOrderRequest, opts ...client.CallOption) (*GetOrderResponse, error)
 	GetUserOrders(ctx context.Context, req *GetUserOrdersRequest, opts ...client.CallOption) (*GetUserOrdersResponse, error)
+	ListOrders(ctx context.Context, req *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error)
 }
 
 // NewOrderService constructs a client for the order.OrderService service.
@@ -143,9 +146,17 @@ func (c *OrderServiceImpl) GetUserOrders(ctx context.Context, req *GetUserOrders
 	return resp, nil
 }
 
+func (c *OrderServiceImpl) ListOrders(ctx context.Context, req *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error) {
+	resp := new(ListOrderResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListOrders", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var OrderService_ClientInfo = client.ClientInfo{
 	InterfaceName: "order.OrderService",
-	MethodNames:   []string{"CreateOrder", "CancelOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders"},
+	MethodNames:   []string{"CreateOrder", "CancelOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "ListOrders"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*OrderServiceImpl)
 		dubboCli.conn = conn
@@ -161,6 +172,7 @@ type OrderServiceHandler interface {
 	FinishOrder(context.Context, *FinishOrderRequest) (*OrderResponse, error)
 	GetOrder(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
 	GetUserOrders(context.Context, *GetUserOrdersRequest) (*GetUserOrdersResponse, error)
+	ListOrders(context.Context, *ListOrderRequest) (*ListOrderResponse, error)
 }
 
 func RegisterOrderServiceHandler(srv *server.Server, hdlr OrderServiceHandler, opts ...server.ServiceOption) error {
@@ -274,6 +286,21 @@ var OrderService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetUserOrdersRequest)
 				res, err := handler.(OrderServiceHandler).GetUserOrders(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListOrders",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListOrderRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListOrderRequest)
+				res, err := handler.(OrderServiceHandler).ListOrders(ctx, req)
 				if err != nil {
 					return nil, err
 				}

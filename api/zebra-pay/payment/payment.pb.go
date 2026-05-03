@@ -979,6 +979,184 @@ func (x *GetPaymentResponse) GetPayment() *Payment {
 	return nil
 }
 
+// 支付单分页查询请求
+type ListPaymentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`          // 用户ID，0表示全部
+	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`        // 订单号，空表示全部
+	PayNo         string                 `protobuf:"bytes,5,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`              // 支付单号，空表示全部
+	PayType       int32                  `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`       // 0表示全部
+	PayStatus     int32                  `protobuf:"varint,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"` // -1表示全部
+	StartTime     int64                  `protobuf:"varint,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPaymentRequest) Reset() {
+	*x = ListPaymentRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPaymentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPaymentRequest) ProtoMessage() {}
+
+func (x *ListPaymentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPaymentRequest.ProtoReflect.Descriptor instead.
+func (*ListPaymentRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListPaymentRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *ListPaymentRequest) GetPayNo() string {
+	if x != nil {
+		return x.PayNo
+	}
+	return ""
+}
+
+func (x *ListPaymentRequest) GetPayType() int32 {
+	if x != nil {
+		return x.PayType
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetPayStatus() int32 {
+	if x != nil {
+		return x.PayStatus
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListPaymentRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 支付单分页查询响应
+type ListPaymentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Payments      []*Payment             `protobuf:"bytes,3,rep,name=payments,proto3" json:"payments,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPaymentResponse) Reset() {
+	*x = ListPaymentResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPaymentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPaymentResponse) ProtoMessage() {}
+
+func (x *ListPaymentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPaymentResponse.ProtoReflect.Descriptor instead.
+func (*ListPaymentResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListPaymentResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListPaymentResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListPaymentResponse) GetPayments() []*Payment {
+	if x != nil {
+		return x.Payments
+	}
+	return nil
+}
+
+func (x *ListPaymentResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 查询退款请求
 type GetRefundRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -993,7 +1171,7 @@ type GetRefundRequest struct {
 
 func (x *GetRefundRequest) Reset() {
 	*x = GetRefundRequest{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[11]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1005,7 +1183,7 @@ func (x *GetRefundRequest) String() string {
 func (*GetRefundRequest) ProtoMessage() {}
 
 func (x *GetRefundRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[11]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1018,7 +1196,7 @@ func (x *GetRefundRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRefundRequest.ProtoReflect.Descriptor instead.
 func (*GetRefundRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{11}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetRefundRequest) GetQuery() isGetRefundRequest_Query {
@@ -1075,7 +1253,7 @@ type GetRefundResponse struct {
 
 func (x *GetRefundResponse) Reset() {
 	*x = GetRefundResponse{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[12]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1087,7 +1265,7 @@ func (x *GetRefundResponse) String() string {
 func (*GetRefundResponse) ProtoMessage() {}
 
 func (x *GetRefundResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[12]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1100,7 +1278,7 @@ func (x *GetRefundResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRefundResponse.ProtoReflect.Descriptor instead.
 func (*GetRefundResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{12}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetRefundResponse) GetCode() *wrapperspb.Int32Value {
@@ -1131,6 +1309,176 @@ func (x *GetRefundResponse) GetItems() []*RefundItem {
 	return nil
 }
 
+// 退款单分页查询请求
+type ListRefundRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PayNo         string                 `protobuf:"bytes,3,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
+	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	RefundNo      string                 `protobuf:"bytes,5,opt,name=refund_no,json=refundNo,proto3" json:"refund_no,omitempty"`
+	RefundStatus  int32                  `protobuf:"varint,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"` // -1表示全部
+	StartTime     int64                  `protobuf:"varint,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListRefundRequest) Reset() {
+	*x = ListRefundRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListRefundRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListRefundRequest) ProtoMessage() {}
+
+func (x *ListRefundRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListRefundRequest.ProtoReflect.Descriptor instead.
+func (*ListRefundRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListRefundRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListRefundRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListRefundRequest) GetPayNo() string {
+	if x != nil {
+		return x.PayNo
+	}
+	return ""
+}
+
+func (x *ListRefundRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *ListRefundRequest) GetRefundNo() string {
+	if x != nil {
+		return x.RefundNo
+	}
+	return ""
+}
+
+func (x *ListRefundRequest) GetRefundStatus() int32 {
+	if x != nil {
+		return x.RefundStatus
+	}
+	return 0
+}
+
+func (x *ListRefundRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListRefundRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 退款单分页查询响应
+type ListRefundResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Refunds       []*Refund              `protobuf:"bytes,3,rep,name=refunds,proto3" json:"refunds,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListRefundResponse) Reset() {
+	*x = ListRefundResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListRefundResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListRefundResponse) ProtoMessage() {}
+
+func (x *ListRefundResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListRefundResponse.ProtoReflect.Descriptor instead.
+func (*ListRefundResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListRefundResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListRefundResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListRefundResponse) GetRefunds() []*Refund {
+	if x != nil {
+		return x.Refunds
+	}
+	return nil
+}
+
+func (x *ListRefundResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 支付日志记录
 type PaymentLog struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1147,7 +1495,7 @@ type PaymentLog struct {
 
 func (x *PaymentLog) Reset() {
 	*x = PaymentLog{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[13]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1159,7 +1507,7 @@ func (x *PaymentLog) String() string {
 func (*PaymentLog) ProtoMessage() {}
 
 func (x *PaymentLog) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[13]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1172,7 +1520,7 @@ func (x *PaymentLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentLog.ProtoReflect.Descriptor instead.
 func (*PaymentLog) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{13}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *PaymentLog) GetLogId() int64 {
@@ -1238,7 +1586,7 @@ type LogPaymentRequest struct {
 
 func (x *LogPaymentRequest) Reset() {
 	*x = LogPaymentRequest{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[14]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1250,7 +1598,7 @@ func (x *LogPaymentRequest) String() string {
 func (*LogPaymentRequest) ProtoMessage() {}
 
 func (x *LogPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[14]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1263,7 +1611,7 @@ func (x *LogPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogPaymentRequest.ProtoReflect.Descriptor instead.
 func (*LogPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{14}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *LogPaymentRequest) GetPayNo() string {
@@ -1315,7 +1663,7 @@ type LogPaymentResponse struct {
 
 func (x *LogPaymentResponse) Reset() {
 	*x = LogPaymentResponse{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[15]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1327,7 +1675,7 @@ func (x *LogPaymentResponse) String() string {
 func (*LogPaymentResponse) ProtoMessage() {}
 
 func (x *LogPaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[15]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1340,7 +1688,7 @@ func (x *LogPaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogPaymentResponse.ProtoReflect.Descriptor instead.
 func (*LogPaymentResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{15}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *LogPaymentResponse) GetCode() *wrapperspb.Int32Value {
@@ -1378,6 +1726,168 @@ func (x *LogPaymentResponse) GetLog() *PaymentLog {
 	return nil
 }
 
+// 支付日志分页查询请求
+type ListPaymentLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PayNo         string                 `protobuf:"bytes,3,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
+	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	Action        string                 `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`
+	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPaymentLogRequest) Reset() {
+	*x = ListPaymentLogRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPaymentLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPaymentLogRequest) ProtoMessage() {}
+
+func (x *ListPaymentLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPaymentLogRequest.ProtoReflect.Descriptor instead.
+func (*ListPaymentLogRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ListPaymentLogRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListPaymentLogRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListPaymentLogRequest) GetPayNo() string {
+	if x != nil {
+		return x.PayNo
+	}
+	return ""
+}
+
+func (x *ListPaymentLogRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *ListPaymentLogRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *ListPaymentLogRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListPaymentLogRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 支付日志分页查询响应
+type ListPaymentLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Logs          []*PaymentLog          `protobuf:"bytes,3,rep,name=logs,proto3" json:"logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPaymentLogResponse) Reset() {
+	*x = ListPaymentLogResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPaymentLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPaymentLogResponse) ProtoMessage() {}
+
+func (x *ListPaymentLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPaymentLogResponse.ProtoReflect.Descriptor instead.
+func (*ListPaymentLogResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ListPaymentLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListPaymentLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListPaymentLogResponse) GetLogs() []*PaymentLog {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+func (x *ListPaymentLogResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 通用响应
 type PaymentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1392,7 +1902,7 @@ type PaymentResponse struct {
 
 func (x *PaymentResponse) Reset() {
 	*x = PaymentResponse{}
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[16]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1404,7 +1914,7 @@ func (x *PaymentResponse) String() string {
 func (*PaymentResponse) ProtoMessage() {}
 
 func (x *PaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[16]
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1417,7 +1927,7 @@ func (x *PaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentResponse.ProtoReflect.Descriptor instead.
 func (*PaymentResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{16}
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PaymentResponse) GetCode() *wrapperspb.Int32Value {
@@ -1555,7 +2065,24 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x12GetPaymentResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12*\n" +
-	"\apayment\x18\x03 \x01(\v2\x10.payment.PaymentR\apayment\"W\n" +
+	"\apayment\x18\x03 \x01(\v2\x10.payment.PaymentR\apayment\"\x84\x02\n" +
+	"\x12ListPaymentRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x19\n" +
+	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x15\n" +
+	"\x06pay_no\x18\x05 \x01(\tR\x05payNo\x12\x19\n" +
+	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12\x1d\n" +
+	"\n" +
+	"pay_status\x18\a \x01(\x05R\tpayStatus\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\b \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\t \x01(\x03R\aendTime\"\x9c\x01\n" +
+	"\x13ListPaymentResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12,\n" +
+	"\bpayments\x18\x03 \x03(\v2\x10.payment.PaymentR\bpayments\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"W\n" +
 	"\x10GetRefundRequest\x12\x1d\n" +
 	"\trefund_no\x18\x01 \x01(\tH\x00R\brefundNo\x12\x1b\n" +
 	"\bsales_no\x18\x02 \x01(\tH\x00R\asalesNoB\a\n" +
@@ -1564,7 +2091,22 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
 	"\x06refund\x18\x03 \x01(\v2\x0f.payment.RefundR\x06refund\x12)\n" +
-	"\x05items\x18\x04 \x03(\v2\x13.payment.RefundItemR\x05items\"\xd6\x01\n" +
+	"\x05items\x18\x04 \x03(\v2\x13.payment.RefundItemR\x05items\"\xf2\x01\n" +
+	"\x11ListRefundRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
+	"\x06pay_no\x18\x03 \x01(\tR\x05payNo\x12\x19\n" +
+	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x1b\n" +
+	"\trefund_no\x18\x05 \x01(\tR\brefundNo\x12#\n" +
+	"\rrefund_status\x18\x06 \x01(\x05R\frefundStatus\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\a \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\b \x01(\x03R\aendTime\"\x98\x01\n" +
+	"\x12ListRefundResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12)\n" +
+	"\arefunds\x18\x03 \x03(\v2\x0f.payment.RefundR\arefunds\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xd6\x01\n" +
 	"\n" +
 	"PaymentLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
@@ -1586,22 +2128,39 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12%\n" +
-	"\x03log\x18\x05 \x01(\v2\x13.payment.PaymentLogR\x03log\"\xb4\x01\n" +
+	"\x03log\x18\x05 \x01(\v2\x13.payment.PaymentLogR\x03log\"\xcc\x01\n" +
+	"\x15ListPaymentLogRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
+	"\x06pay_no\x18\x03 \x01(\tR\x05payNo\x12\x19\n" +
+	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x16\n" +
+	"\x06action\x18\x05 \x01(\tR\x06action\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\x9a\x01\n" +
+	"\x16ListPaymentLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
+	"\x04logs\x18\x03 \x03(\v2\x13.payment.PaymentLogR\x04logs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xb4\x01\n" +
 	"\x0fPaymentResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12*\n" +
-	"\apayment\x18\x05 \x01(\v2\x10.payment.PaymentR\apayment2\xc5\x03\n" +
+	"\apayment\x18\x05 \x01(\v2\x10.payment.PaymentR\apayment2\xac\x05\n" +
 	"\x0ePaymentService\x12N\n" +
 	"\rCreatePayment\x12\x1d.payment.CreatePaymentRequest\x1a\x1e.payment.CreatePaymentResponse\x12D\n" +
 	"\vPayCallback\x12\x1b.payment.PayCallbackRequest\x1a\x18.payment.PaymentResponse\x12K\n" +
 	"\fCreateRefund\x12\x1c.payment.CreateRefundRequest\x1a\x1d.payment.CreateRefundResponse\x12E\n" +
 	"\n" +
-	"GetPayment\x12\x1a.payment.GetPaymentRequest\x1a\x1b.payment.GetPaymentResponse\x12B\n" +
-	"\tGetRefund\x12\x19.payment.GetRefundRequest\x1a\x1a.payment.GetRefundResponse\x12E\n" +
+	"GetPayment\x12\x1a.payment.GetPaymentRequest\x1a\x1b.payment.GetPaymentResponse\x12I\n" +
+	"\fListPayments\x12\x1b.payment.ListPaymentRequest\x1a\x1c.payment.ListPaymentResponse\x12B\n" +
+	"\tGetRefund\x12\x19.payment.GetRefundRequest\x1a\x1a.payment.GetRefundResponse\x12F\n" +
+	"\vListRefunds\x12\x1a.payment.ListRefundRequest\x1a\x1b.payment.ListRefundResponse\x12E\n" +
 	"\n" +
-	"LogPayment\x12\x1a.payment.LogPaymentRequest\x1a\x1b.payment.LogPaymentResponseB!Z\x1f./api/zebra-pay/payment;paymentb\x06proto3"
+	"LogPayment\x12\x1a.payment.LogPaymentRequest\x1a\x1b.payment.LogPaymentResponse\x12R\n" +
+	"\x0fListPaymentLogs\x12\x1e.payment.ListPaymentLogRequest\x1a\x1f.payment.ListPaymentLogResponseB!Z\x1f./api/zebra-pay/payment;paymentb\x06proto3"
 
 var (
 	file_api_zebra_pay_payment_payment_proto_rawDescOnce sync.Once
@@ -1615,59 +2174,77 @@ func file_api_zebra_pay_payment_payment_proto_rawDescGZIP() []byte {
 	return file_api_zebra_pay_payment_payment_proto_rawDescData
 }
 
-var file_api_zebra_pay_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_api_zebra_pay_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_api_zebra_pay_payment_payment_proto_goTypes = []any{
-	(*Payment)(nil),               // 0: payment.Payment
-	(*Refund)(nil),                // 1: payment.Refund
-	(*RefundItem)(nil),            // 2: payment.RefundItem
-	(*CreatePaymentRequest)(nil),  // 3: payment.CreatePaymentRequest
-	(*CreatePaymentResponse)(nil), // 4: payment.CreatePaymentResponse
-	(*PayCallbackRequest)(nil),    // 5: payment.PayCallbackRequest
-	(*CreateRefundRequest)(nil),   // 6: payment.CreateRefundRequest
-	(*RefundItemReq)(nil),         // 7: payment.RefundItemReq
-	(*CreateRefundResponse)(nil),  // 8: payment.CreateRefundResponse
-	(*GetPaymentRequest)(nil),     // 9: payment.GetPaymentRequest
-	(*GetPaymentResponse)(nil),    // 10: payment.GetPaymentResponse
-	(*GetRefundRequest)(nil),      // 11: payment.GetRefundRequest
-	(*GetRefundResponse)(nil),     // 12: payment.GetRefundResponse
-	(*PaymentLog)(nil),            // 13: payment.PaymentLog
-	(*LogPaymentRequest)(nil),     // 14: payment.LogPaymentRequest
-	(*LogPaymentResponse)(nil),    // 15: payment.LogPaymentResponse
-	(*PaymentResponse)(nil),       // 16: payment.PaymentResponse
-	(*wrapperspb.Int32Value)(nil), // 17: google.protobuf.Int32Value
+	(*Payment)(nil),                // 0: payment.Payment
+	(*Refund)(nil),                 // 1: payment.Refund
+	(*RefundItem)(nil),             // 2: payment.RefundItem
+	(*CreatePaymentRequest)(nil),   // 3: payment.CreatePaymentRequest
+	(*CreatePaymentResponse)(nil),  // 4: payment.CreatePaymentResponse
+	(*PayCallbackRequest)(nil),     // 5: payment.PayCallbackRequest
+	(*CreateRefundRequest)(nil),    // 6: payment.CreateRefundRequest
+	(*RefundItemReq)(nil),          // 7: payment.RefundItemReq
+	(*CreateRefundResponse)(nil),   // 8: payment.CreateRefundResponse
+	(*GetPaymentRequest)(nil),      // 9: payment.GetPaymentRequest
+	(*GetPaymentResponse)(nil),     // 10: payment.GetPaymentResponse
+	(*ListPaymentRequest)(nil),     // 11: payment.ListPaymentRequest
+	(*ListPaymentResponse)(nil),    // 12: payment.ListPaymentResponse
+	(*GetRefundRequest)(nil),       // 13: payment.GetRefundRequest
+	(*GetRefundResponse)(nil),      // 14: payment.GetRefundResponse
+	(*ListRefundRequest)(nil),      // 15: payment.ListRefundRequest
+	(*ListRefundResponse)(nil),     // 16: payment.ListRefundResponse
+	(*PaymentLog)(nil),             // 17: payment.PaymentLog
+	(*LogPaymentRequest)(nil),      // 18: payment.LogPaymentRequest
+	(*LogPaymentResponse)(nil),     // 19: payment.LogPaymentResponse
+	(*ListPaymentLogRequest)(nil),  // 20: payment.ListPaymentLogRequest
+	(*ListPaymentLogResponse)(nil), // 21: payment.ListPaymentLogResponse
+	(*PaymentResponse)(nil),        // 22: payment.PaymentResponse
+	(*wrapperspb.Int32Value)(nil),  // 23: google.protobuf.Int32Value
 }
 var file_api_zebra_pay_payment_payment_proto_depIdxs = []int32{
-	17, // 0: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 0: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: payment.CreatePaymentResponse.payment:type_name -> payment.Payment
 	7,  // 2: payment.CreateRefundRequest.items:type_name -> payment.RefundItemReq
-	17, // 3: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 3: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
 	1,  // 4: payment.CreateRefundResponse.refund:type_name -> payment.Refund
-	17, // 5: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 5: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 6: payment.GetPaymentResponse.payment:type_name -> payment.Payment
-	17, // 7: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 8: payment.GetRefundResponse.refund:type_name -> payment.Refund
-	2,  // 9: payment.GetRefundResponse.items:type_name -> payment.RefundItem
-	17, // 10: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
-	13, // 11: payment.LogPaymentResponse.log:type_name -> payment.PaymentLog
-	17, // 12: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 13: payment.PaymentResponse.payment:type_name -> payment.Payment
-	3,  // 14: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
-	5,  // 15: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
-	6,  // 16: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
-	9,  // 17: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
-	11, // 18: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
-	14, // 19: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
-	4,  // 20: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
-	16, // 21: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
-	8,  // 22: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
-	10, // 23: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
-	12, // 24: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
-	15, // 25: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
-	20, // [20:26] is the sub-list for method output_type
-	14, // [14:20] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	23, // 7: payment.ListPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 8: payment.ListPaymentResponse.payments:type_name -> payment.Payment
+	23, // 9: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 10: payment.GetRefundResponse.refund:type_name -> payment.Refund
+	2,  // 11: payment.GetRefundResponse.items:type_name -> payment.RefundItem
+	23, // 12: payment.ListRefundResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 13: payment.ListRefundResponse.refunds:type_name -> payment.Refund
+	23, // 14: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 15: payment.LogPaymentResponse.log:type_name -> payment.PaymentLog
+	23, // 16: payment.ListPaymentLogResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 17: payment.ListPaymentLogResponse.logs:type_name -> payment.PaymentLog
+	23, // 18: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 19: payment.PaymentResponse.payment:type_name -> payment.Payment
+	3,  // 20: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
+	5,  // 21: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
+	6,  // 22: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
+	9,  // 23: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
+	11, // 24: payment.PaymentService.ListPayments:input_type -> payment.ListPaymentRequest
+	13, // 25: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
+	15, // 26: payment.PaymentService.ListRefunds:input_type -> payment.ListRefundRequest
+	18, // 27: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
+	20, // 28: payment.PaymentService.ListPaymentLogs:input_type -> payment.ListPaymentLogRequest
+	4,  // 29: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
+	22, // 30: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
+	8,  // 31: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
+	10, // 32: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
+	12, // 33: payment.PaymentService.ListPayments:output_type -> payment.ListPaymentResponse
+	14, // 34: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
+	16, // 35: payment.PaymentService.ListRefunds:output_type -> payment.ListRefundResponse
+	19, // 36: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
+	21, // 37: payment.PaymentService.ListPaymentLogs:output_type -> payment.ListPaymentLogResponse
+	29, // [29:38] is the sub-list for method output_type
+	20, // [20:29] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_pay_payment_payment_proto_init() }
@@ -1679,7 +2256,7 @@ func file_api_zebra_pay_payment_payment_proto_init() {
 		(*GetPaymentRequest_PayNo)(nil),
 		(*GetPaymentRequest_OrderNo)(nil),
 	}
-	file_api_zebra_pay_payment_payment_proto_msgTypes[11].OneofWrappers = []any{
+	file_api_zebra_pay_payment_payment_proto_msgTypes[13].OneofWrappers = []any{
 		(*GetRefundRequest_RefundNo)(nil),
 		(*GetRefundRequest_SalesNo)(nil),
 	}
@@ -1689,7 +2266,7 @@ func file_api_zebra_pay_payment_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_pay_payment_payment_proto_rawDesc), len(file_api_zebra_pay_payment_payment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

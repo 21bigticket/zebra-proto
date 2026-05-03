@@ -862,6 +862,176 @@ func (x *GetUserAfterSalesResponse) GetTotal() int32 {
 	return 0
 }
 
+// 后台售后分页查询请求
+type ListAfterSalesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                // 用户ID，0表示全部
+	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`              // 订单号，空表示全部
+	SalesNo       string                 `protobuf:"bytes,5,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`              // 售后单号，空表示全部
+	SalesStatus   int32                  `protobuf:"varint,6,opt,name=sales_status,json=salesStatus,proto3" json:"sales_status,omitempty"` // -1=全部
+	StartTime     int64                  `protobuf:"varint,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAfterSalesRequest) Reset() {
+	*x = ListAfterSalesRequest{}
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAfterSalesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAfterSalesRequest) ProtoMessage() {}
+
+func (x *ListAfterSalesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAfterSalesRequest.ProtoReflect.Descriptor instead.
+func (*ListAfterSalesRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_after_sales_after_sales_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListAfterSalesRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAfterSalesRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAfterSalesRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListAfterSalesRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *ListAfterSalesRequest) GetSalesNo() string {
+	if x != nil {
+		return x.SalesNo
+	}
+	return ""
+}
+
+func (x *ListAfterSalesRequest) GetSalesStatus() int32 {
+	if x != nil {
+		return x.SalesStatus
+	}
+	return 0
+}
+
+func (x *ListAfterSalesRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListAfterSalesRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 后台售后分页查询响应
+type ListAfterSalesResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Code           *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg            string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	AfterSalesList []*AfterSales          `protobuf:"bytes,3,rep,name=after_sales_list,json=afterSalesList,proto3" json:"after_sales_list,omitempty"`
+	Total          int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListAfterSalesResponse) Reset() {
+	*x = ListAfterSalesResponse{}
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAfterSalesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAfterSalesResponse) ProtoMessage() {}
+
+func (x *ListAfterSalesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAfterSalesResponse.ProtoReflect.Descriptor instead.
+func (*ListAfterSalesResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_after_sales_after_sales_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListAfterSalesResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListAfterSalesResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListAfterSalesResponse) GetAfterSalesList() []*AfterSales {
+	if x != nil {
+		return x.AfterSalesList
+	}
+	return nil
+}
+
+func (x *ListAfterSalesResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 通用响应
 type AfterSalesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -876,7 +1046,7 @@ type AfterSalesResponse struct {
 
 func (x *AfterSalesResponse) Reset() {
 	*x = AfterSalesResponse{}
-	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[10]
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -888,7 +1058,7 @@ func (x *AfterSalesResponse) String() string {
 func (*AfterSalesResponse) ProtoMessage() {}
 
 func (x *AfterSalesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[10]
+	mi := &file_api_zebra_order_after_sales_after_sales_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -901,7 +1071,7 @@ func (x *AfterSalesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AfterSalesResponse.ProtoReflect.Descriptor instead.
 func (*AfterSalesResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_after_sales_after_sales_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_order_after_sales_after_sales_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *AfterSalesResponse) GetCode() *wrapperspb.Int32Value {
@@ -1024,6 +1194,21 @@ const file_api_zebra_order_after_sales_after_sales_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12A\n" +
 	"\x10after_sales_list\x18\x03 \x03(\v2\x17.after_sales.AfterSalesR\x0eafterSalesList\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xf4\x01\n" +
+	"\x15ListAfterSalesRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x19\n" +
+	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x19\n" +
+	"\bsales_no\x18\x05 \x01(\tR\asalesNo\x12!\n" +
+	"\fsales_status\x18\x06 \x01(\x05R\vsalesStatus\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\a \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\b \x01(\x03R\aendTime\"\xb4\x01\n" +
+	"\x16ListAfterSalesResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12A\n" +
+	"\x10after_sales_list\x18\x03 \x03(\v2\x17.after_sales.AfterSalesR\x0eafterSalesList\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"\xc5\x01\n" +
 	"\x12AfterSalesResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
@@ -1031,13 +1216,14 @@ const file_api_zebra_order_after_sales_after_sales_proto_rawDesc = "" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x128\n" +
 	"\vafter_sales\x18\x05 \x01(\v2\x17.after_sales.AfterSalesR\n" +
-	"afterSales2\xd0\x03\n" +
+	"afterSales2\xab\x04\n" +
 	"\x11AfterSalesService\x12_\n" +
 	"\x10CreateAfterSales\x12$.after_sales.CreateAfterSalesRequest\x1a%.after_sales.CreateAfterSalesResponse\x12W\n" +
 	"\x0fAuditAfterSales\x12#.after_sales.AuditAfterSalesRequest\x1a\x1f.after_sales.AfterSalesResponse\x12E\n" +
 	"\x06Refund\x12\x1a.after_sales.RefundRequest\x1a\x1f.after_sales.AfterSalesResponse\x12V\n" +
 	"\rGetAfterSales\x12!.after_sales.GetAfterSalesRequest\x1a\".after_sales.GetAfterSalesResponse\x12b\n" +
-	"\x11GetUserAfterSales\x12%.after_sales.GetUserAfterSalesRequest\x1a&.after_sales.GetUserAfterSalesResponseB+Z)./api/zebra-order/after_sales;after_salesb\x06proto3"
+	"\x11GetUserAfterSales\x12%.after_sales.GetUserAfterSalesRequest\x1a&.after_sales.GetUserAfterSalesResponse\x12Y\n" +
+	"\x0eListAfterSales\x12\".after_sales.ListAfterSalesRequest\x1a#.after_sales.ListAfterSalesResponseB+Z)./api/zebra-order/after_sales;after_salesb\x06proto3"
 
 var (
 	file_api_zebra_order_after_sales_after_sales_proto_rawDescOnce sync.Once
@@ -1051,7 +1237,7 @@ func file_api_zebra_order_after_sales_after_sales_proto_rawDescGZIP() []byte {
 	return file_api_zebra_order_after_sales_after_sales_proto_rawDescData
 }
 
-var file_api_zebra_order_after_sales_after_sales_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_api_zebra_order_after_sales_after_sales_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_api_zebra_order_after_sales_after_sales_proto_goTypes = []any{
 	(*AfterSales)(nil),                // 0: after_sales.AfterSales
 	(*AfterSalesItem)(nil),            // 1: after_sales.AfterSalesItem
@@ -1063,34 +1249,40 @@ var file_api_zebra_order_after_sales_after_sales_proto_goTypes = []any{
 	(*GetAfterSalesResponse)(nil),     // 7: after_sales.GetAfterSalesResponse
 	(*GetUserAfterSalesRequest)(nil),  // 8: after_sales.GetUserAfterSalesRequest
 	(*GetUserAfterSalesResponse)(nil), // 9: after_sales.GetUserAfterSalesResponse
-	(*AfterSalesResponse)(nil),        // 10: after_sales.AfterSalesResponse
-	(*wrapperspb.Int32Value)(nil),     // 11: google.protobuf.Int32Value
+	(*ListAfterSalesRequest)(nil),     // 10: after_sales.ListAfterSalesRequest
+	(*ListAfterSalesResponse)(nil),    // 11: after_sales.ListAfterSalesResponse
+	(*AfterSalesResponse)(nil),        // 12: after_sales.AfterSalesResponse
+	(*wrapperspb.Int32Value)(nil),     // 13: google.protobuf.Int32Value
 }
 var file_api_zebra_order_after_sales_after_sales_proto_depIdxs = []int32{
-	11, // 0: after_sales.CreateAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 0: after_sales.CreateAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: after_sales.CreateAfterSalesResponse.after_sales:type_name -> after_sales.AfterSales
-	11, // 2: after_sales.GetAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 2: after_sales.GetAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: after_sales.GetAfterSalesResponse.after_sales:type_name -> after_sales.AfterSales
 	1,  // 4: after_sales.GetAfterSalesResponse.items:type_name -> after_sales.AfterSalesItem
-	11, // 5: after_sales.GetUserAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 5: after_sales.GetUserAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 6: after_sales.GetUserAfterSalesResponse.after_sales_list:type_name -> after_sales.AfterSales
-	11, // 7: after_sales.AfterSalesResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 8: after_sales.AfterSalesResponse.after_sales:type_name -> after_sales.AfterSales
-	2,  // 9: after_sales.AfterSalesService.CreateAfterSales:input_type -> after_sales.CreateAfterSalesRequest
-	4,  // 10: after_sales.AfterSalesService.AuditAfterSales:input_type -> after_sales.AuditAfterSalesRequest
-	5,  // 11: after_sales.AfterSalesService.Refund:input_type -> after_sales.RefundRequest
-	6,  // 12: after_sales.AfterSalesService.GetAfterSales:input_type -> after_sales.GetAfterSalesRequest
-	8,  // 13: after_sales.AfterSalesService.GetUserAfterSales:input_type -> after_sales.GetUserAfterSalesRequest
-	3,  // 14: after_sales.AfterSalesService.CreateAfterSales:output_type -> after_sales.CreateAfterSalesResponse
-	10, // 15: after_sales.AfterSalesService.AuditAfterSales:output_type -> after_sales.AfterSalesResponse
-	10, // 16: after_sales.AfterSalesService.Refund:output_type -> after_sales.AfterSalesResponse
-	7,  // 17: after_sales.AfterSalesService.GetAfterSales:output_type -> after_sales.GetAfterSalesResponse
-	9,  // 18: after_sales.AfterSalesService.GetUserAfterSales:output_type -> after_sales.GetUserAfterSalesResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	13, // 7: after_sales.ListAfterSalesResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 8: after_sales.ListAfterSalesResponse.after_sales_list:type_name -> after_sales.AfterSales
+	13, // 9: after_sales.AfterSalesResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 10: after_sales.AfterSalesResponse.after_sales:type_name -> after_sales.AfterSales
+	2,  // 11: after_sales.AfterSalesService.CreateAfterSales:input_type -> after_sales.CreateAfterSalesRequest
+	4,  // 12: after_sales.AfterSalesService.AuditAfterSales:input_type -> after_sales.AuditAfterSalesRequest
+	5,  // 13: after_sales.AfterSalesService.Refund:input_type -> after_sales.RefundRequest
+	6,  // 14: after_sales.AfterSalesService.GetAfterSales:input_type -> after_sales.GetAfterSalesRequest
+	8,  // 15: after_sales.AfterSalesService.GetUserAfterSales:input_type -> after_sales.GetUserAfterSalesRequest
+	10, // 16: after_sales.AfterSalesService.ListAfterSales:input_type -> after_sales.ListAfterSalesRequest
+	3,  // 17: after_sales.AfterSalesService.CreateAfterSales:output_type -> after_sales.CreateAfterSalesResponse
+	12, // 18: after_sales.AfterSalesService.AuditAfterSales:output_type -> after_sales.AfterSalesResponse
+	12, // 19: after_sales.AfterSalesService.Refund:output_type -> after_sales.AfterSalesResponse
+	7,  // 20: after_sales.AfterSalesService.GetAfterSales:output_type -> after_sales.GetAfterSalesResponse
+	9,  // 21: after_sales.AfterSalesService.GetUserAfterSales:output_type -> after_sales.GetUserAfterSalesResponse
+	11, // 22: after_sales.AfterSalesService.ListAfterSales:output_type -> after_sales.ListAfterSalesResponse
+	17, // [17:23] is the sub-list for method output_type
+	11, // [11:17] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_order_after_sales_after_sales_proto_init() }
@@ -1108,7 +1300,7 @@ func file_api_zebra_order_after_sales_after_sales_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_order_after_sales_after_sales_proto_rawDesc), len(file_api_zebra_order_after_sales_after_sales_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

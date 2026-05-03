@@ -139,6 +139,786 @@ func (x *WeixinTemplate) GetIsDeleted() int32 {
 	return 0
 }
 
+// 创建微信模板请求
+type CreateWeixinTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplCode       string                 `protobuf:"bytes,1,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
+	TplIdWeixin   string                 `protobuf:"bytes,3,opt,name=tpl_id_weixin,json=tplIdWeixin,proto3" json:"tpl_id_weixin,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateWeixinTemplateRequest) Reset() {
+	*x = CreateWeixinTemplateRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateWeixinTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWeixinTemplateRequest) ProtoMessage() {}
+
+func (x *CreateWeixinTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWeixinTemplateRequest.ProtoReflect.Descriptor instead.
+func (*CreateWeixinTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateWeixinTemplateRequest) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *CreateWeixinTemplateRequest) GetTplName() string {
+	if x != nil {
+		return x.TplName
+	}
+	return ""
+}
+
+func (x *CreateWeixinTemplateRequest) GetTplIdWeixin() string {
+	if x != nil {
+		return x.TplIdWeixin
+	}
+	return ""
+}
+
+func (x *CreateWeixinTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 更新微信模板请求
+type UpdateWeixinTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
+	TplIdWeixin   string                 `protobuf:"bytes,3,opt,name=tpl_id_weixin,json=tplIdWeixin,proto3" json:"tpl_id_weixin,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateWeixinTemplateRequest) Reset() {
+	*x = UpdateWeixinTemplateRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateWeixinTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateWeixinTemplateRequest) ProtoMessage() {}
+
+func (x *UpdateWeixinTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateWeixinTemplateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateWeixinTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateWeixinTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		return x.TplId
+	}
+	return 0
+}
+
+func (x *UpdateWeixinTemplateRequest) GetTplName() string {
+	if x != nil {
+		return x.TplName
+	}
+	return ""
+}
+
+func (x *UpdateWeixinTemplateRequest) GetTplIdWeixin() string {
+	if x != nil {
+		return x.TplIdWeixin
+	}
+	return ""
+}
+
+func (x *UpdateWeixinTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 删除微信模板请求
+type DeleteWeixinTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteWeixinTemplateRequest) Reset() {
+	*x = DeleteWeixinTemplateRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteWeixinTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteWeixinTemplateRequest) ProtoMessage() {}
+
+func (x *DeleteWeixinTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteWeixinTemplateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteWeixinTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DeleteWeixinTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		return x.TplId
+	}
+	return 0
+}
+
+// 获取微信模板请求
+type GetWeixinTemplateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Query:
+	//
+	//	*GetWeixinTemplateRequest_TplId
+	//	*GetWeixinTemplateRequest_TplCode
+	Query         isGetWeixinTemplateRequest_Query `protobuf_oneof:"query"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWeixinTemplateRequest) Reset() {
+	*x = GetWeixinTemplateRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWeixinTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWeixinTemplateRequest) ProtoMessage() {}
+
+func (x *GetWeixinTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWeixinTemplateRequest.ProtoReflect.Descriptor instead.
+func (*GetWeixinTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetWeixinTemplateRequest) GetQuery() isGetWeixinTemplateRequest_Query {
+	if x != nil {
+		return x.Query
+	}
+	return nil
+}
+
+func (x *GetWeixinTemplateRequest) GetTplId() int64 {
+	if x != nil {
+		if x, ok := x.Query.(*GetWeixinTemplateRequest_TplId); ok {
+			return x.TplId
+		}
+	}
+	return 0
+}
+
+func (x *GetWeixinTemplateRequest) GetTplCode() string {
+	if x != nil {
+		if x, ok := x.Query.(*GetWeixinTemplateRequest_TplCode); ok {
+			return x.TplCode
+		}
+	}
+	return ""
+}
+
+type isGetWeixinTemplateRequest_Query interface {
+	isGetWeixinTemplateRequest_Query()
+}
+
+type GetWeixinTemplateRequest_TplId struct {
+	TplId int64 `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3,oneof"`
+}
+
+type GetWeixinTemplateRequest_TplCode struct {
+	TplCode string `protobuf:"bytes,2,opt,name=tpl_code,json=tplCode,proto3,oneof"`
+}
+
+func (*GetWeixinTemplateRequest_TplId) isGetWeixinTemplateRequest_Query() {}
+
+func (*GetWeixinTemplateRequest_TplCode) isGetWeixinTemplateRequest_Query() {}
+
+// 获取微信模板响应
+type GetWeixinTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Template      *WeixinTemplate        `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWeixinTemplateResponse) Reset() {
+	*x = GetWeixinTemplateResponse{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWeixinTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWeixinTemplateResponse) ProtoMessage() {}
+
+func (x *GetWeixinTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWeixinTemplateResponse.ProtoReflect.Descriptor instead.
+func (*GetWeixinTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetWeixinTemplateResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetWeixinTemplateResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetWeixinTemplateResponse) GetTemplate() *WeixinTemplate {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
+// 微信模板分页查询请求
+type ListWeixinTemplateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TplStatus     int32                  `protobuf:"varint,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWeixinTemplateRequest) Reset() {
+	*x = ListWeixinTemplateRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWeixinTemplateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWeixinTemplateRequest) ProtoMessage() {}
+
+func (x *ListWeixinTemplateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWeixinTemplateRequest.ProtoReflect.Descriptor instead.
+func (*ListWeixinTemplateRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListWeixinTemplateRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListWeixinTemplateRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListWeixinTemplateRequest) GetTplStatus() int32 {
+	if x != nil {
+		return x.TplStatus
+	}
+	return 0
+}
+
+// 微信模板分页查询响应
+type ListWeixinTemplateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Templates     []*WeixinTemplate      `protobuf:"bytes,3,rep,name=templates,proto3" json:"templates,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWeixinTemplateResponse) Reset() {
+	*x = ListWeixinTemplateResponse{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWeixinTemplateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWeixinTemplateResponse) ProtoMessage() {}
+
+func (x *ListWeixinTemplateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWeixinTemplateResponse.ProtoReflect.Descriptor instead.
+func (*ListWeixinTemplateResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListWeixinTemplateResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListWeixinTemplateResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListWeixinTemplateResponse) GetTemplates() []*WeixinTemplate {
+	if x != nil {
+		return x.Templates
+	}
+	return nil
+}
+
+func (x *ListWeixinTemplateResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// 微信消息发送记录
+type WeixinLog struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LogId         int64                  `protobuf:"varint,1,opt,name=log_id,json=logId,proto3" json:"log_id,omitempty"`
+	MsgId         string                 `protobuf:"bytes,2,opt,name=msg_id,json=msgId,proto3" json:"msg_id,omitempty"`
+	Openid        string                 `protobuf:"bytes,3,opt,name=openid,proto3" json:"openid,omitempty"`
+	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	RetryCount    int32                  `protobuf:"varint,7,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
+	Remark        string                 `protobuf:"bytes,8,opt,name=remark,proto3" json:"remark,omitempty"`
+	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WeixinLog) Reset() {
+	*x = WeixinLog{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WeixinLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WeixinLog) ProtoMessage() {}
+
+func (x *WeixinLog) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WeixinLog.ProtoReflect.Descriptor instead.
+func (*WeixinLog) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *WeixinLog) GetLogId() int64 {
+	if x != nil {
+		return x.LogId
+	}
+	return 0
+}
+
+func (x *WeixinLog) GetMsgId() string {
+	if x != nil {
+		return x.MsgId
+	}
+	return ""
+}
+
+func (x *WeixinLog) GetOpenid() string {
+	if x != nil {
+		return x.Openid
+	}
+	return ""
+}
+
+func (x *WeixinLog) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *WeixinLog) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *WeixinLog) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *WeixinLog) GetRetryCount() int32 {
+	if x != nil {
+		return x.RetryCount
+	}
+	return 0
+}
+
+func (x *WeixinLog) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *WeixinLog) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+// 微信消息发送记录分页查询请求
+type ListWeixinLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Openid        string                 `protobuf:"bytes,3,opt,name=openid,proto3" json:"openid,omitempty"`
+	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
+	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWeixinLogRequest) Reset() {
+	*x = ListWeixinLogRequest{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWeixinLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWeixinLogRequest) ProtoMessage() {}
+
+func (x *ListWeixinLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWeixinLogRequest.ProtoReflect.Descriptor instead.
+func (*ListWeixinLogRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListWeixinLogRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListWeixinLogRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListWeixinLogRequest) GetOpenid() string {
+	if x != nil {
+		return x.Openid
+	}
+	return ""
+}
+
+func (x *ListWeixinLogRequest) GetTplCode() string {
+	if x != nil {
+		return x.TplCode
+	}
+	return ""
+}
+
+func (x *ListWeixinLogRequest) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *ListWeixinLogRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListWeixinLogRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 微信消息发送记录分页查询响应
+type ListWeixinLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Logs          []*WeixinLog           `protobuf:"bytes,3,rep,name=logs,proto3" json:"logs,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWeixinLogResponse) Reset() {
+	*x = ListWeixinLogResponse{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWeixinLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWeixinLogResponse) ProtoMessage() {}
+
+func (x *ListWeixinLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWeixinLogResponse.ProtoReflect.Descriptor instead.
+func (*ListWeixinLogResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListWeixinLogResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListWeixinLogResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListWeixinLogResponse) GetLogs() []*WeixinLog {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+func (x *ListWeixinLogResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type WeixinResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WeixinResponse) Reset() {
+	*x = WeixinResponse{}
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WeixinResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WeixinResponse) ProtoMessage() {}
+
+func (x *WeixinResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WeixinResponse.ProtoReflect.Descriptor instead.
+func (*WeixinResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *WeixinResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *WeixinResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 // 发送微信消息请求
 type SendWeixinRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -152,7 +932,7 @@ type SendWeixinRequest struct {
 
 func (x *SendWeixinRequest) Reset() {
 	*x = SendWeixinRequest{}
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[1]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -164,7 +944,7 @@ func (x *SendWeixinRequest) String() string {
 func (*SendWeixinRequest) ProtoMessage() {}
 
 func (x *SendWeixinRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[1]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -177,7 +957,7 @@ func (x *SendWeixinRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendWeixinRequest.ProtoReflect.Descriptor instead.
 func (*SendWeixinRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{1}
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SendWeixinRequest) GetOpenid() string {
@@ -222,7 +1002,7 @@ type SendWeixinResponse struct {
 
 func (x *SendWeixinResponse) Reset() {
 	*x = SendWeixinResponse{}
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[2]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +1014,7 @@ func (x *SendWeixinResponse) String() string {
 func (*SendWeixinResponse) ProtoMessage() {}
 
 func (x *SendWeixinResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[2]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +1027,7 @@ func (x *SendWeixinResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendWeixinResponse.ProtoReflect.Descriptor instead.
 func (*SendWeixinResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{2}
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SendWeixinResponse) GetCode() *wrapperspb.Int32Value {
@@ -298,7 +1078,7 @@ type BatchSendWeixinRequest struct {
 
 func (x *BatchSendWeixinRequest) Reset() {
 	*x = BatchSendWeixinRequest{}
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[3]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -310,7 +1090,7 @@ func (x *BatchSendWeixinRequest) String() string {
 func (*BatchSendWeixinRequest) ProtoMessage() {}
 
 func (x *BatchSendWeixinRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[3]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -323,7 +1103,7 @@ func (x *BatchSendWeixinRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchSendWeixinRequest.ProtoReflect.Descriptor instead.
 func (*BatchSendWeixinRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{3}
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchSendWeixinRequest) GetOpenids() []string {
@@ -368,7 +1148,7 @@ type BatchSendWeixinResponse struct {
 
 func (x *BatchSendWeixinResponse) Reset() {
 	*x = BatchSendWeixinResponse{}
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[4]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -380,7 +1160,7 @@ func (x *BatchSendWeixinResponse) String() string {
 func (*BatchSendWeixinResponse) ProtoMessage() {}
 
 func (x *BatchSendWeixinResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[4]
+	mi := &file_api_zebra_message_weixin_weixin_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -393,7 +1173,7 @@ func (x *BatchSendWeixinResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchSendWeixinResponse.ProtoReflect.Descriptor instead.
 func (*BatchSendWeixinResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{4}
+	return file_api_zebra_message_weixin_weixin_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BatchSendWeixinResponse) GetCode() *wrapperspb.Int32Value {
@@ -448,7 +1228,68 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\vupdate_time\x18\a \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\xcc\x01\n" +
+	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\x96\x01\n" +
+	"\x1bCreateWeixinTemplateRequest\x12\x19\n" +
+	"\btpl_code\x18\x01 \x01(\tR\atplCode\x12\x19\n" +
+	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\"\n" +
+	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"\x92\x01\n" +
+	"\x1bUpdateWeixinTemplateRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
+	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\"\n" +
+	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"4\n" +
+	"\x1bDeleteWeixinTemplateRequest\x12\x15\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\"Y\n" +
+	"\x18GetWeixinTemplateRequest\x12\x17\n" +
+	"\x06tpl_id\x18\x01 \x01(\x03H\x00R\x05tplId\x12\x1b\n" +
+	"\btpl_code\x18\x02 \x01(\tH\x00R\atplCodeB\a\n" +
+	"\x05query\"\x92\x01\n" +
+	"\x19GetWeixinTemplateResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
+	"\btemplate\x18\x03 \x01(\v2\x16.weixin.WeixinTemplateR\btemplate\"k\n" +
+	"\x19ListWeixinTemplateRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"tpl_status\x18\x03 \x01(\x05R\ttplStatus\"\xab\x01\n" +
+	"\x1aListWeixinTemplateResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x124\n" +
+	"\ttemplates\x18\x03 \x03(\v2\x16.weixin.WeixinTemplateR\ttemplates\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xf8\x01\n" +
+	"\tWeixinLog\x12\x15\n" +
+	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
+	"\x06msg_id\x18\x02 \x01(\tR\x05msgId\x12\x16\n" +
+	"\x06openid\x18\x03 \x01(\tR\x06openid\x12\x19\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x18\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1f\n" +
+	"\vretry_count\x18\a \x01(\x05R\n" +
+	"retryCount\x12\x16\n" +
+	"\x06remark\x18\b \x01(\tR\x06remark\x12\x1f\n" +
+	"\vcreate_time\x18\t \x01(\x03R\n" +
+	"createTime\"\xcc\x01\n" +
+	"\x14ListWeixinLogRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x16\n" +
+	"\x06openid\x18\x03 \x01(\tR\x06openid\x12\x19\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\"\x97\x01\n" +
+	"\x15ListWeixinLogResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12%\n" +
+	"\x04logs\x18\x03 \x03(\v2\x11.weixin.WeixinLogR\x04logs\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"S\n" +
+	"\x0eWeixinResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"\xcc\x01\n" +
 	"\x11SendWeixinRequest\x12\x16\n" +
 	"\x06openid\x18\x01 \x01(\tR\x06openid\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x127\n" +
@@ -476,11 +1317,17 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\x17\n" +
-	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\xa8\x01\n" +
+	"\amsg_ids\x18\x05 \x03(\tR\x06msgIds2\x8a\x05\n" +
 	"\rWeixinService\x12C\n" +
 	"\n" +
 	"SendWeixin\x12\x19.weixin.SendWeixinRequest\x1a\x1a.weixin.SendWeixinResponse\x12R\n" +
-	"\x0fBatchSendWeixin\x12\x1e.weixin.BatchSendWeixinRequest\x1a\x1f.weixin.BatchSendWeixinResponseB#Z!./api/zebra-message/weixin;weixinb\x06proto3"
+	"\x0fBatchSendWeixin\x12\x1e.weixin.BatchSendWeixinRequest\x1a\x1f.weixin.BatchSendWeixinResponse\x12M\n" +
+	"\x0eCreateTemplate\x12#.weixin.CreateWeixinTemplateRequest\x1a\x16.weixin.WeixinResponse\x12M\n" +
+	"\x0eUpdateTemplate\x12#.weixin.UpdateWeixinTemplateRequest\x1a\x16.weixin.WeixinResponse\x12M\n" +
+	"\x0eDeleteTemplate\x12#.weixin.DeleteWeixinTemplateRequest\x1a\x16.weixin.WeixinResponse\x12R\n" +
+	"\vGetTemplate\x12 .weixin.GetWeixinTemplateRequest\x1a!.weixin.GetWeixinTemplateResponse\x12V\n" +
+	"\rListTemplates\x12!.weixin.ListWeixinTemplateRequest\x1a\".weixin.ListWeixinTemplateResponse\x12G\n" +
+	"\bListLogs\x12\x1c.weixin.ListWeixinLogRequest\x1a\x1d.weixin.ListWeixinLogResponseB#Z!./api/zebra-message/weixin;weixinb\x06proto3"
 
 var (
 	file_api_zebra_message_weixin_weixin_proto_rawDescOnce sync.Once
@@ -494,31 +1341,61 @@ func file_api_zebra_message_weixin_weixin_proto_rawDescGZIP() []byte {
 	return file_api_zebra_message_weixin_weixin_proto_rawDescData
 }
 
-var file_api_zebra_message_weixin_weixin_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_api_zebra_message_weixin_weixin_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_api_zebra_message_weixin_weixin_proto_goTypes = []any{
-	(*WeixinTemplate)(nil),          // 0: weixin.WeixinTemplate
-	(*SendWeixinRequest)(nil),       // 1: weixin.SendWeixinRequest
-	(*SendWeixinResponse)(nil),      // 2: weixin.SendWeixinResponse
-	(*BatchSendWeixinRequest)(nil),  // 3: weixin.BatchSendWeixinRequest
-	(*BatchSendWeixinResponse)(nil), // 4: weixin.BatchSendWeixinResponse
-	nil,                             // 5: weixin.SendWeixinRequest.DataEntry
-	nil,                             // 6: weixin.BatchSendWeixinRequest.DataEntry
-	(*wrapperspb.Int32Value)(nil),   // 7: google.protobuf.Int32Value
+	(*WeixinTemplate)(nil),              // 0: weixin.WeixinTemplate
+	(*CreateWeixinTemplateRequest)(nil), // 1: weixin.CreateWeixinTemplateRequest
+	(*UpdateWeixinTemplateRequest)(nil), // 2: weixin.UpdateWeixinTemplateRequest
+	(*DeleteWeixinTemplateRequest)(nil), // 3: weixin.DeleteWeixinTemplateRequest
+	(*GetWeixinTemplateRequest)(nil),    // 4: weixin.GetWeixinTemplateRequest
+	(*GetWeixinTemplateResponse)(nil),   // 5: weixin.GetWeixinTemplateResponse
+	(*ListWeixinTemplateRequest)(nil),   // 6: weixin.ListWeixinTemplateRequest
+	(*ListWeixinTemplateResponse)(nil),  // 7: weixin.ListWeixinTemplateResponse
+	(*WeixinLog)(nil),                   // 8: weixin.WeixinLog
+	(*ListWeixinLogRequest)(nil),        // 9: weixin.ListWeixinLogRequest
+	(*ListWeixinLogResponse)(nil),       // 10: weixin.ListWeixinLogResponse
+	(*WeixinResponse)(nil),              // 11: weixin.WeixinResponse
+	(*SendWeixinRequest)(nil),           // 12: weixin.SendWeixinRequest
+	(*SendWeixinResponse)(nil),          // 13: weixin.SendWeixinResponse
+	(*BatchSendWeixinRequest)(nil),      // 14: weixin.BatchSendWeixinRequest
+	(*BatchSendWeixinResponse)(nil),     // 15: weixin.BatchSendWeixinResponse
+	nil,                                 // 16: weixin.SendWeixinRequest.DataEntry
+	nil,                                 // 17: weixin.BatchSendWeixinRequest.DataEntry
+	(*wrapperspb.Int32Value)(nil),       // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_message_weixin_weixin_proto_depIdxs = []int32{
-	5, // 0: weixin.SendWeixinRequest.data:type_name -> weixin.SendWeixinRequest.DataEntry
-	7, // 1: weixin.SendWeixinResponse.code:type_name -> google.protobuf.Int32Value
-	6, // 2: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
-	7, // 3: weixin.BatchSendWeixinResponse.code:type_name -> google.protobuf.Int32Value
-	1, // 4: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
-	3, // 5: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
-	2, // 6: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
-	4, // 7: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	18, // 0: weixin.GetWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: weixin.GetWeixinTemplateResponse.template:type_name -> weixin.WeixinTemplate
+	18, // 2: weixin.ListWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: weixin.ListWeixinTemplateResponse.templates:type_name -> weixin.WeixinTemplate
+	18, // 4: weixin.ListWeixinLogResponse.code:type_name -> google.protobuf.Int32Value
+	8,  // 5: weixin.ListWeixinLogResponse.logs:type_name -> weixin.WeixinLog
+	18, // 6: weixin.WeixinResponse.code:type_name -> google.protobuf.Int32Value
+	16, // 7: weixin.SendWeixinRequest.data:type_name -> weixin.SendWeixinRequest.DataEntry
+	18, // 8: weixin.SendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 9: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
+	18, // 10: weixin.BatchSendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 11: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
+	14, // 12: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
+	1,  // 13: weixin.WeixinService.CreateTemplate:input_type -> weixin.CreateWeixinTemplateRequest
+	2,  // 14: weixin.WeixinService.UpdateTemplate:input_type -> weixin.UpdateWeixinTemplateRequest
+	3,  // 15: weixin.WeixinService.DeleteTemplate:input_type -> weixin.DeleteWeixinTemplateRequest
+	4,  // 16: weixin.WeixinService.GetTemplate:input_type -> weixin.GetWeixinTemplateRequest
+	6,  // 17: weixin.WeixinService.ListTemplates:input_type -> weixin.ListWeixinTemplateRequest
+	9,  // 18: weixin.WeixinService.ListLogs:input_type -> weixin.ListWeixinLogRequest
+	13, // 19: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
+	15, // 20: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
+	11, // 21: weixin.WeixinService.CreateTemplate:output_type -> weixin.WeixinResponse
+	11, // 22: weixin.WeixinService.UpdateTemplate:output_type -> weixin.WeixinResponse
+	11, // 23: weixin.WeixinService.DeleteTemplate:output_type -> weixin.WeixinResponse
+	5,  // 24: weixin.WeixinService.GetTemplate:output_type -> weixin.GetWeixinTemplateResponse
+	7,  // 25: weixin.WeixinService.ListTemplates:output_type -> weixin.ListWeixinTemplateResponse
+	10, // 26: weixin.WeixinService.ListLogs:output_type -> weixin.ListWeixinLogResponse
+	19, // [19:27] is the sub-list for method output_type
+	11, // [11:19] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_weixin_weixin_proto_init() }
@@ -526,13 +1403,17 @@ func file_api_zebra_message_weixin_weixin_proto_init() {
 	if File_api_zebra_message_weixin_weixin_proto != nil {
 		return
 	}
+	file_api_zebra_message_weixin_weixin_proto_msgTypes[4].OneofWrappers = []any{
+		(*GetWeixinTemplateRequest_TplId)(nil),
+		(*GetWeixinTemplateRequest_TplCode)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_message_weixin_weixin_proto_rawDesc), len(file_api_zebra_message_weixin_weixin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -38,6 +38,10 @@ const (
 const (
 	// SkuServiceCreateProcedure is the fully-qualified name of the SkuService's Create RPC.
 	SkuServiceCreateProcedure = "/sku.SkuService/Create"
+	// SkuServiceBatchCreateProcedure is the fully-qualified name of the SkuService's BatchCreate RPC.
+	SkuServiceBatchCreateProcedure = "/sku.SkuService/BatchCreate"
+	// SkuServiceBatchUpdateProcedure is the fully-qualified name of the SkuService's BatchUpdate RPC.
+	SkuServiceBatchUpdateProcedure = "/sku.SkuService/BatchUpdate"
 	// SkuServiceUpdateProcedure is the fully-qualified name of the SkuService's Update RPC.
 	SkuServiceUpdateProcedure = "/sku.SkuService/Update"
 	// SkuServiceDeleteProcedure is the fully-qualified name of the SkuService's Delete RPC.
@@ -55,6 +59,8 @@ var (
 // SkuService is a client for the sku.SkuService service.
 type SkuService interface {
 	Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*Response, error)
+	BatchCreate(ctx context.Context, req *BatchCreateSkuRequest, opts ...client.CallOption) (*Response, error)
+	BatchUpdate(ctx context.Context, req *BatchUpdateSkuRequest, opts ...client.CallOption) (*Response, error)
 	Update(ctx context.Context, req *UpdateSkuRequest, opts ...client.CallOption) (*Response, error)
 	Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetSkuRequest, opts ...client.CallOption) (*GetSkuResponse, error)
@@ -84,6 +90,22 @@ type SkuServiceImpl struct {
 func (c *SkuServiceImpl) Create(ctx context.Context, req *CreateSkuRequest, opts ...client.CallOption) (*Response, error) {
 	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SkuServiceImpl) BatchCreate(ctx context.Context, req *BatchCreateSkuRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchCreate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SkuServiceImpl) BatchUpdate(ctx context.Context, req *BatchUpdateSkuRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchUpdate", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -123,7 +145,7 @@ func (c *SkuServiceImpl) List(ctx context.Context, req *ListSkuRequest, opts ...
 
 var SkuService_ClientInfo = client.ClientInfo{
 	InterfaceName: "sku.SkuService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List"},
+	MethodNames:   []string{"Create", "BatchCreate", "BatchUpdate", "Update", "Delete", "Get", "List"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*SkuServiceImpl)
 		dubboCli.conn = conn
@@ -133,6 +155,8 @@ var SkuService_ClientInfo = client.ClientInfo{
 // SkuServiceHandler is an implementation of the sku.SkuService service.
 type SkuServiceHandler interface {
 	Create(context.Context, *CreateSkuRequest) (*Response, error)
+	BatchCreate(context.Context, *BatchCreateSkuRequest) (*Response, error)
+	BatchUpdate(context.Context, *BatchUpdateSkuRequest) (*Response, error)
 	Update(context.Context, *UpdateSkuRequest) (*Response, error)
 	Delete(context.Context, *DeleteSkuRequest) (*Response, error)
 	Get(context.Context, *GetSkuRequest) (*GetSkuResponse, error)
@@ -160,6 +184,36 @@ var SkuService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*CreateSkuRequest)
 				res, err := handler.(SkuServiceHandler).Create(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "BatchCreate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchCreateSkuRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchCreateSkuRequest)
+				res, err := handler.(SkuServiceHandler).BatchCreate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "BatchUpdate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchUpdateSkuRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchUpdateSkuRequest)
+				res, err := handler.(SkuServiceHandler).BatchUpdate(ctx, req)
 				if err != nil {
 					return nil, err
 				}

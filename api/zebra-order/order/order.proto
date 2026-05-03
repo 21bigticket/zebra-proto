@@ -83,6 +83,7 @@ message CreateOrderRequest {
   string                receiver_name    = 5;
   string                receiver_phone   = 6;
   string                receiver_address = 7;
+  repeated int64        selected_item_ids = 8;
 }
 
 // 订单商品请求
@@ -156,6 +157,25 @@ message GetUserOrdersResponse {
   int32          total  = 4;
 }
 
+// 后台订单分页查询请求
+message ListOrderRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+  string order_no = 4; // 订单号，空表示全部
+  int32 order_status = 5; // -1=全部
+  int64 start_time = 6; // 创建开始时间戳
+  int64 end_time = 7; // 创建结束时间戳
+}
+
+// 后台订单分页查询响应
+message ListOrderResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Order orders = 3;
+  int32 total = 4;
+}
+
 // 通用响应
 message OrderResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -174,4 +194,5 @@ service OrderService {
   rpc FinishOrder(FinishOrderRequest) returns (OrderResponse);
   rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
   rpc GetUserOrders(GetUserOrdersRequest) returns (GetUserOrdersResponse);
+  rpc ListOrders(ListOrderRequest) returns (ListOrderResponse);
 }

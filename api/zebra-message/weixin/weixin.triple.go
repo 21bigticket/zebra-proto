@@ -40,6 +40,18 @@ const (
 	WeixinServiceSendWeixinProcedure = "/weixin.WeixinService/SendWeixin"
 	// WeixinServiceBatchSendWeixinProcedure is the fully-qualified name of the WeixinService's BatchSendWeixin RPC.
 	WeixinServiceBatchSendWeixinProcedure = "/weixin.WeixinService/BatchSendWeixin"
+	// WeixinServiceCreateTemplateProcedure is the fully-qualified name of the WeixinService's CreateTemplate RPC.
+	WeixinServiceCreateTemplateProcedure = "/weixin.WeixinService/CreateTemplate"
+	// WeixinServiceUpdateTemplateProcedure is the fully-qualified name of the WeixinService's UpdateTemplate RPC.
+	WeixinServiceUpdateTemplateProcedure = "/weixin.WeixinService/UpdateTemplate"
+	// WeixinServiceDeleteTemplateProcedure is the fully-qualified name of the WeixinService's DeleteTemplate RPC.
+	WeixinServiceDeleteTemplateProcedure = "/weixin.WeixinService/DeleteTemplate"
+	// WeixinServiceGetTemplateProcedure is the fully-qualified name of the WeixinService's GetTemplate RPC.
+	WeixinServiceGetTemplateProcedure = "/weixin.WeixinService/GetTemplate"
+	// WeixinServiceListTemplatesProcedure is the fully-qualified name of the WeixinService's ListTemplates RPC.
+	WeixinServiceListTemplatesProcedure = "/weixin.WeixinService/ListTemplates"
+	// WeixinServiceListLogsProcedure is the fully-qualified name of the WeixinService's ListLogs RPC.
+	WeixinServiceListLogsProcedure = "/weixin.WeixinService/ListLogs"
 )
 
 var (
@@ -50,6 +62,12 @@ var (
 type WeixinService interface {
 	SendWeixin(ctx context.Context, req *SendWeixinRequest, opts ...client.CallOption) (*SendWeixinResponse, error)
 	BatchSendWeixin(ctx context.Context, req *BatchSendWeixinRequest, opts ...client.CallOption) (*BatchSendWeixinResponse, error)
+	CreateTemplate(ctx context.Context, req *CreateWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	UpdateTemplate(ctx context.Context, req *UpdateWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	DeleteTemplate(ctx context.Context, req *DeleteWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error)
+	GetTemplate(ctx context.Context, req *GetWeixinTemplateRequest, opts ...client.CallOption) (*GetWeixinTemplateResponse, error)
+	ListTemplates(ctx context.Context, req *ListWeixinTemplateRequest, opts ...client.CallOption) (*ListWeixinTemplateResponse, error)
+	ListLogs(ctx context.Context, req *ListWeixinLogRequest, opts ...client.CallOption) (*ListWeixinLogResponse, error)
 }
 
 // NewWeixinService constructs a client for the weixin.WeixinService service.
@@ -88,9 +106,57 @@ func (c *WeixinServiceImpl) BatchSendWeixin(ctx context.Context, req *BatchSendW
 	return resp, nil
 }
 
+func (c *WeixinServiceImpl) CreateTemplate(ctx context.Context, req *CreateWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	resp := new(WeixinResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "CreateTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WeixinServiceImpl) UpdateTemplate(ctx context.Context, req *UpdateWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	resp := new(WeixinResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WeixinServiceImpl) DeleteTemplate(ctx context.Context, req *DeleteWeixinTemplateRequest, opts ...client.CallOption) (*WeixinResponse, error) {
+	resp := new(WeixinResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeleteTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WeixinServiceImpl) GetTemplate(ctx context.Context, req *GetWeixinTemplateRequest, opts ...client.CallOption) (*GetWeixinTemplateResponse, error) {
+	resp := new(GetWeixinTemplateResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WeixinServiceImpl) ListTemplates(ctx context.Context, req *ListWeixinTemplateRequest, opts ...client.CallOption) (*ListWeixinTemplateResponse, error) {
+	resp := new(ListWeixinTemplateResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListTemplates", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WeixinServiceImpl) ListLogs(ctx context.Context, req *ListWeixinLogRequest, opts ...client.CallOption) (*ListWeixinLogResponse, error) {
+	resp := new(ListWeixinLogResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListLogs", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var WeixinService_ClientInfo = client.ClientInfo{
 	InterfaceName: "weixin.WeixinService",
-	MethodNames:   []string{"SendWeixin", "BatchSendWeixin"},
+	MethodNames:   []string{"SendWeixin", "BatchSendWeixin", "CreateTemplate", "UpdateTemplate", "DeleteTemplate", "GetTemplate", "ListTemplates", "ListLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*WeixinServiceImpl)
 		dubboCli.conn = conn
@@ -101,6 +167,12 @@ var WeixinService_ClientInfo = client.ClientInfo{
 type WeixinServiceHandler interface {
 	SendWeixin(context.Context, *SendWeixinRequest) (*SendWeixinResponse, error)
 	BatchSendWeixin(context.Context, *BatchSendWeixinRequest) (*BatchSendWeixinResponse, error)
+	CreateTemplate(context.Context, *CreateWeixinTemplateRequest) (*WeixinResponse, error)
+	UpdateTemplate(context.Context, *UpdateWeixinTemplateRequest) (*WeixinResponse, error)
+	DeleteTemplate(context.Context, *DeleteWeixinTemplateRequest) (*WeixinResponse, error)
+	GetTemplate(context.Context, *GetWeixinTemplateRequest) (*GetWeixinTemplateResponse, error)
+	ListTemplates(context.Context, *ListWeixinTemplateRequest) (*ListWeixinTemplateResponse, error)
+	ListLogs(context.Context, *ListWeixinLogRequest) (*ListWeixinLogResponse, error)
 }
 
 func RegisterWeixinServiceHandler(srv *server.Server, hdlr WeixinServiceHandler, opts ...server.ServiceOption) error {
@@ -139,6 +211,96 @@ var WeixinService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*BatchSendWeixinRequest)
 				res, err := handler.(WeixinServiceHandler).BatchSendWeixin(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "CreateTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(CreateWeixinTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*CreateWeixinTemplateRequest)
+				res, err := handler.(WeixinServiceHandler).CreateTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "UpdateTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(UpdateWeixinTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*UpdateWeixinTemplateRequest)
+				res, err := handler.(WeixinServiceHandler).UpdateTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "DeleteTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(DeleteWeixinTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*DeleteWeixinTemplateRequest)
+				res, err := handler.(WeixinServiceHandler).DeleteTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "GetTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(GetWeixinTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*GetWeixinTemplateRequest)
+				res, err := handler.(WeixinServiceHandler).GetTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListTemplates",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListWeixinTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListWeixinTemplateRequest)
+				res, err := handler.(WeixinServiceHandler).ListTemplates(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListLogs",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListWeixinLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListWeixinLogRequest)
+				res, err := handler.(WeixinServiceHandler).ListLogs(ctx, req)
 				if err != nil {
 					return nil, err
 				}

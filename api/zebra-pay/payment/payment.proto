@@ -132,6 +132,27 @@ message GetPaymentResponse {
   Payment payment = 3;
 }
 
+// 支付单分页查询请求
+message ListPaymentRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+  string order_no = 4; // 订单号，空表示全部
+  string pay_no = 5; // 支付单号，空表示全部
+  int32 pay_type = 6; // 0表示全部
+  int32 pay_status = 7; // -1表示全部
+  int64 start_time = 8;
+  int64 end_time = 9;
+}
+
+// 支付单分页查询响应
+message ListPaymentResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Payment payments = 3;
+  int32 total = 4;
+}
+
 // 查询退款请求
 message GetRefundRequest {
   oneof query {
@@ -146,6 +167,26 @@ message GetRefundResponse {
   string  msg = 2;  // 提示语
   Refund                refund = 3;
   repeated RefundItem   items  = 4;
+}
+
+// 退款单分页查询请求
+message ListRefundRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string pay_no = 3;
+  string order_no = 4;
+  string refund_no = 5;
+  int32 refund_status = 6; // -1表示全部
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+// 退款单分页查询响应
+message ListRefundResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Refund refunds = 3;
+  int32 total = 4;
 }
 
 // 支付日志记录
@@ -177,6 +218,25 @@ message LogPaymentResponse {
   PaymentLog log = 5;
 }
 
+// 支付日志分页查询请求
+message ListPaymentLogRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string pay_no = 3;
+  string order_no = 4;
+  string action = 5;
+  int64 start_time = 6;
+  int64 end_time = 7;
+}
+
+// 支付日志分页查询响应
+message ListPaymentLogResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated PaymentLog logs = 3;
+  int32 total = 4;
+}
+
 // 通用响应
 message PaymentResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -192,6 +252,9 @@ service PaymentService {
   rpc PayCallback(PayCallbackRequest) returns (PaymentResponse);
   rpc CreateRefund(CreateRefundRequest) returns (CreateRefundResponse);
   rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
+  rpc ListPayments(ListPaymentRequest) returns (ListPaymentResponse);
   rpc GetRefund(GetRefundRequest) returns (GetRefundResponse);
+  rpc ListRefunds(ListRefundRequest) returns (ListRefundResponse);
   rpc LogPayment(LogPaymentRequest) returns (LogPaymentResponse);
+  rpc ListPaymentLogs(ListPaymentLogRequest) returns (ListPaymentLogResponse);
 }

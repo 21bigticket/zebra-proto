@@ -825,411 +825,6 @@ func (x *ChangeStatusRequest) GetStatus() string {
 	return ""
 }
 
-// 已授权用户列表请求
-type AllocatedUserListRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	RoleId        int64                  `protobuf:"varint,3,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	UserName      string                 `protobuf:"bytes,4,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	Phonenumber   string                 `protobuf:"bytes,5,opt,name=phonenumber,proto3" json:"phonenumber,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AllocatedUserListRequest) Reset() {
-	*x = AllocatedUserListRequest{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AllocatedUserListRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AllocatedUserListRequest) ProtoMessage() {}
-
-func (x *AllocatedUserListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AllocatedUserListRequest.ProtoReflect.Descriptor instead.
-func (*AllocatedUserListRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *AllocatedUserListRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
-	}
-	return 0
-}
-
-func (x *AllocatedUserListRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *AllocatedUserListRequest) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
-func (x *AllocatedUserListRequest) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *AllocatedUserListRequest) GetPhonenumber() string {
-	if x != nil {
-		return x.Phonenumber
-	}
-	return ""
-}
-
-// 已授权用户列表响应
-type AllocatedUserListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	Users         []*UserInfo            `protobuf:"bytes,3,rep,name=users,proto3" json:"users,omitempty"`
-	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AllocatedUserListResponse) Reset() {
-	*x = AllocatedUserListResponse{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AllocatedUserListResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AllocatedUserListResponse) ProtoMessage() {}
-
-func (x *AllocatedUserListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AllocatedUserListResponse.ProtoReflect.Descriptor instead.
-func (*AllocatedUserListResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *AllocatedUserListResponse) GetCode() *wrapperspb.Int32Value {
-	if x != nil {
-		return x.Code
-	}
-	return nil
-}
-
-func (x *AllocatedUserListResponse) GetMsg() string {
-	if x != nil {
-		return x.Msg
-	}
-	return ""
-}
-
-func (x *AllocatedUserListResponse) GetUsers() []*UserInfo {
-	if x != nil {
-		return x.Users
-	}
-	return nil
-}
-
-func (x *AllocatedUserListResponse) GetTotal() int32 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-type UserInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName      string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	NickName      string                 `protobuf:"bytes,3,opt,name=nick_name,json=nickName,proto3" json:"nick_name,omitempty"`
-	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
-	Phonenumber   string                 `protobuf:"bytes,5,opt,name=phonenumber,proto3" json:"phonenumber,omitempty"`
-	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
-	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	DeptName      string                 `protobuf:"bytes,8,opt,name=dept_name,json=deptName,proto3" json:"dept_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserInfo) Reset() {
-	*x = UserInfo{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserInfo) ProtoMessage() {}
-
-func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
-func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *UserInfo) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserInfo) GetUserName() string {
-	if x != nil {
-		return x.UserName
-	}
-	return ""
-}
-
-func (x *UserInfo) GetNickName() string {
-	if x != nil {
-		return x.NickName
-	}
-	return ""
-}
-
-func (x *UserInfo) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *UserInfo) GetPhonenumber() string {
-	if x != nil {
-		return x.Phonenumber
-	}
-	return ""
-}
-
-func (x *UserInfo) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *UserInfo) GetCreateTime() int64 {
-	if x != nil {
-		return x.CreateTime
-	}
-	return 0
-}
-
-func (x *UserInfo) GetDeptName() string {
-	if x != nil {
-		return x.DeptName
-	}
-	return ""
-}
-
-// 取消用户授权请求
-type AuthUserCancelRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RoleId        int64                  `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AuthUserCancelRequest) Reset() {
-	*x = AuthUserCancelRequest{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AuthUserCancelRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AuthUserCancelRequest) ProtoMessage() {}
-
-func (x *AuthUserCancelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AuthUserCancelRequest.ProtoReflect.Descriptor instead.
-func (*AuthUserCancelRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *AuthUserCancelRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *AuthUserCancelRequest) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
-// 批量取消用户授权请求
-type AuthUserCancelAllRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	UserIds       []int64                `protobuf:"varint,2,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AuthUserCancelAllRequest) Reset() {
-	*x = AuthUserCancelAllRequest{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AuthUserCancelAllRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AuthUserCancelAllRequest) ProtoMessage() {}
-
-func (x *AuthUserCancelAllRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AuthUserCancelAllRequest.ProtoReflect.Descriptor instead.
-func (*AuthUserCancelAllRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *AuthUserCancelAllRequest) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
-func (x *AuthUserCancelAllRequest) GetUserIds() []int64 {
-	if x != nil {
-		return x.UserIds
-	}
-	return nil
-}
-
-// 批量选择用户授权请求
-type AuthUserSelectAllRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	UserIds       []int64                `protobuf:"varint,2,rep,packed,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AuthUserSelectAllRequest) Reset() {
-	*x = AuthUserSelectAllRequest{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AuthUserSelectAllRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AuthUserSelectAllRequest) ProtoMessage() {}
-
-func (x *AuthUserSelectAllRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AuthUserSelectAllRequest.ProtoReflect.Descriptor instead.
-func (*AuthUserSelectAllRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *AuthUserSelectAllRequest) GetRoleId() int64 {
-	if x != nil {
-		return x.RoleId
-	}
-	return 0
-}
-
-func (x *AuthUserSelectAllRequest) GetUserIds() []int64 {
-	if x != nil {
-		return x.UserIds
-	}
-	return nil
-}
-
 type Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -1240,7 +835,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[16]
+	mi := &file_api_zebra_passport_role_role_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1252,7 +847,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_role_role_proto_msgTypes[16]
+	mi := &file_api_zebra_passport_role_role_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1265,7 +860,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{16}
+	return file_api_zebra_passport_role_role_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -1365,40 +960,10 @@ const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\bdept_ids\x18\x03 \x03(\x03R\adeptIds\"F\n" +
 	"\x13ChangeStatusRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"\xa3\x01\n" +
-	"\x18AllocatedUserListRequest\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
-	"\arole_id\x18\x03 \x01(\x03R\x06roleId\x12\x1b\n" +
-	"\tuser_name\x18\x04 \x01(\tR\buserName\x12 \n" +
-	"\vphonenumber\x18\x05 \x01(\tR\vphonenumber\"\x9a\x01\n" +
-	"\x19AllocatedUserListResponse\x12/\n" +
-	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
-	"\x05users\x18\x03 \x03(\v2\x0e.role.UserInfoR\x05users\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xeb\x01\n" +
-	"\bUserInfo\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1b\n" +
-	"\tnick_name\x18\x03 \x01(\tR\bnickName\x12\x14\n" +
-	"\x05email\x18\x04 \x01(\tR\x05email\x12 \n" +
-	"\vphonenumber\x18\x05 \x01(\tR\vphonenumber\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1f\n" +
-	"\vcreate_time\x18\a \x01(\x03R\n" +
-	"createTime\x12\x1b\n" +
-	"\tdept_name\x18\b \x01(\tR\bdeptName\"I\n" +
-	"\x15AuthUserCancelRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\x03R\x06roleId\"N\n" +
-	"\x18AuthUserCancelAllRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x19\n" +
-	"\buser_ids\x18\x02 \x03(\x03R\auserIds\"N\n" +
-	"\x18AuthUserSelectAllRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x19\n" +
-	"\buser_ids\x18\x02 \x03(\x03R\auserIds\"M\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\xf8\x05\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\x81\x03\n" +
 	"\vRoleService\x121\n" +
 	"\x06Create\x12\x17.role.CreateRoleRequest\x1a\x0e.role.Response\x121\n" +
 	"\x06Update\x12\x17.role.UpdateRoleRequest\x1a\x0e.role.Response\x121\n" +
@@ -1406,12 +971,7 @@ const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\x03Get\x12\x14.role.GetRoleRequest\x1a\x15.role.GetRoleResponse\x125\n" +
 	"\x04List\x12\x15.role.ListRoleRequest\x1a\x16.role.ListRoleResponse\x123\n" +
 	"\tDataScope\x12\x16.role.DataScopeRequest\x1a\x0e.role.Response\x129\n" +
-	"\fChangeStatus\x12\x19.role.ChangeStatusRequest\x1a\x0e.role.Response\x12T\n" +
-	"\x11AllocatedUserList\x12\x1e.role.AllocatedUserListRequest\x1a\x1f.role.AllocatedUserListResponse\x12V\n" +
-	"\x13UnallocatedUserList\x12\x1e.role.AllocatedUserListRequest\x1a\x1f.role.AllocatedUserListResponse\x12=\n" +
-	"\x0eAuthUserCancel\x12\x1b.role.AuthUserCancelRequest\x1a\x0e.role.Response\x12C\n" +
-	"\x11AuthUserCancelAll\x12\x1e.role.AuthUserCancelAllRequest\x1a\x0e.role.Response\x12C\n" +
-	"\x11AuthUserSelectAll\x12\x1e.role.AuthUserSelectAllRequest\x1a\x0e.role.ResponseB Z\x1e./api/zebra-passport/role;roleb\x06proto3"
+	"\fChangeStatus\x12\x19.role.ChangeStatusRequest\x1a\x0e.role.ResponseB Z\x1e./api/zebra-passport/role;roleb\x06proto3"
 
 var (
 	file_api_zebra_passport_role_role_proto_rawDescOnce sync.Once
@@ -1425,64 +985,46 @@ func file_api_zebra_passport_role_role_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_role_role_proto_rawDescData
 }
 
-var file_api_zebra_passport_role_role_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_api_zebra_passport_role_role_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_api_zebra_passport_role_role_proto_goTypes = []any{
-	(*Role)(nil),                      // 0: role.Role
-	(*CreateRoleRequest)(nil),         // 1: role.CreateRoleRequest
-	(*UpdateRoleRequest)(nil),         // 2: role.UpdateRoleRequest
-	(*DeleteRoleRequest)(nil),         // 3: role.DeleteRoleRequest
-	(*GetRoleRequest)(nil),            // 4: role.GetRoleRequest
-	(*GetRoleResponse)(nil),           // 5: role.GetRoleResponse
-	(*ListRoleRequest)(nil),           // 6: role.ListRoleRequest
-	(*ListRoleResponse)(nil),          // 7: role.ListRoleResponse
-	(*DataScopeRequest)(nil),          // 8: role.DataScopeRequest
-	(*ChangeStatusRequest)(nil),       // 9: role.ChangeStatusRequest
-	(*AllocatedUserListRequest)(nil),  // 10: role.AllocatedUserListRequest
-	(*AllocatedUserListResponse)(nil), // 11: role.AllocatedUserListResponse
-	(*UserInfo)(nil),                  // 12: role.UserInfo
-	(*AuthUserCancelRequest)(nil),     // 13: role.AuthUserCancelRequest
-	(*AuthUserCancelAllRequest)(nil),  // 14: role.AuthUserCancelAllRequest
-	(*AuthUserSelectAllRequest)(nil),  // 15: role.AuthUserSelectAllRequest
-	(*Response)(nil),                  // 16: role.Response
-	(*wrapperspb.Int32Value)(nil),     // 17: google.protobuf.Int32Value
+	(*Role)(nil),                  // 0: role.Role
+	(*CreateRoleRequest)(nil),     // 1: role.CreateRoleRequest
+	(*UpdateRoleRequest)(nil),     // 2: role.UpdateRoleRequest
+	(*DeleteRoleRequest)(nil),     // 3: role.DeleteRoleRequest
+	(*GetRoleRequest)(nil),        // 4: role.GetRoleRequest
+	(*GetRoleResponse)(nil),       // 5: role.GetRoleResponse
+	(*ListRoleRequest)(nil),       // 6: role.ListRoleRequest
+	(*ListRoleResponse)(nil),      // 7: role.ListRoleResponse
+	(*DataScopeRequest)(nil),      // 8: role.DataScopeRequest
+	(*ChangeStatusRequest)(nil),   // 9: role.ChangeStatusRequest
+	(*Response)(nil),              // 10: role.Response
+	(*wrapperspb.Int32Value)(nil), // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_role_role_proto_depIdxs = []int32{
-	17, // 0: role.GetRoleResponse.code:type_name -> google.protobuf.Int32Value
+	11, // 0: role.GetRoleResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: role.GetRoleResponse.role:type_name -> role.Role
-	17, // 2: role.ListRoleResponse.code:type_name -> google.protobuf.Int32Value
+	11, // 2: role.ListRoleResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: role.ListRoleResponse.roles:type_name -> role.Role
-	17, // 4: role.AllocatedUserListResponse.code:type_name -> google.protobuf.Int32Value
-	12, // 5: role.AllocatedUserListResponse.users:type_name -> role.UserInfo
-	17, // 6: role.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 7: role.RoleService.Create:input_type -> role.CreateRoleRequest
-	2,  // 8: role.RoleService.Update:input_type -> role.UpdateRoleRequest
-	3,  // 9: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
-	4,  // 10: role.RoleService.Get:input_type -> role.GetRoleRequest
-	6,  // 11: role.RoleService.List:input_type -> role.ListRoleRequest
-	8,  // 12: role.RoleService.DataScope:input_type -> role.DataScopeRequest
-	9,  // 13: role.RoleService.ChangeStatus:input_type -> role.ChangeStatusRequest
-	10, // 14: role.RoleService.AllocatedUserList:input_type -> role.AllocatedUserListRequest
-	10, // 15: role.RoleService.UnallocatedUserList:input_type -> role.AllocatedUserListRequest
-	13, // 16: role.RoleService.AuthUserCancel:input_type -> role.AuthUserCancelRequest
-	14, // 17: role.RoleService.AuthUserCancelAll:input_type -> role.AuthUserCancelAllRequest
-	15, // 18: role.RoleService.AuthUserSelectAll:input_type -> role.AuthUserSelectAllRequest
-	16, // 19: role.RoleService.Create:output_type -> role.Response
-	16, // 20: role.RoleService.Update:output_type -> role.Response
-	16, // 21: role.RoleService.Delete:output_type -> role.Response
-	5,  // 22: role.RoleService.Get:output_type -> role.GetRoleResponse
-	7,  // 23: role.RoleService.List:output_type -> role.ListRoleResponse
-	16, // 24: role.RoleService.DataScope:output_type -> role.Response
-	16, // 25: role.RoleService.ChangeStatus:output_type -> role.Response
-	11, // 26: role.RoleService.AllocatedUserList:output_type -> role.AllocatedUserListResponse
-	11, // 27: role.RoleService.UnallocatedUserList:output_type -> role.AllocatedUserListResponse
-	16, // 28: role.RoleService.AuthUserCancel:output_type -> role.Response
-	16, // 29: role.RoleService.AuthUserCancelAll:output_type -> role.Response
-	16, // 30: role.RoleService.AuthUserSelectAll:output_type -> role.Response
-	19, // [19:31] is the sub-list for method output_type
-	7,  // [7:19] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	11, // 4: role.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: role.RoleService.Create:input_type -> role.CreateRoleRequest
+	2,  // 6: role.RoleService.Update:input_type -> role.UpdateRoleRequest
+	3,  // 7: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
+	4,  // 8: role.RoleService.Get:input_type -> role.GetRoleRequest
+	6,  // 9: role.RoleService.List:input_type -> role.ListRoleRequest
+	8,  // 10: role.RoleService.DataScope:input_type -> role.DataScopeRequest
+	9,  // 11: role.RoleService.ChangeStatus:input_type -> role.ChangeStatusRequest
+	10, // 12: role.RoleService.Create:output_type -> role.Response
+	10, // 13: role.RoleService.Update:output_type -> role.Response
+	10, // 14: role.RoleService.Delete:output_type -> role.Response
+	5,  // 15: role.RoleService.Get:output_type -> role.GetRoleResponse
+	7,  // 16: role.RoleService.List:output_type -> role.ListRoleResponse
+	10, // 17: role.RoleService.DataScope:output_type -> role.Response
+	10, // 18: role.RoleService.ChangeStatus:output_type -> role.Response
+	12, // [12:19] is the sub-list for method output_type
+	5,  // [5:12] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_role_role_proto_init() }
@@ -1497,7 +1039,7 @@ func file_api_zebra_passport_role_role_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_role_role_proto_rawDesc), len(file_api_zebra_passport_role_role_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

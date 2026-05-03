@@ -38,6 +38,10 @@ const (
 const (
 	// UserCouponServiceReceiveProcedure is the fully-qualified name of the UserCouponService's Receive RPC.
 	UserCouponServiceReceiveProcedure = "/user_coupon.UserCouponService/Receive"
+	// UserCouponServiceReserveProcedure is the fully-qualified name of the UserCouponService's Reserve RPC.
+	UserCouponServiceReserveProcedure = "/user_coupon.UserCouponService/Reserve"
+	// UserCouponServiceReleaseProcedure is the fully-qualified name of the UserCouponService's Release RPC.
+	UserCouponServiceReleaseProcedure = "/user_coupon.UserCouponService/Release"
 	// UserCouponServiceUseProcedure is the fully-qualified name of the UserCouponService's Use RPC.
 	UserCouponServiceUseProcedure = "/user_coupon.UserCouponService/Use"
 	// UserCouponServiceGetProcedure is the fully-qualified name of the UserCouponService's Get RPC.
@@ -46,6 +50,12 @@ const (
 	UserCouponServiceListProcedure = "/user_coupon.UserCouponService/List"
 	// UserCouponServiceGetAvailableProcedure is the fully-qualified name of the UserCouponService's GetAvailable RPC.
 	UserCouponServiceGetAvailableProcedure = "/user_coupon.UserCouponService/GetAvailable"
+	// UserCouponServiceCalculateDiscountProcedure is the fully-qualified name of the UserCouponService's CalculateDiscount RPC.
+	UserCouponServiceCalculateDiscountProcedure = "/user_coupon.UserCouponService/CalculateDiscount"
+	// UserCouponServiceGetLogProcedure is the fully-qualified name of the UserCouponService's GetLog RPC.
+	UserCouponServiceGetLogProcedure = "/user_coupon.UserCouponService/GetLog"
+	// UserCouponServiceListLogsProcedure is the fully-qualified name of the UserCouponService's ListLogs RPC.
+	UserCouponServiceListLogsProcedure = "/user_coupon.UserCouponService/ListLogs"
 )
 
 var (
@@ -55,10 +65,15 @@ var (
 // UserCouponService is a client for the user_coupon.UserCouponService service.
 type UserCouponService interface {
 	Receive(ctx context.Context, req *ReceiveCouponRequest, opts ...client.CallOption) (*ReceiveCouponResponse, error)
+	Reserve(ctx context.Context, req *ReserveCouponRequest, opts ...client.CallOption) (*ReserveCouponResponse, error)
+	Release(ctx context.Context, req *ReleaseCouponRequest, opts ...client.CallOption) (*ReleaseCouponResponse, error)
 	Use(ctx context.Context, req *UseCouponRequest, opts ...client.CallOption) (*UseCouponResponse, error)
 	Get(ctx context.Context, req *GetUserCouponRequest, opts ...client.CallOption) (*GetUserCouponResponse, error)
 	List(ctx context.Context, req *ListUserCouponRequest, opts ...client.CallOption) (*ListUserCouponResponse, error)
 	GetAvailable(ctx context.Context, req *GetAvailableCouponsRequest, opts ...client.CallOption) (*GetAvailableCouponsResponse, error)
+	CalculateDiscount(ctx context.Context, req *CalculateDiscountRequest, opts ...client.CallOption) (*CalculateDiscountResponse, error)
+	GetLog(ctx context.Context, req *GetUserCouponLogRequest, opts ...client.CallOption) (*GetUserCouponLogResponse, error)
+	ListLogs(ctx context.Context, req *ListUserCouponLogRequest, opts ...client.CallOption) (*ListUserCouponLogResponse, error)
 }
 
 // NewUserCouponService constructs a client for the user_coupon.UserCouponService service.
@@ -84,6 +99,22 @@ type UserCouponServiceImpl struct {
 func (c *UserCouponServiceImpl) Receive(ctx context.Context, req *ReceiveCouponRequest, opts ...client.CallOption) (*ReceiveCouponResponse, error) {
 	resp := new(ReceiveCouponResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Receive", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *UserCouponServiceImpl) Reserve(ctx context.Context, req *ReserveCouponRequest, opts ...client.CallOption) (*ReserveCouponResponse, error) {
+	resp := new(ReserveCouponResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Reserve", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *UserCouponServiceImpl) Release(ctx context.Context, req *ReleaseCouponRequest, opts ...client.CallOption) (*ReleaseCouponResponse, error) {
+	resp := new(ReleaseCouponResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Release", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -121,9 +152,33 @@ func (c *UserCouponServiceImpl) GetAvailable(ctx context.Context, req *GetAvaila
 	return resp, nil
 }
 
+func (c *UserCouponServiceImpl) CalculateDiscount(ctx context.Context, req *CalculateDiscountRequest, opts ...client.CallOption) (*CalculateDiscountResponse, error) {
+	resp := new(CalculateDiscountResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "CalculateDiscount", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *UserCouponServiceImpl) GetLog(ctx context.Context, req *GetUserCouponLogRequest, opts ...client.CallOption) (*GetUserCouponLogResponse, error) {
+	resp := new(GetUserCouponLogResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetLog", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *UserCouponServiceImpl) ListLogs(ctx context.Context, req *ListUserCouponLogRequest, opts ...client.CallOption) (*ListUserCouponLogResponse, error) {
+	resp := new(ListUserCouponLogResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListLogs", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var UserCouponService_ClientInfo = client.ClientInfo{
 	InterfaceName: "user_coupon.UserCouponService",
-	MethodNames:   []string{"Receive", "Use", "Get", "List", "GetAvailable"},
+	MethodNames:   []string{"Receive", "Reserve", "Release", "Use", "Get", "List", "GetAvailable", "CalculateDiscount", "GetLog", "ListLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*UserCouponServiceImpl)
 		dubboCli.conn = conn
@@ -133,10 +188,15 @@ var UserCouponService_ClientInfo = client.ClientInfo{
 // UserCouponServiceHandler is an implementation of the user_coupon.UserCouponService service.
 type UserCouponServiceHandler interface {
 	Receive(context.Context, *ReceiveCouponRequest) (*ReceiveCouponResponse, error)
+	Reserve(context.Context, *ReserveCouponRequest) (*ReserveCouponResponse, error)
+	Release(context.Context, *ReleaseCouponRequest) (*ReleaseCouponResponse, error)
 	Use(context.Context, *UseCouponRequest) (*UseCouponResponse, error)
 	Get(context.Context, *GetUserCouponRequest) (*GetUserCouponResponse, error)
 	List(context.Context, *ListUserCouponRequest) (*ListUserCouponResponse, error)
 	GetAvailable(context.Context, *GetAvailableCouponsRequest) (*GetAvailableCouponsResponse, error)
+	CalculateDiscount(context.Context, *CalculateDiscountRequest) (*CalculateDiscountResponse, error)
+	GetLog(context.Context, *GetUserCouponLogRequest) (*GetUserCouponLogResponse, error)
+	ListLogs(context.Context, *ListUserCouponLogRequest) (*ListUserCouponLogResponse, error)
 }
 
 func RegisterUserCouponServiceHandler(srv *server.Server, hdlr UserCouponServiceHandler, opts ...server.ServiceOption) error {
@@ -160,6 +220,36 @@ var UserCouponService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ReceiveCouponRequest)
 				res, err := handler.(UserCouponServiceHandler).Receive(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Reserve",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ReserveCouponRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ReserveCouponRequest)
+				res, err := handler.(UserCouponServiceHandler).Reserve(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Release",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ReleaseCouponRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ReleaseCouponRequest)
+				res, err := handler.(UserCouponServiceHandler).Release(ctx, req)
 				if err != nil {
 					return nil, err
 				}
@@ -220,6 +310,51 @@ var UserCouponService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetAvailableCouponsRequest)
 				res, err := handler.(UserCouponServiceHandler).GetAvailable(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "CalculateDiscount",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(CalculateDiscountRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*CalculateDiscountRequest)
+				res, err := handler.(UserCouponServiceHandler).CalculateDiscount(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "GetLog",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(GetUserCouponLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*GetUserCouponLogRequest)
+				res, err := handler.(UserCouponServiceHandler).GetLog(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListLogs",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListUserCouponLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListUserCouponLogRequest)
+				res, err := handler.(UserCouponServiceHandler).ListLogs(ctx, req)
 				if err != nil {
 					return nil, err
 				}

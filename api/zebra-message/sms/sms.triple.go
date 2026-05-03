@@ -40,6 +40,18 @@ const (
 	SmsServiceSendSmsProcedure = "/sms.SmsService/SendSms"
 	// SmsServiceBatchSendSmsProcedure is the fully-qualified name of the SmsService's BatchSendSms RPC.
 	SmsServiceBatchSendSmsProcedure = "/sms.SmsService/BatchSendSms"
+	// SmsServiceCreateTemplateProcedure is the fully-qualified name of the SmsService's CreateTemplate RPC.
+	SmsServiceCreateTemplateProcedure = "/sms.SmsService/CreateTemplate"
+	// SmsServiceUpdateTemplateProcedure is the fully-qualified name of the SmsService's UpdateTemplate RPC.
+	SmsServiceUpdateTemplateProcedure = "/sms.SmsService/UpdateTemplate"
+	// SmsServiceDeleteTemplateProcedure is the fully-qualified name of the SmsService's DeleteTemplate RPC.
+	SmsServiceDeleteTemplateProcedure = "/sms.SmsService/DeleteTemplate"
+	// SmsServiceGetTemplateProcedure is the fully-qualified name of the SmsService's GetTemplate RPC.
+	SmsServiceGetTemplateProcedure = "/sms.SmsService/GetTemplate"
+	// SmsServiceListTemplatesProcedure is the fully-qualified name of the SmsService's ListTemplates RPC.
+	SmsServiceListTemplatesProcedure = "/sms.SmsService/ListTemplates"
+	// SmsServiceListLogsProcedure is the fully-qualified name of the SmsService's ListLogs RPC.
+	SmsServiceListLogsProcedure = "/sms.SmsService/ListLogs"
 )
 
 var (
@@ -50,6 +62,12 @@ var (
 type SmsService interface {
 	SendSms(ctx context.Context, req *SendSmsRequest, opts ...client.CallOption) (*SendSmsResponse, error)
 	BatchSendSms(ctx context.Context, req *BatchSendSmsRequest, opts ...client.CallOption) (*BatchSendSmsResponse, error)
+	CreateTemplate(ctx context.Context, req *CreateSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error)
+	UpdateTemplate(ctx context.Context, req *UpdateSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error)
+	DeleteTemplate(ctx context.Context, req *DeleteSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error)
+	GetTemplate(ctx context.Context, req *GetSmsTemplateRequest, opts ...client.CallOption) (*GetSmsTemplateResponse, error)
+	ListTemplates(ctx context.Context, req *ListSmsTemplateRequest, opts ...client.CallOption) (*ListSmsTemplateResponse, error)
+	ListLogs(ctx context.Context, req *ListSmsLogRequest, opts ...client.CallOption) (*ListSmsLogResponse, error)
 }
 
 // NewSmsService constructs a client for the sms.SmsService service.
@@ -88,9 +106,57 @@ func (c *SmsServiceImpl) BatchSendSms(ctx context.Context, req *BatchSendSmsRequ
 	return resp, nil
 }
 
+func (c *SmsServiceImpl) CreateTemplate(ctx context.Context, req *CreateSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error) {
+	resp := new(SmsResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "CreateTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SmsServiceImpl) UpdateTemplate(ctx context.Context, req *UpdateSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error) {
+	resp := new(SmsResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SmsServiceImpl) DeleteTemplate(ctx context.Context, req *DeleteSmsTemplateRequest, opts ...client.CallOption) (*SmsResponse, error) {
+	resp := new(SmsResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeleteTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SmsServiceImpl) GetTemplate(ctx context.Context, req *GetSmsTemplateRequest, opts ...client.CallOption) (*GetSmsTemplateResponse, error) {
+	resp := new(GetSmsTemplateResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetTemplate", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SmsServiceImpl) ListTemplates(ctx context.Context, req *ListSmsTemplateRequest, opts ...client.CallOption) (*ListSmsTemplateResponse, error) {
+	resp := new(ListSmsTemplateResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListTemplates", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *SmsServiceImpl) ListLogs(ctx context.Context, req *ListSmsLogRequest, opts ...client.CallOption) (*ListSmsLogResponse, error) {
+	resp := new(ListSmsLogResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListLogs", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var SmsService_ClientInfo = client.ClientInfo{
 	InterfaceName: "sms.SmsService",
-	MethodNames:   []string{"SendSms", "BatchSendSms"},
+	MethodNames:   []string{"SendSms", "BatchSendSms", "CreateTemplate", "UpdateTemplate", "DeleteTemplate", "GetTemplate", "ListTemplates", "ListLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*SmsServiceImpl)
 		dubboCli.conn = conn
@@ -101,6 +167,12 @@ var SmsService_ClientInfo = client.ClientInfo{
 type SmsServiceHandler interface {
 	SendSms(context.Context, *SendSmsRequest) (*SendSmsResponse, error)
 	BatchSendSms(context.Context, *BatchSendSmsRequest) (*BatchSendSmsResponse, error)
+	CreateTemplate(context.Context, *CreateSmsTemplateRequest) (*SmsResponse, error)
+	UpdateTemplate(context.Context, *UpdateSmsTemplateRequest) (*SmsResponse, error)
+	DeleteTemplate(context.Context, *DeleteSmsTemplateRequest) (*SmsResponse, error)
+	GetTemplate(context.Context, *GetSmsTemplateRequest) (*GetSmsTemplateResponse, error)
+	ListTemplates(context.Context, *ListSmsTemplateRequest) (*ListSmsTemplateResponse, error)
+	ListLogs(context.Context, *ListSmsLogRequest) (*ListSmsLogResponse, error)
 }
 
 func RegisterSmsServiceHandler(srv *server.Server, hdlr SmsServiceHandler, opts ...server.ServiceOption) error {
@@ -139,6 +211,96 @@ var SmsService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*BatchSendSmsRequest)
 				res, err := handler.(SmsServiceHandler).BatchSendSms(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "CreateTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(CreateSmsTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*CreateSmsTemplateRequest)
+				res, err := handler.(SmsServiceHandler).CreateTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "UpdateTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(UpdateSmsTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*UpdateSmsTemplateRequest)
+				res, err := handler.(SmsServiceHandler).UpdateTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "DeleteTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(DeleteSmsTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*DeleteSmsTemplateRequest)
+				res, err := handler.(SmsServiceHandler).DeleteTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "GetTemplate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(GetSmsTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*GetSmsTemplateRequest)
+				res, err := handler.(SmsServiceHandler).GetTemplate(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListTemplates",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListSmsTemplateRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListSmsTemplateRequest)
+				res, err := handler.(SmsServiceHandler).ListTemplates(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListLogs",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListSmsLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListSmsLogRequest)
+				res, err := handler.(SmsServiceHandler).ListLogs(ctx, req)
 				if err != nil {
 					return nil, err
 				}

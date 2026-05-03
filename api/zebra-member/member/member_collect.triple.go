@@ -46,6 +46,8 @@ const (
 	MemberCollectServiceGetProcedure = "/member.MemberCollectService/Get"
 	// MemberCollectServiceGetListByUserProcedure is the fully-qualified name of the MemberCollectService's GetListByUser RPC.
 	MemberCollectServiceGetListByUserProcedure = "/member.MemberCollectService/GetListByUser"
+	// MemberCollectServiceListProcedure is the fully-qualified name of the MemberCollectService's List RPC.
+	MemberCollectServiceListProcedure = "/member.MemberCollectService/List"
 	// MemberCollectServiceCheckStatusProcedure is the fully-qualified name of the MemberCollectService's CheckStatus RPC.
 	MemberCollectServiceCheckStatusProcedure = "/member.MemberCollectService/CheckStatus"
 )
@@ -61,6 +63,7 @@ type MemberCollectService interface {
 	Delete(ctx context.Context, req *DeleteMemberCollectRequest, opts ...client.CallOption) (*MemberCollectResponse, error)
 	Get(ctx context.Context, req *GetMemberCollectRequest, opts ...client.CallOption) (*GetMemberCollectResponse, error)
 	GetListByUser(ctx context.Context, req *GetCollectListByUserRequest, opts ...client.CallOption) (*CollectListResponse, error)
+	List(ctx context.Context, req *ListMemberCollectRequest, opts ...client.CallOption) (*ListMemberCollectResponse, error)
 	CheckStatus(ctx context.Context, req *CheckCollectStatusRequest, opts ...client.CallOption) (*CheckCollectStatusResponse, error)
 }
 
@@ -124,6 +127,14 @@ func (c *MemberCollectServiceImpl) GetListByUser(ctx context.Context, req *GetCo
 	return resp, nil
 }
 
+func (c *MemberCollectServiceImpl) List(ctx context.Context, req *ListMemberCollectRequest, opts ...client.CallOption) (*ListMemberCollectResponse, error) {
+	resp := new(ListMemberCollectResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "List", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *MemberCollectServiceImpl) CheckStatus(ctx context.Context, req *CheckCollectStatusRequest, opts ...client.CallOption) (*CheckCollectStatusResponse, error) {
 	resp := new(CheckCollectStatusResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "CheckStatus", opts...); err != nil {
@@ -134,7 +145,7 @@ func (c *MemberCollectServiceImpl) CheckStatus(ctx context.Context, req *CheckCo
 
 var MemberCollectService_ClientInfo = client.ClientInfo{
 	InterfaceName: "member.MemberCollectService",
-	MethodNames:   []string{"Create", "UpdateStatus", "Delete", "Get", "GetListByUser", "CheckStatus"},
+	MethodNames:   []string{"Create", "UpdateStatus", "Delete", "Get", "GetListByUser", "List", "CheckStatus"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*MemberCollectServiceImpl)
 		dubboCli.conn = conn
@@ -148,6 +159,7 @@ type MemberCollectServiceHandler interface {
 	Delete(context.Context, *DeleteMemberCollectRequest) (*MemberCollectResponse, error)
 	Get(context.Context, *GetMemberCollectRequest) (*GetMemberCollectResponse, error)
 	GetListByUser(context.Context, *GetCollectListByUserRequest) (*CollectListResponse, error)
+	List(context.Context, *ListMemberCollectRequest) (*ListMemberCollectResponse, error)
 	CheckStatus(context.Context, *CheckCollectStatusRequest) (*CheckCollectStatusResponse, error)
 }
 
@@ -232,6 +244,21 @@ var MemberCollectService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetCollectListByUserRequest)
 				res, err := handler.(MemberCollectServiceHandler).GetListByUser(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "List",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListMemberCollectRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListMemberCollectRequest)
+				res, err := handler.(MemberCollectServiceHandler).List(ctx, req)
 				if err != nil {
 					return nil, err
 				}

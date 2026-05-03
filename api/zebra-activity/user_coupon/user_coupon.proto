@@ -29,7 +29,7 @@ message UserCoupon {
   int64  user_id        = 2;
   int64  coupon_id      = 3;
   string coupon_no      = 4;
-  int32  coupon_status  = 5; // 0=未使用, 1=已使用, 2=已过期
+  int32  coupon_status  = 5; // 0=未使用, 1=已使用, 2=已过期, 3=已预占
   int64  start_time     = 6;
   int64  end_time       = 7;
   int64  use_time       = 8;
@@ -37,6 +37,22 @@ message UserCoupon {
   int64  create_time    = 10;
   int64  update_time    = 11;
   int32  is_deleted     = 12;
+}
+
+message UserCouponLog {
+  int64 log_id = 1;
+  int64 user_coupon_id = 2;
+  int64 user_id = 3;
+  int64 coupon_id = 4;
+  string action = 5;
+  string order_no = 6;
+  int32 before_status = 7;
+  int32 after_status = 8;
+  string result = 9;
+  string message = 10;
+  string request_data = 11;
+  string response_data = 12;
+  int64 create_time = 13;
 }
 
 // 领取优惠券请求
@@ -53,11 +69,45 @@ message ReceiveCouponResponse {
   string    message      = 4;
 }
 
+// 预占优惠券请求
+message ReserveCouponRequest {
+  int64 user_coupon_id = 1;
+  int64 user_id = 2;
+  string order_no = 3;
+  int64 order_amount = 4;
+}
+
+// 预占优惠券响应
+message ReserveCouponResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  UserCoupon user_coupon = 3;
+  bool success = 4;
+  string message = 5;
+}
+
+// 释放预占优惠券请求
+message ReleaseCouponRequest {
+  int64 user_coupon_id = 1;
+  int64 user_id = 2;
+  string order_no = 3;
+}
+
+// 释放预占优惠券响应
+message ReleaseCouponResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  UserCoupon user_coupon = 3;
+  bool success = 4;
+  string message = 5;
+}
+
 // 使用优惠券请求
 message UseCouponRequest {
   int64  user_coupon_id = 1;
   int64  user_id        = 2;
   string order_no       = 3;
+  int64  order_amount   = 4;
 }
 
 // 使用优惠券响应
@@ -110,11 +160,62 @@ message GetAvailableCouponsResponse {
   repeated UserCoupon user_coupons = 3;
 }
 
+// 计算优惠金额请求
+message CalculateDiscountRequest {
+  int64 user_coupon_id = 1;
+  int64 user_id = 2;
+  int64 order_amount = 3;
+}
+
+// 计算优惠金额响应
+message CalculateDiscountResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  int64 discount_amount = 3;
+  int64 final_amount = 4;
+  string message = 5;
+}
+
+message GetUserCouponLogRequest {
+  int64 log_id = 1;
+}
+
+message GetUserCouponLogResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  UserCouponLog user_coupon_log = 3;
+}
+
+message ListUserCouponLogRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_coupon_id = 3;
+  int64 user_id = 4;
+  int64 coupon_id = 5;
+  string order_no = 6;
+  string action = 7;
+  string result = 8;
+  int64 start_time = 9;
+  int64 end_time = 10;
+}
+
+message ListUserCouponLogResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated UserCouponLog user_coupon_logs = 3;
+  int32 total = 4;
+}
+
 // 用户优惠券服务
 service UserCouponService {
   rpc Receive(ReceiveCouponRequest) returns (ReceiveCouponResponse);
+  rpc Reserve(ReserveCouponRequest) returns (ReserveCouponResponse);
+  rpc Release(ReleaseCouponRequest) returns (ReleaseCouponResponse);
   rpc Use(UseCouponRequest) returns (UseCouponResponse);
   rpc Get(GetUserCouponRequest) returns (GetUserCouponResponse);
   rpc List(ListUserCouponRequest) returns (ListUserCouponResponse);
   rpc GetAvailable(GetAvailableCouponsRequest) returns (GetAvailableCouponsResponse);
+  rpc CalculateDiscount(CalculateDiscountRequest) returns (CalculateDiscountResponse);
+  rpc GetLog(GetUserCouponLogRequest) returns (GetUserCouponLogResponse);
+  rpc ListLogs(ListUserCouponLogRequest) returns (ListUserCouponLogResponse);
 }

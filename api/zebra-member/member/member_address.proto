@@ -90,6 +90,22 @@ message AddressListResponse {
   repeated MemberAddress addresses = 3;
 }
 
+// 分页查询地址请求
+message ListMemberAddressRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 user_id = 3; // 用户ID，0表示全部
+  int32 address_status = 4; // -1表示全部
+}
+
+// 分页查询地址响应
+message ListMemberAddressResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated MemberAddress addresses = 3;
+  int32 total = 4;
+}
+
 // 设置默认地址请求
 message SetDefaultAddressRequest {
   int64 id      = 1;
@@ -108,5 +124,6 @@ service MemberAddressService {
   rpc Delete(DeleteMemberAddressRequest) returns (MemberAddressResponse);
   rpc Get(GetMemberAddressRequest) returns (GetMemberAddressResponse);
   rpc GetListByUser(GetAddressListByUserRequest) returns (AddressListResponse);
+  rpc List(ListMemberAddressRequest) returns (ListMemberAddressResponse);
   rpc SetDefault(SetDefaultAddressRequest) returns (MemberAddressResponse);
 }

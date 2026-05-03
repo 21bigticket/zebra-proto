@@ -73,9 +73,30 @@ message GetDeliveryResponse {
   Delivery delivery = 3;
 }
 
+// 发货分页查询请求
+message ListDeliveryRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string order_no = 3;
+  string delivery_no = 4;
+  string delivery_comp = 5;
+  int32 delivery_status = 6; // -1表示全部
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+// 发货分页查询响应
+message ListDeliveryResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Delivery deliveries = 3;
+  int32 total = 4;
+}
+
 // 发货服务
 service DeliveryService {
   rpc CreateDelivery(CreateDeliveryRequest) returns (CreateDeliveryResponse);
   rpc UpdateDeliveryStatus(UpdateDeliveryStatusRequest) returns (CreateDeliveryResponse);
   rpc GetDelivery(GetDeliveryRequest) returns (GetDeliveryResponse);
+  rpc ListDeliveries(ListDeliveryRequest) returns (ListDeliveryResponse);
 }

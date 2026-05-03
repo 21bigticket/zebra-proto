@@ -490,6 +490,176 @@ func (x *GetDeliveryResponse) GetDelivery() *Delivery {
 	return nil
 }
 
+// 发货分页查询请求
+type ListDeliveryRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Page           int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize       int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OrderNo        string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	DeliveryNo     string                 `protobuf:"bytes,4,opt,name=delivery_no,json=deliveryNo,proto3" json:"delivery_no,omitempty"`
+	DeliveryComp   string                 `protobuf:"bytes,5,opt,name=delivery_comp,json=deliveryComp,proto3" json:"delivery_comp,omitempty"`
+	DeliveryStatus int32                  `protobuf:"varint,6,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // -1表示全部
+	StartTime      int64                  `protobuf:"varint,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime        int64                  `protobuf:"varint,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ListDeliveryRequest) Reset() {
+	*x = ListDeliveryRequest{}
+	mi := &file_api_zebra_order_delivery_delivery_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDeliveryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDeliveryRequest) ProtoMessage() {}
+
+func (x *ListDeliveryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_delivery_delivery_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDeliveryRequest.ProtoReflect.Descriptor instead.
+func (*ListDeliveryRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_delivery_delivery_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListDeliveryRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListDeliveryRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListDeliveryRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *ListDeliveryRequest) GetDeliveryNo() string {
+	if x != nil {
+		return x.DeliveryNo
+	}
+	return ""
+}
+
+func (x *ListDeliveryRequest) GetDeliveryComp() string {
+	if x != nil {
+		return x.DeliveryComp
+	}
+	return ""
+}
+
+func (x *ListDeliveryRequest) GetDeliveryStatus() int32 {
+	if x != nil {
+		return x.DeliveryStatus
+	}
+	return 0
+}
+
+func (x *ListDeliveryRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListDeliveryRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 发货分页查询响应
+type ListDeliveryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Deliveries    []*Delivery            `protobuf:"bytes,3,rep,name=deliveries,proto3" json:"deliveries,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDeliveryResponse) Reset() {
+	*x = ListDeliveryResponse{}
+	mi := &file_api_zebra_order_delivery_delivery_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDeliveryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDeliveryResponse) ProtoMessage() {}
+
+func (x *ListDeliveryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_delivery_delivery_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDeliveryResponse.ProtoReflect.Descriptor instead.
+func (*ListDeliveryResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_delivery_delivery_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListDeliveryResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListDeliveryResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListDeliveryResponse) GetDeliveries() []*Delivery {
+	if x != nil {
+		return x.Deliveries
+	}
+	return nil
+}
+
+func (x *ListDeliveryResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_api_zebra_order_delivery_delivery_proto protoreflect.FileDescriptor
 
 const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
@@ -533,11 +703,30 @@ const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\x13GetDeliveryResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
-	"\bdelivery\x18\x03 \x01(\v2\x12.delivery.DeliveryR\bdelivery2\x93\x02\n" +
+	"\bdelivery\x18\x03 \x01(\v2\x12.delivery.DeliveryR\bdelivery\"\x8a\x02\n" +
+	"\x13ListDeliveryRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x19\n" +
+	"\border_no\x18\x03 \x01(\tR\aorderNo\x12\x1f\n" +
+	"\vdelivery_no\x18\x04 \x01(\tR\n" +
+	"deliveryNo\x12#\n" +
+	"\rdelivery_comp\x18\x05 \x01(\tR\fdeliveryComp\x12'\n" +
+	"\x0fdelivery_status\x18\x06 \x01(\x05R\x0edeliveryStatus\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\a \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\b \x01(\x03R\aendTime\"\xa3\x01\n" +
+	"\x14ListDeliveryResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
+	"\n" +
+	"deliveries\x18\x03 \x03(\v2\x12.delivery.DeliveryR\n" +
+	"deliveries\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total2\xe4\x02\n" +
 	"\x0fDeliveryService\x12S\n" +
 	"\x0eCreateDelivery\x12\x1f.delivery.CreateDeliveryRequest\x1a .delivery.CreateDeliveryResponse\x12_\n" +
 	"\x14UpdateDeliveryStatus\x12%.delivery.UpdateDeliveryStatusRequest\x1a .delivery.CreateDeliveryResponse\x12J\n" +
-	"\vGetDelivery\x12\x1c.delivery.GetDeliveryRequest\x1a\x1d.delivery.GetDeliveryResponseB%Z#./api/zebra-order/delivery;deliveryb\x06proto3"
+	"\vGetDelivery\x12\x1c.delivery.GetDeliveryRequest\x1a\x1d.delivery.GetDeliveryResponse\x12O\n" +
+	"\x0eListDeliveries\x12\x1d.delivery.ListDeliveryRequest\x1a\x1e.delivery.ListDeliveryResponseB%Z#./api/zebra-order/delivery;deliveryb\x06proto3"
 
 var (
 	file_api_zebra_order_delivery_delivery_proto_rawDescOnce sync.Once
@@ -551,7 +740,7 @@ func file_api_zebra_order_delivery_delivery_proto_rawDescGZIP() []byte {
 	return file_api_zebra_order_delivery_delivery_proto_rawDescData
 }
 
-var file_api_zebra_order_delivery_delivery_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_api_zebra_order_delivery_delivery_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_api_zebra_order_delivery_delivery_proto_goTypes = []any{
 	(*Delivery)(nil),                    // 0: delivery.Delivery
 	(*CreateDeliveryRequest)(nil),       // 1: delivery.CreateDeliveryRequest
@@ -559,24 +748,30 @@ var file_api_zebra_order_delivery_delivery_proto_goTypes = []any{
 	(*UpdateDeliveryStatusRequest)(nil), // 3: delivery.UpdateDeliveryStatusRequest
 	(*GetDeliveryRequest)(nil),          // 4: delivery.GetDeliveryRequest
 	(*GetDeliveryResponse)(nil),         // 5: delivery.GetDeliveryResponse
-	(*wrapperspb.Int32Value)(nil),       // 6: google.protobuf.Int32Value
+	(*ListDeliveryRequest)(nil),         // 6: delivery.ListDeliveryRequest
+	(*ListDeliveryResponse)(nil),        // 7: delivery.ListDeliveryResponse
+	(*wrapperspb.Int32Value)(nil),       // 8: google.protobuf.Int32Value
 }
 var file_api_zebra_order_delivery_delivery_proto_depIdxs = []int32{
-	6, // 0: delivery.CreateDeliveryResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 1: delivery.CreateDeliveryResponse.delivery:type_name -> delivery.Delivery
-	6, // 2: delivery.GetDeliveryResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 3: delivery.GetDeliveryResponse.delivery:type_name -> delivery.Delivery
-	1, // 4: delivery.DeliveryService.CreateDelivery:input_type -> delivery.CreateDeliveryRequest
-	3, // 5: delivery.DeliveryService.UpdateDeliveryStatus:input_type -> delivery.UpdateDeliveryStatusRequest
-	4, // 6: delivery.DeliveryService.GetDelivery:input_type -> delivery.GetDeliveryRequest
-	2, // 7: delivery.DeliveryService.CreateDelivery:output_type -> delivery.CreateDeliveryResponse
-	2, // 8: delivery.DeliveryService.UpdateDeliveryStatus:output_type -> delivery.CreateDeliveryResponse
-	5, // 9: delivery.DeliveryService.GetDelivery:output_type -> delivery.GetDeliveryResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	8,  // 0: delivery.CreateDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 1: delivery.CreateDeliveryResponse.delivery:type_name -> delivery.Delivery
+	8,  // 2: delivery.GetDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: delivery.GetDeliveryResponse.delivery:type_name -> delivery.Delivery
+	8,  // 4: delivery.ListDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: delivery.ListDeliveryResponse.deliveries:type_name -> delivery.Delivery
+	1,  // 6: delivery.DeliveryService.CreateDelivery:input_type -> delivery.CreateDeliveryRequest
+	3,  // 7: delivery.DeliveryService.UpdateDeliveryStatus:input_type -> delivery.UpdateDeliveryStatusRequest
+	4,  // 8: delivery.DeliveryService.GetDelivery:input_type -> delivery.GetDeliveryRequest
+	6,  // 9: delivery.DeliveryService.ListDeliveries:input_type -> delivery.ListDeliveryRequest
+	2,  // 10: delivery.DeliveryService.CreateDelivery:output_type -> delivery.CreateDeliveryResponse
+	2,  // 11: delivery.DeliveryService.UpdateDeliveryStatus:output_type -> delivery.CreateDeliveryResponse
+	5,  // 12: delivery.DeliveryService.GetDelivery:output_type -> delivery.GetDeliveryResponse
+	7,  // 13: delivery.DeliveryService.ListDeliveries:output_type -> delivery.ListDeliveryResponse
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_order_delivery_delivery_proto_init() }
@@ -595,7 +790,7 @@ func file_api_zebra_order_delivery_delivery_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_order_delivery_delivery_proto_rawDesc), len(file_api_zebra_order_delivery_delivery_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -79,6 +79,21 @@ message GetStockResponse {
   repeated Stock stocks = 3;  // 库存信息列表
 }
 
+// 库存分页查询请求
+message ListStockRequest {
+  int32 page = 1;       // 页码
+  int32 page_size = 2;  // 页大小
+  int64 sku_id = 3;     // SKU ID，0表示全部
+}
+
+// 库存分页查询响应
+message ListStockResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Stock stocks = 3;
+  int32 total = 4;
+}
+
 // 通用响应
 message StockResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -100,4 +115,6 @@ service StockService {
   rpc Release(ReleaseRequest) returns (StockResponse);
   // 获取库存
   rpc GetStock(GetStockRequest) returns (GetStockResponse);
+  // 分页查询库存
+  rpc List(ListStockRequest) returns (ListStockResponse);
 }

@@ -46,6 +46,8 @@ const (
 	MemberAddressServiceGetProcedure = "/member.MemberAddressService/Get"
 	// MemberAddressServiceGetListByUserProcedure is the fully-qualified name of the MemberAddressService's GetListByUser RPC.
 	MemberAddressServiceGetListByUserProcedure = "/member.MemberAddressService/GetListByUser"
+	// MemberAddressServiceListProcedure is the fully-qualified name of the MemberAddressService's List RPC.
+	MemberAddressServiceListProcedure = "/member.MemberAddressService/List"
 	// MemberAddressServiceSetDefaultProcedure is the fully-qualified name of the MemberAddressService's SetDefault RPC.
 	MemberAddressServiceSetDefaultProcedure = "/member.MemberAddressService/SetDefault"
 )
@@ -61,6 +63,7 @@ type MemberAddressService interface {
 	Delete(ctx context.Context, req *DeleteMemberAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
 	Get(ctx context.Context, req *GetMemberAddressRequest, opts ...client.CallOption) (*GetMemberAddressResponse, error)
 	GetListByUser(ctx context.Context, req *GetAddressListByUserRequest, opts ...client.CallOption) (*AddressListResponse, error)
+	List(ctx context.Context, req *ListMemberAddressRequest, opts ...client.CallOption) (*ListMemberAddressResponse, error)
 	SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error)
 }
 
@@ -124,6 +127,14 @@ func (c *MemberAddressServiceImpl) GetListByUser(ctx context.Context, req *GetAd
 	return resp, nil
 }
 
+func (c *MemberAddressServiceImpl) List(ctx context.Context, req *ListMemberAddressRequest, opts ...client.CallOption) (*ListMemberAddressResponse, error) {
+	resp := new(ListMemberAddressResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "List", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *MemberAddressServiceImpl) SetDefault(ctx context.Context, req *SetDefaultAddressRequest, opts ...client.CallOption) (*MemberAddressResponse, error) {
 	resp := new(MemberAddressResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "SetDefault", opts...); err != nil {
@@ -134,7 +145,7 @@ func (c *MemberAddressServiceImpl) SetDefault(ctx context.Context, req *SetDefau
 
 var MemberAddressService_ClientInfo = client.ClientInfo{
 	InterfaceName: "member.MemberAddressService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "GetListByUser", "SetDefault"},
+	MethodNames:   []string{"Create", "Update", "Delete", "Get", "GetListByUser", "List", "SetDefault"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*MemberAddressServiceImpl)
 		dubboCli.conn = conn
@@ -148,6 +159,7 @@ type MemberAddressServiceHandler interface {
 	Delete(context.Context, *DeleteMemberAddressRequest) (*MemberAddressResponse, error)
 	Get(context.Context, *GetMemberAddressRequest) (*GetMemberAddressResponse, error)
 	GetListByUser(context.Context, *GetAddressListByUserRequest) (*AddressListResponse, error)
+	List(context.Context, *ListMemberAddressRequest) (*ListMemberAddressResponse, error)
 	SetDefault(context.Context, *SetDefaultAddressRequest) (*MemberAddressResponse, error)
 }
 
@@ -232,6 +244,21 @@ var MemberAddressService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetAddressListByUserRequest)
 				res, err := handler.(MemberAddressServiceHandler).GetListByUser(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "List",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListMemberAddressRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListMemberAddressRequest)
+				res, err := handler.(MemberAddressServiceHandler).List(ctx, req)
 				if err != nil {
 					return nil, err
 				}

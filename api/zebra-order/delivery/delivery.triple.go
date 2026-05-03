@@ -42,6 +42,8 @@ const (
 	DeliveryServiceUpdateDeliveryStatusProcedure = "/delivery.DeliveryService/UpdateDeliveryStatus"
 	// DeliveryServiceGetDeliveryProcedure is the fully-qualified name of the DeliveryService's GetDelivery RPC.
 	DeliveryServiceGetDeliveryProcedure = "/delivery.DeliveryService/GetDelivery"
+	// DeliveryServiceListDeliveriesProcedure is the fully-qualified name of the DeliveryService's ListDeliveries RPC.
+	DeliveryServiceListDeliveriesProcedure = "/delivery.DeliveryService/ListDeliveries"
 )
 
 var (
@@ -53,6 +55,7 @@ type DeliveryService interface {
 	CreateDelivery(ctx context.Context, req *CreateDeliveryRequest, opts ...client.CallOption) (*CreateDeliveryResponse, error)
 	UpdateDeliveryStatus(ctx context.Context, req *UpdateDeliveryStatusRequest, opts ...client.CallOption) (*CreateDeliveryResponse, error)
 	GetDelivery(ctx context.Context, req *GetDeliveryRequest, opts ...client.CallOption) (*GetDeliveryResponse, error)
+	ListDeliveries(ctx context.Context, req *ListDeliveryRequest, opts ...client.CallOption) (*ListDeliveryResponse, error)
 }
 
 // NewDeliveryService constructs a client for the delivery.DeliveryService service.
@@ -99,9 +102,17 @@ func (c *DeliveryServiceImpl) GetDelivery(ctx context.Context, req *GetDeliveryR
 	return resp, nil
 }
 
+func (c *DeliveryServiceImpl) ListDeliveries(ctx context.Context, req *ListDeliveryRequest, opts ...client.CallOption) (*ListDeliveryResponse, error) {
+	resp := new(ListDeliveryResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListDeliveries", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var DeliveryService_ClientInfo = client.ClientInfo{
 	InterfaceName: "delivery.DeliveryService",
-	MethodNames:   []string{"CreateDelivery", "UpdateDeliveryStatus", "GetDelivery"},
+	MethodNames:   []string{"CreateDelivery", "UpdateDeliveryStatus", "GetDelivery", "ListDeliveries"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*DeliveryServiceImpl)
 		dubboCli.conn = conn
@@ -113,6 +124,7 @@ type DeliveryServiceHandler interface {
 	CreateDelivery(context.Context, *CreateDeliveryRequest) (*CreateDeliveryResponse, error)
 	UpdateDeliveryStatus(context.Context, *UpdateDeliveryStatusRequest) (*CreateDeliveryResponse, error)
 	GetDelivery(context.Context, *GetDeliveryRequest) (*GetDeliveryResponse, error)
+	ListDeliveries(context.Context, *ListDeliveryRequest) (*ListDeliveryResponse, error)
 }
 
 func RegisterDeliveryServiceHandler(srv *server.Server, hdlr DeliveryServiceHandler, opts ...server.ServiceOption) error {
@@ -166,6 +178,21 @@ var DeliveryService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetDeliveryRequest)
 				res, err := handler.(DeliveryServiceHandler).GetDelivery(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListDeliveries",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListDeliveryRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListDeliveryRequest)
+				res, err := handler.(DeliveryServiceHandler).ListDeliveries(ctx, req)
 				if err != nil {
 					return nil, err
 				}

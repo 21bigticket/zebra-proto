@@ -44,10 +44,16 @@ const (
 	PaymentServiceCreateRefundProcedure = "/payment.PaymentService/CreateRefund"
 	// PaymentServiceGetPaymentProcedure is the fully-qualified name of the PaymentService's GetPayment RPC.
 	PaymentServiceGetPaymentProcedure = "/payment.PaymentService/GetPayment"
+	// PaymentServiceListPaymentsProcedure is the fully-qualified name of the PaymentService's ListPayments RPC.
+	PaymentServiceListPaymentsProcedure = "/payment.PaymentService/ListPayments"
 	// PaymentServiceGetRefundProcedure is the fully-qualified name of the PaymentService's GetRefund RPC.
 	PaymentServiceGetRefundProcedure = "/payment.PaymentService/GetRefund"
+	// PaymentServiceListRefundsProcedure is the fully-qualified name of the PaymentService's ListRefunds RPC.
+	PaymentServiceListRefundsProcedure = "/payment.PaymentService/ListRefunds"
 	// PaymentServiceLogPaymentProcedure is the fully-qualified name of the PaymentService's LogPayment RPC.
 	PaymentServiceLogPaymentProcedure = "/payment.PaymentService/LogPayment"
+	// PaymentServiceListPaymentLogsProcedure is the fully-qualified name of the PaymentService's ListPaymentLogs RPC.
+	PaymentServiceListPaymentLogsProcedure = "/payment.PaymentService/ListPaymentLogs"
 )
 
 var (
@@ -60,8 +66,11 @@ type PaymentService interface {
 	PayCallback(ctx context.Context, req *PayCallbackRequest, opts ...client.CallOption) (*PaymentResponse, error)
 	CreateRefund(ctx context.Context, req *CreateRefundRequest, opts ...client.CallOption) (*CreateRefundResponse, error)
 	GetPayment(ctx context.Context, req *GetPaymentRequest, opts ...client.CallOption) (*GetPaymentResponse, error)
+	ListPayments(ctx context.Context, req *ListPaymentRequest, opts ...client.CallOption) (*ListPaymentResponse, error)
 	GetRefund(ctx context.Context, req *GetRefundRequest, opts ...client.CallOption) (*GetRefundResponse, error)
+	ListRefunds(ctx context.Context, req *ListRefundRequest, opts ...client.CallOption) (*ListRefundResponse, error)
 	LogPayment(ctx context.Context, req *LogPaymentRequest, opts ...client.CallOption) (*LogPaymentResponse, error)
+	ListPaymentLogs(ctx context.Context, req *ListPaymentLogRequest, opts ...client.CallOption) (*ListPaymentLogResponse, error)
 }
 
 // NewPaymentService constructs a client for the payment.PaymentService service.
@@ -116,9 +125,25 @@ func (c *PaymentServiceImpl) GetPayment(ctx context.Context, req *GetPaymentRequ
 	return resp, nil
 }
 
+func (c *PaymentServiceImpl) ListPayments(ctx context.Context, req *ListPaymentRequest, opts ...client.CallOption) (*ListPaymentResponse, error) {
+	resp := new(ListPaymentResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListPayments", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *PaymentServiceImpl) GetRefund(ctx context.Context, req *GetRefundRequest, opts ...client.CallOption) (*GetRefundResponse, error) {
 	resp := new(GetRefundResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetRefund", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *PaymentServiceImpl) ListRefunds(ctx context.Context, req *ListRefundRequest, opts ...client.CallOption) (*ListRefundResponse, error) {
+	resp := new(ListRefundResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListRefunds", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -132,9 +157,17 @@ func (c *PaymentServiceImpl) LogPayment(ctx context.Context, req *LogPaymentRequ
 	return resp, nil
 }
 
+func (c *PaymentServiceImpl) ListPaymentLogs(ctx context.Context, req *ListPaymentLogRequest, opts ...client.CallOption) (*ListPaymentLogResponse, error) {
+	resp := new(ListPaymentLogResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListPaymentLogs", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var PaymentService_ClientInfo = client.ClientInfo{
 	InterfaceName: "payment.PaymentService",
-	MethodNames:   []string{"CreatePayment", "PayCallback", "CreateRefund", "GetPayment", "GetRefund", "LogPayment"},
+	MethodNames:   []string{"CreatePayment", "PayCallback", "CreateRefund", "GetPayment", "ListPayments", "GetRefund", "ListRefunds", "LogPayment", "ListPaymentLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*PaymentServiceImpl)
 		dubboCli.conn = conn
@@ -147,8 +180,11 @@ type PaymentServiceHandler interface {
 	PayCallback(context.Context, *PayCallbackRequest) (*PaymentResponse, error)
 	CreateRefund(context.Context, *CreateRefundRequest) (*CreateRefundResponse, error)
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
+	ListPayments(context.Context, *ListPaymentRequest) (*ListPaymentResponse, error)
 	GetRefund(context.Context, *GetRefundRequest) (*GetRefundResponse, error)
+	ListRefunds(context.Context, *ListRefundRequest) (*ListRefundResponse, error)
 	LogPayment(context.Context, *LogPaymentRequest) (*LogPaymentResponse, error)
+	ListPaymentLogs(context.Context, *ListPaymentLogRequest) (*ListPaymentLogResponse, error)
 }
 
 func RegisterPaymentServiceHandler(srv *server.Server, hdlr PaymentServiceHandler, opts ...server.ServiceOption) error {
@@ -224,6 +260,21 @@ var PaymentService_ServiceInfo = server.ServiceInfo{
 			},
 		},
 		{
+			Name: "ListPayments",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListPaymentRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListPaymentRequest)
+				res, err := handler.(PaymentServiceHandler).ListPayments(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
 			Name: "GetRefund",
 			Type: constant.CallUnary,
 			ReqInitFunc: func() interface{} {
@@ -239,6 +290,21 @@ var PaymentService_ServiceInfo = server.ServiceInfo{
 			},
 		},
 		{
+			Name: "ListRefunds",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListRefundRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListRefundRequest)
+				res, err := handler.(PaymentServiceHandler).ListRefunds(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
 			Name: "LogPayment",
 			Type: constant.CallUnary,
 			ReqInitFunc: func() interface{} {
@@ -247,6 +313,21 @@ var PaymentService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*LogPaymentRequest)
 				res, err := handler.(PaymentServiceHandler).LogPayment(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListPaymentLogs",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListPaymentLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListPaymentLogRequest)
+				res, err := handler.(PaymentServiceHandler).ListPaymentLogs(ctx, req)
 				if err != nil {
 					return nil, err
 				}

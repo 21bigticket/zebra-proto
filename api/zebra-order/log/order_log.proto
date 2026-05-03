@@ -56,6 +56,8 @@ message GetOrderLogsRequest {
   string action    = 2;  // 操作类型
   int32  page      = 3;
   int32  page_size = 4;
+  int64  start_time = 5;
+  int64  end_time = 6;
 }
 
 // 查询订单日志响应

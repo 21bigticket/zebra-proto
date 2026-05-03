@@ -510,6 +510,160 @@ func (x *CollectListResponse) GetCollects() []*MemberCollect {
 	return nil
 }
 
+// 分页查询收藏请求
+type ListMemberCollectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                      // 用户ID，0表示全部
+	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`                   // 商品ID，0表示全部
+	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`                         // SKU ID，0表示全部
+	CollectStatus int32                  `protobuf:"varint,6,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // -1表示全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMemberCollectRequest) Reset() {
+	*x = ListMemberCollectRequest{}
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMemberCollectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMemberCollectRequest) ProtoMessage() {}
+
+func (x *ListMemberCollectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMemberCollectRequest.ProtoReflect.Descriptor instead.
+func (*ListMemberCollectRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListMemberCollectRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListMemberCollectRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListMemberCollectRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListMemberCollectRequest) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *ListMemberCollectRequest) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
+	}
+	return 0
+}
+
+func (x *ListMemberCollectRequest) GetCollectStatus() int32 {
+	if x != nil {
+		return x.CollectStatus
+	}
+	return 0
+}
+
+// 分页查询收藏响应
+type ListMemberCollectResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Collects      []*MemberCollect       `protobuf:"bytes,3,rep,name=collects,proto3" json:"collects,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListMemberCollectResponse) Reset() {
+	*x = ListMemberCollectResponse{}
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListMemberCollectResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMemberCollectResponse) ProtoMessage() {}
+
+func (x *ListMemberCollectResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMemberCollectResponse.ProtoReflect.Descriptor instead.
+func (*ListMemberCollectResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListMemberCollectResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListMemberCollectResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListMemberCollectResponse) GetCollects() []*MemberCollect {
+	if x != nil {
+		return x.Collects
+	}
+	return nil
+}
+
+func (x *ListMemberCollectResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 // 检查收藏状态请求
 type CheckCollectStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -522,7 +676,7 @@ type CheckCollectStatusRequest struct {
 
 func (x *CheckCollectStatusRequest) Reset() {
 	*x = CheckCollectStatusRequest{}
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[8]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -534,7 +688,7 @@ func (x *CheckCollectStatusRequest) String() string {
 func (*CheckCollectStatusRequest) ProtoMessage() {}
 
 func (x *CheckCollectStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[8]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +701,7 @@ func (x *CheckCollectStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckCollectStatusRequest.ProtoReflect.Descriptor instead.
 func (*CheckCollectStatusRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{8}
+	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CheckCollectStatusRequest) GetUserId() int64 {
@@ -583,7 +737,7 @@ type CheckCollectStatusResponse struct {
 
 func (x *CheckCollectStatusResponse) Reset() {
 	*x = CheckCollectStatusResponse{}
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[9]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -595,7 +749,7 @@ func (x *CheckCollectStatusResponse) String() string {
 func (*CheckCollectStatusResponse) ProtoMessage() {}
 
 func (x *CheckCollectStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[9]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,7 +762,7 @@ func (x *CheckCollectStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckCollectStatusResponse.ProtoReflect.Descriptor instead.
 func (*CheckCollectStatusResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{9}
+	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CheckCollectStatusResponse) GetCode() *wrapperspb.Int32Value {
@@ -642,7 +796,7 @@ type MemberCollectResponse struct {
 
 func (x *MemberCollectResponse) Reset() {
 	*x = MemberCollectResponse{}
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[10]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +808,7 @@ func (x *MemberCollectResponse) String() string {
 func (*MemberCollectResponse) ProtoMessage() {}
 
 func (x *MemberCollectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[10]
+	mi := &file_api_zebra_member_member_member_collect_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +821,7 @@ func (x *MemberCollectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberCollectResponse.ProtoReflect.Descriptor instead.
 func (*MemberCollectResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_member_member_member_collect_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *MemberCollectResponse) GetCode() *wrapperspb.Int32Value {
@@ -721,7 +875,19 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x13CollectListResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x121\n" +
-	"\bcollects\x18\x03 \x03(\v2\x15.member.MemberCollectR\bcollects\"f\n" +
+	"\bcollects\x18\x03 \x03(\v2\x15.member.MemberCollectR\bcollects\"\xbd\x01\n" +
+	"\x18ListMemberCollectRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x19\n" +
+	"\bgoods_id\x18\x04 \x01(\x03R\agoodsId\x12\x15\n" +
+	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\x12%\n" +
+	"\x0ecollect_status\x18\x06 \x01(\x05R\rcollectStatus\"\xa7\x01\n" +
+	"\x19ListMemberCollectResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x121\n" +
+	"\bcollects\x18\x03 \x03(\v2\x15.member.MemberCollectR\bcollects\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"f\n" +
 	"\x19CheckCollectStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x15\n" +
@@ -732,13 +898,14 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x0ecollect_status\x18\x03 \x01(\x05R\rcollectStatus\"Z\n" +
 	"\x15MemberCollectResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\xf6\x03\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xc3\x04\n" +
 	"\x14MemberCollectService\x12K\n" +
 	"\x06Create\x12\".member.CreateMemberCollectRequest\x1a\x1d.member.MemberCollectResponse\x12Q\n" +
 	"\fUpdateStatus\x12\".member.UpdateCollectStatusRequest\x1a\x1d.member.MemberCollectResponse\x12K\n" +
 	"\x06Delete\x12\".member.DeleteMemberCollectRequest\x1a\x1d.member.MemberCollectResponse\x12H\n" +
 	"\x03Get\x12\x1f.member.GetMemberCollectRequest\x1a .member.GetMemberCollectResponse\x12Q\n" +
-	"\rGetListByUser\x12#.member.GetCollectListByUserRequest\x1a\x1b.member.CollectListResponse\x12T\n" +
+	"\rGetListByUser\x12#.member.GetCollectListByUserRequest\x1a\x1b.member.CollectListResponse\x12K\n" +
+	"\x04List\x12 .member.ListMemberCollectRequest\x1a!.member.ListMemberCollectResponse\x12T\n" +
 	"\vCheckStatus\x12!.member.CheckCollectStatusRequest\x1a\".member.CheckCollectStatusResponseB\"Z ./api/zebra-member/member;memberb\x06proto3"
 
 var (
@@ -753,7 +920,7 @@ func file_api_zebra_member_member_member_collect_proto_rawDescGZIP() []byte {
 	return file_api_zebra_member_member_member_collect_proto_rawDescData
 }
 
-var file_api_zebra_member_member_member_collect_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_api_zebra_member_member_member_collect_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_api_zebra_member_member_member_collect_proto_goTypes = []any{
 	(*MemberCollect)(nil),               // 0: member.MemberCollect
 	(*CreateMemberCollectRequest)(nil),  // 1: member.CreateMemberCollectRequest
@@ -763,35 +930,41 @@ var file_api_zebra_member_member_member_collect_proto_goTypes = []any{
 	(*GetMemberCollectResponse)(nil),    // 5: member.GetMemberCollectResponse
 	(*GetCollectListByUserRequest)(nil), // 6: member.GetCollectListByUserRequest
 	(*CollectListResponse)(nil),         // 7: member.CollectListResponse
-	(*CheckCollectStatusRequest)(nil),   // 8: member.CheckCollectStatusRequest
-	(*CheckCollectStatusResponse)(nil),  // 9: member.CheckCollectStatusResponse
-	(*MemberCollectResponse)(nil),       // 10: member.MemberCollectResponse
-	(*wrapperspb.Int32Value)(nil),       // 11: google.protobuf.Int32Value
+	(*ListMemberCollectRequest)(nil),    // 8: member.ListMemberCollectRequest
+	(*ListMemberCollectResponse)(nil),   // 9: member.ListMemberCollectResponse
+	(*CheckCollectStatusRequest)(nil),   // 10: member.CheckCollectStatusRequest
+	(*CheckCollectStatusResponse)(nil),  // 11: member.CheckCollectStatusResponse
+	(*MemberCollectResponse)(nil),       // 12: member.MemberCollectResponse
+	(*wrapperspb.Int32Value)(nil),       // 13: google.protobuf.Int32Value
 }
 var file_api_zebra_member_member_member_collect_proto_depIdxs = []int32{
-	11, // 0: member.GetMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 0: member.GetMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: member.GetMemberCollectResponse.member_collect:type_name -> member.MemberCollect
-	11, // 2: member.CollectListResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 2: member.CollectListResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: member.CollectListResponse.collects:type_name -> member.MemberCollect
-	11, // 4: member.CheckCollectStatusResponse.code:type_name -> google.protobuf.Int32Value
-	11, // 5: member.MemberCollectResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 6: member.MemberCollectService.Create:input_type -> member.CreateMemberCollectRequest
-	2,  // 7: member.MemberCollectService.UpdateStatus:input_type -> member.UpdateCollectStatusRequest
-	3,  // 8: member.MemberCollectService.Delete:input_type -> member.DeleteMemberCollectRequest
-	4,  // 9: member.MemberCollectService.Get:input_type -> member.GetMemberCollectRequest
-	6,  // 10: member.MemberCollectService.GetListByUser:input_type -> member.GetCollectListByUserRequest
-	8,  // 11: member.MemberCollectService.CheckStatus:input_type -> member.CheckCollectStatusRequest
-	10, // 12: member.MemberCollectService.Create:output_type -> member.MemberCollectResponse
-	10, // 13: member.MemberCollectService.UpdateStatus:output_type -> member.MemberCollectResponse
-	10, // 14: member.MemberCollectService.Delete:output_type -> member.MemberCollectResponse
-	5,  // 15: member.MemberCollectService.Get:output_type -> member.GetMemberCollectResponse
-	7,  // 16: member.MemberCollectService.GetListByUser:output_type -> member.CollectListResponse
-	9,  // 17: member.MemberCollectService.CheckStatus:output_type -> member.CheckCollectStatusResponse
-	12, // [12:18] is the sub-list for method output_type
-	6,  // [6:12] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	13, // 4: member.ListMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: member.ListMemberCollectResponse.collects:type_name -> member.MemberCollect
+	13, // 6: member.CheckCollectStatusResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 7: member.MemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 8: member.MemberCollectService.Create:input_type -> member.CreateMemberCollectRequest
+	2,  // 9: member.MemberCollectService.UpdateStatus:input_type -> member.UpdateCollectStatusRequest
+	3,  // 10: member.MemberCollectService.Delete:input_type -> member.DeleteMemberCollectRequest
+	4,  // 11: member.MemberCollectService.Get:input_type -> member.GetMemberCollectRequest
+	6,  // 12: member.MemberCollectService.GetListByUser:input_type -> member.GetCollectListByUserRequest
+	8,  // 13: member.MemberCollectService.List:input_type -> member.ListMemberCollectRequest
+	10, // 14: member.MemberCollectService.CheckStatus:input_type -> member.CheckCollectStatusRequest
+	12, // 15: member.MemberCollectService.Create:output_type -> member.MemberCollectResponse
+	12, // 16: member.MemberCollectService.UpdateStatus:output_type -> member.MemberCollectResponse
+	12, // 17: member.MemberCollectService.Delete:output_type -> member.MemberCollectResponse
+	5,  // 18: member.MemberCollectService.Get:output_type -> member.GetMemberCollectResponse
+	7,  // 19: member.MemberCollectService.GetListByUser:output_type -> member.CollectListResponse
+	9,  // 20: member.MemberCollectService.List:output_type -> member.ListMemberCollectResponse
+	11, // 21: member.MemberCollectService.CheckStatus:output_type -> member.CheckCollectStatusResponse
+	15, // [15:22] is the sub-list for method output_type
+	8,  // [8:15] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_member_member_member_collect_proto_init() }
@@ -805,7 +978,7 @@ func file_api_zebra_member_member_member_collect_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_member_member_member_collect_proto_rawDesc), len(file_api_zebra_member_member_member_collect_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
