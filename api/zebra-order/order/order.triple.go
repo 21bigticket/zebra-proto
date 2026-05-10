@@ -40,6 +40,8 @@ const (
 	OrderServiceCreateOrderProcedure = "/order.OrderService/CreateOrder"
 	// OrderServiceCancelOrderProcedure is the fully-qualified name of the OrderService's CancelOrder RPC.
 	OrderServiceCancelOrderProcedure = "/order.OrderService/CancelOrder"
+	// OrderServiceDeleteOrderProcedure is the fully-qualified name of the OrderService's DeleteOrder RPC.
+	OrderServiceDeleteOrderProcedure = "/order.OrderService/DeleteOrder"
 	// OrderServicePayOrderProcedure is the fully-qualified name of the OrderService's PayOrder RPC.
 	OrderServicePayOrderProcedure = "/order.OrderService/PayOrder"
 	// OrderServiceDeliverOrderProcedure is the fully-qualified name of the OrderService's DeliverOrder RPC.
@@ -62,6 +64,7 @@ var (
 type OrderService interface {
 	CreateOrder(ctx context.Context, req *CreateOrderRequest, opts ...client.CallOption) (*CreateOrderResponse, error)
 	CancelOrder(ctx context.Context, req *CancelOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	DeleteOrder(ctx context.Context, req *DeleteOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	PayOrder(ctx context.Context, req *PayOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	DeliverOrder(ctx context.Context, req *DeliverOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	FinishOrder(ctx context.Context, req *FinishOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
@@ -101,6 +104,14 @@ func (c *OrderServiceImpl) CreateOrder(ctx context.Context, req *CreateOrderRequ
 func (c *OrderServiceImpl) CancelOrder(ctx context.Context, req *CancelOrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
 	resp := new(OrderResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "CancelOrder", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *OrderServiceImpl) DeleteOrder(ctx context.Context, req *DeleteOrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	resp := new(OrderResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeleteOrder", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -156,7 +167,7 @@ func (c *OrderServiceImpl) ListOrders(ctx context.Context, req *ListOrderRequest
 
 var OrderService_ClientInfo = client.ClientInfo{
 	InterfaceName: "order.OrderService",
-	MethodNames:   []string{"CreateOrder", "CancelOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "ListOrders"},
+	MethodNames:   []string{"CreateOrder", "CancelOrder", "DeleteOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "ListOrders"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*OrderServiceImpl)
 		dubboCli.conn = conn
@@ -167,6 +178,7 @@ var OrderService_ClientInfo = client.ClientInfo{
 type OrderServiceHandler interface {
 	CreateOrder(context.Context, *CreateOrderRequest) (*CreateOrderResponse, error)
 	CancelOrder(context.Context, *CancelOrderRequest) (*OrderResponse, error)
+	DeleteOrder(context.Context, *DeleteOrderRequest) (*OrderResponse, error)
 	PayOrder(context.Context, *PayOrderRequest) (*OrderResponse, error)
 	DeliverOrder(context.Context, *DeliverOrderRequest) (*OrderResponse, error)
 	FinishOrder(context.Context, *FinishOrderRequest) (*OrderResponse, error)
@@ -211,6 +223,21 @@ var OrderService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*CancelOrderRequest)
 				res, err := handler.(OrderServiceHandler).CancelOrder(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "DeleteOrder",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(DeleteOrderRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*DeleteOrderRequest)
+				res, err := handler.(OrderServiceHandler).DeleteOrder(ctx, req)
 				if err != nil {
 					return nil, err
 				}

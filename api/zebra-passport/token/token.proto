@@ -7,6 +7,7 @@ option go_package = "./api/zebra-passport/token;token";
 message CreateTokenRequest {
   int64 user_id = 1;
   string user_name = 2;
+  string client_type = 3;
 }
 
 message RefreshTokenRequest {
@@ -15,6 +16,21 @@ message RefreshTokenRequest {
 
 message CheckTokenRequest {
   string access_token = 1;
+}
+
+message RevokeUserTokensRequest {
+  int64 user_id = 1;
+  string reason = 2;
+}
+
+message ParseAccessTokenRequest {
+  string access_token = 1;
+}
+
+message ParseAccessTokenResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  int64 user_id = 3;
 }
 
 message Response {
@@ -29,6 +45,7 @@ message TokenResponse {
   string refresh_token = 4;
   int64 expires_in = 5;
   string token_type = 6;
+  string client_type = 7;
 }
 
 // TokenService
@@ -36,4 +53,6 @@ service TokenService {
   rpc Create(CreateTokenRequest) returns (TokenResponse);
   rpc Refresh(RefreshTokenRequest) returns (TokenResponse);
   rpc Check(CheckTokenRequest) returns (Response);
+  rpc RevokeUserTokens(RevokeUserTokensRequest) returns (Response);
+  rpc ParseAccessToken(ParseAccessTokenRequest) returns (ParseAccessTokenResponse);
 }

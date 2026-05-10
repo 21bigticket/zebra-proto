@@ -82,6 +82,7 @@ message ListCartItemRequest {
   int64  cart_id   = 3;
   int64  user_id   = 4;
   int64  sku_id    = 5;
+  int64  goods_id  = 6;
 }
 
 // 查询购物车商品列表响应

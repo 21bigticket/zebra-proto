@@ -27,38 +27,49 @@ option go_package = "./api/zebra-member/member;member";
 message MemberAddress {
   int64  id              = 1;
   int64  user_id        = 2;
-  string country        = 3;
-  string province       = 4;
-  string city           = 5;
-  string region         = 6;
-  string street         = 7;
-  int32  address_status = 8; // 0=禁用, 1=启用
-  int32  default_option = 9; // 0=非默认, 1=默认
-  int64  create_time    = 10;
-  int64  update_time    = 11;
-  int32  is_deleted     = 12;
+  string receiver_name  = 3;
+  string receiver_phone = 4;
+  string postal_code    = 5;
+  string country        = 6;
+  string province       = 7;
+  string city           = 8;
+  string region         = 9;
+  string street         = 10;
+  int32  address_status = 11; // 0=禁用, 1=启用
+  int32  default_option = 12; // 0=非默认, 1=默认
+  int64  create_time    = 13;
+  int64  update_time    = 14;
+  int32  is_deleted     = 15;
 }
 
 // 创建地址请求
 message CreateMemberAddressRequest {
-  int64  user_id   = 1;
-  string country  = 2;
-  string province = 3;
-  string city     = 4;
-  string region   = 5;
-  string street   = 6;
+  int64  user_id         = 1;
+  string receiver_name   = 2;
+  string receiver_phone  = 3;
+  string postal_code     = 4;
+  string country         = 5;
+  string province        = 6;
+  string city            = 7;
+  string region          = 8;
+  string street          = 9;
+  int32  address_status  = 10;
+  int32  default_option  = 11;
 }
 
 // 更新地址请求
 message UpdateMemberAddressRequest {
   int64  id              = 1;
-  string country        = 2;
-  string province       = 3;
-  string city           = 4;
-  string region         = 5;
-  string street         = 6;
-  int32  address_status = 7;
-  int32  default_option = 8;
+  string receiver_name   = 2;
+  string receiver_phone  = 3;
+  string postal_code     = 4;
+  string country         = 5;
+  string province        = 6;
+  string city            = 7;
+  string region          = 8;
+  string street          = 9;
+  int32  address_status  = 10;
+  int32  default_option  = 11;
 }
 
 // 删除地址请求

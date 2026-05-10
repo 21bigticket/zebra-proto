@@ -90,6 +90,8 @@ message ListActivityGoodsRequest {
   int64 activity_id = 1;
   int32 page        = 2;
   int32 page_size   = 3;
+  int64 goods_id    = 4;
+  int64 sku_id      = 5;
 }
 
 // 列出活动商品响应

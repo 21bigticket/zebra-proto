@@ -42,6 +42,10 @@ const (
 	TokenServiceRefreshProcedure = "/token.TokenService/Refresh"
 	// TokenServiceCheckProcedure is the fully-qualified name of the TokenService's Check RPC.
 	TokenServiceCheckProcedure = "/token.TokenService/Check"
+	// TokenServiceRevokeUserTokensProcedure is the fully-qualified name of the TokenService's RevokeUserTokens RPC.
+	TokenServiceRevokeUserTokensProcedure = "/token.TokenService/RevokeUserTokens"
+	// TokenServiceParseAccessTokenProcedure is the fully-qualified name of the TokenService's ParseAccessToken RPC.
+	TokenServiceParseAccessTokenProcedure = "/token.TokenService/ParseAccessToken"
 )
 
 var (
@@ -53,6 +57,8 @@ type TokenService interface {
 	Create(ctx context.Context, req *CreateTokenRequest, opts ...client.CallOption) (*TokenResponse, error)
 	Refresh(ctx context.Context, req *RefreshTokenRequest, opts ...client.CallOption) (*TokenResponse, error)
 	Check(ctx context.Context, req *CheckTokenRequest, opts ...client.CallOption) (*Response, error)
+	RevokeUserTokens(ctx context.Context, req *RevokeUserTokensRequest, opts ...client.CallOption) (*Response, error)
+	ParseAccessToken(ctx context.Context, req *ParseAccessTokenRequest, opts ...client.CallOption) (*ParseAccessTokenResponse, error)
 }
 
 // NewTokenService constructs a client for the token.TokenService service.
@@ -99,9 +105,25 @@ func (c *TokenServiceImpl) Check(ctx context.Context, req *CheckTokenRequest, op
 	return resp, nil
 }
 
+func (c *TokenServiceImpl) RevokeUserTokens(ctx context.Context, req *RevokeUserTokensRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "RevokeUserTokens", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *TokenServiceImpl) ParseAccessToken(ctx context.Context, req *ParseAccessTokenRequest, opts ...client.CallOption) (*ParseAccessTokenResponse, error) {
+	resp := new(ParseAccessTokenResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ParseAccessToken", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var TokenService_ClientInfo = client.ClientInfo{
 	InterfaceName: "token.TokenService",
-	MethodNames:   []string{"Create", "Refresh", "Check"},
+	MethodNames:   []string{"Create", "Refresh", "Check", "RevokeUserTokens", "ParseAccessToken"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*TokenServiceImpl)
 		dubboCli.conn = conn
@@ -113,6 +135,8 @@ type TokenServiceHandler interface {
 	Create(context.Context, *CreateTokenRequest) (*TokenResponse, error)
 	Refresh(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
 	Check(context.Context, *CheckTokenRequest) (*Response, error)
+	RevokeUserTokens(context.Context, *RevokeUserTokensRequest) (*Response, error)
+	ParseAccessToken(context.Context, *ParseAccessTokenRequest) (*ParseAccessTokenResponse, error)
 }
 
 func RegisterTokenServiceHandler(srv *server.Server, hdlr TokenServiceHandler, opts ...server.ServiceOption) error {
@@ -166,6 +190,36 @@ var TokenService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*CheckTokenRequest)
 				res, err := handler.(TokenServiceHandler).Check(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "RevokeUserTokens",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(RevokeUserTokensRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*RevokeUserTokensRequest)
+				res, err := handler.(TokenServiceHandler).RevokeUserTokens(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ParseAccessToken",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ParseAccessTokenRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ParseAccessTokenRequest)
+				res, err := handler.(TokenServiceHandler).ParseAccessToken(ctx, req)
 				if err != nil {
 					return nil, err
 				}

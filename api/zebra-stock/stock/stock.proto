@@ -33,6 +33,10 @@ message Stock {
   int64  create_time = 6;  // 创建时间
   int64  update_time = 7;  // 更新时间
   int32  is_deleted  = 8;  // 是否删除: 0=否, 1=是
+  int64  goods_id    = 9;  // 商品ID
+  string goods_name  = 10; // 商品名称
+  string sku_code    = 11; // SKU编码
+  string sku_name    = 12; // SKU名称
 }
 
 // 入库请求
@@ -84,6 +88,7 @@ message ListStockRequest {
   int32 page = 1;       // 页码
   int32 page_size = 2;  // 页大小
   int64 sku_id = 3;     // SKU ID，0表示全部
+  int64 goods_id = 4;   // 商品ID，0表示全部
 }
 
 // 库存分页查询响应

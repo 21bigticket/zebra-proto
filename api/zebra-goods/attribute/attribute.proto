@@ -31,9 +31,10 @@ message GoodsAttribute {
   int32  type        = 4; // 1=规格, 2=参数, 3=属性
   int32  sort_order  = 5;
   int32  status      = 6; // 0=禁用, 1=启用
-  int64  create_time = 7;
-  int64  update_time = 8;
-  int32  is_deleted  = 9;
+  string description = 7;
+  int64  create_time = 8;
+  int64  update_time = 9;
+  int32  is_deleted  = 10;
 }
 
 // 创建属性请求
@@ -42,6 +43,7 @@ message CreateAttributeRequest {
   string name       = 2;
   int32  type       = 3;
   int32  sort_order = 4;
+  string description = 5;
 }
 
 // 更新属性请求
@@ -50,6 +52,7 @@ message UpdateAttributeRequest {
   string name       = 2;
   int32  sort_order = 3;
   int32  status     = 4;
+  string description = 5;
 }
 
 // 删除属性请求

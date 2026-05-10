@@ -129,6 +129,11 @@ message GetRoutersResponse {
   repeated RouterVo data = 3;
 }
 
+// 获取当前用户路由请求
+message GetRoutersRequest {
+  int64 user_id = 1;
+}
+
 // 菜单树节点
 message MenuTreeOption {
   int64  menu_id   = 1;
@@ -173,7 +178,7 @@ service MenuService {
   rpc Delete(DeleteMenuRequest) returns (Response);
   rpc Get(GetMenuRequest) returns (GetMenuResponse);
   rpc List(ListMenuRequest) returns (ListMenuResponse);
-  rpc GetRouters(GetMenuRequest) returns (GetRoutersResponse);
+  rpc GetRouters(GetRoutersRequest) returns (GetRoutersResponse);
   rpc TreeSelect(GetMenuRequest) returns (TreeSelectResponse);
   rpc RoleMenuTreeSelect(GetMenuRequest) returns (RoleMenuTreeSelectResponse);
   rpc UpdateSort(UpdateMenuSortRequest) returns (Response);

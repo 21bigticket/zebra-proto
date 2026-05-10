@@ -49,6 +49,10 @@ type Stock struct {
 	CreateTime    int64                  `protobuf:"varint,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"` // 创建时间
 	UpdateTime    int64                  `protobuf:"varint,7,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"` // 更新时间
 	IsDeleted     int32                  `protobuf:"varint,8,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`    // 是否删除: 0=否, 1=是
+	GoodsId       int64                  `protobuf:"varint,9,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`          // 商品ID
+	GoodsName     string                 `protobuf:"bytes,10,opt,name=goods_name,json=goodsName,proto3" json:"goods_name,omitempty"`    // 商品名称
+	SkuCode       string                 `protobuf:"bytes,11,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`          // SKU编码
+	SkuName       string                 `protobuf:"bytes,12,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`          // SKU名称
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,6 +141,34 @@ func (x *Stock) GetIsDeleted() int32 {
 		return x.IsDeleted
 	}
 	return 0
+}
+
+func (x *Stock) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *Stock) GetGoodsName() string {
+	if x != nil {
+		return x.GoodsName
+	}
+	return ""
+}
+
+func (x *Stock) GetSkuCode() string {
+	if x != nil {
+		return x.SkuCode
+	}
+	return ""
+}
+
+func (x *Stock) GetSkuName() string {
+	if x != nil {
+		return x.SkuName
+	}
+	return ""
 }
 
 // 入库请求
@@ -527,6 +559,7 @@ type ListStockRequest struct {
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`                         // 页码
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // 页大小
 	SkuId         int64                  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`          // SKU ID，0表示全部
+	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`    // 商品ID，0表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -578,6 +611,13 @@ func (x *ListStockRequest) GetPageSize() int32 {
 func (x *ListStockRequest) GetSkuId() int64 {
 	if x != nil {
 		return x.SkuId
+	}
+	return 0
+}
+
+func (x *ListStockRequest) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
 	}
 	return 0
 }
@@ -732,7 +772,7 @@ var File_api_zebra_stock_stock_stock_proto protoreflect.FileDescriptor
 
 const file_api_zebra_stock_stock_stock_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-stock/stock/stock.proto\x12\x05stock\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x01\n" +
+	"!api/zebra-stock/stock/stock.proto\x12\x05stock\x1a\x1egoogle/protobuf/wrappers.proto\"\xe0\x02\n" +
 	"\x05Stock\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x1b\n" +
 	"\tstock_num\x18\x02 \x01(\x05R\bstockNum\x12\x1d\n" +
@@ -745,7 +785,13 @@ const file_api_zebra_stock_stock_stock_proto_rawDesc = "" +
 	"\vupdate_time\x18\a \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\b \x01(\x05R\tisDeleted\"l\n" +
+	"is_deleted\x18\b \x01(\x05R\tisDeleted\x12\x19\n" +
+	"\bgoods_id\x18\t \x01(\x03R\agoodsId\x12\x1d\n" +
+	"\n" +
+	"goods_name\x18\n" +
+	" \x01(\tR\tgoodsName\x12\x19\n" +
+	"\bsku_code\x18\v \x01(\tR\askuCode\x12\x19\n" +
+	"\bsku_name\x18\f \x01(\tR\askuName\"l\n" +
 	"\x0eInboundRequest\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x10\n" +
 	"\x03num\x18\x02 \x01(\x05R\x03num\x12\x19\n" +
@@ -771,11 +817,12 @@ const file_api_zebra_stock_stock_stock_proto_rawDesc = "" +
 	"\x10GetStockResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
-	"\x06stocks\x18\x03 \x03(\v2\f.stock.StockR\x06stocks\"Z\n" +
+	"\x06stocks\x18\x03 \x03(\v2\f.stock.StockR\x06stocks\"u\n" +
 	"\x10ListStockRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
-	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"\x92\x01\n" +
+	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\x12\x19\n" +
+	"\bgoods_id\x18\x04 \x01(\x03R\agoodsId\"\x92\x01\n" +
 	"\x11ListStockResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +

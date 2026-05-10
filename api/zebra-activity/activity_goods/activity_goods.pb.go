@@ -580,6 +580,8 @@ type ListActivityGoodsRequest struct {
 	ActivityId    int64                  `protobuf:"varint,1,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
 	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
+	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -631,6 +633,20 @@ func (x *ListActivityGoodsRequest) GetPage() int32 {
 func (x *ListActivityGoodsRequest) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListActivityGoodsRequest) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *ListActivityGoodsRequest) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
 	}
 	return 0
 }
@@ -1177,12 +1193,14 @@ const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\x18GetActivityGoodsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12D\n" +
-	"\x0eactivity_goods\x18\x03 \x01(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\"l\n" +
+	"\x0eactivity_goods\x18\x03 \x01(\v2\x1d.activity_goods.ActivityGoodsR\ractivityGoods\"\x9e\x01\n" +
 	"\x18ListActivityGoodsRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"\xba\x01\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x19\n" +
+	"\bgoods_id\x18\x04 \x01(\x03R\agoodsId\x12\x15\n" +
+	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\"\xba\x01\n" +
 	"\x19ListActivityGoodsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12D\n" +

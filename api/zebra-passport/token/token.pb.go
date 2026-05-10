@@ -27,6 +27,7 @@ type CreateTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	UserName      string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	ClientType    string                 `protobuf:"bytes,3,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,6 +72,13 @@ func (x *CreateTokenRequest) GetUserId() int64 {
 func (x *CreateTokenRequest) GetUserName() string {
 	if x != nil {
 		return x.UserName
+	}
+	return ""
+}
+
+func (x *CreateTokenRequest) GetClientType() string {
+	if x != nil {
+		return x.ClientType
 	}
 	return ""
 }
@@ -163,6 +171,162 @@ func (x *CheckTokenRequest) GetAccessToken() string {
 	return ""
 }
 
+type RevokeUserTokensRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Reason        string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RevokeUserTokensRequest) Reset() {
+	*x = RevokeUserTokensRequest{}
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RevokeUserTokensRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RevokeUserTokensRequest) ProtoMessage() {}
+
+func (x *RevokeUserTokensRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RevokeUserTokensRequest.ProtoReflect.Descriptor instead.
+func (*RevokeUserTokensRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RevokeUserTokensRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *RevokeUserTokensRequest) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+type ParseAccessTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseAccessTokenRequest) Reset() {
+	*x = ParseAccessTokenRequest{}
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseAccessTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseAccessTokenRequest) ProtoMessage() {}
+
+func (x *ParseAccessTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseAccessTokenRequest.ProtoReflect.Descriptor instead.
+func (*ParseAccessTokenRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ParseAccessTokenRequest) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+type ParseAccessTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseAccessTokenResponse) Reset() {
+	*x = ParseAccessTokenResponse{}
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseAccessTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseAccessTokenResponse) ProtoMessage() {}
+
+func (x *ParseAccessTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseAccessTokenResponse.ProtoReflect.Descriptor instead.
+func (*ParseAccessTokenResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ParseAccessTokenResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ParseAccessTokenResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ParseAccessTokenResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -173,7 +337,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_passport_token_token_proto_msgTypes[3]
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -185,7 +349,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_token_token_proto_msgTypes[3]
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,7 +362,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{3}
+	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -223,13 +387,14 @@ type TokenResponse struct {
 	RefreshToken  string                 `protobuf:"bytes,4,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
 	ExpiresIn     int64                  `protobuf:"varint,5,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
 	TokenType     string                 `protobuf:"bytes,6,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
+	ClientType    string                 `protobuf:"bytes,7,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TokenResponse) Reset() {
 	*x = TokenResponse{}
-	mi := &file_api_zebra_passport_token_token_proto_msgTypes[4]
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +406,7 @@ func (x *TokenResponse) String() string {
 func (*TokenResponse) ProtoMessage() {}
 
 func (x *TokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_token_token_proto_msgTypes[4]
+	mi := &file_api_zebra_passport_token_token_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +419,7 @@ func (x *TokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
 func (*TokenResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{4}
+	return file_api_zebra_passport_token_token_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TokenResponse) GetCode() *wrapperspb.Int32Value {
@@ -299,21 +464,39 @@ func (x *TokenResponse) GetTokenType() string {
 	return ""
 }
 
+func (x *TokenResponse) GetClientType() string {
+	if x != nil {
+		return x.ClientType
+	}
+	return ""
+}
+
 var File_api_zebra_passport_token_token_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_token_token_proto_rawDesc = "" +
 	"\n" +
-	"$api/zebra-passport/token/token.proto\x12\x05token\x1a\x1egoogle/protobuf/wrappers.proto\"J\n" +
+	"$api/zebra-passport/token/token.proto\x12\x05token\x1a\x1egoogle/protobuf/wrappers.proto\"k\n" +
 	"\x12CreateTokenRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\":\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1f\n" +
+	"\vclient_type\x18\x03 \x01(\tR\n" +
+	"clientType\":\n" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"6\n" +
 	"\x11CheckTokenRequest\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"M\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"J\n" +
+	"\x17RevokeUserTokensRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"<\n" +
+	"\x17ParseAccessTokenRequest\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"v\n" +
+	"\x18ParseAccessTokenResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\"\xd8\x01\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\"\xf9\x01\n" +
 	"\rTokenResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +
@@ -322,11 +505,15 @@ const file_api_zebra_passport_token_token_proto_rawDesc = "" +
 	"\n" +
 	"expires_in\x18\x05 \x01(\x03R\texpiresIn\x12\x1d\n" +
 	"\n" +
-	"token_type\x18\x06 \x01(\tR\ttokenType2\xba\x01\n" +
+	"token_type\x18\x06 \x01(\tR\ttokenType\x12\x1f\n" +
+	"\vclient_type\x18\a \x01(\tR\n" +
+	"clientType2\xd4\x02\n" +
 	"\fTokenService\x129\n" +
 	"\x06Create\x12\x19.token.CreateTokenRequest\x1a\x14.token.TokenResponse\x12;\n" +
 	"\aRefresh\x12\x1a.token.RefreshTokenRequest\x1a\x14.token.TokenResponse\x122\n" +
-	"\x05Check\x12\x18.token.CheckTokenRequest\x1a\x0f.token.ResponseB\"Z ./api/zebra-passport/token;tokenb\x06proto3"
+	"\x05Check\x12\x18.token.CheckTokenRequest\x1a\x0f.token.Response\x12C\n" +
+	"\x10RevokeUserTokens\x12\x1e.token.RevokeUserTokensRequest\x1a\x0f.token.Response\x12S\n" +
+	"\x10ParseAccessToken\x12\x1e.token.ParseAccessTokenRequest\x1a\x1f.token.ParseAccessTokenResponseB\"Z ./api/zebra-passport/token;tokenb\x06proto3"
 
 var (
 	file_api_zebra_passport_token_token_proto_rawDescOnce sync.Once
@@ -340,29 +527,37 @@ func file_api_zebra_passport_token_token_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_token_token_proto_rawDescData
 }
 
-var file_api_zebra_passport_token_token_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_api_zebra_passport_token_token_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_api_zebra_passport_token_token_proto_goTypes = []any{
-	(*CreateTokenRequest)(nil),    // 0: token.CreateTokenRequest
-	(*RefreshTokenRequest)(nil),   // 1: token.RefreshTokenRequest
-	(*CheckTokenRequest)(nil),     // 2: token.CheckTokenRequest
-	(*Response)(nil),              // 3: token.Response
-	(*TokenResponse)(nil),         // 4: token.TokenResponse
-	(*wrapperspb.Int32Value)(nil), // 5: google.protobuf.Int32Value
+	(*CreateTokenRequest)(nil),       // 0: token.CreateTokenRequest
+	(*RefreshTokenRequest)(nil),      // 1: token.RefreshTokenRequest
+	(*CheckTokenRequest)(nil),        // 2: token.CheckTokenRequest
+	(*RevokeUserTokensRequest)(nil),  // 3: token.RevokeUserTokensRequest
+	(*ParseAccessTokenRequest)(nil),  // 4: token.ParseAccessTokenRequest
+	(*ParseAccessTokenResponse)(nil), // 5: token.ParseAccessTokenResponse
+	(*Response)(nil),                 // 6: token.Response
+	(*TokenResponse)(nil),            // 7: token.TokenResponse
+	(*wrapperspb.Int32Value)(nil),    // 8: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_token_token_proto_depIdxs = []int32{
-	5, // 0: token.Response.code:type_name -> google.protobuf.Int32Value
-	5, // 1: token.TokenResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 2: token.TokenService.Create:input_type -> token.CreateTokenRequest
-	1, // 3: token.TokenService.Refresh:input_type -> token.RefreshTokenRequest
-	2, // 4: token.TokenService.Check:input_type -> token.CheckTokenRequest
-	4, // 5: token.TokenService.Create:output_type -> token.TokenResponse
-	4, // 6: token.TokenService.Refresh:output_type -> token.TokenResponse
-	3, // 7: token.TokenService.Check:output_type -> token.Response
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	8, // 0: token.ParseAccessTokenResponse.code:type_name -> google.protobuf.Int32Value
+	8, // 1: token.Response.code:type_name -> google.protobuf.Int32Value
+	8, // 2: token.TokenResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 3: token.TokenService.Create:input_type -> token.CreateTokenRequest
+	1, // 4: token.TokenService.Refresh:input_type -> token.RefreshTokenRequest
+	2, // 5: token.TokenService.Check:input_type -> token.CheckTokenRequest
+	3, // 6: token.TokenService.RevokeUserTokens:input_type -> token.RevokeUserTokensRequest
+	4, // 7: token.TokenService.ParseAccessToken:input_type -> token.ParseAccessTokenRequest
+	7, // 8: token.TokenService.Create:output_type -> token.TokenResponse
+	7, // 9: token.TokenService.Refresh:output_type -> token.TokenResponse
+	6, // 10: token.TokenService.Check:output_type -> token.Response
+	6, // 11: token.TokenService.RevokeUserTokens:output_type -> token.Response
+	5, // 12: token.TokenService.ParseAccessToken:output_type -> token.ParseAccessTokenResponse
+	8, // [8:13] is the sub-list for method output_type
+	3, // [3:8] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_token_token_proto_init() }
@@ -376,7 +571,7 @@ func file_api_zebra_passport_token_token_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_token_token_proto_rawDesc), len(file_api_zebra_passport_token_token_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

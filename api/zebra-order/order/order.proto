@@ -106,6 +106,12 @@ message CancelOrderRequest {
   int64  user_id   = 2;
 }
 
+// 删除订单请求
+message DeleteOrderRequest {
+  string order_no = 1;
+  int64  user_id   = 2;
+}
+
 // 支付订单请求
 message PayOrderRequest {
   string order_no = 1;
@@ -189,6 +195,7 @@ message OrderResponse {
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
   rpc CancelOrder(CancelOrderRequest) returns (OrderResponse);
+  rpc DeleteOrder(DeleteOrderRequest) returns (OrderResponse);
   rpc PayOrder(PayOrderRequest) returns (OrderResponse);
   rpc DeliverOrder(DeliverOrderRequest) returns (OrderResponse);
   rpc FinishOrder(FinishOrderRequest) returns (OrderResponse);

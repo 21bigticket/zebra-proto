@@ -1054,6 +1054,51 @@ func (x *GetRoutersResponse) GetData() []*RouterVo {
 	return nil
 }
 
+// 获取当前用户路由请求
+type GetRoutersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRoutersRequest) Reset() {
+	*x = GetRoutersRequest{}
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRoutersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRoutersRequest) ProtoMessage() {}
+
+func (x *GetRoutersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRoutersRequest.ProtoReflect.Descriptor instead.
+func (*GetRoutersRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetRoutersRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 // 菜单树节点
 type MenuTreeOption struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1066,7 +1111,7 @@ type MenuTreeOption struct {
 
 func (x *MenuTreeOption) Reset() {
 	*x = MenuTreeOption{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[11]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1078,7 +1123,7 @@ func (x *MenuTreeOption) String() string {
 func (*MenuTreeOption) ProtoMessage() {}
 
 func (x *MenuTreeOption) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[11]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1091,7 +1136,7 @@ func (x *MenuTreeOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuTreeOption.ProtoReflect.Descriptor instead.
 func (*MenuTreeOption) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{11}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *MenuTreeOption) GetMenuId() int64 {
@@ -1127,7 +1172,7 @@ type TreeSelectResponse struct {
 
 func (x *TreeSelectResponse) Reset() {
 	*x = TreeSelectResponse{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[12]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1139,7 +1184,7 @@ func (x *TreeSelectResponse) String() string {
 func (*TreeSelectResponse) ProtoMessage() {}
 
 func (x *TreeSelectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[12]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1197,7 @@ func (x *TreeSelectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TreeSelectResponse.ProtoReflect.Descriptor instead.
 func (*TreeSelectResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{12}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *TreeSelectResponse) GetCode() *wrapperspb.Int32Value {
@@ -1189,7 +1234,7 @@ type RoleMenuTreeSelectResponse struct {
 
 func (x *RoleMenuTreeSelectResponse) Reset() {
 	*x = RoleMenuTreeSelectResponse{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[13]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1201,7 +1246,7 @@ func (x *RoleMenuTreeSelectResponse) String() string {
 func (*RoleMenuTreeSelectResponse) ProtoMessage() {}
 
 func (x *RoleMenuTreeSelectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[13]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1214,7 +1259,7 @@ func (x *RoleMenuTreeSelectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleMenuTreeSelectResponse.ProtoReflect.Descriptor instead.
 func (*RoleMenuTreeSelectResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{13}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RoleMenuTreeSelectResponse) GetCode() *wrapperspb.Int32Value {
@@ -1255,7 +1300,7 @@ type UpdateMenuSortRequest struct {
 
 func (x *UpdateMenuSortRequest) Reset() {
 	*x = UpdateMenuSortRequest{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[14]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1267,7 +1312,7 @@ func (x *UpdateMenuSortRequest) String() string {
 func (*UpdateMenuSortRequest) ProtoMessage() {}
 
 func (x *UpdateMenuSortRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[14]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1280,7 +1325,7 @@ func (x *UpdateMenuSortRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMenuSortRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMenuSortRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{14}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateMenuSortRequest) GetItems() []*MenuSortItem {
@@ -1300,7 +1345,7 @@ type MenuSortItem struct {
 
 func (x *MenuSortItem) Reset() {
 	*x = MenuSortItem{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[15]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1312,7 +1357,7 @@ func (x *MenuSortItem) String() string {
 func (*MenuSortItem) ProtoMessage() {}
 
 func (x *MenuSortItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[15]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1325,7 +1370,7 @@ func (x *MenuSortItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuSortItem.ProtoReflect.Descriptor instead.
 func (*MenuSortItem) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{15}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *MenuSortItem) GetMenuId() int64 {
@@ -1352,7 +1397,7 @@ type Response struct {
 
 func (x *Response) Reset() {
 	*x = Response{}
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[16]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1364,7 +1409,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[16]
+	mi := &file_api_zebra_passport_menu_menu_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1377,7 +1422,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{16}
+	return file_api_zebra_passport_menu_menu_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Response) GetCode() *wrapperspb.Int32Value {
@@ -1521,7 +1566,9 @@ const file_api_zebra_passport_menu_menu_proto_rawDesc = "" +
 	"\x12GetRoutersResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\"\n" +
-	"\x04data\x18\x03 \x03(\v2\x0e.menu.RouterVoR\x04data\"x\n" +
+	"\x04data\x18\x03 \x03(\v2\x0e.menu.RouterVoR\x04data\",\n" +
+	"\x11GetRoutersRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"x\n" +
 	"\x0eMenuTreeOption\x12\x17\n" +
 	"\amenu_id\x18\x01 \x01(\x03R\x06menuId\x12\x1b\n" +
 	"\tmenu_name\x18\x02 \x01(\tR\bmenuName\x120\n" +
@@ -1542,15 +1589,15 @@ const file_api_zebra_passport_menu_menu_proto_rawDesc = "" +
 	"\torder_num\x18\x02 \x01(\x05R\borderNum\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\x96\x04\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\x99\x04\n" +
 	"\vMenuService\x121\n" +
 	"\x06Create\x12\x17.menu.CreateMenuRequest\x1a\x0e.menu.Response\x121\n" +
 	"\x06Update\x12\x17.menu.UpdateMenuRequest\x1a\x0e.menu.Response\x121\n" +
 	"\x06Delete\x12\x17.menu.DeleteMenuRequest\x1a\x0e.menu.Response\x122\n" +
 	"\x03Get\x12\x14.menu.GetMenuRequest\x1a\x15.menu.GetMenuResponse\x125\n" +
-	"\x04List\x12\x15.menu.ListMenuRequest\x1a\x16.menu.ListMenuResponse\x12<\n" +
+	"\x04List\x12\x15.menu.ListMenuRequest\x1a\x16.menu.ListMenuResponse\x12?\n" +
 	"\n" +
-	"GetRouters\x12\x14.menu.GetMenuRequest\x1a\x18.menu.GetRoutersResponse\x12<\n" +
+	"GetRouters\x12\x17.menu.GetRoutersRequest\x1a\x18.menu.GetRoutersResponse\x12<\n" +
 	"\n" +
 	"TreeSelect\x12\x14.menu.GetMenuRequest\x1a\x18.menu.TreeSelectResponse\x12L\n" +
 	"\x12RoleMenuTreeSelect\x12\x14.menu.GetMenuRequest\x1a .menu.RoleMenuTreeSelectResponse\x129\n" +
@@ -1569,7 +1616,7 @@ func file_api_zebra_passport_menu_menu_proto_rawDescGZIP() []byte {
 	return file_api_zebra_passport_menu_menu_proto_rawDescData
 }
 
-var file_api_zebra_passport_menu_menu_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_api_zebra_passport_menu_menu_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_api_zebra_passport_menu_menu_proto_goTypes = []any{
 	(*Menu)(nil),                       // 0: menu.Menu
 	(*MetaVo)(nil),                     // 1: menu.MetaVo
@@ -1582,49 +1629,50 @@ var file_api_zebra_passport_menu_menu_proto_goTypes = []any{
 	(*ListMenuRequest)(nil),            // 8: menu.ListMenuRequest
 	(*ListMenuResponse)(nil),           // 9: menu.ListMenuResponse
 	(*GetRoutersResponse)(nil),         // 10: menu.GetRoutersResponse
-	(*MenuTreeOption)(nil),             // 11: menu.MenuTreeOption
-	(*TreeSelectResponse)(nil),         // 12: menu.TreeSelectResponse
-	(*RoleMenuTreeSelectResponse)(nil), // 13: menu.RoleMenuTreeSelectResponse
-	(*UpdateMenuSortRequest)(nil),      // 14: menu.UpdateMenuSortRequest
-	(*MenuSortItem)(nil),               // 15: menu.MenuSortItem
-	(*Response)(nil),                   // 16: menu.Response
-	(*wrapperspb.Int32Value)(nil),      // 17: google.protobuf.Int32Value
+	(*GetRoutersRequest)(nil),          // 11: menu.GetRoutersRequest
+	(*MenuTreeOption)(nil),             // 12: menu.MenuTreeOption
+	(*TreeSelectResponse)(nil),         // 13: menu.TreeSelectResponse
+	(*RoleMenuTreeSelectResponse)(nil), // 14: menu.RoleMenuTreeSelectResponse
+	(*UpdateMenuSortRequest)(nil),      // 15: menu.UpdateMenuSortRequest
+	(*MenuSortItem)(nil),               // 16: menu.MenuSortItem
+	(*Response)(nil),                   // 17: menu.Response
+	(*wrapperspb.Int32Value)(nil),      // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_menu_menu_proto_depIdxs = []int32{
 	0,  // 0: menu.Menu.children:type_name -> menu.Menu
 	1,  // 1: menu.RouterVo.meta:type_name -> menu.MetaVo
 	2,  // 2: menu.RouterVo.children:type_name -> menu.RouterVo
-	17, // 3: menu.GetMenuResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 3: menu.GetMenuResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 4: menu.GetMenuResponse.menu:type_name -> menu.Menu
-	17, // 5: menu.ListMenuResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 5: menu.ListMenuResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 6: menu.ListMenuResponse.menus:type_name -> menu.Menu
-	17, // 7: menu.GetRoutersResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 7: menu.GetRoutersResponse.code:type_name -> google.protobuf.Int32Value
 	2,  // 8: menu.GetRoutersResponse.data:type_name -> menu.RouterVo
-	11, // 9: menu.MenuTreeOption.children:type_name -> menu.MenuTreeOption
-	17, // 10: menu.TreeSelectResponse.code:type_name -> google.protobuf.Int32Value
-	11, // 11: menu.TreeSelectResponse.menus:type_name -> menu.MenuTreeOption
-	17, // 12: menu.RoleMenuTreeSelectResponse.code:type_name -> google.protobuf.Int32Value
-	11, // 13: menu.RoleMenuTreeSelectResponse.menus:type_name -> menu.MenuTreeOption
-	15, // 14: menu.UpdateMenuSortRequest.items:type_name -> menu.MenuSortItem
-	17, // 15: menu.Response.code:type_name -> google.protobuf.Int32Value
+	12, // 9: menu.MenuTreeOption.children:type_name -> menu.MenuTreeOption
+	18, // 10: menu.TreeSelectResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 11: menu.TreeSelectResponse.menus:type_name -> menu.MenuTreeOption
+	18, // 12: menu.RoleMenuTreeSelectResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 13: menu.RoleMenuTreeSelectResponse.menus:type_name -> menu.MenuTreeOption
+	16, // 14: menu.UpdateMenuSortRequest.items:type_name -> menu.MenuSortItem
+	18, // 15: menu.Response.code:type_name -> google.protobuf.Int32Value
 	3,  // 16: menu.MenuService.Create:input_type -> menu.CreateMenuRequest
 	4,  // 17: menu.MenuService.Update:input_type -> menu.UpdateMenuRequest
 	5,  // 18: menu.MenuService.Delete:input_type -> menu.DeleteMenuRequest
 	6,  // 19: menu.MenuService.Get:input_type -> menu.GetMenuRequest
 	8,  // 20: menu.MenuService.List:input_type -> menu.ListMenuRequest
-	6,  // 21: menu.MenuService.GetRouters:input_type -> menu.GetMenuRequest
+	11, // 21: menu.MenuService.GetRouters:input_type -> menu.GetRoutersRequest
 	6,  // 22: menu.MenuService.TreeSelect:input_type -> menu.GetMenuRequest
 	6,  // 23: menu.MenuService.RoleMenuTreeSelect:input_type -> menu.GetMenuRequest
-	14, // 24: menu.MenuService.UpdateSort:input_type -> menu.UpdateMenuSortRequest
-	16, // 25: menu.MenuService.Create:output_type -> menu.Response
-	16, // 26: menu.MenuService.Update:output_type -> menu.Response
-	16, // 27: menu.MenuService.Delete:output_type -> menu.Response
+	15, // 24: menu.MenuService.UpdateSort:input_type -> menu.UpdateMenuSortRequest
+	17, // 25: menu.MenuService.Create:output_type -> menu.Response
+	17, // 26: menu.MenuService.Update:output_type -> menu.Response
+	17, // 27: menu.MenuService.Delete:output_type -> menu.Response
 	7,  // 28: menu.MenuService.Get:output_type -> menu.GetMenuResponse
 	9,  // 29: menu.MenuService.List:output_type -> menu.ListMenuResponse
 	10, // 30: menu.MenuService.GetRouters:output_type -> menu.GetRoutersResponse
-	12, // 31: menu.MenuService.TreeSelect:output_type -> menu.TreeSelectResponse
-	13, // 32: menu.MenuService.RoleMenuTreeSelect:output_type -> menu.RoleMenuTreeSelectResponse
-	16, // 33: menu.MenuService.UpdateSort:output_type -> menu.Response
+	13, // 31: menu.MenuService.TreeSelect:output_type -> menu.TreeSelectResponse
+	14, // 32: menu.MenuService.RoleMenuTreeSelect:output_type -> menu.RoleMenuTreeSelectResponse
+	17, // 33: menu.MenuService.UpdateSort:output_type -> menu.Response
 	25, // [25:34] is the sub-list for method output_type
 	16, // [16:25] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
@@ -1644,7 +1692,7 @@ func file_api_zebra_passport_menu_menu_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_passport_menu_menu_proto_rawDesc), len(file_api_zebra_passport_menu_menu_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

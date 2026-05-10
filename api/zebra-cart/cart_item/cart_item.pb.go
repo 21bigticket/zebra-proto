@@ -500,6 +500,7 @@ type ListCartItemRequest struct {
 	CartId        int64                  `protobuf:"varint,3,opt,name=cart_id,json=cartId,proto3" json:"cart_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	GoodsId       int64                  `protobuf:"varint,6,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -565,6 +566,13 @@ func (x *ListCartItemRequest) GetUserId() int64 {
 func (x *ListCartItemRequest) GetSkuId() int64 {
 	if x != nil {
 		return x.SkuId
+	}
+	return 0
+}
+
+func (x *ListCartItemRequest) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
 	}
 	return 0
 }
@@ -998,13 +1006,14 @@ const file_api_zebra_cart_cart_item_cart_item_proto_rawDesc = "" +
 	"\x13GetCartItemResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x120\n" +
-	"\tcart_item\x18\x03 \x01(\v2\x13.cart_item.CartItemR\bcartItem\"\x8f\x01\n" +
+	"\tcart_item\x18\x03 \x01(\v2\x13.cart_item.CartItemR\bcartItem\"\xaa\x01\n" +
 	"\x13ListCartItemRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
 	"\acart_id\x18\x03 \x01(\x03R\x06cartId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x15\n" +
-	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\"\xa3\x01\n" +
+	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\x12\x19\n" +
+	"\bgoods_id\x18\x06 \x01(\x03R\agoodsId\"\xa3\x01\n" +
 	"\x14ListCartItemResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +

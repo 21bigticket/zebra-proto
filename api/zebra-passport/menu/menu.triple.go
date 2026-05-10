@@ -67,7 +67,7 @@ type MenuService interface {
 	Delete(ctx context.Context, req *DeleteMenuRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetMenuRequest, opts ...client.CallOption) (*GetMenuResponse, error)
 	List(ctx context.Context, req *ListMenuRequest, opts ...client.CallOption) (*ListMenuResponse, error)
-	GetRouters(ctx context.Context, req *GetMenuRequest, opts ...client.CallOption) (*GetRoutersResponse, error)
+	GetRouters(ctx context.Context, req *GetRoutersRequest, opts ...client.CallOption) (*GetRoutersResponse, error)
 	TreeSelect(ctx context.Context, req *GetMenuRequest, opts ...client.CallOption) (*TreeSelectResponse, error)
 	RoleMenuTreeSelect(ctx context.Context, req *GetMenuRequest, opts ...client.CallOption) (*RoleMenuTreeSelectResponse, error)
 	UpdateSort(ctx context.Context, req *UpdateMenuSortRequest, opts ...client.CallOption) (*Response, error)
@@ -133,7 +133,7 @@ func (c *MenuServiceImpl) List(ctx context.Context, req *ListMenuRequest, opts .
 	return resp, nil
 }
 
-func (c *MenuServiceImpl) GetRouters(ctx context.Context, req *GetMenuRequest, opts ...client.CallOption) (*GetRoutersResponse, error) {
+func (c *MenuServiceImpl) GetRouters(ctx context.Context, req *GetRoutersRequest, opts ...client.CallOption) (*GetRoutersResponse, error) {
 	resp := new(GetRoutersResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetRouters", opts...); err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ type MenuServiceHandler interface {
 	Delete(context.Context, *DeleteMenuRequest) (*Response, error)
 	Get(context.Context, *GetMenuRequest) (*GetMenuResponse, error)
 	List(context.Context, *ListMenuRequest) (*ListMenuResponse, error)
-	GetRouters(context.Context, *GetMenuRequest) (*GetRoutersResponse, error)
+	GetRouters(context.Context, *GetRoutersRequest) (*GetRoutersResponse, error)
 	TreeSelect(context.Context, *GetMenuRequest) (*TreeSelectResponse, error)
 	RoleMenuTreeSelect(context.Context, *GetMenuRequest) (*RoleMenuTreeSelectResponse, error)
 	UpdateSort(context.Context, *UpdateMenuSortRequest) (*Response, error)
@@ -278,10 +278,10 @@ var MenuService_ServiceInfo = server.ServiceInfo{
 			Name: "GetRouters",
 			Type: constant.CallUnary,
 			ReqInitFunc: func() interface{} {
-				return new(GetMenuRequest)
+				return new(GetRoutersRequest)
 			},
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
-				req := args[0].(*GetMenuRequest)
+				req := args[0].(*GetRoutersRequest)
 				res, err := handler.(MenuServiceHandler).GetRouters(ctx, req)
 				if err != nil {
 					return nil, err

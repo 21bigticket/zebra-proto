@@ -43,16 +43,19 @@ type MemberAddress struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Province      string                 `protobuf:"bytes,4,opt,name=province,proto3" json:"province,omitempty"`
-	City          string                 `protobuf:"bytes,5,opt,name=city,proto3" json:"city,omitempty"`
-	Region        string                 `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
-	Street        string                 `protobuf:"bytes,7,opt,name=street,proto3" json:"street,omitempty"`
-	AddressStatus int32                  `protobuf:"varint,8,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"` // 0=禁用, 1=启用
-	DefaultOption int32                  `protobuf:"varint,9,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"` // 0=非默认, 1=默认
-	CreateTime    int64                  `protobuf:"varint,10,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime    int64                  `protobuf:"varint,11,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	IsDeleted     int32                  `protobuf:"varint,12,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	ReceiverName  string                 `protobuf:"bytes,3,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
+	ReceiverPhone string                 `protobuf:"bytes,4,opt,name=receiver_phone,json=receiverPhone,proto3" json:"receiver_phone,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,5,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Country       string                 `protobuf:"bytes,6,opt,name=country,proto3" json:"country,omitempty"`
+	Province      string                 `protobuf:"bytes,7,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,8,opt,name=city,proto3" json:"city,omitempty"`
+	Region        string                 `protobuf:"bytes,9,opt,name=region,proto3" json:"region,omitempty"`
+	Street        string                 `protobuf:"bytes,10,opt,name=street,proto3" json:"street,omitempty"`
+	AddressStatus int32                  `protobuf:"varint,11,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"` // 0=禁用, 1=启用
+	DefaultOption int32                  `protobuf:"varint,12,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"` // 0=非默认, 1=默认
+	CreateTime    int64                  `protobuf:"varint,13,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime    int64                  `protobuf:"varint,14,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	IsDeleted     int32                  `protobuf:"varint,15,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -99,6 +102,27 @@ func (x *MemberAddress) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *MemberAddress) GetReceiverName() string {
+	if x != nil {
+		return x.ReceiverName
+	}
+	return ""
+}
+
+func (x *MemberAddress) GetReceiverPhone() string {
+	if x != nil {
+		return x.ReceiverPhone
+	}
+	return ""
+}
+
+func (x *MemberAddress) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
 }
 
 func (x *MemberAddress) GetCountry() string {
@@ -175,11 +199,16 @@ func (x *MemberAddress) GetIsDeleted() int32 {
 type CreateMemberAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	Province      string                 `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
-	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
-	Region        string                 `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
-	Street        string                 `protobuf:"bytes,6,opt,name=street,proto3" json:"street,omitempty"`
+	ReceiverName  string                 `protobuf:"bytes,2,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
+	ReceiverPhone string                 `protobuf:"bytes,3,opt,name=receiver_phone,json=receiverPhone,proto3" json:"receiver_phone,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,4,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Country       string                 `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	Province      string                 `protobuf:"bytes,6,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	Region        string                 `protobuf:"bytes,8,opt,name=region,proto3" json:"region,omitempty"`
+	Street        string                 `protobuf:"bytes,9,opt,name=street,proto3" json:"street,omitempty"`
+	AddressStatus int32                  `protobuf:"varint,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
+	DefaultOption int32                  `protobuf:"varint,11,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -221,6 +250,27 @@ func (x *CreateMemberAddressRequest) GetUserId() int64 {
 	return 0
 }
 
+func (x *CreateMemberAddressRequest) GetReceiverName() string {
+	if x != nil {
+		return x.ReceiverName
+	}
+	return ""
+}
+
+func (x *CreateMemberAddressRequest) GetReceiverPhone() string {
+	if x != nil {
+		return x.ReceiverPhone
+	}
+	return ""
+}
+
+func (x *CreateMemberAddressRequest) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
+}
+
 func (x *CreateMemberAddressRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
@@ -256,17 +306,34 @@ func (x *CreateMemberAddressRequest) GetStreet() string {
 	return ""
 }
 
+func (x *CreateMemberAddressRequest) GetAddressStatus() int32 {
+	if x != nil {
+		return x.AddressStatus
+	}
+	return 0
+}
+
+func (x *CreateMemberAddressRequest) GetDefaultOption() int32 {
+	if x != nil {
+		return x.DefaultOption
+	}
+	return 0
+}
+
 // 更新地址请求
 type UpdateMemberAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	Province      string                 `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
-	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
-	Region        string                 `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
-	Street        string                 `protobuf:"bytes,6,opt,name=street,proto3" json:"street,omitempty"`
-	AddressStatus int32                  `protobuf:"varint,7,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
-	DefaultOption int32                  `protobuf:"varint,8,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"`
+	ReceiverName  string                 `protobuf:"bytes,2,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
+	ReceiverPhone string                 `protobuf:"bytes,3,opt,name=receiver_phone,json=receiverPhone,proto3" json:"receiver_phone,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,4,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Country       string                 `protobuf:"bytes,5,opt,name=country,proto3" json:"country,omitempty"`
+	Province      string                 `protobuf:"bytes,6,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	Region        string                 `protobuf:"bytes,8,opt,name=region,proto3" json:"region,omitempty"`
+	Street        string                 `protobuf:"bytes,9,opt,name=street,proto3" json:"street,omitempty"`
+	AddressStatus int32                  `protobuf:"varint,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
+	DefaultOption int32                  `protobuf:"varint,11,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -306,6 +373,27 @@ func (x *UpdateMemberAddressRequest) GetId() int64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *UpdateMemberAddressRequest) GetReceiverName() string {
+	if x != nil {
+		return x.ReceiverName
+	}
+	return ""
+}
+
+func (x *UpdateMemberAddressRequest) GetReceiverPhone() string {
+	if x != nil {
+		return x.ReceiverPhone
+	}
+	return ""
+}
+
+func (x *UpdateMemberAddressRequest) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
 }
 
 func (x *UpdateMemberAddressRequest) GetCountry() string {
@@ -861,40 +949,56 @@ var File_api_zebra_member_member_member_address_proto protoreflect.FileDescripto
 
 const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-member/member/member_address.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xe1\x02\n" +
+	",api/zebra-member/member/member_address.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x03\n" +
 	"\rMemberAddress\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1a\n" +
-	"\bprovince\x18\x04 \x01(\tR\bprovince\x12\x12\n" +
-	"\x04city\x18\x05 \x01(\tR\x04city\x12\x16\n" +
-	"\x06region\x18\x06 \x01(\tR\x06region\x12\x16\n" +
-	"\x06street\x18\a \x01(\tR\x06street\x12%\n" +
-	"\x0eaddress_status\x18\b \x01(\x05R\raddressStatus\x12%\n" +
-	"\x0edefault_option\x18\t \x01(\x05R\rdefaultOption\x12\x1f\n" +
-	"\vcreate_time\x18\n" +
-	" \x01(\x03R\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
+	"\rreceiver_name\x18\x03 \x01(\tR\freceiverName\x12%\n" +
+	"\x0ereceiver_phone\x18\x04 \x01(\tR\rreceiverPhone\x12\x1f\n" +
+	"\vpostal_code\x18\x05 \x01(\tR\n" +
+	"postalCode\x12\x18\n" +
+	"\acountry\x18\x06 \x01(\tR\acountry\x12\x1a\n" +
+	"\bprovince\x18\a \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\b \x01(\tR\x04city\x12\x16\n" +
+	"\x06region\x18\t \x01(\tR\x06region\x12\x16\n" +
+	"\x06street\x18\n" +
+	" \x01(\tR\x06street\x12%\n" +
+	"\x0eaddress_status\x18\v \x01(\x05R\raddressStatus\x12%\n" +
+	"\x0edefault_option\x18\f \x01(\x05R\rdefaultOption\x12\x1f\n" +
+	"\vcreate_time\x18\r \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
-	"\vupdate_time\x18\v \x01(\x03R\n" +
+	"\vupdate_time\x18\x0e \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\f \x01(\x05R\tisDeleted\"\xaf\x01\n" +
+	"is_deleted\x18\x0f \x01(\x05R\tisDeleted\"\xea\x02\n" +
 	"\x1aCreateMemberAddressRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1a\n" +
-	"\bprovince\x18\x03 \x01(\tR\bprovince\x12\x12\n" +
-	"\x04city\x18\x04 \x01(\tR\x04city\x12\x16\n" +
-	"\x06region\x18\x05 \x01(\tR\x06region\x12\x16\n" +
-	"\x06street\x18\x06 \x01(\tR\x06street\"\xf4\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12#\n" +
+	"\rreceiver_name\x18\x02 \x01(\tR\freceiverName\x12%\n" +
+	"\x0ereceiver_phone\x18\x03 \x01(\tR\rreceiverPhone\x12\x1f\n" +
+	"\vpostal_code\x18\x04 \x01(\tR\n" +
+	"postalCode\x12\x18\n" +
+	"\acountry\x18\x05 \x01(\tR\acountry\x12\x1a\n" +
+	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\a \x01(\tR\x04city\x12\x16\n" +
+	"\x06region\x18\b \x01(\tR\x06region\x12\x16\n" +
+	"\x06street\x18\t \x01(\tR\x06street\x12%\n" +
+	"\x0eaddress_status\x18\n" +
+	" \x01(\x05R\raddressStatus\x12%\n" +
+	"\x0edefault_option\x18\v \x01(\x05R\rdefaultOption\"\xe1\x02\n" +
 	"\x1aUpdateMemberAddressRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1a\n" +
-	"\bprovince\x18\x03 \x01(\tR\bprovince\x12\x12\n" +
-	"\x04city\x18\x04 \x01(\tR\x04city\x12\x16\n" +
-	"\x06region\x18\x05 \x01(\tR\x06region\x12\x16\n" +
-	"\x06street\x18\x06 \x01(\tR\x06street\x12%\n" +
-	"\x0eaddress_status\x18\a \x01(\x05R\raddressStatus\x12%\n" +
-	"\x0edefault_option\x18\b \x01(\x05R\rdefaultOption\",\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
+	"\rreceiver_name\x18\x02 \x01(\tR\freceiverName\x12%\n" +
+	"\x0ereceiver_phone\x18\x03 \x01(\tR\rreceiverPhone\x12\x1f\n" +
+	"\vpostal_code\x18\x04 \x01(\tR\n" +
+	"postalCode\x12\x18\n" +
+	"\acountry\x18\x05 \x01(\tR\acountry\x12\x1a\n" +
+	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\a \x01(\tR\x04city\x12\x16\n" +
+	"\x06region\x18\b \x01(\tR\x06region\x12\x16\n" +
+	"\x06street\x18\t \x01(\tR\x06street\x12%\n" +
+	"\x0eaddress_status\x18\n" +
+	" \x01(\x05R\raddressStatus\x12%\n" +
+	"\x0edefault_option\x18\v \x01(\x05R\rdefaultOption\",\n" +
 	"\x1aDeleteMemberAddressRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\")\n" +
 	"\x17GetMemberAddressRequest\x12\x0e\n" +

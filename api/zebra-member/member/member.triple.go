@@ -46,6 +46,22 @@ const (
 	MemberServiceGetProcedure = "/member.MemberService/Get"
 	// MemberServiceListProcedure is the fully-qualified name of the MemberService's List RPC.
 	MemberServiceListProcedure = "/member.MemberService/List"
+	// MemberServiceRegisterProcedure is the fully-qualified name of the MemberService's Register RPC.
+	MemberServiceRegisterProcedure = "/member.MemberService/Register"
+	// MemberServiceLoginProcedure is the fully-qualified name of the MemberService's Login RPC.
+	MemberServiceLoginProcedure = "/member.MemberService/Login"
+	// MemberServiceLogoutProcedure is the fully-qualified name of the MemberService's Logout RPC.
+	MemberServiceLogoutProcedure = "/member.MemberService/Logout"
+	// MemberServiceUpdateProfileProcedure is the fully-qualified name of the MemberService's UpdateProfile RPC.
+	MemberServiceUpdateProfileProcedure = "/member.MemberService/UpdateProfile"
+	// MemberServiceUploadAvatarProcedure is the fully-qualified name of the MemberService's UploadAvatar RPC.
+	MemberServiceUploadAvatarProcedure = "/member.MemberService/UploadAvatar"
+	// MemberServiceSendVerifyCodeProcedure is the fully-qualified name of the MemberService's SendVerifyCode RPC.
+	MemberServiceSendVerifyCodeProcedure = "/member.MemberService/SendVerifyCode"
+	// MemberServiceChangeMobileProcedure is the fully-qualified name of the MemberService's ChangeMobile RPC.
+	MemberServiceChangeMobileProcedure = "/member.MemberService/ChangeMobile"
+	// MemberServiceResetPasswordProcedure is the fully-qualified name of the MemberService's ResetPassword RPC.
+	MemberServiceResetPasswordProcedure = "/member.MemberService/ResetPassword"
 )
 
 var (
@@ -59,6 +75,14 @@ type MemberService interface {
 	Delete(ctx context.Context, req *DeleteMemberRequest, opts ...client.CallOption) (*MemberResponse, error)
 	Get(ctx context.Context, req *GetMemberRequest, opts ...client.CallOption) (*GetMemberResponse, error)
 	List(ctx context.Context, req *ListMemberRequest, opts ...client.CallOption) (*ListMemberResponse, error)
+	Register(ctx context.Context, req *RegisterMemberRequest, opts ...client.CallOption) (*RegisterMemberResponse, error)
+	Login(ctx context.Context, req *LoginMemberRequest, opts ...client.CallOption) (*LoginMemberResponse, error)
+	Logout(ctx context.Context, req *LogoutRequest, opts ...client.CallOption) (*MemberResponse, error)
+	UpdateProfile(ctx context.Context, req *UpdateProfileRequest, opts ...client.CallOption) (*MemberResponse, error)
+	UploadAvatar(ctx context.Context, req *UploadAvatarRequest, opts ...client.CallOption) (*UploadAvatarResponse, error)
+	SendVerifyCode(ctx context.Context, req *SendVerifyCodeRequest, opts ...client.CallOption) (*SendVerifyCodeResponse, error)
+	ChangeMobile(ctx context.Context, req *ChangeMobileRequest, opts ...client.CallOption) (*MemberResponse, error)
+	ResetPassword(ctx context.Context, req *ResetPasswordRequest, opts ...client.CallOption) (*MemberResponse, error)
 }
 
 // NewMemberService constructs a client for the member.MemberService service.
@@ -121,9 +145,73 @@ func (c *MemberServiceImpl) List(ctx context.Context, req *ListMemberRequest, op
 	return resp, nil
 }
 
+func (c *MemberServiceImpl) Register(ctx context.Context, req *RegisterMemberRequest, opts ...client.CallOption) (*RegisterMemberResponse, error) {
+	resp := new(RegisterMemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Register", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) Login(ctx context.Context, req *LoginMemberRequest, opts ...client.CallOption) (*LoginMemberResponse, error) {
+	resp := new(LoginMemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Login", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) Logout(ctx context.Context, req *LogoutRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Logout", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) UpdateProfile(ctx context.Context, req *UpdateProfileRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UpdateProfile", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) UploadAvatar(ctx context.Context, req *UploadAvatarRequest, opts ...client.CallOption) (*UploadAvatarResponse, error) {
+	resp := new(UploadAvatarResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "UploadAvatar", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) SendVerifyCode(ctx context.Context, req *SendVerifyCodeRequest, opts ...client.CallOption) (*SendVerifyCodeResponse, error) {
+	resp := new(SendVerifyCodeResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "SendVerifyCode", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) ChangeMobile(ctx context.Context, req *ChangeMobileRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ChangeMobile", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *MemberServiceImpl) ResetPassword(ctx context.Context, req *ResetPasswordRequest, opts ...client.CallOption) (*MemberResponse, error) {
+	resp := new(MemberResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ResetPassword", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var MemberService_ClientInfo = client.ClientInfo{
 	InterfaceName: "member.MemberService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List"},
+	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "Register", "Login", "Logout", "UpdateProfile", "UploadAvatar", "SendVerifyCode", "ChangeMobile", "ResetPassword"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*MemberServiceImpl)
 		dubboCli.conn = conn
@@ -137,6 +225,14 @@ type MemberServiceHandler interface {
 	Delete(context.Context, *DeleteMemberRequest) (*MemberResponse, error)
 	Get(context.Context, *GetMemberRequest) (*GetMemberResponse, error)
 	List(context.Context, *ListMemberRequest) (*ListMemberResponse, error)
+	Register(context.Context, *RegisterMemberRequest) (*RegisterMemberResponse, error)
+	Login(context.Context, *LoginMemberRequest) (*LoginMemberResponse, error)
+	Logout(context.Context, *LogoutRequest) (*MemberResponse, error)
+	UpdateProfile(context.Context, *UpdateProfileRequest) (*MemberResponse, error)
+	UploadAvatar(context.Context, *UploadAvatarRequest) (*UploadAvatarResponse, error)
+	SendVerifyCode(context.Context, *SendVerifyCodeRequest) (*SendVerifyCodeResponse, error)
+	ChangeMobile(context.Context, *ChangeMobileRequest) (*MemberResponse, error)
+	ResetPassword(context.Context, *ResetPasswordRequest) (*MemberResponse, error)
 }
 
 func RegisterMemberServiceHandler(srv *server.Server, hdlr MemberServiceHandler, opts ...server.ServiceOption) error {
@@ -220,6 +316,126 @@ var MemberService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListMemberRequest)
 				res, err := handler.(MemberServiceHandler).List(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Register",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(RegisterMemberRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*RegisterMemberRequest)
+				res, err := handler.(MemberServiceHandler).Register(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Login",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(LoginMemberRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*LoginMemberRequest)
+				res, err := handler.(MemberServiceHandler).Login(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Logout",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(LogoutRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*LogoutRequest)
+				res, err := handler.(MemberServiceHandler).Logout(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "UpdateProfile",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(UpdateProfileRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*UpdateProfileRequest)
+				res, err := handler.(MemberServiceHandler).UpdateProfile(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "UploadAvatar",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(UploadAvatarRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*UploadAvatarRequest)
+				res, err := handler.(MemberServiceHandler).UploadAvatar(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "SendVerifyCode",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(SendVerifyCodeRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*SendVerifyCodeRequest)
+				res, err := handler.(MemberServiceHandler).SendVerifyCode(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ChangeMobile",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ChangeMobileRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ChangeMobileRequest)
+				res, err := handler.(MemberServiceHandler).ChangeMobile(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ResetPassword",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ResetPasswordRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ResetPasswordRequest)
+				res, err := handler.(MemberServiceHandler).ResetPassword(ctx, req)
 				if err != nil {
 					return nil, err
 				}

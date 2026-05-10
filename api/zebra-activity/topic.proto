@@ -1,0 +1,144 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package topic;
+
+option go_package = "./api/zebra-activity;topic";
+
+message Topic {
+  int64 id = 1;
+  string title = 2;
+  string subtitle = 3;
+  string pic_url = 4;
+  string content = 5;
+  int64 read_count = 6;
+  int32 sort_order = 7;
+  int32 status = 8;
+  int64 create_time = 9;
+  int64 update_time = 10;
+}
+
+message TopicGoods {
+  int64 id = 1;
+  int64 topic_id = 2;
+  int64 goods_id = 3;
+  string name = 4;
+  string pic_url = 5;
+  int64 retail_price = 6;
+  int32 sort_order = 7;
+}
+
+message CreateTopicGoodsRequest {
+  int64 topic_id = 1;
+  int64 goods_id = 2;
+  int32 sort_order = 3;
+}
+
+message DeleteTopicGoodsRequest {
+  int64 id = 1;
+}
+
+message CreateTopicRequest {
+  string title = 1;
+  string subtitle = 2;
+  string pic_url = 3;
+  string content = 4;
+  int32 sort_order = 5;
+  int32 status = 6;
+}
+
+message UpdateTopicRequest {
+  int64 id = 1;
+  string title = 2;
+  string subtitle = 3;
+  string pic_url = 4;
+  string content = 5;
+  int32 sort_order = 6;
+  int32 status = 7;
+}
+
+message DeleteTopicRequest {
+  int64 id = 1;
+}
+
+message ListTopicRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  int32 status = 3;
+}
+
+message ListTopicResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Topic topics = 3;
+  int32 total = 4;
+  int32 page = 5;
+  int32 page_size = 6;
+}
+
+message GetTopicRequest {
+  int64 id = 1;
+}
+
+message GetTopicResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  Topic topic = 3;
+  repeated TopicGoods goods = 4;
+}
+
+message ListTopicGoodsRequest {
+  int64 topic_id = 1;
+}
+
+message ListTopicGoodsResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated TopicGoods goods = 3;
+}
+
+message GetRelatedTopicRequest {
+  int64 id = 1;
+  int32 limit = 2;
+}
+
+message GetRelatedTopicResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Topic topics = 3;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+}
+
+service TopicService {
+  rpc CreateTopicGoods(CreateTopicGoodsRequest) returns (Response);
+  rpc DeleteTopicGoods(DeleteTopicGoodsRequest) returns (Response);
+  rpc CreateTopic(CreateTopicRequest) returns (Response);
+  rpc UpdateTopic(UpdateTopicRequest) returns (Response);
+  rpc DeleteTopic(DeleteTopicRequest) returns (Response);
+  rpc ListTopic(ListTopicRequest) returns (ListTopicResponse);
+  rpc GetTopic(GetTopicRequest) returns (GetTopicResponse);
+  rpc ListTopicGoods(ListTopicGoodsRequest) returns (ListTopicGoodsResponse);
+  rpc GetRelatedTopic(GetRelatedTopicRequest) returns (GetRelatedTopicResponse);
+}

@@ -47,9 +47,10 @@ type GoodsAttribute struct {
 	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"` // 1=规格, 2=参数, 3=属性
 	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
-	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
-	UpdateTime    int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
-	IsDeleted     int32                  `protobuf:"varint,9,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	CreateTime    int64                  `protobuf:"varint,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime    int64                  `protobuf:"varint,9,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	IsDeleted     int32                  `protobuf:"varint,10,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -126,6 +127,13 @@ func (x *GoodsAttribute) GetStatus() int32 {
 	return 0
 }
 
+func (x *GoodsAttribute) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *GoodsAttribute) GetCreateTime() int64 {
 	if x != nil {
 		return x.CreateTime
@@ -154,6 +162,7 @@ type CreateAttributeRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -216,6 +225,13 @@ func (x *CreateAttributeRequest) GetSortOrder() int32 {
 	return 0
 }
 
+func (x *CreateAttributeRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 // 更新属性请求
 type UpdateAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -223,6 +239,7 @@ type UpdateAttributeRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -283,6 +300,13 @@ func (x *UpdateAttributeRequest) GetStatus() int32 {
 		return x.Status
 	}
 	return 0
+}
+
+func (x *UpdateAttributeRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 // 删除属性请求
@@ -638,7 +662,7 @@ var File_api_zebra_goods_attribute_attribute_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\x1a\x1egoogle/protobuf/wrappers.proto\"\xfd\x01\n" +
+	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\x1a\x1egoogle/protobuf/wrappers.proto\"\x9f\x02\n" +
 	"\x0eGoodsAttribute\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x12\n" +
@@ -646,25 +670,29 @@ const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1f\n" +
-	"\vcreate_time\x18\a \x01(\x03R\n" +
+	"\x06status\x18\x06 \x01(\x05R\x06status\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x1f\n" +
+	"\vcreate_time\x18\b \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
-	"\vupdate_time\x18\b \x01(\x03R\n" +
+	"\vupdate_time\x18\t \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\t \x01(\x05R\tisDeleted\"|\n" +
+	"is_deleted\x18\n" +
+	" \x01(\x05R\tisDeleted\"\x9e\x01\n" +
 	"\x16CreateAttributeRequest\x12\x1b\n" +
 	"\tparent_id\x18\x01 \x01(\x03R\bparentId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x1d\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x05R\tsortOrder\"s\n" +
+	"sort_order\x18\x04 \x01(\x05R\tsortOrder\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\"\x95\x01\n" +
 	"\x16UpdateAttributeRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"sort_order\x18\x03 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"(\n" +
+	"\x06status\x18\x04 \x01(\x05R\x06status\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\"(\n" +
 	"\x16DeleteAttributeRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"%\n" +
 	"\x13GetAttributeRequest\x12\x0e\n" +

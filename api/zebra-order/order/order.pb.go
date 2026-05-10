@@ -737,6 +737,59 @@ func (x *CancelOrderRequest) GetUserId() int64 {
 	return 0
 }
 
+// 删除订单请求
+type DeleteOrderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderNo       string                 `protobuf:"bytes,1,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOrderRequest) Reset() {
+	*x = DeleteOrderRequest{}
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOrderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOrderRequest) ProtoMessage() {}
+
+func (x *DeleteOrderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOrderRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOrderRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteOrderRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *DeleteOrderRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 // 支付订单请求
 type PayOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -748,7 +801,7 @@ type PayOrderRequest struct {
 
 func (x *PayOrderRequest) Reset() {
 	*x = PayOrderRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[7]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -760,7 +813,7 @@ func (x *PayOrderRequest) String() string {
 func (*PayOrderRequest) ProtoMessage() {}
 
 func (x *PayOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[7]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -773,7 +826,7 @@ func (x *PayOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PayOrderRequest.ProtoReflect.Descriptor instead.
 func (*PayOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{7}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PayOrderRequest) GetOrderNo() string {
@@ -802,7 +855,7 @@ type DeliverOrderRequest struct {
 
 func (x *DeliverOrderRequest) Reset() {
 	*x = DeliverOrderRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[8]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -814,7 +867,7 @@ func (x *DeliverOrderRequest) String() string {
 func (*DeliverOrderRequest) ProtoMessage() {}
 
 func (x *DeliverOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[8]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -827,7 +880,7 @@ func (x *DeliverOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeliverOrderRequest.ProtoReflect.Descriptor instead.
 func (*DeliverOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{8}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeliverOrderRequest) GetOrderNo() string {
@@ -861,7 +914,7 @@ type FinishOrderRequest struct {
 
 func (x *FinishOrderRequest) Reset() {
 	*x = FinishOrderRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[9]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -873,7 +926,7 @@ func (x *FinishOrderRequest) String() string {
 func (*FinishOrderRequest) ProtoMessage() {}
 
 func (x *FinishOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[9]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -886,7 +939,7 @@ func (x *FinishOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FinishOrderRequest.ProtoReflect.Descriptor instead.
 func (*FinishOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{9}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *FinishOrderRequest) GetOrderNo() string {
@@ -910,7 +963,7 @@ type GetOrderRequest struct {
 
 func (x *GetOrderRequest) Reset() {
 	*x = GetOrderRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[10]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +975,7 @@ func (x *GetOrderRequest) String() string {
 func (*GetOrderRequest) ProtoMessage() {}
 
 func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[10]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +988,7 @@ func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderRequest.ProtoReflect.Descriptor instead.
 func (*GetOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{10}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetOrderRequest) GetQuery() isGetOrderRequest_Query {
@@ -993,7 +1046,7 @@ type GetOrderResponse struct {
 
 func (x *GetOrderResponse) Reset() {
 	*x = GetOrderResponse{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[11]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1005,7 +1058,7 @@ func (x *GetOrderResponse) String() string {
 func (*GetOrderResponse) ProtoMessage() {}
 
 func (x *GetOrderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[11]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1018,7 +1071,7 @@ func (x *GetOrderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrderResponse.ProtoReflect.Descriptor instead.
 func (*GetOrderResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{11}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetOrderResponse) GetCode() *wrapperspb.Int32Value {
@@ -1069,7 +1122,7 @@ type GetUserOrdersRequest struct {
 
 func (x *GetUserOrdersRequest) Reset() {
 	*x = GetUserOrdersRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[12]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1081,7 +1134,7 @@ func (x *GetUserOrdersRequest) String() string {
 func (*GetUserOrdersRequest) ProtoMessage() {}
 
 func (x *GetUserOrdersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[12]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1147,7 @@ func (x *GetUserOrdersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserOrdersRequest.ProtoReflect.Descriptor instead.
 func (*GetUserOrdersRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{12}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetUserOrdersRequest) GetUserId() int64 {
@@ -1138,7 +1191,7 @@ type GetUserOrdersResponse struct {
 
 func (x *GetUserOrdersResponse) Reset() {
 	*x = GetUserOrdersResponse{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[13]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1150,7 +1203,7 @@ func (x *GetUserOrdersResponse) String() string {
 func (*GetUserOrdersResponse) ProtoMessage() {}
 
 func (x *GetUserOrdersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[13]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1163,7 +1216,7 @@ func (x *GetUserOrdersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserOrdersResponse.ProtoReflect.Descriptor instead.
 func (*GetUserOrdersResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{13}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetUserOrdersResponse) GetCode() *wrapperspb.Int32Value {
@@ -1210,7 +1263,7 @@ type ListOrderRequest struct {
 
 func (x *ListOrderRequest) Reset() {
 	*x = ListOrderRequest{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[14]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1222,7 +1275,7 @@ func (x *ListOrderRequest) String() string {
 func (*ListOrderRequest) ProtoMessage() {}
 
 func (x *ListOrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[14]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1235,7 +1288,7 @@ func (x *ListOrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOrderRequest.ProtoReflect.Descriptor instead.
 func (*ListOrderRequest) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{14}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListOrderRequest) GetPage() int32 {
@@ -1300,7 +1353,7 @@ type ListOrderResponse struct {
 
 func (x *ListOrderResponse) Reset() {
 	*x = ListOrderResponse{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[15]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1312,7 +1365,7 @@ func (x *ListOrderResponse) String() string {
 func (*ListOrderResponse) ProtoMessage() {}
 
 func (x *ListOrderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[15]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1325,7 +1378,7 @@ func (x *ListOrderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOrderResponse.ProtoReflect.Descriptor instead.
 func (*ListOrderResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{15}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListOrderResponse) GetCode() *wrapperspb.Int32Value {
@@ -1370,7 +1423,7 @@ type OrderResponse struct {
 
 func (x *OrderResponse) Reset() {
 	*x = OrderResponse{}
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[16]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1382,7 +1435,7 @@ func (x *OrderResponse) String() string {
 func (*OrderResponse) ProtoMessage() {}
 
 func (x *OrderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zebra_order_order_order_proto_msgTypes[16]
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1395,7 +1448,7 @@ func (x *OrderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderResponse.ProtoReflect.Descriptor instead.
 func (*OrderResponse) Descriptor() ([]byte, []int) {
-	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{16}
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *OrderResponse) GetCode() *wrapperspb.Int32Value {
@@ -1516,6 +1569,9 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\amessage\x18\x04 \x01(\tR\amessage\"H\n" +
 	"\x12CancelOrderRequest\x12\x19\n" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\"H\n" +
+	"\x12DeleteOrderRequest\x12\x19\n" +
+	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"E\n" +
 	"\x0fPayOrderRequest\x12\x19\n" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
@@ -1566,10 +1622,11 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12\"\n" +
-	"\x05order\x18\x05 \x01(\v2\f.order.OrderR\x05order2\x9a\x04\n" +
+	"\x05order\x18\x05 \x01(\v2\f.order.OrderR\x05order2\xda\x04\n" +
 	"\fOrderService\x12D\n" +
 	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x1a.order.CreateOrderResponse\x12>\n" +
-	"\vCancelOrder\x12\x19.order.CancelOrderRequest\x1a\x14.order.OrderResponse\x128\n" +
+	"\vCancelOrder\x12\x19.order.CancelOrderRequest\x1a\x14.order.OrderResponse\x12>\n" +
+	"\vDeleteOrder\x12\x19.order.DeleteOrderRequest\x1a\x14.order.OrderResponse\x128\n" +
 	"\bPayOrder\x12\x16.order.PayOrderRequest\x1a\x14.order.OrderResponse\x12@\n" +
 	"\fDeliverOrder\x12\x1a.order.DeliverOrderRequest\x1a\x14.order.OrderResponse\x12>\n" +
 	"\vFinishOrder\x12\x19.order.FinishOrderRequest\x1a\x14.order.OrderResponse\x12;\n" +
@@ -1590,7 +1647,7 @@ func file_api_zebra_order_order_order_proto_rawDescGZIP() []byte {
 	return file_api_zebra_order_order_order_proto_rawDescData
 }
 
-var file_api_zebra_order_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_api_zebra_order_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_api_zebra_order_order_order_proto_goTypes = []any{
 	(*Order)(nil),                 // 0: order.Order
 	(*OrderItem)(nil),             // 1: order.OrderItem
@@ -1599,50 +1656,53 @@ var file_api_zebra_order_order_order_proto_goTypes = []any{
 	(*OrderItemReq)(nil),          // 4: order.OrderItemReq
 	(*CreateOrderResponse)(nil),   // 5: order.CreateOrderResponse
 	(*CancelOrderRequest)(nil),    // 6: order.CancelOrderRequest
-	(*PayOrderRequest)(nil),       // 7: order.PayOrderRequest
-	(*DeliverOrderRequest)(nil),   // 8: order.DeliverOrderRequest
-	(*FinishOrderRequest)(nil),    // 9: order.FinishOrderRequest
-	(*GetOrderRequest)(nil),       // 10: order.GetOrderRequest
-	(*GetOrderResponse)(nil),      // 11: order.GetOrderResponse
-	(*GetUserOrdersRequest)(nil),  // 12: order.GetUserOrdersRequest
-	(*GetUserOrdersResponse)(nil), // 13: order.GetUserOrdersResponse
-	(*ListOrderRequest)(nil),      // 14: order.ListOrderRequest
-	(*ListOrderResponse)(nil),     // 15: order.ListOrderResponse
-	(*OrderResponse)(nil),         // 16: order.OrderResponse
-	(*wrapperspb.Int32Value)(nil), // 17: google.protobuf.Int32Value
+	(*DeleteOrderRequest)(nil),    // 7: order.DeleteOrderRequest
+	(*PayOrderRequest)(nil),       // 8: order.PayOrderRequest
+	(*DeliverOrderRequest)(nil),   // 9: order.DeliverOrderRequest
+	(*FinishOrderRequest)(nil),    // 10: order.FinishOrderRequest
+	(*GetOrderRequest)(nil),       // 11: order.GetOrderRequest
+	(*GetOrderResponse)(nil),      // 12: order.GetOrderResponse
+	(*GetUserOrdersRequest)(nil),  // 13: order.GetUserOrdersRequest
+	(*GetUserOrdersResponse)(nil), // 14: order.GetUserOrdersResponse
+	(*ListOrderRequest)(nil),      // 15: order.ListOrderRequest
+	(*ListOrderResponse)(nil),     // 16: order.ListOrderResponse
+	(*OrderResponse)(nil),         // 17: order.OrderResponse
+	(*wrapperspb.Int32Value)(nil), // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_order_order_order_proto_depIdxs = []int32{
 	4,  // 0: order.CreateOrderRequest.items:type_name -> order.OrderItemReq
-	17, // 1: order.CreateOrderResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 1: order.CreateOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 2: order.CreateOrderResponse.order:type_name -> order.Order
-	17, // 3: order.GetOrderResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 3: order.GetOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 4: order.GetOrderResponse.order:type_name -> order.Order
 	1,  // 5: order.GetOrderResponse.items:type_name -> order.OrderItem
 	2,  // 6: order.GetOrderResponse.delivery:type_name -> order.OrderDelivery
-	17, // 7: order.GetUserOrdersResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 7: order.GetUserOrdersResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 8: order.GetUserOrdersResponse.orders:type_name -> order.Order
-	17, // 9: order.ListOrderResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 9: order.ListOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 10: order.ListOrderResponse.orders:type_name -> order.Order
-	17, // 11: order.OrderResponse.code:type_name -> google.protobuf.Int32Value
+	18, // 11: order.OrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 12: order.OrderResponse.order:type_name -> order.Order
 	3,  // 13: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
 	6,  // 14: order.OrderService.CancelOrder:input_type -> order.CancelOrderRequest
-	7,  // 15: order.OrderService.PayOrder:input_type -> order.PayOrderRequest
-	8,  // 16: order.OrderService.DeliverOrder:input_type -> order.DeliverOrderRequest
-	9,  // 17: order.OrderService.FinishOrder:input_type -> order.FinishOrderRequest
-	10, // 18: order.OrderService.GetOrder:input_type -> order.GetOrderRequest
-	12, // 19: order.OrderService.GetUserOrders:input_type -> order.GetUserOrdersRequest
-	14, // 20: order.OrderService.ListOrders:input_type -> order.ListOrderRequest
-	5,  // 21: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
-	16, // 22: order.OrderService.CancelOrder:output_type -> order.OrderResponse
-	16, // 23: order.OrderService.PayOrder:output_type -> order.OrderResponse
-	16, // 24: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
-	16, // 25: order.OrderService.FinishOrder:output_type -> order.OrderResponse
-	11, // 26: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
-	13, // 27: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
-	15, // 28: order.OrderService.ListOrders:output_type -> order.ListOrderResponse
-	21, // [21:29] is the sub-list for method output_type
-	13, // [13:21] is the sub-list for method input_type
+	7,  // 15: order.OrderService.DeleteOrder:input_type -> order.DeleteOrderRequest
+	8,  // 16: order.OrderService.PayOrder:input_type -> order.PayOrderRequest
+	9,  // 17: order.OrderService.DeliverOrder:input_type -> order.DeliverOrderRequest
+	10, // 18: order.OrderService.FinishOrder:input_type -> order.FinishOrderRequest
+	11, // 19: order.OrderService.GetOrder:input_type -> order.GetOrderRequest
+	13, // 20: order.OrderService.GetUserOrders:input_type -> order.GetUserOrdersRequest
+	15, // 21: order.OrderService.ListOrders:input_type -> order.ListOrderRequest
+	5,  // 22: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
+	17, // 23: order.OrderService.CancelOrder:output_type -> order.OrderResponse
+	17, // 24: order.OrderService.DeleteOrder:output_type -> order.OrderResponse
+	17, // 25: order.OrderService.PayOrder:output_type -> order.OrderResponse
+	17, // 26: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
+	17, // 27: order.OrderService.FinishOrder:output_type -> order.OrderResponse
+	12, // 28: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
+	14, // 29: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
+	16, // 30: order.OrderService.ListOrders:output_type -> order.ListOrderResponse
+	22, // [22:31] is the sub-list for method output_type
+	13, // [13:22] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1653,7 +1713,7 @@ func file_api_zebra_order_order_order_proto_init() {
 	if File_api_zebra_order_order_order_proto != nil {
 		return
 	}
-	file_api_zebra_order_order_order_proto_msgTypes[10].OneofWrappers = []any{
+	file_api_zebra_order_order_order_proto_msgTypes[11].OneofWrappers = []any{
 		(*GetOrderRequest_OrderNo)(nil),
 		(*GetOrderRequest_OrderId)(nil),
 	}
@@ -1663,7 +1723,7 @@ func file_api_zebra_order_order_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_order_order_order_proto_rawDesc), len(file_api_zebra_order_order_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
