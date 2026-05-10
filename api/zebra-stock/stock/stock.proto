@@ -66,6 +66,17 @@ message OutboundRequest {
   string remark    = 4;  // 备注
 }
 
+message BatchOutboundItem {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 出库数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+message BatchOutboundRequest {
+  repeated BatchOutboundItem items = 1;  // 批量出库条目
+}
+
 // 冻结库存请求
 message FreezeRequest {
   int64  sku_id    = 1;  // SKU ID
@@ -74,12 +85,34 @@ message FreezeRequest {
   string remark    = 4;  // 备注
 }
 
+message BatchFreezeItem {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 冻结数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+message BatchFreezeRequest {
+  repeated BatchFreezeItem items = 1;  // 批量冻结条目
+}
+
 // 释放库存请求
 message ReleaseRequest {
   int64  sku_id    = 1;  // SKU ID
   int32  num       = 2;  // 释放数量
   string order_no  = 3;  // 订单号
   string remark    = 4;  // 备注
+}
+
+message BatchReleaseItem {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 释放数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+message BatchReleaseRequest {
+  repeated BatchReleaseItem items = 1;  // 批量释放条目
 }
 
 // 批量库存查询请求
@@ -127,10 +160,16 @@ service StockService {
   rpc BatchInbound(BatchInboundRequest) returns (StockResponse);
   // 出库
   rpc Outbound(OutboundRequest) returns (StockResponse);
+  // 批量出库
+  rpc BatchOutbound(BatchOutboundRequest) returns (StockResponse);
   // 冻结库存
   rpc Freeze(FreezeRequest) returns (StockResponse);
+  // 批量冻结库存
+  rpc BatchFreeze(BatchFreezeRequest) returns (StockResponse);
   // 释放库存
   rpc Release(ReleaseRequest) returns (StockResponse);
+  // 批量释放库存
+  rpc BatchRelease(BatchReleaseRequest) returns (StockResponse);
   // 获取库存
   rpc GetStock(GetStockRequest) returns (GetStockResponse);
   // 分页查询库存

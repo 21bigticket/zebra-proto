@@ -42,10 +42,16 @@ const (
 	StockServiceBatchInboundProcedure = "/stock.StockService/BatchInbound"
 	// StockServiceOutboundProcedure is the fully-qualified name of the StockService's Outbound RPC.
 	StockServiceOutboundProcedure = "/stock.StockService/Outbound"
+	// StockServiceBatchOutboundProcedure is the fully-qualified name of the StockService's BatchOutbound RPC.
+	StockServiceBatchOutboundProcedure = "/stock.StockService/BatchOutbound"
 	// StockServiceFreezeProcedure is the fully-qualified name of the StockService's Freeze RPC.
 	StockServiceFreezeProcedure = "/stock.StockService/Freeze"
+	// StockServiceBatchFreezeProcedure is the fully-qualified name of the StockService's BatchFreeze RPC.
+	StockServiceBatchFreezeProcedure = "/stock.StockService/BatchFreeze"
 	// StockServiceReleaseProcedure is the fully-qualified name of the StockService's Release RPC.
 	StockServiceReleaseProcedure = "/stock.StockService/Release"
+	// StockServiceBatchReleaseProcedure is the fully-qualified name of the StockService's BatchRelease RPC.
+	StockServiceBatchReleaseProcedure = "/stock.StockService/BatchRelease"
 	// StockServiceGetStockProcedure is the fully-qualified name of the StockService's GetStock RPC.
 	StockServiceGetStockProcedure = "/stock.StockService/GetStock"
 	// StockServiceListProcedure is the fully-qualified name of the StockService's List RPC.
@@ -61,8 +67,11 @@ type StockService interface {
 	Inbound(ctx context.Context, req *InboundRequest, opts ...client.CallOption) (*StockResponse, error)
 	BatchInbound(ctx context.Context, req *BatchInboundRequest, opts ...client.CallOption) (*StockResponse, error)
 	Outbound(ctx context.Context, req *OutboundRequest, opts ...client.CallOption) (*StockResponse, error)
+	BatchOutbound(ctx context.Context, req *BatchOutboundRequest, opts ...client.CallOption) (*StockResponse, error)
 	Freeze(ctx context.Context, req *FreezeRequest, opts ...client.CallOption) (*StockResponse, error)
+	BatchFreeze(ctx context.Context, req *BatchFreezeRequest, opts ...client.CallOption) (*StockResponse, error)
 	Release(ctx context.Context, req *ReleaseRequest, opts ...client.CallOption) (*StockResponse, error)
+	BatchRelease(ctx context.Context, req *BatchReleaseRequest, opts ...client.CallOption) (*StockResponse, error)
 	GetStock(ctx context.Context, req *GetStockRequest, opts ...client.CallOption) (*GetStockResponse, error)
 	List(ctx context.Context, req *ListStockRequest, opts ...client.CallOption) (*ListStockResponse, error)
 }
@@ -111,6 +120,14 @@ func (c *StockServiceImpl) Outbound(ctx context.Context, req *OutboundRequest, o
 	return resp, nil
 }
 
+func (c *StockServiceImpl) BatchOutbound(ctx context.Context, req *BatchOutboundRequest, opts ...client.CallOption) (*StockResponse, error) {
+	resp := new(StockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchOutbound", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *StockServiceImpl) Freeze(ctx context.Context, req *FreezeRequest, opts ...client.CallOption) (*StockResponse, error) {
 	resp := new(StockResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Freeze", opts...); err != nil {
@@ -119,9 +136,25 @@ func (c *StockServiceImpl) Freeze(ctx context.Context, req *FreezeRequest, opts 
 	return resp, nil
 }
 
+func (c *StockServiceImpl) BatchFreeze(ctx context.Context, req *BatchFreezeRequest, opts ...client.CallOption) (*StockResponse, error) {
+	resp := new(StockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchFreeze", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *StockServiceImpl) Release(ctx context.Context, req *ReleaseRequest, opts ...client.CallOption) (*StockResponse, error) {
 	resp := new(StockResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Release", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *StockServiceImpl) BatchRelease(ctx context.Context, req *BatchReleaseRequest, opts ...client.CallOption) (*StockResponse, error) {
+	resp := new(StockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchRelease", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -145,7 +178,7 @@ func (c *StockServiceImpl) List(ctx context.Context, req *ListStockRequest, opts
 
 var StockService_ClientInfo = client.ClientInfo{
 	InterfaceName: "stock.StockService",
-	MethodNames:   []string{"Inbound", "BatchInbound", "Outbound", "Freeze", "Release", "GetStock", "List"},
+	MethodNames:   []string{"Inbound", "BatchInbound", "Outbound", "BatchOutbound", "Freeze", "BatchFreeze", "Release", "BatchRelease", "GetStock", "List"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*StockServiceImpl)
 		dubboCli.conn = conn
@@ -157,8 +190,11 @@ type StockServiceHandler interface {
 	Inbound(context.Context, *InboundRequest) (*StockResponse, error)
 	BatchInbound(context.Context, *BatchInboundRequest) (*StockResponse, error)
 	Outbound(context.Context, *OutboundRequest) (*StockResponse, error)
+	BatchOutbound(context.Context, *BatchOutboundRequest) (*StockResponse, error)
 	Freeze(context.Context, *FreezeRequest) (*StockResponse, error)
+	BatchFreeze(context.Context, *BatchFreezeRequest) (*StockResponse, error)
 	Release(context.Context, *ReleaseRequest) (*StockResponse, error)
+	BatchRelease(context.Context, *BatchReleaseRequest) (*StockResponse, error)
 	GetStock(context.Context, *GetStockRequest) (*GetStockResponse, error)
 	List(context.Context, *ListStockRequest) (*ListStockResponse, error)
 }
@@ -221,6 +257,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			},
 		},
 		{
+			Name: "BatchOutbound",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchOutboundRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchOutboundRequest)
+				res, err := handler.(StockServiceHandler).BatchOutbound(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
 			Name: "Freeze",
 			Type: constant.CallUnary,
 			ReqInitFunc: func() interface{} {
@@ -236,6 +287,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			},
 		},
 		{
+			Name: "BatchFreeze",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchFreezeRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchFreezeRequest)
+				res, err := handler.(StockServiceHandler).BatchFreeze(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
 			Name: "Release",
 			Type: constant.CallUnary,
 			ReqInitFunc: func() interface{} {
@@ -244,6 +310,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ReleaseRequest)
 				res, err := handler.(StockServiceHandler).Release(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "BatchRelease",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchReleaseRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchReleaseRequest)
+				res, err := handler.(StockServiceHandler).BatchRelease(ctx, req)
 				if err != nil {
 					return nil, err
 				}
