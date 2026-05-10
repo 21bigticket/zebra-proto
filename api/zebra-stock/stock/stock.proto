@@ -47,6 +47,17 @@ message InboundRequest {
   string remark    = 4;  // 备注
 }
 
+message BatchInboundItem {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 入库数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
+message BatchInboundRequest {
+  repeated BatchInboundItem items = 1;  // 批量入库条目
+}
+
 // 出库请求
 message OutboundRequest {
   int64  sku_id    = 1;  // SKU ID
@@ -112,6 +123,8 @@ message StockResponse {
 service StockService {
   // 入库
   rpc Inbound(InboundRequest) returns (StockResponse);
+  // 批量入库
+  rpc BatchInbound(BatchInboundRequest) returns (StockResponse);
   // 出库
   rpc Outbound(OutboundRequest) returns (StockResponse);
   // 冻结库存

@@ -50,6 +50,8 @@ const (
 	SkuServiceGetProcedure = "/sku.SkuService/Get"
 	// SkuServiceListProcedure is the fully-qualified name of the SkuService's List RPC.
 	SkuServiceListProcedure = "/sku.SkuService/List"
+	// SkuServiceListSimpleProcedure is the fully-qualified name of the SkuService's ListSimple RPC.
+	SkuServiceListSimpleProcedure = "/sku.SkuService/ListSimple"
 	// SkuServiceMatchBySpecsProcedure is the fully-qualified name of the SkuService's MatchBySpecs RPC.
 	SkuServiceMatchBySpecsProcedure = "/sku.SkuService/MatchBySpecs"
 )
@@ -67,6 +69,7 @@ type SkuService interface {
 	Delete(ctx context.Context, req *DeleteSkuRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetSkuRequest, opts ...client.CallOption) (*GetSkuResponse, error)
 	List(ctx context.Context, req *ListSkuRequest, opts ...client.CallOption) (*ListSkuResponse, error)
+	ListSimple(ctx context.Context, req *ListSkuRequest, opts ...client.CallOption) (*ListSkuResponse, error)
 	MatchBySpecs(ctx context.Context, req *MatchSkuBySpecsRequest, opts ...client.CallOption) (*MatchSkuBySpecsResponse, error)
 }
 
@@ -146,6 +149,14 @@ func (c *SkuServiceImpl) List(ctx context.Context, req *ListSkuRequest, opts ...
 	return resp, nil
 }
 
+func (c *SkuServiceImpl) ListSimple(ctx context.Context, req *ListSkuRequest, opts ...client.CallOption) (*ListSkuResponse, error) {
+	resp := new(ListSkuResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListSimple", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *SkuServiceImpl) MatchBySpecs(ctx context.Context, req *MatchSkuBySpecsRequest, opts ...client.CallOption) (*MatchSkuBySpecsResponse, error) {
 	resp := new(MatchSkuBySpecsResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "MatchBySpecs", opts...); err != nil {
@@ -156,7 +167,7 @@ func (c *SkuServiceImpl) MatchBySpecs(ctx context.Context, req *MatchSkuBySpecsR
 
 var SkuService_ClientInfo = client.ClientInfo{
 	InterfaceName: "sku.SkuService",
-	MethodNames:   []string{"Create", "BatchCreate", "BatchUpdate", "Update", "Delete", "Get", "List", "MatchBySpecs"},
+	MethodNames:   []string{"Create", "BatchCreate", "BatchUpdate", "Update", "Delete", "Get", "List", "ListSimple", "MatchBySpecs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*SkuServiceImpl)
 		dubboCli.conn = conn
@@ -172,6 +183,7 @@ type SkuServiceHandler interface {
 	Delete(context.Context, *DeleteSkuRequest) (*Response, error)
 	Get(context.Context, *GetSkuRequest) (*GetSkuResponse, error)
 	List(context.Context, *ListSkuRequest) (*ListSkuResponse, error)
+	ListSimple(context.Context, *ListSkuRequest) (*ListSkuResponse, error)
 	MatchBySpecs(context.Context, *MatchSkuBySpecsRequest) (*MatchSkuBySpecsResponse, error)
 }
 
@@ -286,6 +298,21 @@ var SkuService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListSkuRequest)
 				res, err := handler.(SkuServiceHandler).List(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListSimple",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListSkuRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListSkuRequest)
+				res, err := handler.(SkuServiceHandler).ListSimple(ctx, req)
 				if err != nil {
 					return nil, err
 				}

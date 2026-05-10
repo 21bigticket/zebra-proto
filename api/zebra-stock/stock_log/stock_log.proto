@@ -38,6 +38,10 @@ message StockLog {
   string operate_ip      = 11; // 操作IP地址
   string remark          = 12; // 备注（扩容长度，满足业务描述需求）
   int64  create_time     = 13; // 创建时间
+  int64  goods_id        = 14; // 商品ID
+  string goods_name      = 15; // 商品名称
+  string sku_code        = 16; // SKU编码
+  string sku_name        = 17; // SKU名称
 }
 
 // 创建库存日志请求
@@ -76,6 +80,7 @@ message ListLogRequest {
   string order_no    = 5;  // 订单号
   int64  start_time  = 6;  // 开始时间戳
   int64  end_time    = 7;  // 结束时间戳
+  int64  goods_id    = 8;  // 商品ID
 }
 
 // 查询库存日志列表响应

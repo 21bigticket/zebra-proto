@@ -38,6 +38,8 @@ const (
 const (
 	// StockServiceInboundProcedure is the fully-qualified name of the StockService's Inbound RPC.
 	StockServiceInboundProcedure = "/stock.StockService/Inbound"
+	// StockServiceBatchInboundProcedure is the fully-qualified name of the StockService's BatchInbound RPC.
+	StockServiceBatchInboundProcedure = "/stock.StockService/BatchInbound"
 	// StockServiceOutboundProcedure is the fully-qualified name of the StockService's Outbound RPC.
 	StockServiceOutboundProcedure = "/stock.StockService/Outbound"
 	// StockServiceFreezeProcedure is the fully-qualified name of the StockService's Freeze RPC.
@@ -57,6 +59,7 @@ var (
 // StockService is a client for the stock.StockService service.
 type StockService interface {
 	Inbound(ctx context.Context, req *InboundRequest, opts ...client.CallOption) (*StockResponse, error)
+	BatchInbound(ctx context.Context, req *BatchInboundRequest, opts ...client.CallOption) (*StockResponse, error)
 	Outbound(ctx context.Context, req *OutboundRequest, opts ...client.CallOption) (*StockResponse, error)
 	Freeze(ctx context.Context, req *FreezeRequest, opts ...client.CallOption) (*StockResponse, error)
 	Release(ctx context.Context, req *ReleaseRequest, opts ...client.CallOption) (*StockResponse, error)
@@ -87,6 +90,14 @@ type StockServiceImpl struct {
 func (c *StockServiceImpl) Inbound(ctx context.Context, req *InboundRequest, opts ...client.CallOption) (*StockResponse, error) {
 	resp := new(StockResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Inbound", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *StockServiceImpl) BatchInbound(ctx context.Context, req *BatchInboundRequest, opts ...client.CallOption) (*StockResponse, error) {
+	resp := new(StockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchInbound", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -134,7 +145,7 @@ func (c *StockServiceImpl) List(ctx context.Context, req *ListStockRequest, opts
 
 var StockService_ClientInfo = client.ClientInfo{
 	InterfaceName: "stock.StockService",
-	MethodNames:   []string{"Inbound", "Outbound", "Freeze", "Release", "GetStock", "List"},
+	MethodNames:   []string{"Inbound", "BatchInbound", "Outbound", "Freeze", "Release", "GetStock", "List"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*StockServiceImpl)
 		dubboCli.conn = conn
@@ -144,6 +155,7 @@ var StockService_ClientInfo = client.ClientInfo{
 // StockServiceHandler is an implementation of the stock.StockService service.
 type StockServiceHandler interface {
 	Inbound(context.Context, *InboundRequest) (*StockResponse, error)
+	BatchInbound(context.Context, *BatchInboundRequest) (*StockResponse, error)
 	Outbound(context.Context, *OutboundRequest) (*StockResponse, error)
 	Freeze(context.Context, *FreezeRequest) (*StockResponse, error)
 	Release(context.Context, *ReleaseRequest) (*StockResponse, error)
@@ -172,6 +184,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*InboundRequest)
 				res, err := handler.(StockServiceHandler).Inbound(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "BatchInbound",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchInboundRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchInboundRequest)
+				res, err := handler.(StockServiceHandler).BatchInbound(ctx, req)
 				if err != nil {
 					return nil, err
 				}

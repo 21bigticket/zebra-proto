@@ -54,6 +54,10 @@ type StockLog struct {
 	OperateIp     string                 `protobuf:"bytes,11,opt,name=operate_ip,json=operateIp,proto3" json:"operate_ip,omitempty"`                // 操作IP地址
 	Remark        string                 `protobuf:"bytes,12,opt,name=remark,proto3" json:"remark,omitempty"`                                       // 备注（扩容长度，满足业务描述需求）
 	CreateTime    int64                  `protobuf:"varint,13,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`            // 创建时间
+	GoodsId       int64                  `protobuf:"varint,14,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`                     // 商品ID
+	GoodsName     string                 `protobuf:"bytes,15,opt,name=goods_name,json=goodsName,proto3" json:"goods_name,omitempty"`                // 商品名称
+	SkuCode       string                 `protobuf:"bytes,16,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`                      // SKU编码
+	SkuName       string                 `protobuf:"bytes,17,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`                      // SKU名称
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,6 +181,34 @@ func (x *StockLog) GetCreateTime() int64 {
 		return x.CreateTime
 	}
 	return 0
+}
+
+func (x *StockLog) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *StockLog) GetGoodsName() string {
+	if x != nil {
+		return x.GoodsName
+	}
+	return ""
+}
+
+func (x *StockLog) GetSkuCode() string {
+	if x != nil {
+		return x.SkuCode
+	}
+	return ""
+}
+
+func (x *StockLog) GetSkuName() string {
+	if x != nil {
+		return x.SkuName
+	}
+	return ""
 }
 
 // 创建库存日志请求
@@ -420,6 +452,7 @@ type ListLogRequest struct {
 	OrderNo       string                 `protobuf:"bytes,5,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`           // 订单号
 	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`    // 开始时间戳
 	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`          // 结束时间戳
+	GoodsId       int64                  `protobuf:"varint,8,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`          // 商品ID
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -499,6 +532,13 @@ func (x *ListLogRequest) GetStartTime() int64 {
 func (x *ListLogRequest) GetEndTime() int64 {
 	if x != nil {
 		return x.EndTime
+	}
+	return 0
+}
+
+func (x *ListLogRequest) GetGoodsId() int64 {
+	if x != nil {
+		return x.GoodsId
 	}
 	return 0
 }
@@ -827,7 +867,7 @@ var File_api_zebra_stock_stock_log_stock_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-stock/stock_log/stock_log.proto\x12\tstock_log\x1a\x1egoogle/protobuf/wrappers.proto\"\x9f\x03\n" +
+	")api/zebra-stock/stock_log/stock_log.proto\x12\tstock_log\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\x04\n" +
 	"\bStockLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
 	"\x06sku_id\x18\x02 \x01(\x03R\x05skuId\x12\x1f\n" +
@@ -847,7 +887,12 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"operate_ip\x18\v \x01(\tR\toperateIp\x12\x16\n" +
 	"\x06remark\x18\f \x01(\tR\x06remark\x12\x1f\n" +
 	"\vcreate_time\x18\r \x01(\x03R\n" +
-	"createTime\"\xef\x02\n" +
+	"createTime\x12\x19\n" +
+	"\bgoods_id\x18\x0e \x01(\x03R\agoodsId\x12\x1d\n" +
+	"\n" +
+	"goods_name\x18\x0f \x01(\tR\tgoodsName\x12\x19\n" +
+	"\bsku_code\x18\x10 \x01(\tR\askuCode\x12\x19\n" +
+	"\bsku_name\x18\x11 \x01(\tR\askuName\"\xef\x02\n" +
 	"\x10CreateLogRequest\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x1f\n" +
 	"\vchange_type\x18\x02 \x01(\x05R\n" +
@@ -870,7 +915,7 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\x0eGetLogResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x120\n" +
-	"\tstock_log\x18\x03 \x01(\v2\x13.stock_log.StockLogR\bstockLog\"\xce\x01\n" +
+	"\tstock_log\x18\x03 \x01(\v2\x13.stock_log.StockLogR\bstockLog\"\xe9\x01\n" +
 	"\x0eListLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
@@ -880,7 +925,8 @@ const file_api_zebra_stock_stock_log_stock_log_proto_rawDesc = "" +
 	"\border_no\x18\x05 \x01(\tR\aorderNo\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\a \x01(\x03R\aendTime\"\x9e\x01\n" +
+	"\bend_time\x18\a \x01(\x03R\aendTime\x12\x19\n" +
+	"\bgoods_id\x18\b \x01(\x03R\agoodsId\"\x9e\x01\n" +
 	"\x0fListLogResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +

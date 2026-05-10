@@ -1172,7 +1172,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"M\n" +
 	"\bResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg2\xbe\x03\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xf7\x03\n" +
 	"\n" +
 	"SkuService\x12.\n" +
 	"\x06Create\x12\x15.sku.CreateSkuRequest\x1a\r.sku.Response\x128\n" +
@@ -1181,7 +1181,9 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x06Update\x12\x15.sku.UpdateSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x06Delete\x12\x15.sku.DeleteSkuRequest\x1a\r.sku.Response\x12.\n" +
 	"\x03Get\x12\x12.sku.GetSkuRequest\x1a\x13.sku.GetSkuResponse\x121\n" +
-	"\x04List\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponse\x12I\n" +
+	"\x04List\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponse\x127\n" +
+	"\n" +
+	"ListSimple\x12\x13.sku.ListSkuRequest\x1a\x14.sku.ListSkuResponse\x12I\n" +
 	"\fMatchBySpecs\x12\x1b.sku.MatchSkuBySpecsRequest\x1a\x1c.sku.MatchSkuBySpecsResponseB\x1bZ\x19./api/zebra-goods/sku;skub\x06proto3"
 
 var (
@@ -1232,17 +1234,19 @@ var file_api_zebra_goods_sku_sku_proto_depIdxs = []int32{
 	7,  // 13: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
 	8,  // 14: sku.SkuService.Get:input_type -> sku.GetSkuRequest
 	12, // 15: sku.SkuService.List:input_type -> sku.ListSkuRequest
-	10, // 16: sku.SkuService.MatchBySpecs:input_type -> sku.MatchSkuBySpecsRequest
-	14, // 17: sku.SkuService.Create:output_type -> sku.Response
-	14, // 18: sku.SkuService.BatchCreate:output_type -> sku.Response
-	14, // 19: sku.SkuService.BatchUpdate:output_type -> sku.Response
-	14, // 20: sku.SkuService.Update:output_type -> sku.Response
-	14, // 21: sku.SkuService.Delete:output_type -> sku.Response
-	9,  // 22: sku.SkuService.Get:output_type -> sku.GetSkuResponse
-	13, // 23: sku.SkuService.List:output_type -> sku.ListSkuResponse
-	11, // 24: sku.SkuService.MatchBySpecs:output_type -> sku.MatchSkuBySpecsResponse
-	17, // [17:25] is the sub-list for method output_type
-	9,  // [9:17] is the sub-list for method input_type
+	12, // 16: sku.SkuService.ListSimple:input_type -> sku.ListSkuRequest
+	10, // 17: sku.SkuService.MatchBySpecs:input_type -> sku.MatchSkuBySpecsRequest
+	14, // 18: sku.SkuService.Create:output_type -> sku.Response
+	14, // 19: sku.SkuService.BatchCreate:output_type -> sku.Response
+	14, // 20: sku.SkuService.BatchUpdate:output_type -> sku.Response
+	14, // 21: sku.SkuService.Update:output_type -> sku.Response
+	14, // 22: sku.SkuService.Delete:output_type -> sku.Response
+	9,  // 23: sku.SkuService.Get:output_type -> sku.GetSkuResponse
+	13, // 24: sku.SkuService.List:output_type -> sku.ListSkuResponse
+	13, // 25: sku.SkuService.ListSimple:output_type -> sku.ListSkuResponse
+	11, // 26: sku.SkuService.MatchBySpecs:output_type -> sku.MatchSkuBySpecsResponse
+	18, // [18:27] is the sub-list for method output_type
+	9,  // [9:18] is the sub-list for method input_type
 	9,  // [9:9] is the sub-list for extension type_name
 	9,  // [9:9] is the sub-list for extension extendee
 	0,  // [0:9] is the sub-list for field type_name

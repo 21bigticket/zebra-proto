@@ -147,5 +147,6 @@ service SkuService {
   rpc Delete(DeleteSkuRequest) returns (Response);
   rpc Get(GetSkuRequest) returns (GetSkuResponse);
   rpc List(ListSkuRequest) returns (ListSkuResponse);
+  rpc ListSimple(ListSkuRequest) returns (ListSkuResponse);
   rpc MatchBySpecs(MatchSkuBySpecsRequest) returns (MatchSkuBySpecsResponse);
 }
