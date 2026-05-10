@@ -1,0 +1,109 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package spec;
+
+option go_package = "./api/zebra-goods/spec;spec";
+
+// 商品规格
+message GoodsSpec {
+  int64  id          = 1;
+  int64  goods_id    = 2;
+  string spec_name   = 3; // 规格名称, 如"颜色"
+  string spec_value  = 4; // 规格值, 如"红色"
+  repeated string spec_images = 5;
+  int32  spec_sort   = 6;
+  int64  create_time = 7;
+  int64  update_time = 8;
+}
+
+// 创建规格请求(单个)
+message CreateSpecRequest {
+  int64  goods_id   = 1;
+  string spec_name  = 2;
+  string spec_value = 3;
+  repeated string spec_images = 4;
+  int32  spec_sort  = 5;
+}
+
+// 批量创建规格请求
+message BatchCreateSpecRequest {
+  repeated CreateSpecRequest items = 1;
+}
+
+// 更新规格请求
+message UpdateSpecRequest {
+  int64  id              = 1;
+  optional string spec_name  = 2;
+  optional string spec_value = 3;
+  repeated string spec_images = 4;
+  optional int32  spec_sort  = 5;
+}
+
+// 删除规格请求
+message DeleteSpecRequest {
+  int64 id = 1;
+}
+
+// 获取规格请求
+message GetSpecRequest {
+  int64 id = 1;
+}
+
+// 按商品ID列出规格请求
+message ListSpecByGoodsRequest {
+  int64 goods_id = 1;
+}
+
+// 按SKU ID查询关联的规格列表请求
+message ListSpecBySkuRequest {
+  int64 sku_id = 1;
+}
+
+// 按商品ID列出规格响应
+message ListSpecResponse {
+  google.protobuf.Int32Value code = 1; // 0=成功, -1=失败
+  string msg = 2;
+  repeated GoodsSpec specs = 3;
+}
+
+// 获取规格响应
+message GetSpecResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  GoodsSpec spec = 3;
+}
+
+message Response {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+}
+
+// 规格服务
+service SpecService {
+  rpc Create(CreateSpecRequest) returns (Response);
+  rpc BatchCreate(BatchCreateSpecRequest) returns (Response);
+  rpc Update(UpdateSpecRequest) returns (Response);
+  rpc Delete(DeleteSpecRequest) returns (Response);
+  rpc Get(GetSpecRequest) returns (GetSpecResponse);
+  rpc ListByGoods(ListSpecByGoodsRequest) returns (ListSpecResponse);
+  rpc ListBySku(ListSpecBySkuRequest) returns (ListSpecResponse);
+}

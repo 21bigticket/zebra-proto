@@ -23,21 +23,19 @@ package attribute;
 
 option go_package = "./api/zebra-goods/attribute;attribute";
 
-// 商品属性信息
 message GoodsAttribute {
   int64  id          = 1;
-  int64  parent_id   = 2; // 父属性ID，0表示根属性
+  int64  parent_id   = 2;
   string name        = 3;
-  int32  type        = 4; // 1=规格, 2=参数, 3=属性
+  int32  type        = 4;
   int32  sort_order  = 5;
-  int32  status      = 6; // 0=禁用, 1=启用
+  int32  status      = 6;
   string description = 7;
   int64  create_time = 8;
   int64  update_time = 9;
   int32  is_deleted  = 10;
 }
 
-// 创建属性请求
 message CreateAttributeRequest {
   int64  parent_id  = 1;
   string name       = 2;
@@ -46,7 +44,6 @@ message CreateAttributeRequest {
   string description = 5;
 }
 
-// 更新属性请求
 message UpdateAttributeRequest {
   int64  id         = 1;
   string name       = 2;
@@ -55,46 +52,40 @@ message UpdateAttributeRequest {
   string description = 5;
 }
 
-// 删除属性请求
 message DeleteAttributeRequest {
   int64 id = 1;
 }
 
-// 获取属性请求
 message GetAttributeRequest {
   int64 id = 1;
 }
 
-// 获取属性响应
 message GetAttributeResponse {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
+  google.protobuf.Int32Value  code = 1;
+  string  msg = 2;
   GoodsAttribute attribute = 3;
 }
 
-// 列出属性请求
 message ListAttributeRequest {
   int32  page       = 1;
   int32  page_size  = 2;
-  int64  parent_id  = 3; // -1表示全部
-  int32  type       = 4; // -1表示全部
-  int32  status     = 5; // -1表示全部
+  int64  parent_id  = 3;
+  int32  type       = 4;
+  int32  status     = 5;
 }
 
-// 列出属性响应
 message ListAttributeResponse {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
+  google.protobuf.Int32Value  code = 1;
+  string  msg = 2;
   repeated GoodsAttribute attributes = 3;
   int32                   total      = 4;
 }
 
 message Response {
-  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
-  string  msg = 2;  // 提示语
+  google.protobuf.Int32Value  code = 1;
+  string  msg = 2;
 }
 
-// 属性服务
 service AttributeService {
   rpc Create(CreateAttributeRequest) returns (Response);
   rpc Update(UpdateAttributeRequest) returns (Response);

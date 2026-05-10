@@ -37,6 +37,7 @@ message GoodsSku {
   int64  update_time = 10;
   int32  is_deleted  = 11;
   int32  stock_num   = 13; // 库存
+  repeated int64 spec_ids = 14; // 关联的规格ID列表
 }
 
 // 创建SKU请求
@@ -47,7 +48,7 @@ message CreateSkuRequest {
   int64  price      = 4;
   string image_url  = 5;
   int32  sort_order = 6;
-  int32  stock_num  = 8;
+  repeated int64 spec_ids = 9; // 关联的规格ID列表
 }
 
 // 更新SKU请求
@@ -58,7 +59,9 @@ message UpdateSkuRequest {
   string image_url  = 4;
   int32  sort_order = 5;
   int32  status     = 6;
-  int32  stock_num  = 8;
+  string sku_code   = 7;
+  int64  goods_id   = 8;
+  repeated int64 spec_ids = 9; // 关联的规格ID列表
 }
 
 message BatchCreateSkuItem {
@@ -68,7 +71,7 @@ message BatchCreateSkuItem {
   int64  price      = 4;
   string image_url  = 5;
   int32  sort_order = 6;
-  int32  stock_num  = 8;
+  repeated int64 spec_ids = 9; // 关联的规格ID列表
 }
 
 message BatchCreateSkuRequest {
@@ -78,7 +81,6 @@ message BatchCreateSkuRequest {
 message BatchUpdateSkuItem {
   int64  id         = 1;
   int64  price      = 2;
-  int32  stock_num  = 3;
   int32  sort_order = 4;
   int32  status     = 5;
 }
@@ -101,6 +103,17 @@ message GetSkuRequest {
 message GetSkuResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
   string  msg = 2;  // 提示语
+  GoodsSku sku = 3;
+}
+
+message MatchSkuBySpecsRequest {
+  int64 goods_id = 1;
+  repeated int64 spec_ids = 2;
+}
+
+message MatchSkuBySpecsResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
   GoodsSku sku = 3;
 }
 
@@ -134,4 +147,5 @@ service SkuService {
   rpc Delete(DeleteSkuRequest) returns (Response);
   rpc Get(GetSkuRequest) returns (GetSkuResponse);
   rpc List(ListSkuRequest) returns (ListSkuResponse);
+  rpc MatchBySpecs(MatchSkuBySpecsRequest) returns (MatchSkuBySpecsResponse);
 }

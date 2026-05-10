@@ -55,8 +55,9 @@ type Goods struct {
 	UpdateTime        int64                  `protobuf:"varint,12,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted         int32                  `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
 	GalleryImages     []string               `protobuf:"bytes,14,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`                     // 商品图集
-	AttributeTemplate []int64                `protobuf:"varint,15,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"` // 规格属性模板，存父属性ID
+	AttributeTemplate []int64                `protobuf:"varint,15,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"` // 商品属性模板
 	SkuNameRule       string                 `protobuf:"bytes,16,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`                         // SKU自动命名规则
+	GoodsCode         string                 `protobuf:"bytes,17,opt,name=goods_code,json=goodsCode,proto3" json:"goods_code,omitempty"`                                 // 商品编码
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -203,6 +204,13 @@ func (x *Goods) GetSkuNameRule() string {
 	return ""
 }
 
+func (x *Goods) GetGoodsCode() string {
+	if x != nil {
+		return x.GoodsCode
+	}
+	return ""
+}
+
 // 创建商品请求
 type CreateGoodsRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
@@ -217,6 +225,7 @@ type CreateGoodsRequest struct {
 	GalleryImages     []string               `protobuf:"bytes,9,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`
 	AttributeTemplate []int64                `protobuf:"varint,10,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"`
 	SkuNameRule       string                 `protobuf:"bytes,11,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`
+	GoodsCode         string                 `protobuf:"bytes,12,opt,name=goods_code,json=goodsCode,proto3" json:"goods_code,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -328,6 +337,13 @@ func (x *CreateGoodsRequest) GetSkuNameRule() string {
 	return ""
 }
 
+func (x *CreateGoodsRequest) GetGoodsCode() string {
+	if x != nil {
+		return x.GoodsCode
+	}
+	return ""
+}
+
 // 更新商品请求
 type UpdateGoodsRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
@@ -344,6 +360,7 @@ type UpdateGoodsRequest struct {
 	CategoryId        int64                  `protobuf:"varint,11,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"`
 	BrandId           int64                  `protobuf:"varint,12,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
 	VendorId          int64                  `protobuf:"varint,13,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`
+	GoodsCode         string                 `protobuf:"bytes,14,opt,name=goods_code,json=goodsCode,proto3" json:"goods_code,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -467,6 +484,13 @@ func (x *UpdateGoodsRequest) GetVendorId() int64 {
 		return x.VendorId
 	}
 	return 0
+}
+
+func (x *UpdateGoodsRequest) GetGoodsCode() string {
+	if x != nil {
+		return x.GoodsCode
+	}
+	return ""
 }
 
 // 删除商品请求
@@ -838,7 +862,7 @@ var File_api_zebra_goods_goods_goods_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xea\x03\n" +
+	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\x89\x04\n" +
 	"\x05Goods\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vcategory_id\x18\x02 \x01(\x03R\n" +
@@ -862,7 +886,9 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"is_deleted\x18\r \x01(\x05R\tisDeleted\x12%\n" +
 	"\x0egallery_images\x18\x0e \x03(\tR\rgalleryImages\x12-\n" +
 	"\x12attribute_template\x18\x0f \x03(\x03R\x11attributeTemplate\x12\"\n" +
-	"\rsku_name_rule\x18\x10 \x01(\tR\vskuNameRule\"\xee\x02\n" +
+	"\rsku_name_rule\x18\x10 \x01(\tR\vskuNameRule\x12\x1d\n" +
+	"\n" +
+	"goods_code\x18\x11 \x01(\tR\tgoodsCode\"\x8d\x03\n" +
 	"\x12CreateGoodsRequest\x12\x1f\n" +
 	"\vcategory_id\x18\x01 \x01(\x03R\n" +
 	"categoryId\x12\x1b\n" +
@@ -878,7 +904,9 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\x0egallery_images\x18\t \x03(\tR\rgalleryImages\x12-\n" +
 	"\x12attribute_template\x18\n" +
 	" \x03(\x03R\x11attributeTemplate\x12\"\n" +
-	"\rsku_name_rule\x18\v \x01(\tR\vskuNameRule\"\x96\x03\n" +
+	"\rsku_name_rule\x18\v \x01(\tR\vskuNameRule\x12\x1d\n" +
+	"\n" +
+	"goods_code\x18\f \x01(\tR\tgoodsCode\"\xb5\x03\n" +
 	"\x12UpdateGoodsRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -896,7 +924,9 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\vcategory_id\x18\v \x01(\x03R\n" +
 	"categoryId\x12\x19\n" +
 	"\bbrand_id\x18\f \x01(\x03R\abrandId\x12\x1b\n" +
-	"\tvendor_id\x18\r \x01(\x03R\bvendorId\"$\n" +
+	"\tvendor_id\x18\r \x01(\x03R\bvendorId\x12\x1d\n" +
+	"\n" +
+	"goods_code\x18\x0e \x01(\tR\tgoodsCode\"$\n" +
 	"\x12DeleteGoodsRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"!\n" +
 	"\x0fGetGoodsRequest\x12\x0e\n" +

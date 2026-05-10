@@ -38,15 +38,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 商品属性信息
 type GoodsAttribute struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	ParentId      int64                  `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 父属性ID，0表示根属性
+	ParentId      int64                  `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"` // 1=规格, 2=参数, 3=属性
+	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
 	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
+	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
 	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,9,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -155,7 +154,6 @@ func (x *GoodsAttribute) GetIsDeleted() int32 {
 	return 0
 }
 
-// 创建属性请求
 type CreateAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ParentId      int64                  `protobuf:"varint,1,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
@@ -232,7 +230,6 @@ func (x *CreateAttributeRequest) GetDescription() string {
 	return ""
 }
 
-// 更新属性请求
 type UpdateAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -309,7 +306,6 @@ func (x *UpdateAttributeRequest) GetDescription() string {
 	return ""
 }
 
-// 删除属性请求
 type DeleteAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -354,7 +350,6 @@ func (x *DeleteAttributeRequest) GetId() int64 {
 	return 0
 }
 
-// 获取属性请求
 type GetAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -399,11 +394,10 @@ func (x *GetAttributeRequest) GetId() int64 {
 	return 0
 }
 
-// 获取属性响应
 type GetAttributeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	Attribute     *GoodsAttribute        `protobuf:"bytes,3,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -460,14 +454,13 @@ func (x *GetAttributeResponse) GetAttribute() *GoodsAttribute {
 	return nil
 }
 
-// 列出属性请求
 type ListAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	ParentId      int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // -1表示全部
-	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`                         // -1表示全部
-	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`                     // -1表示全部
+	ParentId      int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
+	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -537,11 +530,10 @@ func (x *ListAttributeRequest) GetStatus() int32 {
 	return 0
 }
 
-// 列出属性响应
 type ListAttributeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	Attributes    []*GoodsAttribute      `protobuf:"bytes,3,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -608,8 +600,8 @@ func (x *ListAttributeResponse) GetTotal() int32 {
 
 type Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"` // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

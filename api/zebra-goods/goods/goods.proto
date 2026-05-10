@@ -39,8 +39,9 @@ message Goods {
   int64  update_time     = 12;
   int32  is_deleted      = 13;
   repeated string gallery_images = 14; // 商品图集
-  repeated int64 attribute_template = 15; // 规格属性模板，存父属性ID
+  repeated int64 attribute_template = 15; // 商品属性模板
   string sku_name_rule = 16; // SKU自动命名规则
+  string goods_code = 17; // 商品编码
 }
 
 // 创建商品请求
@@ -56,6 +57,7 @@ message CreateGoodsRequest {
   repeated string gallery_images = 9;
   repeated int64 attribute_template = 10;
   string sku_name_rule = 11;
+  string goods_code = 12;
 }
 
 // 更新商品请求
@@ -73,6 +75,7 @@ message UpdateGoodsRequest {
   int64 category_id = 11;
   int64 brand_id = 12;
   int64 vendor_id = 13;
+  string goods_code = 14;
 }
 
 // 删除商品请求
