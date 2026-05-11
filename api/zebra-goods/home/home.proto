@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package home;
+
+option go_package = "./api/zebra-goods/home;home";
+
+message GetGoodsHomeRequest {
+  int32 category_limit = 1;
+  int32 brand_limit = 2;
+  int32 goods_limit = 3;
+}
+
+message HomeCategory {
+  int64 id = 1;
+  string name = 2;
+  string icon_url = 3;
+}
+
+message HomeBrand {
+  int64 id = 1;
+  string name = 2;
+  string logo_url = 3;
+  string description = 4;
+}
+
+message HomeGoods {
+  int64 id = 1;
+  string name = 2;
+  string main_image = 3;
+  string sub_title = 4;
+  int64 retail_price = 5;
+  int64 counter_price = 6;
+}
+
+message GetGoodsHomeResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated HomeCategory categories = 3;
+  repeated HomeBrand brands = 4;
+  repeated HomeGoods goods = 5;
+}
+
+service HomeService {
+  rpc GetGoodsHome(GetGoodsHomeRequest) returns (GetGoodsHomeResponse);
+}

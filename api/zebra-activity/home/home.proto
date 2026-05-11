@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package home;
+
+option go_package = "./api/zebra-activity/home;home";
+
+message GetActivityHomeRequest {
+  int32 coupon_limit = 1;
+  int32 topic_limit = 2;
+}
+
+message HomeCoupon {
+  int64 id = 1;
+  string name = 2;
+  int32 type = 3;
+  int64 min_amount = 4;
+  int64 discount_amount = 5;
+  int32 discount_rate = 6;
+  int32 valid_days = 7;
+  int32 total_quantity = 8;
+  int32 issued_quantity = 9;
+}
+
+message HomeTopic {
+  int64 id = 1;
+  string title = 2;
+  string subtitle = 3;
+  string pic_url = 4;
+  int64 read_count = 5;
+}
+
+message GetActivityHomeResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated HomeCoupon coupons = 3;
+  repeated HomeTopic topics = 4;
+}
+
+service HomeService {
+  rpc GetActivityHome(GetActivityHomeRequest) returns (GetActivityHomeResponse);
+}
