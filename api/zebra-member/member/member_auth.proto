@@ -1,0 +1,148 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package member_auth;
+
+option go_package = "./api/zebra-member/member;member";
+
+// 用户端最小用户信息
+message MemberAuthUser {
+  int64  user_id    = 1;
+  string user_name  = 2;
+  string nick_name  = 3;
+  string head_url   = 4;
+  string phone      = 5;
+  string email      = 6;
+}
+
+// 用户端通用响应
+message AuthResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败
+  string  msg = 2;
+}
+
+// 用户端注册请求
+message RegisterMemberRequest {
+  optional string user_name       = 1;  // 可选，为空时默认用手机号
+  string password        = 2;
+  string repeat_password = 3;
+  string phone           = 4;
+  string email           = 5;
+  string nick_name       = 6;
+  optional string verify_code = 7;  // 短信验证码，对接短信后必填
+}
+
+// 用户端注册响应
+message RegisterMemberResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg                     = 2;
+  MemberAuthUser user_info       = 3;
+}
+
+// 用户端登录请求
+message LoginMemberRequest {
+  string account  = 1;
+  string password = 2;
+}
+
+// 用户端登录响应
+message LoginMemberResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg                     = 2;
+  string token                   = 3;
+  int64 expires_in               = 4;
+  MemberAuthUser user_info       = 5;
+}
+
+// 退出登录请求
+message LogoutRequest {
+  int64 user_id = 1;
+}
+
+// 更新个人资料请求
+message UpdateProfileRequest {
+  optional string nick_name = 1;
+  optional string email = 2;
+  optional string phonenumber = 3;
+  optional string sex = 4;
+}
+
+// 上传头像请求
+message UploadAvatarRequest {
+  string file_name = 1;
+}
+
+// 上传头像响应
+message UploadAvatarResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  string img_url = 3;
+}
+
+// 发送验证码请求
+message SendVerifyCodeRequest {
+  string mobile = 1;
+  string biz_type = 2;
+}
+
+// 发送验证码响应
+message SendVerifyCodeResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  string message = 3;
+}
+
+// 换绑手机号请求
+message ChangeMobileRequest {
+  int64 user_id = 1;
+  string password = 2;
+  string new_mobile = 3;
+  string verify_code = 4;
+}
+
+// 通过短信重置密码请求
+message ResetPasswordRequest {
+  string mobile = 1;
+  string password = 2;
+  string repeat_password = 3;
+  string verify_code = 4;
+}
+
+// 通过原密码修改密码请求
+message ChangePasswordRequest {
+  string account         = 1;  // 手机号或邮箱
+  string old_password    = 2;
+  string new_password    = 3;
+  string repeat_password = 4;
+}
+
+// 用户端认证服务
+service MemberAuthService {
+  rpc Register(RegisterMemberRequest) returns (RegisterMemberResponse);
+  rpc Login(LoginMemberRequest) returns (LoginMemberResponse);
+  rpc Logout(LogoutRequest) returns (AuthResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (AuthResponse);
+  rpc UploadAvatar(UploadAvatarRequest) returns (UploadAvatarResponse);
+  rpc SendVerifyCode(SendVerifyCodeRequest) returns (SendVerifyCodeResponse);
+  rpc ChangeMobile(ChangeMobileRequest) returns (AuthResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (AuthResponse);
+  rpc ChangePassword(ChangePasswordRequest) returns (AuthResponse);
+}
