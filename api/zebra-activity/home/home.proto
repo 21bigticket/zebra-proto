@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-package home;
+package activity_home;
 
 option go_package = "./api/zebra-activity/home;home";
 

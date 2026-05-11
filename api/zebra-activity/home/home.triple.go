@@ -25,7 +25,7 @@ const _ = triple_protocol.IsAtLeastVersion0_1_0
 
 const (
 	// HomeServiceName is the fully-qualified name of the HomeService service.
-	HomeServiceName = "home.HomeService"
+	HomeServiceName = "activity_home.HomeService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -37,21 +37,21 @@ const (
 // period.
 const (
 	// HomeServiceGetActivityHomeProcedure is the fully-qualified name of the HomeService's GetActivityHome RPC.
-	HomeServiceGetActivityHomeProcedure = "/home.HomeService/GetActivityHome"
+	HomeServiceGetActivityHomeProcedure = "/activity_home.HomeService/GetActivityHome"
 )
 
 var (
 	_ HomeService = (*HomeServiceImpl)(nil)
 )
 
-// HomeService is a client for the home.HomeService service.
+// HomeService is a client for the activity_home.HomeService service.
 type HomeService interface {
 	GetActivityHome(ctx context.Context, req *GetActivityHomeRequest, opts ...client.CallOption) (*GetActivityHomeResponse, error)
 }
 
 // NewHomeService constructs a client for the home.HomeService service.
 func NewHomeService(cli *client.Client, opts ...client.ReferenceOption) (HomeService, error) {
-	conn, err := cli.DialWithInfo("home.HomeService", &HomeService_ClientInfo, opts...)
+	conn, err := cli.DialWithInfo("activity_home.HomeService", &HomeService_ClientInfo, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (c *HomeServiceImpl) GetActivityHome(ctx context.Context, req *GetActivityH
 }
 
 var HomeService_ClientInfo = client.ClientInfo{
-	InterfaceName: "home.HomeService",
+	InterfaceName: "activity_home.HomeService",
 	MethodNames:   []string{"GetActivityHome"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*HomeServiceImpl)
@@ -86,7 +86,7 @@ var HomeService_ClientInfo = client.ClientInfo{
 	},
 }
 
-// HomeServiceHandler is an implementation of the home.HomeService service.
+// HomeServiceHandler is an implementation of the activity_home.HomeService service.
 type HomeServiceHandler interface {
 	GetActivityHome(context.Context, *GetActivityHomeRequest) (*GetActivityHomeResponse, error)
 }
@@ -100,7 +100,7 @@ func SetProviderHomeService(srv common.RPCService) {
 }
 
 var HomeService_ServiceInfo = server.ServiceInfo{
-	InterfaceName: "home.HomeService",
+	InterfaceName: "activity_home.HomeService",
 	ServiceType:   (*HomeServiceHandler)(nil),
 	Methods: []server.MethodInfo{
 		{

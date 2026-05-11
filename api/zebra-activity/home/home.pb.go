@@ -330,7 +330,7 @@ var File_api_zebra_activity_home_home_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_home_home_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-activity/home/home.proto\x12\x04home\x1a\x1egoogle/protobuf/wrappers.proto\"\\\n" +
+	"\"api/zebra-activity/home/home.proto\x12\ractivity_home\x1a\x1egoogle/protobuf/wrappers.proto\"\\\n" +
 	"\x16GetActivityHomeRequest\x12!\n" +
 	"\fcoupon_limit\x18\x01 \x01(\x05R\vcouponLimit\x12\x1f\n" +
 	"\vtopic_limit\x18\x02 \x01(\x05R\n" +
@@ -354,14 +354,14 @@ const file_api_zebra_activity_home_home_proto_rawDesc = "" +
 	"\bsubtitle\x18\x03 \x01(\tR\bsubtitle\x12\x17\n" +
 	"\apic_url\x18\x04 \x01(\tR\x06picUrl\x12\x1d\n" +
 	"\n" +
-	"read_count\x18\x05 \x01(\x03R\treadCount\"\xb1\x01\n" +
+	"read_count\x18\x05 \x01(\x03R\treadCount\"\xc3\x01\n" +
 	"\x17GetActivityHomeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12*\n" +
-	"\acoupons\x18\x03 \x03(\v2\x10.home.HomeCouponR\acoupons\x12'\n" +
-	"\x06topics\x18\x04 \x03(\v2\x0f.home.HomeTopicR\x06topics2]\n" +
-	"\vHomeService\x12N\n" +
-	"\x0fGetActivityHome\x12\x1c.home.GetActivityHomeRequest\x1a\x1d.home.GetActivityHomeResponseB Z\x1e./api/zebra-activity/home;homeb\x06proto3"
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\acoupons\x18\x03 \x03(\v2\x19.activity_home.HomeCouponR\acoupons\x120\n" +
+	"\x06topics\x18\x04 \x03(\v2\x18.activity_home.HomeTopicR\x06topics2o\n" +
+	"\vHomeService\x12`\n" +
+	"\x0fGetActivityHome\x12%.activity_home.GetActivityHomeRequest\x1a&.activity_home.GetActivityHomeResponseB Z\x1e./api/zebra-activity/home;homeb\x06proto3"
 
 var (
 	file_api_zebra_activity_home_home_proto_rawDescOnce sync.Once
@@ -377,18 +377,18 @@ func file_api_zebra_activity_home_home_proto_rawDescGZIP() []byte {
 
 var file_api_zebra_activity_home_home_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_api_zebra_activity_home_home_proto_goTypes = []any{
-	(*GetActivityHomeRequest)(nil),  // 0: home.GetActivityHomeRequest
-	(*HomeCoupon)(nil),              // 1: home.HomeCoupon
-	(*HomeTopic)(nil),               // 2: home.HomeTopic
-	(*GetActivityHomeResponse)(nil), // 3: home.GetActivityHomeResponse
+	(*GetActivityHomeRequest)(nil),  // 0: activity_home.GetActivityHomeRequest
+	(*HomeCoupon)(nil),              // 1: activity_home.HomeCoupon
+	(*HomeTopic)(nil),               // 2: activity_home.HomeTopic
+	(*GetActivityHomeResponse)(nil), // 3: activity_home.GetActivityHomeResponse
 	(*wrapperspb.Int32Value)(nil),   // 4: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_home_home_proto_depIdxs = []int32{
-	4, // 0: home.GetActivityHomeResponse.code:type_name -> google.protobuf.Int32Value
-	1, // 1: home.GetActivityHomeResponse.coupons:type_name -> home.HomeCoupon
-	2, // 2: home.GetActivityHomeResponse.topics:type_name -> home.HomeTopic
-	0, // 3: home.HomeService.GetActivityHome:input_type -> home.GetActivityHomeRequest
-	3, // 4: home.HomeService.GetActivityHome:output_type -> home.GetActivityHomeResponse
+	4, // 0: activity_home.GetActivityHomeResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 1: activity_home.GetActivityHomeResponse.coupons:type_name -> activity_home.HomeCoupon
+	2, // 2: activity_home.GetActivityHomeResponse.topics:type_name -> activity_home.HomeTopic
+	0, // 3: activity_home.HomeService.GetActivityHome:input_type -> activity_home.GetActivityHomeRequest
+	3, // 4: activity_home.HomeService.GetActivityHome:output_type -> activity_home.GetActivityHomeResponse
 	4, // [4:5] is the sub-list for method output_type
 	3, // [3:4] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

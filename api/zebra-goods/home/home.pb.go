@@ -374,7 +374,8 @@ var File_api_zebra_goods_home_home_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_home_home_proto_rawDesc = "" +
 	"\n" +
-	"\x1fapi/zebra-goods/home/home.proto\x12\x04home\x1a\x1egoogle/protobuf/wrappers.proto\"~\n" +
+	"\x1fapi/zebra-goods/home/home.proto\x12\n" +
+	"goods_home\x1a\x1egoogle/protobuf/wrappers.proto\"~\n" +
 	"\x13GetGoodsHomeRequest\x12%\n" +
 	"\x0ecategory_limit\x18\x01 \x01(\x05R\rcategoryLimit\x12\x1f\n" +
 	"\vbrand_limit\x18\x02 \x01(\x05R\n" +
@@ -397,17 +398,17 @@ const file_api_zebra_goods_home_home_proto_rawDesc = "" +
 	"main_image\x18\x03 \x01(\tR\tmainImage\x12\x1b\n" +
 	"\tsub_title\x18\x04 \x01(\tR\bsubTitle\x12!\n" +
 	"\fretail_price\x18\x05 \x01(\x03R\vretailPrice\x12#\n" +
-	"\rcounter_price\x18\x06 \x01(\x03R\fcounterPrice\"\xdd\x01\n" +
+	"\rcounter_price\x18\x06 \x01(\x03R\fcounterPrice\"\xef\x01\n" +
 	"\x14GetGoodsHomeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
 	"\n" +
-	"categories\x18\x03 \x03(\v2\x12.home.HomeCategoryR\n" +
-	"categories\x12'\n" +
-	"\x06brands\x18\x04 \x03(\v2\x0f.home.HomeBrandR\x06brands\x12%\n" +
-	"\x05goods\x18\x05 \x03(\v2\x0f.home.HomeGoodsR\x05goods2T\n" +
-	"\vHomeService\x12E\n" +
-	"\fGetGoodsHome\x12\x19.home.GetGoodsHomeRequest\x1a\x1a.home.GetGoodsHomeResponseB\x1dZ\x1b./api/zebra-goods/home;homeb\x06proto3"
+	"categories\x18\x03 \x03(\v2\x18.goods_home.HomeCategoryR\n" +
+	"categories\x12-\n" +
+	"\x06brands\x18\x04 \x03(\v2\x15.goods_home.HomeBrandR\x06brands\x12+\n" +
+	"\x05goods\x18\x05 \x03(\v2\x15.goods_home.HomeGoodsR\x05goods2`\n" +
+	"\vHomeService\x12Q\n" +
+	"\fGetGoodsHome\x12\x1f.goods_home.GetGoodsHomeRequest\x1a .goods_home.GetGoodsHomeResponseB\x1dZ\x1b./api/zebra-goods/home;homeb\x06proto3"
 
 var (
 	file_api_zebra_goods_home_home_proto_rawDescOnce sync.Once
@@ -423,20 +424,20 @@ func file_api_zebra_goods_home_home_proto_rawDescGZIP() []byte {
 
 var file_api_zebra_goods_home_home_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_api_zebra_goods_home_home_proto_goTypes = []any{
-	(*GetGoodsHomeRequest)(nil),   // 0: home.GetGoodsHomeRequest
-	(*HomeCategory)(nil),          // 1: home.HomeCategory
-	(*HomeBrand)(nil),             // 2: home.HomeBrand
-	(*HomeGoods)(nil),             // 3: home.HomeGoods
-	(*GetGoodsHomeResponse)(nil),  // 4: home.GetGoodsHomeResponse
+	(*GetGoodsHomeRequest)(nil),   // 0: goods_home.GetGoodsHomeRequest
+	(*HomeCategory)(nil),          // 1: goods_home.HomeCategory
+	(*HomeBrand)(nil),             // 2: goods_home.HomeBrand
+	(*HomeGoods)(nil),             // 3: goods_home.HomeGoods
+	(*GetGoodsHomeResponse)(nil),  // 4: goods_home.GetGoodsHomeResponse
 	(*wrapperspb.Int32Value)(nil), // 5: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_home_home_proto_depIdxs = []int32{
-	5, // 0: home.GetGoodsHomeResponse.code:type_name -> google.protobuf.Int32Value
-	1, // 1: home.GetGoodsHomeResponse.categories:type_name -> home.HomeCategory
-	2, // 2: home.GetGoodsHomeResponse.brands:type_name -> home.HomeBrand
-	3, // 3: home.GetGoodsHomeResponse.goods:type_name -> home.HomeGoods
-	0, // 4: home.HomeService.GetGoodsHome:input_type -> home.GetGoodsHomeRequest
-	4, // 5: home.HomeService.GetGoodsHome:output_type -> home.GetGoodsHomeResponse
+	5, // 0: goods_home.GetGoodsHomeResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 1: goods_home.GetGoodsHomeResponse.categories:type_name -> goods_home.HomeCategory
+	2, // 2: goods_home.GetGoodsHomeResponse.brands:type_name -> goods_home.HomeBrand
+	3, // 3: goods_home.GetGoodsHomeResponse.goods:type_name -> goods_home.HomeGoods
+	0, // 4: goods_home.HomeService.GetGoodsHome:input_type -> goods_home.GetGoodsHomeRequest
+	4, // 5: goods_home.HomeService.GetGoodsHome:output_type -> goods_home.GetGoodsHomeResponse
 	5, // [5:6] is the sub-list for method output_type
 	4, // [4:5] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

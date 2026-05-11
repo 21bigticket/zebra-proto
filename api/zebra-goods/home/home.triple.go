@@ -25,7 +25,7 @@ const _ = triple_protocol.IsAtLeastVersion0_1_0
 
 const (
 	// HomeServiceName is the fully-qualified name of the HomeService service.
-	HomeServiceName = "home.HomeService"
+	HomeServiceName = "goods_home.HomeService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -37,21 +37,21 @@ const (
 // period.
 const (
 	// HomeServiceGetGoodsHomeProcedure is the fully-qualified name of the HomeService's GetGoodsHome RPC.
-	HomeServiceGetGoodsHomeProcedure = "/home.HomeService/GetGoodsHome"
+	HomeServiceGetGoodsHomeProcedure = "/goods_home.HomeService/GetGoodsHome"
 )
 
 var (
 	_ HomeService = (*HomeServiceImpl)(nil)
 )
 
-// HomeService is a client for the home.HomeService service.
+// HomeService is a client for the goods_home.HomeService service.
 type HomeService interface {
 	GetGoodsHome(ctx context.Context, req *GetGoodsHomeRequest, opts ...client.CallOption) (*GetGoodsHomeResponse, error)
 }
 
 // NewHomeService constructs a client for the home.HomeService service.
 func NewHomeService(cli *client.Client, opts ...client.ReferenceOption) (HomeService, error) {
-	conn, err := cli.DialWithInfo("home.HomeService", &HomeService_ClientInfo, opts...)
+	conn, err := cli.DialWithInfo("goods_home.HomeService", &HomeService_ClientInfo, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (c *HomeServiceImpl) GetGoodsHome(ctx context.Context, req *GetGoodsHomeReq
 }
 
 var HomeService_ClientInfo = client.ClientInfo{
-	InterfaceName: "home.HomeService",
+	InterfaceName: "goods_home.HomeService",
 	MethodNames:   []string{"GetGoodsHome"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*HomeServiceImpl)
@@ -86,7 +86,7 @@ var HomeService_ClientInfo = client.ClientInfo{
 	},
 }
 
-// HomeServiceHandler is an implementation of the home.HomeService service.
+// HomeServiceHandler is an implementation of the goods_home.HomeService service.
 type HomeServiceHandler interface {
 	GetGoodsHome(context.Context, *GetGoodsHomeRequest) (*GetGoodsHomeResponse, error)
 }
@@ -100,7 +100,7 @@ func SetProviderHomeService(srv common.RPCService) {
 }
 
 var HomeService_ServiceInfo = server.ServiceInfo{
-	InterfaceName: "home.HomeService",
+	InterfaceName: "goods_home.HomeService",
 	ServiceType:   (*HomeServiceHandler)(nil),
 	Methods: []server.MethodInfo{
 		{
