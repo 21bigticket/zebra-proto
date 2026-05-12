@@ -83,6 +83,7 @@ message ListTopicRequest {
   int32 page = 1;
   int32 page_size = 2;
   int32 status = 3;
+  string title_keyword = 4;
 }
 
 message ListTopicResponse {

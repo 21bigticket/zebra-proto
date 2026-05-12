@@ -575,6 +575,7 @@ type ListTopicRequest struct {
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	Status        int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
+	TitleKeyword  string                 `protobuf:"bytes,4,opt,name=title_keyword,json=titleKeyword,proto3" json:"title_keyword,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -628,6 +629,13 @@ func (x *ListTopicRequest) GetStatus() int32 {
 		return x.Status
 	}
 	return 0
+}
+
+func (x *ListTopicRequest) GetTitleKeyword() string {
+	if x != nil {
+		return x.TitleKeyword
+	}
+	return ""
 }
 
 type ListTopicResponse struct {
@@ -1150,11 +1158,12 @@ const file_api_zebra_activity_topic_proto_rawDesc = "" +
 	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x16\n" +
 	"\x06status\x18\a \x01(\x05R\x06status\"$\n" +
 	"\x12DeleteTopicRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"[\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x80\x01\n" +
 	"\x10ListTopicRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\x05R\x06status\"\xc3\x01\n" +
+	"\x06status\x18\x03 \x01(\x05R\x06status\x12#\n" +
+	"\rtitle_keyword\x18\x04 \x01(\tR\ftitleKeyword\"\xc3\x01\n" +
 	"\x11ListTopicResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12$\n" +
