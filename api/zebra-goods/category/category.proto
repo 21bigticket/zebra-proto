@@ -42,7 +42,7 @@ message CreateCategoryRequest {
   int64  parent_id  = 1;
   string name       = 2;
   string icon_url   = 3;
-  int32  sort_order = 4;
+  google.protobuf.Int32Value sort_order = 4;
 }
 
 // 更新分类请求
@@ -50,8 +50,8 @@ message UpdateCategoryRequest {
   int64  id         = 1;
   string name       = 2;
   string icon_url   = 3;
-  int32  sort_order = 4;
-  int32  status     = 5;
+  google.protobuf.Int32Value sort_order = 4;
+  google.protobuf.Int32Value status = 5;
 }
 
 // 删除分类请求
@@ -77,7 +77,7 @@ message ListCategoryRequest {
   int32  page_size  = 2;
   int64  parent_id  = 3; // 父分类ID，-1表示全部
   int32  level      = 4; // 层级，-1表示全部
-  int32  status     = 5; // 状态，-1表示全部
+  google.protobuf.Int32Value status = 5; // 状态，-1表示全部
 }
 
 // 列出分类响应

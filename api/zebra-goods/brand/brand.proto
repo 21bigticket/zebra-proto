@@ -29,8 +29,8 @@ message Brand {
   string name        = 2;
   string logo_url    = 3;
   string description = 4;
-  int32  sort_order  = 5;
-  int32  status      = 6; // 0=禁用, 1=启用
+  google.protobuf.Int32Value sort_order = 5;
+  google.protobuf.Int32Value status = 6; // 0=禁用, 1=启用
   int64  create_time = 7;
   int64  update_time = 8;
   int32  is_deleted  = 9;
@@ -41,7 +41,7 @@ message CreateBrandRequest {
   string name        = 1;
   string logo_url    = 2;
   string description = 3;
-  int32  sort_order  = 4;
+  google.protobuf.Int32Value sort_order = 4;
 }
 
 // 更新品牌请求
@@ -50,8 +50,8 @@ message UpdateBrandRequest {
   string name        = 2;
   string logo_url    = 3;
   string description = 4;
-  int32  sort_order  = 5;
-  int32  status      = 6;
+  google.protobuf.Int32Value sort_order = 5;
+  google.protobuf.Int32Value status = 6;
 }
 
 // 删除品牌请求
@@ -76,7 +76,7 @@ message ListBrandRequest {
   int32  page          = 1;
   int32  page_size     = 2;
   string name_keyword  = 3;
-  int32  status        = 4;
+  google.protobuf.Int32Value status = 4;
 }
 
 // 列出品牌响应

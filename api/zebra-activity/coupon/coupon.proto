@@ -37,7 +37,7 @@ message Coupon {
   int32  valid_days      = 10; // 有效天数
   int64  start_time      = 11; // 开始时间
   int64  end_time        = 12; // 结束时间
-  int32  status          = 13; // 0=禁用, 1=启用
+  google.protobuf.Int32Value status = 13; // 0=禁用, 1=启用
   int64  create_time     = 14;
   int64  update_time     = 15;
   int32  is_deleted      = 16;
@@ -67,7 +67,7 @@ message UpdateCouponRequest {
   int32  valid_days      = 7;
   int64  start_time      = 8;
   int64  end_time        = 9;
-  int32  status          = 10;
+  google.protobuf.Int32Value status = 10;
 }
 
 // 删除优惠券请求
@@ -92,7 +92,7 @@ message ListCouponRequest {
   int32  page      = 1;
   int32  page_size = 2;
   int32  type      = 3; // -1表示全部
-  int32  status    = 4; // -1表示全部
+  google.protobuf.Int32Value status = 4; // -1表示全部
 }
 
 // 列出优惠券响应

@@ -31,7 +31,7 @@ message Payment {
   int64  user_id          = 4;
   int64  pay_amount      = 5;  // 支付金额（分）
   int32  pay_type        = 6;  // 1=支付宝, 2=微信, 3=余额
-  int32  pay_status      = 7;  // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
+  google.protobuf.Int32Value pay_status = 7; // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
   string third_party_no  = 8;  // 第三方支付流水号
   int64  pay_time        = 9;
   string notify_url     = 10;
@@ -48,7 +48,7 @@ message Refund {
   string pay_no          = 3;
   string order_no        = 4;
   int64  refund_amount   = 5;  // 退款金额（分）
-  int32  refund_status   = 6;  // 0=退款中, 1=退款成功, 2=退款失败
+  google.protobuf.Int32Value refund_status = 6; // 0=退款中, 1=退款成功, 2=退款失败
   string third_party_no  = 7;  // 第三方退款流水号
   int64  refund_time     = 8;
   string refund_reason   = 9;
@@ -91,7 +91,7 @@ message CreatePaymentResponse {
 message PayCallbackRequest {
   string pay_no         = 1;
   string third_party_no = 2;
-  int32  pay_status     = 3;
+  google.protobuf.Int32Value pay_status = 3;
 }
 
 // 创建退款请求
@@ -140,7 +140,7 @@ message ListPaymentRequest {
   string order_no = 4; // 订单号，空表示全部
   string pay_no = 5; // 支付单号，空表示全部
   int32 pay_type = 6; // 0表示全部
-  int32 pay_status = 7; // -1表示全部
+  google.protobuf.Int32Value pay_status = 7; // -1表示全部
   int64 start_time = 8;
   int64 end_time = 9;
 }
@@ -176,7 +176,7 @@ message ListRefundRequest {
   string pay_no = 3;
   string order_no = 4;
   string refund_no = 5;
-  int32 refund_status = 6; // -1表示全部
+  google.protobuf.Int32Value refund_status = 6; // -1表示全部
   int64 start_time = 7;
   int64 end_time = 8;
 }

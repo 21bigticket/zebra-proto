@@ -45,7 +45,7 @@ type SmsTemplate struct {
 	TplCode       string                 `protobuf:"bytes,2,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	TplName       string                 `protobuf:"bytes,3,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplContent    string                 `protobuf:"bytes,4,opt,name=tpl_content,json=tplContent,proto3" json:"tpl_content,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,5,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // 0=禁用, 1=启用
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // 0=禁用, 1=启用
 	CreateTime    int64                  `protobuf:"varint,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,7,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,8,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -111,11 +111,11 @@ func (x *SmsTemplate) GetTplContent() string {
 	return ""
 }
 
-func (x *SmsTemplate) GetTplStatus() int32 {
+func (x *SmsTemplate) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *SmsTemplate) GetCreateTime() int64 {
@@ -145,7 +145,7 @@ type CreateSmsTemplateRequest struct {
 	TplCode       string                 `protobuf:"bytes,1,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplContent    string                 `protobuf:"bytes,3,opt,name=tpl_content,json=tplContent,proto3" json:"tpl_content,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -201,11 +201,11 @@ func (x *CreateSmsTemplateRequest) GetTplContent() string {
 	return ""
 }
 
-func (x *CreateSmsTemplateRequest) GetTplStatus() int32 {
+func (x *CreateSmsTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 更新短信模板请求
@@ -214,7 +214,7 @@ type UpdateSmsTemplateRequest struct {
 	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
 	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplContent    string                 `protobuf:"bytes,3,opt,name=tpl_content,json=tplContent,proto3" json:"tpl_content,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,11 +270,11 @@ func (x *UpdateSmsTemplateRequest) GetTplContent() string {
 	return ""
 }
 
-func (x *UpdateSmsTemplateRequest) GetTplStatus() int32 {
+func (x *UpdateSmsTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 删除短信模板请求
@@ -471,7 +471,7 @@ type ListSmsTemplateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -520,11 +520,11 @@ func (x *ListSmsTemplateRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListSmsTemplateRequest) GetTplStatus() int32 {
+func (x *ListSmsTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 短信模板分页查询响应
@@ -604,7 +604,7 @@ type SmsLog struct {
 	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
 	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	RetryCount    int32                  `protobuf:"varint,7,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
 	Remark        string                 `protobuf:"bytes,8,opt,name=remark,proto3" json:"remark,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -677,11 +677,11 @@ func (x *SmsLog) GetContent() string {
 	return ""
 }
 
-func (x *SmsLog) GetStatus() int32 {
+func (x *SmsLog) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *SmsLog) GetRetryCount() int32 {
@@ -712,7 +712,7 @@ type ListSmsLogRequest struct {
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
 	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
-	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
 	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -777,11 +777,11 @@ func (x *ListSmsLogRequest) GetTplCode() string {
 	return ""
 }
 
-func (x *ListSmsLogRequest) GetStatus() int32 {
+func (x *ListSmsLogRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *ListSmsLogRequest) GetStartTime() int64 {
@@ -1199,35 +1199,35 @@ var File_api_zebra_message_sms_sms_proto protoreflect.FileDescriptor
 
 const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\n" +
-	"\x1fapi/zebra-message/sms/sms.proto\x12\x03sms\x1a\x1egoogle/protobuf/wrappers.proto\"\xfb\x01\n" +
+	"\x1fapi/zebra-message/sms/sms.proto\x12\x03sms\x1a\x1egoogle/protobuf/wrappers.proto\"\x98\x02\n" +
 	"\vSmsTemplate\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12\x19\n" +
 	"\btpl_name\x18\x03 \x01(\tR\atplName\x12\x1f\n" +
 	"\vtpl_content\x18\x04 \x01(\tR\n" +
-	"tplContent\x12\x1d\n" +
+	"tplContent\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x05 \x01(\x05R\ttplStatus\x12\x1f\n" +
+	"tpl_status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\a \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\x90\x01\n" +
+	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\xad\x01\n" +
 	"\x18CreateSmsTemplateRequest\x12\x19\n" +
 	"\btpl_code\x18\x01 \x01(\tR\atplCode\x12\x19\n" +
 	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x1f\n" +
 	"\vtpl_content\x18\x03 \x01(\tR\n" +
-	"tplContent\x12\x1d\n" +
+	"tplContent\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"\x8c\x01\n" +
+	"tpl_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"\xa9\x01\n" +
 	"\x18UpdateSmsTemplateRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\x1f\n" +
 	"\vtpl_content\x18\x03 \x01(\tR\n" +
-	"tplContent\x12\x1d\n" +
+	"tplContent\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"1\n" +
+	"tpl_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"1\n" +
 	"\x18DeleteSmsTemplateRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\"V\n" +
 	"\x15GetSmsTemplateRequest\x12\x17\n" +
@@ -1237,35 +1237,35 @@ const file_api_zebra_message_sms_sms_proto_rawDesc = "" +
 	"\x16GetSmsTemplateResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12,\n" +
-	"\btemplate\x18\x03 \x01(\v2\x10.sms.SmsTemplateR\btemplate\"h\n" +
+	"\btemplate\x18\x03 \x01(\v2\x10.sms.SmsTemplateR\btemplate\"\x85\x01\n" +
 	"\x16ListSmsTemplateRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x03 \x01(\x05R\ttplStatus\"\xa2\x01\n" +
+	"tpl_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"\xa2\x01\n" +
 	"\x17ListSmsTemplateResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
 	"\ttemplates\x18\x03 \x03(\v2\x10.sms.SmsTemplateR\ttemplates\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xf3\x01\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x90\x02\n" +
 	"\x06SmsLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
 	"\x06msg_id\x18\x02 \x01(\tR\x05msgId\x12\x14\n" +
 	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x19\n" +
 	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1f\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vretry_count\x18\a \x01(\x05R\n" +
 	"retryCount\x12\x16\n" +
 	"\x06remark\x18\b \x01(\tR\x06remark\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
-	"createTime\"\xc7\x01\n" +
+	"createTime\"\xe4\x01\n" +
 	"\x11ListSmsLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x19\n" +
-	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\x12\x1d\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x123\n" +
+	"\x06status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\a \x01(\x03R\aendTime\"\x8e\x01\n" +
@@ -1349,38 +1349,44 @@ var file_api_zebra_message_sms_sms_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),    // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_message_sms_sms_proto_depIdxs = []int32{
-	18, // 0: sms.GetSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: sms.GetSmsTemplateResponse.template:type_name -> sms.SmsTemplate
-	18, // 2: sms.ListSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: sms.ListSmsTemplateResponse.templates:type_name -> sms.SmsTemplate
-	18, // 4: sms.ListSmsLogResponse.code:type_name -> google.protobuf.Int32Value
-	8,  // 5: sms.ListSmsLogResponse.logs:type_name -> sms.SmsLog
-	18, // 6: sms.SmsResponse.code:type_name -> google.protobuf.Int32Value
-	16, // 7: sms.SendSmsRequest.params:type_name -> sms.SendSmsRequest.ParamsEntry
-	18, // 8: sms.SendSmsResponse.code:type_name -> google.protobuf.Int32Value
-	17, // 9: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
-	18, // 10: sms.BatchSendSmsResponse.code:type_name -> google.protobuf.Int32Value
-	12, // 11: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
-	14, // 12: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
-	1,  // 13: sms.SmsService.CreateTemplate:input_type -> sms.CreateSmsTemplateRequest
-	2,  // 14: sms.SmsService.UpdateTemplate:input_type -> sms.UpdateSmsTemplateRequest
-	3,  // 15: sms.SmsService.DeleteTemplate:input_type -> sms.DeleteSmsTemplateRequest
-	4,  // 16: sms.SmsService.GetTemplate:input_type -> sms.GetSmsTemplateRequest
-	6,  // 17: sms.SmsService.ListTemplates:input_type -> sms.ListSmsTemplateRequest
-	9,  // 18: sms.SmsService.ListLogs:input_type -> sms.ListSmsLogRequest
-	13, // 19: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
-	15, // 20: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
-	11, // 21: sms.SmsService.CreateTemplate:output_type -> sms.SmsResponse
-	11, // 22: sms.SmsService.UpdateTemplate:output_type -> sms.SmsResponse
-	11, // 23: sms.SmsService.DeleteTemplate:output_type -> sms.SmsResponse
-	5,  // 24: sms.SmsService.GetTemplate:output_type -> sms.GetSmsTemplateResponse
-	7,  // 25: sms.SmsService.ListTemplates:output_type -> sms.ListSmsTemplateResponse
-	10, // 26: sms.SmsService.ListLogs:output_type -> sms.ListSmsLogResponse
-	19, // [19:27] is the sub-list for method output_type
-	11, // [11:19] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	18, // 0: sms.SmsTemplate.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 1: sms.CreateSmsTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 2: sms.UpdateSmsTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 3: sms.GetSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: sms.GetSmsTemplateResponse.template:type_name -> sms.SmsTemplate
+	18, // 5: sms.ListSmsTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 6: sms.ListSmsTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: sms.ListSmsTemplateResponse.templates:type_name -> sms.SmsTemplate
+	18, // 8: sms.SmsLog.status:type_name -> google.protobuf.Int32Value
+	18, // 9: sms.ListSmsLogRequest.status:type_name -> google.protobuf.Int32Value
+	18, // 10: sms.ListSmsLogResponse.code:type_name -> google.protobuf.Int32Value
+	8,  // 11: sms.ListSmsLogResponse.logs:type_name -> sms.SmsLog
+	18, // 12: sms.SmsResponse.code:type_name -> google.protobuf.Int32Value
+	16, // 13: sms.SendSmsRequest.params:type_name -> sms.SendSmsRequest.ParamsEntry
+	18, // 14: sms.SendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 15: sms.BatchSendSmsRequest.params:type_name -> sms.BatchSendSmsRequest.ParamsEntry
+	18, // 16: sms.BatchSendSmsResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 17: sms.SmsService.SendSms:input_type -> sms.SendSmsRequest
+	14, // 18: sms.SmsService.BatchSendSms:input_type -> sms.BatchSendSmsRequest
+	1,  // 19: sms.SmsService.CreateTemplate:input_type -> sms.CreateSmsTemplateRequest
+	2,  // 20: sms.SmsService.UpdateTemplate:input_type -> sms.UpdateSmsTemplateRequest
+	3,  // 21: sms.SmsService.DeleteTemplate:input_type -> sms.DeleteSmsTemplateRequest
+	4,  // 22: sms.SmsService.GetTemplate:input_type -> sms.GetSmsTemplateRequest
+	6,  // 23: sms.SmsService.ListTemplates:input_type -> sms.ListSmsTemplateRequest
+	9,  // 24: sms.SmsService.ListLogs:input_type -> sms.ListSmsLogRequest
+	13, // 25: sms.SmsService.SendSms:output_type -> sms.SendSmsResponse
+	15, // 26: sms.SmsService.BatchSendSms:output_type -> sms.BatchSendSmsResponse
+	11, // 27: sms.SmsService.CreateTemplate:output_type -> sms.SmsResponse
+	11, // 28: sms.SmsService.UpdateTemplate:output_type -> sms.SmsResponse
+	11, // 29: sms.SmsService.DeleteTemplate:output_type -> sms.SmsResponse
+	5,  // 30: sms.SmsService.GetTemplate:output_type -> sms.GetSmsTemplateResponse
+	7,  // 31: sms.SmsService.ListTemplates:output_type -> sms.ListSmsTemplateResponse
+	10, // 32: sms.SmsService.ListLogs:output_type -> sms.ListSmsLogResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_sms_sms_proto_init() }

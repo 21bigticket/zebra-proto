@@ -30,7 +30,7 @@ message GoodsSpec {
   string spec_name   = 3; // 规格名称, 如"颜色"
   string spec_value  = 4; // 规格值, 如"红色"
   repeated string spec_images = 5;
-  int32  spec_sort   = 6;
+  google.protobuf.Int32Value spec_sort = 6;
   int64  create_time = 7;
   int64  update_time = 8;
 }
@@ -41,7 +41,7 @@ message CreateSpecRequest {
   string spec_name  = 2;
   string spec_value = 3;
   repeated string spec_images = 4;
-  int32  spec_sort  = 5;
+  google.protobuf.Int32Value spec_sort = 5;
 }
 
 // 批量创建规格请求
@@ -55,7 +55,7 @@ message UpdateSpecRequest {
   optional string spec_name  = 2;
   optional string spec_value = 3;
   repeated string spec_images = 4;
-  optional int32  spec_sort  = 5;
+  google.protobuf.Int32Value spec_sort = 5;
 }
 
 // 删除规格请求

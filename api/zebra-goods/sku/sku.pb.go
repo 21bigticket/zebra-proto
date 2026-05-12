@@ -47,8 +47,8 @@ type GoodsSku struct {
 	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`                      // SKU名称，如"红色-L"
 	Price         int64                  `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`                   // 价格(分)
 	ImageUrl      string                 `protobuf:"bytes,6,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -130,18 +130,18 @@ func (x *GoodsSku) GetImageUrl() string {
 	return ""
 }
 
-func (x *GoodsSku) GetSortOrder() int32 {
+func (x *GoodsSku) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *GoodsSku) GetStatus() int32 {
+func (x *GoodsSku) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *GoodsSku) GetCreateTime() int64 {
@@ -187,7 +187,7 @@ type CreateSkuRequest struct {
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
 	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	SpecIds       []int64                `protobuf:"varint,9,rep,packed,name=spec_ids,json=specIds,proto3" json:"spec_ids,omitempty"` // 关联的规格ID列表
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -258,11 +258,11 @@ func (x *CreateSkuRequest) GetImageUrl() string {
 	return ""
 }
 
-func (x *CreateSkuRequest) GetSortOrder() int32 {
+func (x *CreateSkuRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateSkuRequest) GetSpecIds() []int64 {
@@ -279,8 +279,8 @@ type UpdateSkuRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Price         int64                  `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
 	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	SkuCode       string                 `protobuf:"bytes,7,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`
 	GoodsId       int64                  `protobuf:"varint,8,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	SpecIds       []int64                `protobuf:"varint,9,rep,packed,name=spec_ids,json=specIds,proto3" json:"spec_ids,omitempty"` // 关联的规格ID列表
@@ -346,18 +346,18 @@ func (x *UpdateSkuRequest) GetImageUrl() string {
 	return ""
 }
 
-func (x *UpdateSkuRequest) GetSortOrder() int32 {
+func (x *UpdateSkuRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *UpdateSkuRequest) GetStatus() int32 {
+func (x *UpdateSkuRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateSkuRequest) GetSkuCode() string {
@@ -388,7 +388,7 @@ type BatchCreateSkuItem struct {
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
 	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	SpecIds       []int64                `protobuf:"varint,9,rep,packed,name=spec_ids,json=specIds,proto3" json:"spec_ids,omitempty"` // 关联的规格ID列表
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -459,11 +459,11 @@ func (x *BatchCreateSkuItem) GetImageUrl() string {
 	return ""
 }
 
-func (x *BatchCreateSkuItem) GetSortOrder() int32 {
+func (x *BatchCreateSkuItem) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *BatchCreateSkuItem) GetSpecIds() []int64 {
@@ -521,8 +521,8 @@ type BatchUpdateSkuItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -571,18 +571,18 @@ func (x *BatchUpdateSkuItem) GetPrice() int64 {
 	return 0
 }
 
-func (x *BatchUpdateSkuItem) GetSortOrder() int32 {
+func (x *BatchUpdateSkuItem) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *BatchUpdateSkuItem) GetStatus() int32 {
+func (x *BatchUpdateSkuItem) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 type BatchUpdateSkuRequest struct {
@@ -898,7 +898,7 @@ type ListSkuRequest struct {
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	GoodsId       int64                  `protobuf:"varint,3,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"` // -1表示全部
-	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`                  // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                   // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -954,11 +954,11 @@ func (x *ListSkuRequest) GetGoodsId() int64 {
 	return 0
 }
 
-func (x *ListSkuRequest) GetStatus() int32 {
+func (x *ListSkuRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 // 列出SKU响应
@@ -1086,17 +1086,17 @@ var File_api_zebra_goods_sku_sku_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\n" +
-	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\x1a\x1egoogle/protobuf/wrappers.proto\"\xe7\x02\n" +
+	"\x1dapi/zebra-goods/sku/sku.proto\x12\x03sku\x1a\x1egoogle/protobuf/wrappers.proto\"\xa1\x03\n" +
 	"\bGoodsSku\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x03 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x05 \x01(\x03R\x05price\x12\x1b\n" +
-	"\timage_url\x18\x06 \x01(\tR\bimageUrl\x12\x1d\n" +
+	"\timage_url\x18\x06 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
-	"sort_order\x18\a \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\b \x01(\x05R\x06status\x12\x1f\n" +
+	"sort_order\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\n" +
@@ -1105,44 +1105,44 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\n" +
 	"is_deleted\x18\v \x01(\x05R\tisDeleted\x12\x1b\n" +
 	"\tstock_num\x18\r \x01(\x05R\bstockNum\x12\x19\n" +
-	"\bspec_ids\x18\x0e \x03(\x03R\aspecIds\"\xc9\x01\n" +
+	"\bspec_ids\x18\x0e \x03(\x03R\aspecIds\"\xe6\x01\n" +
 	"\x10CreateSkuRequest\x12\x19\n" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
-	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12\x1d\n" +
+	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x19\n" +
-	"\bspec_ids\x18\t \x03(\x03R\aspecIds\"\xf1\x01\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x19\n" +
+	"\bspec_ids\x18\t \x03(\x03R\aspecIds\"\xab\x02\n" +
 	"\x10UpdateSkuRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x03 \x01(\x03R\x05price\x12\x1b\n" +
-	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x1d\n" +
+	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
-	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x19\n" +
+	"sort_order\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x19\n" +
 	"\bsku_code\x18\a \x01(\tR\askuCode\x12\x19\n" +
 	"\bgoods_id\x18\b \x01(\x03R\agoodsId\x12\x19\n" +
-	"\bspec_ids\x18\t \x03(\x03R\aspecIds\"\xcb\x01\n" +
+	"\bspec_ids\x18\t \x03(\x03R\aspecIds\"\xe8\x01\n" +
 	"\x12BatchCreateSkuItem\x12\x19\n" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
 	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
-	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12\x1d\n" +
+	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x19\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x19\n" +
 	"\bspec_ids\x18\t \x03(\x03R\aspecIds\"F\n" +
 	"\x15BatchCreateSkuRequest\x12-\n" +
-	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchCreateSkuItemR\x05items\"q\n" +
+	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchCreateSkuItemR\x05items\"\xab\x01\n" +
 	"\x12BatchUpdateSkuItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05price\x18\x02 \x01(\x03R\x05price\x12\x1d\n" +
+	"\x05price\x18\x02 \x01(\x03R\x05price\x12:\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"F\n" +
+	"sort_order\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"F\n" +
 	"\x15BatchUpdateSkuRequest\x12-\n" +
 	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchUpdateSkuItemR\x05items\"\"\n" +
 	"\x10DeleteSkuRequest\x12\x0e\n" +
@@ -1159,12 +1159,12 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x17MatchSkuBySpecsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
-	"\x03sku\x18\x03 \x01(\v2\r.sku.GoodsSkuR\x03sku\"t\n" +
+	"\x03sku\x18\x03 \x01(\v2\r.sku.GoodsSkuR\x03sku\"\x91\x01\n" +
 	"\x0eListSkuRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x19\n" +
-	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"\x8d\x01\n" +
+	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x123\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\x8d\x01\n" +
 	"\x0fListSkuResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +
@@ -1218,38 +1218,47 @@ var file_api_zebra_goods_sku_sku_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),   // 15: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_sku_sku_proto_depIdxs = []int32{
-	3,  // 0: sku.BatchCreateSkuRequest.items:type_name -> sku.BatchCreateSkuItem
-	5,  // 1: sku.BatchUpdateSkuRequest.items:type_name -> sku.BatchUpdateSkuItem
-	15, // 2: sku.GetSkuResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
-	15, // 4: sku.MatchSkuBySpecsResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: sku.MatchSkuBySpecsResponse.sku:type_name -> sku.GoodsSku
-	15, // 6: sku.ListSkuResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 7: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
-	15, // 8: sku.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 9: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
-	4,  // 10: sku.SkuService.BatchCreate:input_type -> sku.BatchCreateSkuRequest
-	6,  // 11: sku.SkuService.BatchUpdate:input_type -> sku.BatchUpdateSkuRequest
-	2,  // 12: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
-	7,  // 13: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
-	8,  // 14: sku.SkuService.Get:input_type -> sku.GetSkuRequest
-	12, // 15: sku.SkuService.List:input_type -> sku.ListSkuRequest
-	12, // 16: sku.SkuService.ListSimple:input_type -> sku.ListSkuRequest
-	10, // 17: sku.SkuService.MatchBySpecs:input_type -> sku.MatchSkuBySpecsRequest
-	14, // 18: sku.SkuService.Create:output_type -> sku.Response
-	14, // 19: sku.SkuService.BatchCreate:output_type -> sku.Response
-	14, // 20: sku.SkuService.BatchUpdate:output_type -> sku.Response
-	14, // 21: sku.SkuService.Update:output_type -> sku.Response
-	14, // 22: sku.SkuService.Delete:output_type -> sku.Response
-	9,  // 23: sku.SkuService.Get:output_type -> sku.GetSkuResponse
-	13, // 24: sku.SkuService.List:output_type -> sku.ListSkuResponse
-	13, // 25: sku.SkuService.ListSimple:output_type -> sku.ListSkuResponse
-	11, // 26: sku.SkuService.MatchBySpecs:output_type -> sku.MatchSkuBySpecsResponse
-	18, // [18:27] is the sub-list for method output_type
-	9,  // [9:18] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	15, // 0: sku.GoodsSku.sort_order:type_name -> google.protobuf.Int32Value
+	15, // 1: sku.GoodsSku.status:type_name -> google.protobuf.Int32Value
+	15, // 2: sku.CreateSkuRequest.sort_order:type_name -> google.protobuf.Int32Value
+	15, // 3: sku.UpdateSkuRequest.sort_order:type_name -> google.protobuf.Int32Value
+	15, // 4: sku.UpdateSkuRequest.status:type_name -> google.protobuf.Int32Value
+	15, // 5: sku.BatchCreateSkuItem.sort_order:type_name -> google.protobuf.Int32Value
+	3,  // 6: sku.BatchCreateSkuRequest.items:type_name -> sku.BatchCreateSkuItem
+	15, // 7: sku.BatchUpdateSkuItem.sort_order:type_name -> google.protobuf.Int32Value
+	15, // 8: sku.BatchUpdateSkuItem.status:type_name -> google.protobuf.Int32Value
+	5,  // 9: sku.BatchUpdateSkuRequest.items:type_name -> sku.BatchUpdateSkuItem
+	15, // 10: sku.GetSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 11: sku.GetSkuResponse.sku:type_name -> sku.GoodsSku
+	15, // 12: sku.MatchSkuBySpecsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 13: sku.MatchSkuBySpecsResponse.sku:type_name -> sku.GoodsSku
+	15, // 14: sku.ListSkuRequest.status:type_name -> google.protobuf.Int32Value
+	15, // 15: sku.ListSkuResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 16: sku.ListSkuResponse.skus:type_name -> sku.GoodsSku
+	15, // 17: sku.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 18: sku.SkuService.Create:input_type -> sku.CreateSkuRequest
+	4,  // 19: sku.SkuService.BatchCreate:input_type -> sku.BatchCreateSkuRequest
+	6,  // 20: sku.SkuService.BatchUpdate:input_type -> sku.BatchUpdateSkuRequest
+	2,  // 21: sku.SkuService.Update:input_type -> sku.UpdateSkuRequest
+	7,  // 22: sku.SkuService.Delete:input_type -> sku.DeleteSkuRequest
+	8,  // 23: sku.SkuService.Get:input_type -> sku.GetSkuRequest
+	12, // 24: sku.SkuService.List:input_type -> sku.ListSkuRequest
+	12, // 25: sku.SkuService.ListSimple:input_type -> sku.ListSkuRequest
+	10, // 26: sku.SkuService.MatchBySpecs:input_type -> sku.MatchSkuBySpecsRequest
+	14, // 27: sku.SkuService.Create:output_type -> sku.Response
+	14, // 28: sku.SkuService.BatchCreate:output_type -> sku.Response
+	14, // 29: sku.SkuService.BatchUpdate:output_type -> sku.Response
+	14, // 30: sku.SkuService.Update:output_type -> sku.Response
+	14, // 31: sku.SkuService.Delete:output_type -> sku.Response
+	9,  // 32: sku.SkuService.Get:output_type -> sku.GetSkuResponse
+	13, // 33: sku.SkuService.List:output_type -> sku.ListSkuResponse
+	13, // 34: sku.SkuService.ListSimple:output_type -> sku.ListSkuResponse
+	11, // 35: sku.SkuService.MatchBySpecs:output_type -> sku.MatchSkuBySpecsResponse
+	27, // [27:36] is the sub-list for method output_type
+	18, // [18:27] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_sku_sku_proto_init() }

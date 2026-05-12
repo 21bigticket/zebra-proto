@@ -53,7 +53,7 @@ type Coupon struct {
 	ValidDays      int32                  `protobuf:"varint,10,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`               // 有效天数
 	StartTime      int64                  `protobuf:"varint,11,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`               // 开始时间
 	EndTime        int64                  `protobuf:"varint,12,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`                     // 结束时间
-	Status         int32                  `protobuf:"varint,13,opt,name=status,proto3" json:"status,omitempty"`                                      // 0=禁用, 1=启用
+	Status         *wrapperspb.Int32Value `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`                                       // 0=禁用, 1=启用
 	CreateTime     int64                  `protobuf:"varint,14,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime     int64                  `protobuf:"varint,15,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted      int32                  `protobuf:"varint,16,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -175,11 +175,11 @@ func (x *Coupon) GetEndTime() int64 {
 	return 0
 }
 
-func (x *Coupon) GetStatus() int32 {
+func (x *Coupon) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *Coupon) GetCreateTime() int64 {
@@ -324,7 +324,7 @@ type UpdateCouponRequest struct {
 	ValidDays      int32                  `protobuf:"varint,7,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`
 	StartTime      int64                  `protobuf:"varint,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime        int64                  `protobuf:"varint,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Status         int32                  `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
+	Status         *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -422,11 +422,11 @@ func (x *UpdateCouponRequest) GetEndTime() int64 {
 	return 0
 }
 
-func (x *UpdateCouponRequest) GetStatus() int32 {
+func (x *UpdateCouponRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 // 删除优惠券请求
@@ -585,8 +585,8 @@ type ListCouponRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`     // -1表示全部
-	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`    // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -642,11 +642,11 @@ func (x *ListCouponRequest) GetType() int32 {
 	return 0
 }
 
-func (x *ListCouponRequest) GetStatus() int32 {
+func (x *ListCouponRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 // 列出优惠券响应
@@ -774,7 +774,7 @@ var File_api_zebra_activity_coupon_coupon_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\n" +
-	"&api/zebra-activity/coupon/coupon.proto\x12\x06coupon\x1a\x1egoogle/protobuf/wrappers.proto\"\xf4\x03\n" +
+	"&api/zebra-activity/coupon/coupon.proto\x12\x06coupon\x1a\x1egoogle/protobuf/wrappers.proto\"\x91\x04\n" +
 	"\x06Coupon\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -791,8 +791,8 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	" \x01(\x05R\tvalidDays\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\v \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\f \x01(\x03R\aendTime\x12\x16\n" +
-	"\x06status\x18\r \x01(\x05R\x06status\x12\x1f\n" +
+	"\bend_time\x18\f \x01(\x03R\aendTime\x123\n" +
+	"\x06status\x18\r \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vcreate_time\x18\x0e \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x0f \x01(\x03R\n" +
@@ -811,7 +811,7 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"valid_days\x18\a \x01(\x05R\tvalidDays\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\b \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\t \x01(\x03R\aendTime\"\xbe\x02\n" +
+	"\bend_time\x18\t \x01(\x03R\aendTime\"\xdb\x02\n" +
 	"\x13UpdateCouponRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -824,9 +824,9 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"valid_days\x18\a \x01(\x05R\tvalidDays\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\b \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\t \x01(\x03R\aendTime\x12\x16\n" +
+	"\bend_time\x18\t \x01(\x03R\aendTime\x123\n" +
 	"\x06status\x18\n" +
-	" \x01(\x05R\x06status\"%\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"%\n" +
 	"\x13DeleteCouponRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\"\n" +
 	"\x10GetCouponRequest\x12\x0e\n" +
@@ -834,12 +834,12 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\x11GetCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12&\n" +
-	"\x06coupon\x18\x03 \x01(\v2\x0e.coupon.CouponR\x06coupon\"p\n" +
+	"\x06coupon\x18\x03 \x01(\v2\x0e.coupon.CouponR\x06coupon\"\x8d\x01\n" +
 	"\x11ListCouponRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"\x97\x01\n" +
+	"\x04type\x18\x03 \x01(\x05R\x04type\x123\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\x97\x01\n" +
 	"\x12ListCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12(\n" +
@@ -881,26 +881,29 @@ var file_api_zebra_activity_coupon_coupon_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_coupon_coupon_proto_depIdxs = []int32{
-	9,  // 0: coupon.GetCouponResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: coupon.GetCouponResponse.coupon:type_name -> coupon.Coupon
-	9,  // 2: coupon.ListCouponResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: coupon.ListCouponResponse.coupons:type_name -> coupon.Coupon
-	9,  // 4: coupon.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: coupon.CouponService.Create:input_type -> coupon.CreateCouponRequest
-	2,  // 6: coupon.CouponService.Update:input_type -> coupon.UpdateCouponRequest
-	3,  // 7: coupon.CouponService.Delete:input_type -> coupon.DeleteCouponRequest
-	4,  // 8: coupon.CouponService.Get:input_type -> coupon.GetCouponRequest
-	6,  // 9: coupon.CouponService.List:input_type -> coupon.ListCouponRequest
-	8,  // 10: coupon.CouponService.Create:output_type -> coupon.Response
-	8,  // 11: coupon.CouponService.Update:output_type -> coupon.Response
-	8,  // 12: coupon.CouponService.Delete:output_type -> coupon.Response
-	5,  // 13: coupon.CouponService.Get:output_type -> coupon.GetCouponResponse
-	7,  // 14: coupon.CouponService.List:output_type -> coupon.ListCouponResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	9,  // 0: coupon.Coupon.status:type_name -> google.protobuf.Int32Value
+	9,  // 1: coupon.UpdateCouponRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 2: coupon.GetCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: coupon.GetCouponResponse.coupon:type_name -> coupon.Coupon
+	9,  // 4: coupon.ListCouponRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 5: coupon.ListCouponResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: coupon.ListCouponResponse.coupons:type_name -> coupon.Coupon
+	9,  // 7: coupon.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 8: coupon.CouponService.Create:input_type -> coupon.CreateCouponRequest
+	2,  // 9: coupon.CouponService.Update:input_type -> coupon.UpdateCouponRequest
+	3,  // 10: coupon.CouponService.Delete:input_type -> coupon.DeleteCouponRequest
+	4,  // 11: coupon.CouponService.Get:input_type -> coupon.GetCouponRequest
+	6,  // 12: coupon.CouponService.List:input_type -> coupon.ListCouponRequest
+	8,  // 13: coupon.CouponService.Create:output_type -> coupon.Response
+	8,  // 14: coupon.CouponService.Update:output_type -> coupon.Response
+	8,  // 15: coupon.CouponService.Delete:output_type -> coupon.Response
+	5,  // 16: coupon.CouponService.Get:output_type -> coupon.GetCouponResponse
+	7,  // 17: coupon.CouponService.List:output_type -> coupon.ListCouponResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_coupon_coupon_proto_init() }

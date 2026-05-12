@@ -11,7 +11,7 @@ message Role {
   int64  role_id             = 1;
   string role_name           = 2;
   string role_key            = 3;
-  int32  role_sort           = 4;
+  google.protobuf.Int32Value role_sort = 4;
   string data_scope          = 5;  // 数据范围（1:全部 2:自定 3:本部门 4:本部门及以下）
   bool   menu_check_strictly = 6;
   bool   dept_check_strictly = 7;
@@ -31,7 +31,7 @@ message Role {
 message CreateRoleRequest {
   string role_name  = 1;
   string role_key   = 2;
-  int32  role_sort  = 3;
+  google.protobuf.Int32Value role_sort = 3;
   string status     = 4;
   string remark     = 5;
   repeated int64 menu_ids = 6;
@@ -43,7 +43,7 @@ message UpdateRoleRequest {
   int64  role_id    = 1;
   optional string role_name  = 2;
   optional string role_key   = 3;
-  optional int32  role_sort  = 4;
+  google.protobuf.Int32Value role_sort = 4;
   optional string status     = 5;
   optional string remark     = 6;
   repeated int64 menu_ids = 7;

@@ -47,7 +47,7 @@ type Payment struct {
 	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	PayAmount     int64                  `protobuf:"varint,5,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`           // 支付金额（分）
 	PayType       int32                  `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`                 // 1=支付宝, 2=微信, 3=余额
-	PayStatus     int32                  `protobuf:"varint,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`           // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
+	PayStatus     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`            // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
 	ThirdPartyNo  string                 `protobuf:"bytes,8,opt,name=third_party_no,json=thirdPartyNo,proto3" json:"third_party_no,omitempty"` // 第三方支付流水号
 	PayTime       int64                  `protobuf:"varint,9,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
 	NotifyUrl     string                 `protobuf:"bytes,10,opt,name=notify_url,json=notifyUrl,proto3" json:"notify_url,omitempty"`
@@ -131,11 +131,11 @@ func (x *Payment) GetPayType() int32 {
 	return 0
 }
 
-func (x *Payment) GetPayStatus() int32 {
+func (x *Payment) GetPayStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.PayStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *Payment) GetThirdPartyNo() string {
@@ -195,7 +195,7 @@ type Refund struct {
 	PayNo         string                 `protobuf:"bytes,3,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	RefundAmount  int64                  `protobuf:"varint,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`  // 退款金额（分）
-	RefundStatus  int32                  `protobuf:"varint,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"`  // 0=退款中, 1=退款成功, 2=退款失败
+	RefundStatus  *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"`   // 0=退款中, 1=退款成功, 2=退款失败
 	ThirdPartyNo  string                 `protobuf:"bytes,7,opt,name=third_party_no,json=thirdPartyNo,proto3" json:"third_party_no,omitempty"` // 第三方退款流水号
 	RefundTime    int64                  `protobuf:"varint,8,opt,name=refund_time,json=refundTime,proto3" json:"refund_time,omitempty"`
 	RefundReason  string                 `protobuf:"bytes,9,opt,name=refund_reason,json=refundReason,proto3" json:"refund_reason,omitempty"`
@@ -271,11 +271,11 @@ func (x *Refund) GetRefundAmount() int64 {
 	return 0
 }
 
-func (x *Refund) GetRefundStatus() int32 {
+func (x *Refund) GetRefundStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.RefundStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *Refund) GetThirdPartyNo() string {
@@ -580,7 +580,7 @@ type PayCallbackRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PayNo         string                 `protobuf:"bytes,1,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
 	ThirdPartyNo  string                 `protobuf:"bytes,2,opt,name=third_party_no,json=thirdPartyNo,proto3" json:"third_party_no,omitempty"`
-	PayStatus     int32                  `protobuf:"varint,3,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`
+	PayStatus     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -629,11 +629,11 @@ func (x *PayCallbackRequest) GetThirdPartyNo() string {
 	return ""
 }
 
-func (x *PayCallbackRequest) GetPayStatus() int32 {
+func (x *PayCallbackRequest) GetPayStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.PayStatus
 	}
-	return 0
+	return nil
 }
 
 // 创建退款请求
@@ -984,11 +984,11 @@ type ListPaymentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`          // 用户ID，0表示全部
-	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`        // 订单号，空表示全部
-	PayNo         string                 `protobuf:"bytes,5,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`              // 支付单号，空表示全部
-	PayType       int32                  `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`       // 0表示全部
-	PayStatus     int32                  `protobuf:"varint,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"` // -1表示全部
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`         // 用户ID，0表示全部
+	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`       // 订单号，空表示全部
+	PayNo         string                 `protobuf:"bytes,5,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`             // 支付单号，空表示全部
+	PayType       int32                  `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`      // 0表示全部
+	PayStatus     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"` // -1表示全部
 	StartTime     int64                  `protobuf:"varint,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime       int64                  `protobuf:"varint,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1067,11 +1067,11 @@ func (x *ListPaymentRequest) GetPayType() int32 {
 	return 0
 }
 
-func (x *ListPaymentRequest) GetPayStatus() int32 {
+func (x *ListPaymentRequest) GetPayStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.PayStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *ListPaymentRequest) GetStartTime() int64 {
@@ -1317,7 +1317,7 @@ type ListRefundRequest struct {
 	PayNo         string                 `protobuf:"bytes,3,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	RefundNo      string                 `protobuf:"bytes,5,opt,name=refund_no,json=refundNo,proto3" json:"refund_no,omitempty"`
-	RefundStatus  int32                  `protobuf:"varint,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"` // -1表示全部
+	RefundStatus  *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"` // -1表示全部
 	StartTime     int64                  `protobuf:"varint,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime       int64                  `protobuf:"varint,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1389,11 +1389,11 @@ func (x *ListRefundRequest) GetRefundNo() string {
 	return ""
 }
 
-func (x *ListRefundRequest) GetRefundStatus() int32 {
+func (x *ListRefundRequest) GetRefundStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.RefundStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *ListRefundRequest) GetStartTime() int64 {
@@ -1969,7 +1969,7 @@ var File_api_zebra_pay_payment_payment_proto protoreflect.FileDescriptor
 
 const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\n" +
-	"#api/zebra-pay/payment/payment.proto\x12\apayment\x1a\x1egoogle/protobuf/wrappers.proto\"\xa4\x03\n" +
+	"#api/zebra-pay/payment/payment.proto\x12\apayment\x1a\x1egoogle/protobuf/wrappers.proto\"\xc1\x03\n" +
 	"\aPayment\x12\x15\n" +
 	"\x06pay_id\x18\x01 \x01(\x03R\x05payId\x12\x15\n" +
 	"\x06pay_no\x18\x02 \x01(\tR\x05payNo\x12\x19\n" +
@@ -1977,9 +1977,9 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
 	"pay_amount\x18\x05 \x01(\x03R\tpayAmount\x12\x19\n" +
-	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12\x1d\n" +
+	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12:\n" +
 	"\n" +
-	"pay_status\x18\a \x01(\x05R\tpayStatus\x12$\n" +
+	"pay_status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\x12$\n" +
 	"\x0ethird_party_no\x18\b \x01(\tR\fthirdPartyNo\x12\x19\n" +
 	"\bpay_time\x18\t \x01(\x03R\apayTime\x12\x1d\n" +
 	"\n" +
@@ -1992,14 +1992,14 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\vupdate_time\x18\r \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\x0e \x01(\x05R\tisDeleted\"\x8b\x03\n" +
+	"is_deleted\x18\x0e \x01(\x05R\tisDeleted\"\xa8\x03\n" +
 	"\x06Refund\x12\x1b\n" +
 	"\trefund_id\x18\x01 \x01(\x03R\brefundId\x12\x1b\n" +
 	"\trefund_no\x18\x02 \x01(\tR\brefundNo\x12\x15\n" +
 	"\x06pay_no\x18\x03 \x01(\tR\x05payNo\x12\x19\n" +
 	"\border_no\x18\x04 \x01(\tR\aorderNo\x12#\n" +
-	"\rrefund_amount\x18\x05 \x01(\x03R\frefundAmount\x12#\n" +
-	"\rrefund_status\x18\x06 \x01(\x05R\frefundStatus\x12$\n" +
+	"\rrefund_amount\x18\x05 \x01(\x03R\frefundAmount\x12@\n" +
+	"\rrefund_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\frefundStatus\x12$\n" +
 	"\x0ethird_party_no\x18\a \x01(\tR\fthirdPartyNo\x12\x1f\n" +
 	"\vrefund_time\x18\b \x01(\x03R\n" +
 	"refundTime\x12#\n" +
@@ -2038,12 +2038,12 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12*\n" +
 	"\apayment\x18\x03 \x01(\v2\x10.payment.PaymentR\apayment\x12\x17\n" +
 	"\apay_url\x18\x04 \x01(\tR\x06payUrl\x12\x18\n" +
-	"\amessage\x18\x05 \x01(\tR\amessage\"p\n" +
+	"\amessage\x18\x05 \x01(\tR\amessage\"\x8d\x01\n" +
 	"\x12PayCallbackRequest\x12\x15\n" +
 	"\x06pay_no\x18\x01 \x01(\tR\x05payNo\x12$\n" +
-	"\x0ethird_party_no\x18\x02 \x01(\tR\fthirdPartyNo\x12\x1d\n" +
+	"\x0ethird_party_no\x18\x02 \x01(\tR\fthirdPartyNo\x12:\n" +
 	"\n" +
-	"pay_status\x18\x03 \x01(\x05R\tpayStatus\"\xbf\x01\n" +
+	"pay_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\"\xbf\x01\n" +
 	"\x13CreateRefundRequest\x12\x15\n" +
 	"\x06pay_no\x18\x01 \x01(\tR\x05payNo\x12\x19\n" +
 	"\bsales_no\x18\x02 \x01(\tR\asalesNo\x12#\n" +
@@ -2065,16 +2065,16 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x12GetPaymentResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12*\n" +
-	"\apayment\x18\x03 \x01(\v2\x10.payment.PaymentR\apayment\"\x84\x02\n" +
+	"\apayment\x18\x03 \x01(\v2\x10.payment.PaymentR\apayment\"\xa1\x02\n" +
 	"\x12ListPaymentRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x19\n" +
 	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x15\n" +
 	"\x06pay_no\x18\x05 \x01(\tR\x05payNo\x12\x19\n" +
-	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12\x1d\n" +
+	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12:\n" +
 	"\n" +
-	"pay_status\x18\a \x01(\x05R\tpayStatus\x12\x1d\n" +
+	"pay_status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\b \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\t \x01(\x03R\aendTime\"\x9c\x01\n" +
@@ -2091,14 +2091,14 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
 	"\x06refund\x18\x03 \x01(\v2\x0f.payment.RefundR\x06refund\x12)\n" +
-	"\x05items\x18\x04 \x03(\v2\x13.payment.RefundItemR\x05items\"\xf2\x01\n" +
+	"\x05items\x18\x04 \x03(\v2\x13.payment.RefundItemR\x05items\"\x8f\x02\n" +
 	"\x11ListRefundRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x15\n" +
 	"\x06pay_no\x18\x03 \x01(\tR\x05payNo\x12\x19\n" +
 	"\border_no\x18\x04 \x01(\tR\aorderNo\x12\x1b\n" +
-	"\trefund_no\x18\x05 \x01(\tR\brefundNo\x12#\n" +
-	"\rrefund_status\x18\x06 \x01(\x05R\frefundStatus\x12\x1d\n" +
+	"\trefund_no\x18\x05 \x01(\tR\brefundNo\x12@\n" +
+	"\rrefund_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\frefundStatus\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\a \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\b \x01(\x03R\aendTime\"\x98\x01\n" +
@@ -2202,49 +2202,54 @@ var file_api_zebra_pay_payment_payment_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),  // 23: google.protobuf.Int32Value
 }
 var file_api_zebra_pay_payment_payment_proto_depIdxs = []int32{
-	23, // 0: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: payment.CreatePaymentResponse.payment:type_name -> payment.Payment
-	7,  // 2: payment.CreateRefundRequest.items:type_name -> payment.RefundItemReq
-	23, // 3: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 4: payment.CreateRefundResponse.refund:type_name -> payment.Refund
-	23, // 5: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 6: payment.GetPaymentResponse.payment:type_name -> payment.Payment
-	23, // 7: payment.ListPaymentResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 8: payment.ListPaymentResponse.payments:type_name -> payment.Payment
-	23, // 9: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 10: payment.GetRefundResponse.refund:type_name -> payment.Refund
-	2,  // 11: payment.GetRefundResponse.items:type_name -> payment.RefundItem
-	23, // 12: payment.ListRefundResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 13: payment.ListRefundResponse.refunds:type_name -> payment.Refund
-	23, // 14: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
-	17, // 15: payment.LogPaymentResponse.log:type_name -> payment.PaymentLog
-	23, // 16: payment.ListPaymentLogResponse.code:type_name -> google.protobuf.Int32Value
-	17, // 17: payment.ListPaymentLogResponse.logs:type_name -> payment.PaymentLog
-	23, // 18: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 19: payment.PaymentResponse.payment:type_name -> payment.Payment
-	3,  // 20: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
-	5,  // 21: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
-	6,  // 22: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
-	9,  // 23: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
-	11, // 24: payment.PaymentService.ListPayments:input_type -> payment.ListPaymentRequest
-	13, // 25: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
-	15, // 26: payment.PaymentService.ListRefunds:input_type -> payment.ListRefundRequest
-	18, // 27: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
-	20, // 28: payment.PaymentService.ListPaymentLogs:input_type -> payment.ListPaymentLogRequest
-	4,  // 29: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
-	22, // 30: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
-	8,  // 31: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
-	10, // 32: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
-	12, // 33: payment.PaymentService.ListPayments:output_type -> payment.ListPaymentResponse
-	14, // 34: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
-	16, // 35: payment.PaymentService.ListRefunds:output_type -> payment.ListRefundResponse
-	19, // 36: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
-	21, // 37: payment.PaymentService.ListPaymentLogs:output_type -> payment.ListPaymentLogResponse
-	29, // [29:38] is the sub-list for method output_type
-	20, // [20:29] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	23, // 0: payment.Payment.pay_status:type_name -> google.protobuf.Int32Value
+	23, // 1: payment.Refund.refund_status:type_name -> google.protobuf.Int32Value
+	23, // 2: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: payment.CreatePaymentResponse.payment:type_name -> payment.Payment
+	23, // 4: payment.PayCallbackRequest.pay_status:type_name -> google.protobuf.Int32Value
+	7,  // 5: payment.CreateRefundRequest.items:type_name -> payment.RefundItemReq
+	23, // 6: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 7: payment.CreateRefundResponse.refund:type_name -> payment.Refund
+	23, // 8: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: payment.GetPaymentResponse.payment:type_name -> payment.Payment
+	23, // 10: payment.ListPaymentRequest.pay_status:type_name -> google.protobuf.Int32Value
+	23, // 11: payment.ListPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 12: payment.ListPaymentResponse.payments:type_name -> payment.Payment
+	23, // 13: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 14: payment.GetRefundResponse.refund:type_name -> payment.Refund
+	2,  // 15: payment.GetRefundResponse.items:type_name -> payment.RefundItem
+	23, // 16: payment.ListRefundRequest.refund_status:type_name -> google.protobuf.Int32Value
+	23, // 17: payment.ListRefundResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 18: payment.ListRefundResponse.refunds:type_name -> payment.Refund
+	23, // 19: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 20: payment.LogPaymentResponse.log:type_name -> payment.PaymentLog
+	23, // 21: payment.ListPaymentLogResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 22: payment.ListPaymentLogResponse.logs:type_name -> payment.PaymentLog
+	23, // 23: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 24: payment.PaymentResponse.payment:type_name -> payment.Payment
+	3,  // 25: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
+	5,  // 26: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
+	6,  // 27: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
+	9,  // 28: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
+	11, // 29: payment.PaymentService.ListPayments:input_type -> payment.ListPaymentRequest
+	13, // 30: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
+	15, // 31: payment.PaymentService.ListRefunds:input_type -> payment.ListRefundRequest
+	18, // 32: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
+	20, // 33: payment.PaymentService.ListPaymentLogs:input_type -> payment.ListPaymentLogRequest
+	4,  // 34: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
+	22, // 35: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
+	8,  // 36: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
+	10, // 37: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
+	12, // 38: payment.PaymentService.ListPayments:output_type -> payment.ListPaymentResponse
+	14, // 39: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
+	16, // 40: payment.PaymentService.ListRefunds:output_type -> payment.ListRefundResponse
+	19, // 41: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
+	21, // 42: payment.PaymentService.ListPaymentLogs:output_type -> payment.ListPaymentLogResponse
+	34, // [34:43] is the sub-list for method output_type
+	25, // [25:34] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_pay_payment_payment_proto_init() }

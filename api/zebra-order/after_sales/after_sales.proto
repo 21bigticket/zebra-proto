@@ -33,7 +33,7 @@ message AfterSales {
   int32  sales_reason    = 6;  // 1=不想要了, 2=商品质量问题, 3=商品错发漏发, 4=其他
   string sales_desc      = 7;  // 售后说明
   int64  refund_amount   = 8;  // 退款金额（分）
-  int32  sales_status    = 9;  // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
+  google.protobuf.Int32Value sales_status = 9; // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
   string audit_remark    = 10; // 审核备注
   int64  audit_time      = 11;
   int64  refund_time     = 12;
@@ -77,7 +77,7 @@ message CreateAfterSalesResponse {
 // 审核售后单请求
 message AuditAfterSalesRequest {
   string sales_no    = 1;
-  int32  audit_status = 2;  // 1=通过, 2=拒绝
+  google.protobuf.Int32Value audit_status = 2; // 1=通过, 2=拒绝
   string audit_remark = 3;
 }
 
@@ -105,7 +105,7 @@ message GetAfterSalesResponse {
 // 查询用户售后单列表请求
 message GetUserAfterSalesRequest {
   int64 user_id      = 1;
-  int32 sales_status = 2;  // -1=全部
+  google.protobuf.Int32Value sales_status = 2; // -1=全部
   int32 page         = 3;
   int32 page_size    = 4;
 }
@@ -125,7 +125,7 @@ message ListAfterSalesRequest {
   int64 user_id = 3; // 用户ID，0表示全部
   string order_no = 4; // 订单号，空表示全部
   string sales_no = 5; // 售后单号，空表示全部
-  int32 sales_status = 6; // -1=全部
+  google.protobuf.Int32Value sales_status = 6; // -1=全部
   int64 start_time = 7;
   int64 end_time = 8;
 }

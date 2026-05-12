@@ -29,7 +29,7 @@ message Config {
   string appid = 2;
   string config_key = 3;
   string config_value = 4;
-  int32 config_status = 5; // 0=禁用, 1=启用
+  google.protobuf.Int32Value config_status = 5; // 0=禁用, 1=启用
   string config_desc = 6;
   int64 create_time = 7;
   int64 update_time = 8;
@@ -41,7 +41,7 @@ message CreateConfigRequest {
   string appid = 1;
   string config_key = 2;
   string config_value = 3;
-  int32 config_status = 4;
+  google.protobuf.Int32Value config_status = 4;
   string config_desc = 5;
 }
 
@@ -49,7 +49,7 @@ message CreateConfigRequest {
 message UpdateConfigRequest {
   int64 id = 1;
   string config_value = 2;
-  int32 config_status = 3;
+  google.protobuf.Int32Value config_status = 3;
   string config_desc = 4;
 }
 
@@ -82,7 +82,7 @@ message ListConfigRequest {
   int32 page = 2;
   int32 page_size = 3;
   string config_keyword = 4; // 配置key模糊查询
-  int32 config_status = 5;   // 状态过滤，-1表示全部
+  google.protobuf.Int32Value config_status = 5; // 状态过滤，-1表示全部
 }
 
 // 列出配置响应

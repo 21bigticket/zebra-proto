@@ -38,7 +38,7 @@ type OperLog struct {
 	OperLocation  string                 `protobuf:"bytes,11,opt,name=oper_location,json=operLocation,proto3" json:"oper_location,omitempty"`   // 操作地点
 	OperParam     string                 `protobuf:"bytes,12,opt,name=oper_param,json=operParam,proto3" json:"oper_param,omitempty"`            // 请求参数
 	JsonResult    string                 `protobuf:"bytes,13,opt,name=json_result,json=jsonResult,proto3" json:"json_result,omitempty"`         // 返回参数
-	Status        int32                  `protobuf:"varint,14,opt,name=status,proto3" json:"status,omitempty"`                                  // 操作状态（0正常 1异常）
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`                                   // 操作状态（0正常 1异常）
 	ErrorMsg      string                 `protobuf:"bytes,15,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg,omitempty"`               // 错误消息
 	OperTime      int64                  `protobuf:"varint,16,opt,name=oper_time,json=operTime,proto3" json:"oper_time,omitempty"`              // 操作时间
 	CostTime      int64                  `protobuf:"varint,17,opt,name=cost_time,json=costTime,proto3" json:"cost_time,omitempty"`              // 消耗时间
@@ -167,11 +167,11 @@ func (x *OperLog) GetJsonResult() string {
 	return ""
 }
 
-func (x *OperLog) GetStatus() int32 {
+func (x *OperLog) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *OperLog) GetErrorMsg() string {
@@ -203,7 +203,7 @@ type ListOperLogRequest struct {
 	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	BusinessType  int32                  `protobuf:"varint,4,opt,name=business_type,json=businessType,proto3" json:"business_type,omitempty"`
 	OperName      string                 `protobuf:"bytes,5,opt,name=oper_name,json=operName,proto3" json:"oper_name,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	BeginTime     string                 `protobuf:"bytes,7,opt,name=begin_time,json=beginTime,proto3" json:"begin_time,omitempty"`
 	EndTime       string                 `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -275,11 +275,11 @@ func (x *ListOperLogRequest) GetOperName() string {
 	return ""
 }
 
-func (x *ListOperLogRequest) GetStatus() int32 {
+func (x *ListOperLogRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *ListOperLogRequest) GetBeginTime() string {
@@ -466,7 +466,7 @@ var File_api_zebra_passport_oper_log_oper_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_oper_log_oper_log_proto_rawDesc = "" +
 	"\n" +
-	"*api/zebra-passport/oper_log/oper_log.proto\x12\boper_log\x1a\x1egoogle/protobuf/wrappers.proto\"\x83\x04\n" +
+	"*api/zebra-passport/oper_log/oper_log.proto\x12\boper_log\x1a\x1egoogle/protobuf/wrappers.proto\"\xa0\x04\n" +
 	"\aOperLog\x12\x17\n" +
 	"\aoper_id\x18\x01 \x01(\x03R\x06operId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12#\n" +
@@ -483,18 +483,18 @@ const file_api_zebra_passport_oper_log_oper_log_proto_rawDesc = "" +
 	"\n" +
 	"oper_param\x18\f \x01(\tR\toperParam\x12\x1f\n" +
 	"\vjson_result\x18\r \x01(\tR\n" +
-	"jsonResult\x12\x16\n" +
-	"\x06status\x18\x0e \x01(\x05R\x06status\x12\x1b\n" +
+	"jsonResult\x123\n" +
+	"\x06status\x18\x0e \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1b\n" +
 	"\terror_msg\x18\x0f \x01(\tR\berrorMsg\x12\x1b\n" +
 	"\toper_time\x18\x10 \x01(\x03R\boperTime\x12\x1b\n" +
-	"\tcost_time\x18\x11 \x01(\x03R\bcostTime\"\xef\x01\n" +
+	"\tcost_time\x18\x11 \x01(\x03R\bcostTime\"\x8c\x02\n" +
 	"\x12ListOperLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12#\n" +
 	"\rbusiness_type\x18\x04 \x01(\x05R\fbusinessType\x12\x1b\n" +
-	"\toper_name\x18\x05 \x01(\tR\boperName\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1d\n" +
+	"\toper_name\x18\x05 \x01(\tR\boperName\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1d\n" +
 	"\n" +
 	"begin_time\x18\a \x01(\tR\tbeginTime\x12\x19\n" +
 	"\bend_time\x18\b \x01(\tR\aendTime\"\x95\x01\n" +
@@ -535,20 +535,22 @@ var file_api_zebra_passport_oper_log_oper_log_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 5: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_oper_log_oper_log_proto_depIdxs = []int32{
-	5, // 0: oper_log.ListOperLogResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 1: oper_log.ListOperLogResponse.logs:type_name -> oper_log.OperLog
-	5, // 2: oper_log.Response.code:type_name -> google.protobuf.Int32Value
-	1, // 3: oper_log.OperLogService.List:input_type -> oper_log.ListOperLogRequest
-	3, // 4: oper_log.OperLogService.Delete:input_type -> oper_log.DeleteOperLogRequest
-	3, // 5: oper_log.OperLogService.Clean:input_type -> oper_log.DeleteOperLogRequest
-	2, // 6: oper_log.OperLogService.List:output_type -> oper_log.ListOperLogResponse
-	4, // 7: oper_log.OperLogService.Delete:output_type -> oper_log.Response
-	4, // 8: oper_log.OperLogService.Clean:output_type -> oper_log.Response
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	5, // 0: oper_log.OperLog.status:type_name -> google.protobuf.Int32Value
+	5, // 1: oper_log.ListOperLogRequest.status:type_name -> google.protobuf.Int32Value
+	5, // 2: oper_log.ListOperLogResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 3: oper_log.ListOperLogResponse.logs:type_name -> oper_log.OperLog
+	5, // 4: oper_log.Response.code:type_name -> google.protobuf.Int32Value
+	1, // 5: oper_log.OperLogService.List:input_type -> oper_log.ListOperLogRequest
+	3, // 6: oper_log.OperLogService.Delete:input_type -> oper_log.DeleteOperLogRequest
+	3, // 7: oper_log.OperLogService.Clean:input_type -> oper_log.DeleteOperLogRequest
+	2, // 8: oper_log.OperLogService.List:output_type -> oper_log.ListOperLogResponse
+	4, // 9: oper_log.OperLogService.Delete:output_type -> oper_log.Response
+	4, // 10: oper_log.OperLogService.Clean:output_type -> oper_log.Response
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_oper_log_oper_log_proto_init() }

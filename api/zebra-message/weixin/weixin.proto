@@ -29,7 +29,7 @@ message WeixinTemplate {
   string tpl_code     = 2;
   string tpl_name     = 3;
   string tpl_id_weixin = 4; // 微信模板ID
-  int32  tpl_status   = 5;  // 0=禁用, 1=启用
+  google.protobuf.Int32Value tpl_status = 5; // 0=禁用, 1=启用
   int64  create_time  = 6;
   int64  update_time  = 7;
   int32  is_deleted   = 8;
@@ -40,7 +40,7 @@ message CreateWeixinTemplateRequest {
   string tpl_code = 1;
   string tpl_name = 2;
   string tpl_id_weixin = 3;
-  int32 tpl_status = 4;
+  google.protobuf.Int32Value tpl_status = 4;
 }
 
 // 更新微信模板请求
@@ -48,7 +48,7 @@ message UpdateWeixinTemplateRequest {
   int64 tpl_id = 1;
   string tpl_name = 2;
   string tpl_id_weixin = 3;
-  int32 tpl_status = 4;
+  google.protobuf.Int32Value tpl_status = 4;
 }
 
 // 删除微信模板请求
@@ -75,7 +75,7 @@ message GetWeixinTemplateResponse {
 message ListWeixinTemplateRequest {
   int32 page = 1;
   int32 page_size = 2;
-  int32 tpl_status = 3; // -1表示全部
+  google.protobuf.Int32Value tpl_status = 3; // -1表示全部
 }
 
 // 微信模板分页查询响应
@@ -93,7 +93,7 @@ message WeixinLog {
   string openid = 3;
   string tpl_code = 4;
   string content = 5;
-  int32 status = 6;
+  google.protobuf.Int32Value status = 6;
   int32 retry_count = 7;
   string remark = 8;
   int64 create_time = 9;
@@ -105,7 +105,7 @@ message ListWeixinLogRequest {
   int32 page_size = 2;
   string openid = 3;
   string tpl_code = 4;
-  int32 status = 5; // -1表示全部
+  google.protobuf.Int32Value status = 5; // -1表示全部
   int64 start_time = 6;
   int64 end_time = 7;
 }

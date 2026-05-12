@@ -46,7 +46,7 @@ type CouponGoods struct {
 	GoodsId       int64                  `protobuf:"varint,3,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	GoodsName     string                 `protobuf:"bytes,4,opt,name=goods_name,json=goodsName,proto3" json:"goods_name,omitempty"` // 商品名称快照
 	PicUrl        string                 `protobuf:"bytes,5,opt,name=pic_url,json=picUrl,proto3" json:"pic_url,omitempty"`          // 商品图片快照
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,11 +116,11 @@ func (x *CouponGoods) GetPicUrl() string {
 	return ""
 }
 
-func (x *CouponGoods) GetSortOrder() int32 {
+func (x *CouponGoods) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 // 新增优惠券商品关联
@@ -128,7 +128,7 @@ type CreateCouponGoodsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CouponId      int64                  `protobuf:"varint,1,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
 	GoodsId       int64                  `protobuf:"varint,2,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,11 +177,11 @@ func (x *CreateCouponGoodsRequest) GetGoodsId() int64 {
 	return 0
 }
 
-func (x *CreateCouponGoodsRequest) GetSortOrder() int32 {
+func (x *CreateCouponGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 // 删除优惠券商品关联
@@ -391,21 +391,21 @@ var File_api_zebra_activity_coupon_coupon_goods_proto protoreflect.FileDescripto
 
 const file_api_zebra_activity_coupon_coupon_goods_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-activity/coupon/coupon_goods.proto\x12\fcoupon_goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xc4\x01\n" +
+	",api/zebra-activity/coupon/coupon_goods.proto\x12\fcoupon_goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xe1\x01\n" +
 	"\vCouponGoods\x12&\n" +
 	"\x0fcoupon_goods_id\x18\x01 \x01(\x03R\rcouponGoodsId\x12\x1b\n" +
 	"\tcoupon_id\x18\x02 \x01(\x03R\bcouponId\x12\x19\n" +
 	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x12\x1d\n" +
 	"\n" +
 	"goods_name\x18\x04 \x01(\tR\tgoodsName\x12\x17\n" +
-	"\apic_url\x18\x05 \x01(\tR\x06picUrl\x12\x1d\n" +
+	"\apic_url\x18\x05 \x01(\tR\x06picUrl\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\"q\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\"\x8e\x01\n" +
 	"\x18CreateCouponGoodsRequest\x12\x1b\n" +
 	"\tcoupon_id\x18\x01 \x01(\x03R\bcouponId\x12\x19\n" +
-	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x1d\n" +
+	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12:\n" +
 	"\n" +
-	"sort_order\x18\x03 \x01(\x05R\tsortOrder\"B\n" +
+	"sort_order\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\"B\n" +
 	"\x18DeleteCouponGoodsRequest\x12&\n" +
 	"\x0fcoupon_goods_id\x18\x01 \x01(\x03R\rcouponGoodsId\"5\n" +
 	"\x16ListCouponGoodsRequest\x12\x1b\n" +
@@ -445,20 +445,22 @@ var file_api_zebra_activity_coupon_coupon_goods_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),    // 6: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_coupon_coupon_goods_proto_depIdxs = []int32{
-	6, // 0: coupon_goods.ListCouponGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	0, // 1: coupon_goods.ListCouponGoodsResponse.goods:type_name -> coupon_goods.CouponGoods
-	6, // 2: coupon_goods.CouponGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	1, // 3: coupon_goods.CouponGoodsService.CreateCouponGoods:input_type -> coupon_goods.CreateCouponGoodsRequest
-	2, // 4: coupon_goods.CouponGoodsService.DeleteCouponGoods:input_type -> coupon_goods.DeleteCouponGoodsRequest
-	3, // 5: coupon_goods.CouponGoodsService.ListCouponGoods:input_type -> coupon_goods.ListCouponGoodsRequest
-	5, // 6: coupon_goods.CouponGoodsService.CreateCouponGoods:output_type -> coupon_goods.CouponGoodsResponse
-	5, // 7: coupon_goods.CouponGoodsService.DeleteCouponGoods:output_type -> coupon_goods.CouponGoodsResponse
-	4, // 8: coupon_goods.CouponGoodsService.ListCouponGoods:output_type -> coupon_goods.ListCouponGoodsResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: coupon_goods.CouponGoods.sort_order:type_name -> google.protobuf.Int32Value
+	6, // 1: coupon_goods.CreateCouponGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	6, // 2: coupon_goods.ListCouponGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0, // 3: coupon_goods.ListCouponGoodsResponse.goods:type_name -> coupon_goods.CouponGoods
+	6, // 4: coupon_goods.CouponGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	1, // 5: coupon_goods.CouponGoodsService.CreateCouponGoods:input_type -> coupon_goods.CreateCouponGoodsRequest
+	2, // 6: coupon_goods.CouponGoodsService.DeleteCouponGoods:input_type -> coupon_goods.DeleteCouponGoodsRequest
+	3, // 7: coupon_goods.CouponGoodsService.ListCouponGoods:input_type -> coupon_goods.ListCouponGoodsRequest
+	5, // 8: coupon_goods.CouponGoodsService.CreateCouponGoods:output_type -> coupon_goods.CouponGoodsResponse
+	5, // 9: coupon_goods.CouponGoodsService.DeleteCouponGoods:output_type -> coupon_goods.CouponGoodsResponse
+	4, // 10: coupon_goods.CouponGoodsService.ListCouponGoods:output_type -> coupon_goods.ListCouponGoodsResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_coupon_coupon_goods_proto_init() }

@@ -46,7 +46,7 @@ type GoodsSpec struct {
 	SpecName      string                 `protobuf:"bytes,3,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`    // 规格名称, 如"颜色"
 	SpecValue     string                 `protobuf:"bytes,4,opt,name=spec_value,json=specValue,proto3" json:"spec_value,omitempty"` // 规格值, 如"红色"
 	SpecImages    []string               `protobuf:"bytes,5,rep,name=spec_images,json=specImages,proto3" json:"spec_images,omitempty"`
-	SpecSort      int32                  `protobuf:"varint,6,opt,name=spec_sort,json=specSort,proto3" json:"spec_sort,omitempty"`
+	SpecSort      *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=spec_sort,json=specSort,proto3" json:"spec_sort,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -118,11 +118,11 @@ func (x *GoodsSpec) GetSpecImages() []string {
 	return nil
 }
 
-func (x *GoodsSpec) GetSpecSort() int32 {
+func (x *GoodsSpec) GetSpecSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SpecSort
 	}
-	return 0
+	return nil
 }
 
 func (x *GoodsSpec) GetCreateTime() int64 {
@@ -146,7 +146,7 @@ type CreateSpecRequest struct {
 	SpecName      string                 `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3" json:"spec_name,omitempty"`
 	SpecValue     string                 `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3" json:"spec_value,omitempty"`
 	SpecImages    []string               `protobuf:"bytes,4,rep,name=spec_images,json=specImages,proto3" json:"spec_images,omitempty"`
-	SpecSort      int32                  `protobuf:"varint,5,opt,name=spec_sort,json=specSort,proto3" json:"spec_sort,omitempty"`
+	SpecSort      *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=spec_sort,json=specSort,proto3" json:"spec_sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -209,11 +209,11 @@ func (x *CreateSpecRequest) GetSpecImages() []string {
 	return nil
 }
 
-func (x *CreateSpecRequest) GetSpecSort() int32 {
+func (x *CreateSpecRequest) GetSpecSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SpecSort
 	}
-	return 0
+	return nil
 }
 
 // 批量创建规格请求
@@ -268,7 +268,7 @@ type UpdateSpecRequest struct {
 	SpecName      *string                `protobuf:"bytes,2,opt,name=spec_name,json=specName,proto3,oneof" json:"spec_name,omitempty"`
 	SpecValue     *string                `protobuf:"bytes,3,opt,name=spec_value,json=specValue,proto3,oneof" json:"spec_value,omitempty"`
 	SpecImages    []string               `protobuf:"bytes,4,rep,name=spec_images,json=specImages,proto3" json:"spec_images,omitempty"`
-	SpecSort      *int32                 `protobuf:"varint,5,opt,name=spec_sort,json=specSort,proto3,oneof" json:"spec_sort,omitempty"`
+	SpecSort      *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=spec_sort,json=specSort,proto3" json:"spec_sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -331,11 +331,11 @@ func (x *UpdateSpecRequest) GetSpecImages() []string {
 	return nil
 }
 
-func (x *UpdateSpecRequest) GetSpecSort() int32 {
-	if x != nil && x.SpecSort != nil {
-		return *x.SpecSort
+func (x *UpdateSpecRequest) GetSpecSort() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.SpecSort
 	}
-	return 0
+	return nil
 }
 
 // 删除规格请求
@@ -696,7 +696,7 @@ var File_api_zebra_goods_spec_spec_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_spec_spec_proto_rawDesc = "" +
 	"\n" +
-	"\x1fapi/zebra-goods/spec/spec.proto\x12\x04spec\x1a\x1egoogle/protobuf/wrappers.proto\"\xf2\x01\n" +
+	"\x1fapi/zebra-goods/spec/spec.proto\x12\x04spec\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\x02\n" +
 	"\tGoodsSpec\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x1b\n" +
@@ -704,35 +704,33 @@ const file_api_zebra_goods_spec_spec_proto_rawDesc = "" +
 	"\n" +
 	"spec_value\x18\x04 \x01(\tR\tspecValue\x12\x1f\n" +
 	"\vspec_images\x18\x05 \x03(\tR\n" +
-	"specImages\x12\x1b\n" +
-	"\tspec_sort\x18\x06 \x01(\x05R\bspecSort\x12\x1f\n" +
+	"specImages\x128\n" +
+	"\tspec_sort\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\bspecSort\x12\x1f\n" +
 	"\vcreate_time\x18\a \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\b \x01(\x03R\n" +
-	"updateTime\"\xa8\x01\n" +
+	"updateTime\"\xc5\x01\n" +
 	"\x11CreateSpecRequest\x12\x19\n" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x1b\n" +
 	"\tspec_name\x18\x02 \x01(\tR\bspecName\x12\x1d\n" +
 	"\n" +
 	"spec_value\x18\x03 \x01(\tR\tspecValue\x12\x1f\n" +
 	"\vspec_images\x18\x04 \x03(\tR\n" +
-	"specImages\x12\x1b\n" +
-	"\tspec_sort\x18\x05 \x01(\x05R\bspecSort\"G\n" +
+	"specImages\x128\n" +
+	"\tspec_sort\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\bspecSort\"G\n" +
 	"\x16BatchCreateSpecRequest\x12-\n" +
-	"\x05items\x18\x01 \x03(\v2\x17.spec.CreateSpecRequestR\x05items\"\xd7\x01\n" +
+	"\x05items\x18\x01 \x03(\v2\x17.spec.CreateSpecRequestR\x05items\"\xe1\x01\n" +
 	"\x11UpdateSpecRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12 \n" +
 	"\tspec_name\x18\x02 \x01(\tH\x00R\bspecName\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"spec_value\x18\x03 \x01(\tH\x01R\tspecValue\x88\x01\x01\x12\x1f\n" +
 	"\vspec_images\x18\x04 \x03(\tR\n" +
-	"specImages\x12 \n" +
-	"\tspec_sort\x18\x05 \x01(\x05H\x02R\bspecSort\x88\x01\x01B\f\n" +
+	"specImages\x128\n" +
+	"\tspec_sort\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\bspecSortB\f\n" +
 	"\n" +
 	"_spec_nameB\r\n" +
-	"\v_spec_valueB\f\n" +
-	"\n" +
-	"_spec_sort\"#\n" +
+	"\v_spec_value\"#\n" +
 	"\x11DeleteSpecRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x0eGetSpecRequest\x12\x0e\n" +
@@ -789,31 +787,34 @@ var file_api_zebra_goods_spec_spec_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),  // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_spec_spec_proto_depIdxs = []int32{
-	1,  // 0: spec.BatchCreateSpecRequest.items:type_name -> spec.CreateSpecRequest
-	11, // 1: spec.ListSpecResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 2: spec.ListSpecResponse.specs:type_name -> spec.GoodsSpec
-	11, // 3: spec.GetSpecResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 4: spec.GetSpecResponse.spec:type_name -> spec.GoodsSpec
-	11, // 5: spec.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 6: spec.SpecService.Create:input_type -> spec.CreateSpecRequest
-	2,  // 7: spec.SpecService.BatchCreate:input_type -> spec.BatchCreateSpecRequest
-	3,  // 8: spec.SpecService.Update:input_type -> spec.UpdateSpecRequest
-	4,  // 9: spec.SpecService.Delete:input_type -> spec.DeleteSpecRequest
-	5,  // 10: spec.SpecService.Get:input_type -> spec.GetSpecRequest
-	6,  // 11: spec.SpecService.ListByGoods:input_type -> spec.ListSpecByGoodsRequest
-	7,  // 12: spec.SpecService.ListBySku:input_type -> spec.ListSpecBySkuRequest
-	10, // 13: spec.SpecService.Create:output_type -> spec.Response
-	10, // 14: spec.SpecService.BatchCreate:output_type -> spec.Response
-	10, // 15: spec.SpecService.Update:output_type -> spec.Response
-	10, // 16: spec.SpecService.Delete:output_type -> spec.Response
-	9,  // 17: spec.SpecService.Get:output_type -> spec.GetSpecResponse
-	8,  // 18: spec.SpecService.ListByGoods:output_type -> spec.ListSpecResponse
-	8,  // 19: spec.SpecService.ListBySku:output_type -> spec.ListSpecResponse
-	13, // [13:20] is the sub-list for method output_type
-	6,  // [6:13] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	11, // 0: spec.GoodsSpec.spec_sort:type_name -> google.protobuf.Int32Value
+	11, // 1: spec.CreateSpecRequest.spec_sort:type_name -> google.protobuf.Int32Value
+	1,  // 2: spec.BatchCreateSpecRequest.items:type_name -> spec.CreateSpecRequest
+	11, // 3: spec.UpdateSpecRequest.spec_sort:type_name -> google.protobuf.Int32Value
+	11, // 4: spec.ListSpecResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: spec.ListSpecResponse.specs:type_name -> spec.GoodsSpec
+	11, // 6: spec.GetSpecResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: spec.GetSpecResponse.spec:type_name -> spec.GoodsSpec
+	11, // 8: spec.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 9: spec.SpecService.Create:input_type -> spec.CreateSpecRequest
+	2,  // 10: spec.SpecService.BatchCreate:input_type -> spec.BatchCreateSpecRequest
+	3,  // 11: spec.SpecService.Update:input_type -> spec.UpdateSpecRequest
+	4,  // 12: spec.SpecService.Delete:input_type -> spec.DeleteSpecRequest
+	5,  // 13: spec.SpecService.Get:input_type -> spec.GetSpecRequest
+	6,  // 14: spec.SpecService.ListByGoods:input_type -> spec.ListSpecByGoodsRequest
+	7,  // 15: spec.SpecService.ListBySku:input_type -> spec.ListSpecBySkuRequest
+	10, // 16: spec.SpecService.Create:output_type -> spec.Response
+	10, // 17: spec.SpecService.BatchCreate:output_type -> spec.Response
+	10, // 18: spec.SpecService.Update:output_type -> spec.Response
+	10, // 19: spec.SpecService.Delete:output_type -> spec.Response
+	9,  // 20: spec.SpecService.Get:output_type -> spec.GetSpecResponse
+	8,  // 21: spec.SpecService.ListByGoods:output_type -> spec.ListSpecResponse
+	8,  // 22: spec.SpecService.ListBySku:output_type -> spec.ListSpecResponse
+	16, // [16:23] is the sub-list for method output_type
+	9,  // [9:16] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_spec_spec_proto_init() }

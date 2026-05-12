@@ -33,8 +33,8 @@ message Goods {
   string sub_title       = 6;
   string main_image      = 7;
   string detail          = 8; // 富文本详情
-  int32  sort_order      = 9;
-  int32  status          = 10; // 0=下架, 1=上架
+  google.protobuf.Int32Value sort_order = 9;
+  google.protobuf.Int32Value status = 10; // 0=下架, 1=上架
   int64  create_time     = 11;
   int64  update_time     = 12;
   int32  is_deleted      = 13;
@@ -53,7 +53,7 @@ message CreateGoodsRequest {
   string sub_title   = 5;
   string main_image  = 6;
   string detail      = 7;
-  int32  sort_order  = 8;
+  google.protobuf.Int32Value sort_order = 8;
   repeated string gallery_images = 9;
   repeated int64 attribute_template = 10;
   string sku_name_rule = 11;
@@ -67,8 +67,8 @@ message UpdateGoodsRequest {
   string sub_title   = 3;
   string main_image  = 4;
   string detail      = 5;
-  int32  sort_order  = 6;
-  int32  status      = 7;
+  google.protobuf.Int32Value sort_order = 6;
+  google.protobuf.Int32Value status = 7;
   repeated string gallery_images = 8;
   repeated int64 attribute_template = 9;
   string sku_name_rule = 10;
@@ -102,7 +102,7 @@ message ListGoodsRequest {
   int64  category_id  = 3; // -1表示全部
   int64  vendor_id    = 4; // -1表示全部
   int64  brand_id     = 5; // -1表示全部
-  int32  status       = 6; // -1表示全部
+  google.protobuf.Int32Value status = 6; // -1表示全部
   string name_keyword = 7;
 }
 

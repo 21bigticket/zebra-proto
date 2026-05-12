@@ -28,7 +28,7 @@ type Role struct {
 	RoleId            int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	RoleName          string                 `protobuf:"bytes,2,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
 	RoleKey           string                 `protobuf:"bytes,3,opt,name=role_key,json=roleKey,proto3" json:"role_key,omitempty"`
-	RoleSort          int32                  `protobuf:"varint,4,opt,name=role_sort,json=roleSort,proto3" json:"role_sort,omitempty"`
+	RoleSort          *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=role_sort,json=roleSort,proto3" json:"role_sort,omitempty"`
 	DataScope         string                 `protobuf:"bytes,5,opt,name=data_scope,json=dataScope,proto3" json:"data_scope,omitempty"` // 数据范围（1:全部 2:自定 3:本部门 4:本部门及以下）
 	MenuCheckStrictly bool                   `protobuf:"varint,6,opt,name=menu_check_strictly,json=menuCheckStrictly,proto3" json:"menu_check_strictly,omitempty"`
 	DeptCheckStrictly bool                   `protobuf:"varint,7,opt,name=dept_check_strictly,json=deptCheckStrictly,proto3" json:"dept_check_strictly,omitempty"`
@@ -97,11 +97,11 @@ func (x *Role) GetRoleKey() string {
 	return ""
 }
 
-func (x *Role) GetRoleSort() int32 {
+func (x *Role) GetRoleSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.RoleSort
 	}
-	return 0
+	return nil
 }
 
 func (x *Role) GetDataScope() string {
@@ -193,7 +193,7 @@ type CreateRoleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RoleName      string                 `protobuf:"bytes,1,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
 	RoleKey       string                 `protobuf:"bytes,2,opt,name=role_key,json=roleKey,proto3" json:"role_key,omitempty"`
-	RoleSort      int32                  `protobuf:"varint,3,opt,name=role_sort,json=roleSort,proto3" json:"role_sort,omitempty"`
+	RoleSort      *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=role_sort,json=roleSort,proto3" json:"role_sort,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Remark        string                 `protobuf:"bytes,5,opt,name=remark,proto3" json:"remark,omitempty"`
 	MenuIds       []int64                `protobuf:"varint,6,rep,packed,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
@@ -246,11 +246,11 @@ func (x *CreateRoleRequest) GetRoleKey() string {
 	return ""
 }
 
-func (x *CreateRoleRequest) GetRoleSort() int32 {
+func (x *CreateRoleRequest) GetRoleSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.RoleSort
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateRoleRequest) GetStatus() string {
@@ -287,7 +287,7 @@ type UpdateRoleRequest struct {
 	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	RoleName      *string                `protobuf:"bytes,2,opt,name=role_name,json=roleName,proto3,oneof" json:"role_name,omitempty"`
 	RoleKey       *string                `protobuf:"bytes,3,opt,name=role_key,json=roleKey,proto3,oneof" json:"role_key,omitempty"`
-	RoleSort      *int32                 `protobuf:"varint,4,opt,name=role_sort,json=roleSort,proto3,oneof" json:"role_sort,omitempty"`
+	RoleSort      *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=role_sort,json=roleSort,proto3" json:"role_sort,omitempty"`
 	Status        *string                `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Remark        *string                `protobuf:"bytes,6,opt,name=remark,proto3,oneof" json:"remark,omitempty"`
 	MenuIds       []int64                `protobuf:"varint,7,rep,packed,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
@@ -347,11 +347,11 @@ func (x *UpdateRoleRequest) GetRoleKey() string {
 	return ""
 }
 
-func (x *UpdateRoleRequest) GetRoleSort() int32 {
-	if x != nil && x.RoleSort != nil {
-		return *x.RoleSort
+func (x *UpdateRoleRequest) GetRoleSort() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.RoleSort
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateRoleRequest) GetStatus() string {
@@ -881,12 +881,12 @@ var File_api_zebra_passport_role_role_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-passport/role/role.proto\x12\x04role\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x03\n" +
+	"\"api/zebra-passport/role/role.proto\x12\x04role\x1a\x1egoogle/protobuf/wrappers.proto\"\x8d\x04\n" +
 	"\x04Role\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x1b\n" +
 	"\trole_name\x18\x02 \x01(\tR\broleName\x12\x19\n" +
-	"\brole_key\x18\x03 \x01(\tR\aroleKey\x12\x1b\n" +
-	"\trole_sort\x18\x04 \x01(\x05R\broleSort\x12\x1d\n" +
+	"\brole_key\x18\x03 \x01(\tR\aroleKey\x128\n" +
+	"\trole_sort\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\broleSort\x12\x1d\n" +
 	"\n" +
 	"data_scope\x18\x05 \x01(\tR\tdataScope\x12.\n" +
 	"\x13menu_check_strictly\x18\x06 \x01(\bR\x11menuCheckStrictly\x12.\n" +
@@ -902,29 +902,27 @@ const file_api_zebra_passport_role_role_proto_rawDesc = "" +
 	"updateTime\x12\x16\n" +
 	"\x06remark\x18\x0e \x01(\tR\x06remark\x12\x19\n" +
 	"\bmenu_ids\x18\x0f \x03(\x03R\amenuIds\x12\x19\n" +
-	"\bdept_ids\x18\x10 \x03(\x03R\adeptIds\"\xce\x01\n" +
+	"\bdept_ids\x18\x10 \x03(\x03R\adeptIds\"\xeb\x01\n" +
 	"\x11CreateRoleRequest\x12\x1b\n" +
 	"\trole_name\x18\x01 \x01(\tR\broleName\x12\x19\n" +
-	"\brole_key\x18\x02 \x01(\tR\aroleKey\x12\x1b\n" +
-	"\trole_sort\x18\x03 \x01(\x05R\broleSort\x12\x16\n" +
+	"\brole_key\x18\x02 \x01(\tR\aroleKey\x128\n" +
+	"\trole_sort\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\broleSort\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x16\n" +
 	"\x06remark\x18\x05 \x01(\tR\x06remark\x12\x19\n" +
 	"\bmenu_ids\x18\x06 \x03(\x03R\amenuIds\x12\x19\n" +
-	"\bdept_ids\x18\a \x03(\x03R\adeptIds\"\xbf\x02\n" +
+	"\bdept_ids\x18\a \x03(\x03R\adeptIds\"\xc9\x02\n" +
 	"\x11UpdateRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12 \n" +
 	"\trole_name\x18\x02 \x01(\tH\x00R\broleName\x88\x01\x01\x12\x1e\n" +
-	"\brole_key\x18\x03 \x01(\tH\x01R\aroleKey\x88\x01\x01\x12 \n" +
-	"\trole_sort\x18\x04 \x01(\x05H\x02R\broleSort\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x05 \x01(\tH\x03R\x06status\x88\x01\x01\x12\x1b\n" +
-	"\x06remark\x18\x06 \x01(\tH\x04R\x06remark\x88\x01\x01\x12\x19\n" +
+	"\brole_key\x18\x03 \x01(\tH\x01R\aroleKey\x88\x01\x01\x128\n" +
+	"\trole_sort\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\broleSort\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01\x12\x1b\n" +
+	"\x06remark\x18\x06 \x01(\tH\x03R\x06remark\x88\x01\x01\x12\x19\n" +
 	"\bmenu_ids\x18\a \x03(\x03R\amenuIds\x12\x19\n" +
 	"\bdept_ids\x18\b \x03(\x03R\adeptIdsB\f\n" +
 	"\n" +
 	"_role_nameB\v\n" +
-	"\t_role_keyB\f\n" +
-	"\n" +
-	"_role_sortB\t\n" +
+	"\t_role_keyB\t\n" +
 	"\a_statusB\t\n" +
 	"\a_remark\".\n" +
 	"\x11DeleteRoleRequest\x12\x19\n" +
@@ -1001,30 +999,33 @@ var file_api_zebra_passport_role_role_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_role_role_proto_depIdxs = []int32{
-	11, // 0: role.GetRoleResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: role.GetRoleResponse.role:type_name -> role.Role
-	11, // 2: role.ListRoleResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: role.ListRoleResponse.roles:type_name -> role.Role
-	11, // 4: role.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: role.RoleService.Create:input_type -> role.CreateRoleRequest
-	2,  // 6: role.RoleService.Update:input_type -> role.UpdateRoleRequest
-	3,  // 7: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
-	4,  // 8: role.RoleService.Get:input_type -> role.GetRoleRequest
-	6,  // 9: role.RoleService.List:input_type -> role.ListRoleRequest
-	8,  // 10: role.RoleService.DataScope:input_type -> role.DataScopeRequest
-	9,  // 11: role.RoleService.ChangeStatus:input_type -> role.ChangeStatusRequest
-	10, // 12: role.RoleService.Create:output_type -> role.Response
-	10, // 13: role.RoleService.Update:output_type -> role.Response
-	10, // 14: role.RoleService.Delete:output_type -> role.Response
-	5,  // 15: role.RoleService.Get:output_type -> role.GetRoleResponse
-	7,  // 16: role.RoleService.List:output_type -> role.ListRoleResponse
-	10, // 17: role.RoleService.DataScope:output_type -> role.Response
-	10, // 18: role.RoleService.ChangeStatus:output_type -> role.Response
-	12, // [12:19] is the sub-list for method output_type
-	5,  // [5:12] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	11, // 0: role.Role.role_sort:type_name -> google.protobuf.Int32Value
+	11, // 1: role.CreateRoleRequest.role_sort:type_name -> google.protobuf.Int32Value
+	11, // 2: role.UpdateRoleRequest.role_sort:type_name -> google.protobuf.Int32Value
+	11, // 3: role.GetRoleResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: role.GetRoleResponse.role:type_name -> role.Role
+	11, // 5: role.ListRoleResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: role.ListRoleResponse.roles:type_name -> role.Role
+	11, // 7: role.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 8: role.RoleService.Create:input_type -> role.CreateRoleRequest
+	2,  // 9: role.RoleService.Update:input_type -> role.UpdateRoleRequest
+	3,  // 10: role.RoleService.Delete:input_type -> role.DeleteRoleRequest
+	4,  // 11: role.RoleService.Get:input_type -> role.GetRoleRequest
+	6,  // 12: role.RoleService.List:input_type -> role.ListRoleRequest
+	8,  // 13: role.RoleService.DataScope:input_type -> role.DataScopeRequest
+	9,  // 14: role.RoleService.ChangeStatus:input_type -> role.ChangeStatusRequest
+	10, // 15: role.RoleService.Create:output_type -> role.Response
+	10, // 16: role.RoleService.Update:output_type -> role.Response
+	10, // 17: role.RoleService.Delete:output_type -> role.Response
+	5,  // 18: role.RoleService.Get:output_type -> role.GetRoleResponse
+	7,  // 19: role.RoleService.List:output_type -> role.ListRoleResponse
+	10, // 20: role.RoleService.DataScope:output_type -> role.Response
+	10, // 21: role.RoleService.ChangeStatus:output_type -> role.Response
+	15, // [15:22] is the sub-list for method output_type
+	8,  // [8:15] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_role_role_proto_init() }

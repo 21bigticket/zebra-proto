@@ -45,7 +45,7 @@ type Config struct {
 	Appid         string                 `protobuf:"bytes,2,opt,name=appid,proto3" json:"appid,omitempty"`
 	ConfigKey     string                 `protobuf:"bytes,3,opt,name=config_key,json=configKey,proto3" json:"config_key,omitempty"`
 	ConfigValue   string                 `protobuf:"bytes,4,opt,name=config_value,json=configValue,proto3" json:"config_value,omitempty"`
-	ConfigStatus  int32                  `protobuf:"varint,5,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"` // 0=禁用, 1=启用
+	ConfigStatus  *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"` // 0=禁用, 1=启用
 	ConfigDesc    string                 `protobuf:"bytes,6,opt,name=config_desc,json=configDesc,proto3" json:"config_desc,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -112,11 +112,11 @@ func (x *Config) GetConfigValue() string {
 	return ""
 }
 
-func (x *Config) GetConfigStatus() int32 {
+func (x *Config) GetConfigStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ConfigStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *Config) GetConfigDesc() string {
@@ -153,7 +153,7 @@ type CreateConfigRequest struct {
 	Appid         string                 `protobuf:"bytes,1,opt,name=appid,proto3" json:"appid,omitempty"`
 	ConfigKey     string                 `protobuf:"bytes,2,opt,name=config_key,json=configKey,proto3" json:"config_key,omitempty"`
 	ConfigValue   string                 `protobuf:"bytes,3,opt,name=config_value,json=configValue,proto3" json:"config_value,omitempty"`
-	ConfigStatus  int32                  `protobuf:"varint,4,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`
+	ConfigStatus  *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`
 	ConfigDesc    string                 `protobuf:"bytes,5,opt,name=config_desc,json=configDesc,proto3" json:"config_desc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -210,11 +210,11 @@ func (x *CreateConfigRequest) GetConfigValue() string {
 	return ""
 }
 
-func (x *CreateConfigRequest) GetConfigStatus() int32 {
+func (x *CreateConfigRequest) GetConfigStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ConfigStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateConfigRequest) GetConfigDesc() string {
@@ -229,7 +229,7 @@ type UpdateConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	ConfigValue   string                 `protobuf:"bytes,2,opt,name=config_value,json=configValue,proto3" json:"config_value,omitempty"`
-	ConfigStatus  int32                  `protobuf:"varint,3,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`
+	ConfigStatus  *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`
 	ConfigDesc    string                 `protobuf:"bytes,4,opt,name=config_desc,json=configDesc,proto3" json:"config_desc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -279,11 +279,11 @@ func (x *UpdateConfigRequest) GetConfigValue() string {
 	return ""
 }
 
-func (x *UpdateConfigRequest) GetConfigStatus() int32 {
+func (x *UpdateConfigRequest) GetConfigStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ConfigStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateConfigRequest) GetConfigDesc() string {
@@ -504,7 +504,7 @@ type ListConfigRequest struct {
 	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	ConfigKeyword string                 `protobuf:"bytes,4,opt,name=config_keyword,json=configKeyword,proto3" json:"config_keyword,omitempty"` // 配置key模糊查询
-	ConfigStatus  int32                  `protobuf:"varint,5,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`   // 状态过滤，-1表示全部
+	ConfigStatus  *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=config_status,json=configStatus,proto3" json:"config_status,omitempty"`    // 状态过滤，-1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -567,11 +567,11 @@ func (x *ListConfigRequest) GetConfigKeyword() string {
 	return ""
 }
 
-func (x *ListConfigRequest) GetConfigStatus() int32 {
+func (x *ListConfigRequest) GetConfigStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ConfigStatus
 	}
-	return 0
+	return nil
 }
 
 // 列出配置响应
@@ -858,14 +858,14 @@ var File_api_zebra_config_config_config_proto protoreflect.FileDescriptor
 
 const file_api_zebra_config_config_config_proto_rawDesc = "" +
 	"\n" +
-	"$api/zebra-config/config/config.proto\x12\x06config\x1a\x1egoogle/protobuf/wrappers.proto\"\x97\x02\n" +
+	"$api/zebra-config/config/config.proto\x12\x06config\x1a\x1egoogle/protobuf/wrappers.proto\"\xb4\x02\n" +
 	"\x06Config\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05appid\x18\x02 \x01(\tR\x05appid\x12\x1d\n" +
 	"\n" +
 	"config_key\x18\x03 \x01(\tR\tconfigKey\x12!\n" +
-	"\fconfig_value\x18\x04 \x01(\tR\vconfigValue\x12#\n" +
-	"\rconfig_status\x18\x05 \x01(\x05R\fconfigStatus\x12\x1f\n" +
+	"\fconfig_value\x18\x04 \x01(\tR\vconfigValue\x12@\n" +
+	"\rconfig_status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\fconfigStatus\x12\x1f\n" +
 	"\vconfig_desc\x18\x06 \x01(\tR\n" +
 	"configDesc\x12\x1f\n" +
 	"\vcreate_time\x18\a \x01(\x03R\n" +
@@ -873,19 +873,19 @@ const file_api_zebra_config_config_config_proto_rawDesc = "" +
 	"\vupdate_time\x18\b \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\t \x01(\x05R\tisDeleted\"\xb3\x01\n" +
+	"is_deleted\x18\t \x01(\x05R\tisDeleted\"\xd0\x01\n" +
 	"\x13CreateConfigRequest\x12\x14\n" +
 	"\x05appid\x18\x01 \x01(\tR\x05appid\x12\x1d\n" +
 	"\n" +
 	"config_key\x18\x02 \x01(\tR\tconfigKey\x12!\n" +
-	"\fconfig_value\x18\x03 \x01(\tR\vconfigValue\x12#\n" +
-	"\rconfig_status\x18\x04 \x01(\x05R\fconfigStatus\x12\x1f\n" +
+	"\fconfig_value\x18\x03 \x01(\tR\vconfigValue\x12@\n" +
+	"\rconfig_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\fconfigStatus\x12\x1f\n" +
 	"\vconfig_desc\x18\x05 \x01(\tR\n" +
-	"configDesc\"\x8e\x01\n" +
+	"configDesc\"\xab\x01\n" +
 	"\x13UpdateConfigRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
-	"\fconfig_value\x18\x02 \x01(\tR\vconfigValue\x12#\n" +
-	"\rconfig_status\x18\x03 \x01(\x05R\fconfigStatus\x12\x1f\n" +
+	"\fconfig_value\x18\x02 \x01(\tR\vconfigValue\x12@\n" +
+	"\rconfig_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\fconfigStatus\x12\x1f\n" +
 	"\vconfig_desc\x18\x04 \x01(\tR\n" +
 	"configDesc\"%\n" +
 	"\x13DeleteConfigRequest\x12\x0e\n" +
@@ -899,13 +899,13 @@ const file_api_zebra_config_config_config_proto_rawDesc = "" +
 	"\x15GetConfigByAppRequest\x12\x14\n" +
 	"\x05appid\x18\x01 \x01(\tR\x05appid\x12\x1d\n" +
 	"\n" +
-	"config_key\x18\x02 \x01(\tR\tconfigKey\"\xa6\x01\n" +
+	"config_key\x18\x02 \x01(\tR\tconfigKey\"\xc3\x01\n" +
 	"\x11ListConfigRequest\x12\x14\n" +
 	"\x05appid\x18\x01 \x01(\tR\x05appid\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12%\n" +
-	"\x0econfig_keyword\x18\x04 \x01(\tR\rconfigKeyword\x12#\n" +
-	"\rconfig_status\x18\x05 \x01(\x05R\fconfigStatus\"\x97\x01\n" +
+	"\x0econfig_keyword\x18\x04 \x01(\tR\rconfigKeyword\x12@\n" +
+	"\rconfig_status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\fconfigStatus\"\x97\x01\n" +
 	"\x12ListConfigResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12(\n" +
@@ -964,34 +964,38 @@ var file_api_zebra_config_config_config_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),     // 13: google.protobuf.Int32Value
 }
 var file_api_zebra_config_config_config_proto_depIdxs = []int32{
-	13, // 0: config.GetConfigResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: config.GetConfigResponse.config:type_name -> config.Config
-	13, // 2: config.ListConfigResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: config.ListConfigResponse.configs:type_name -> config.Config
-	13, // 4: config.BatchGetConfigResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: config.BatchGetConfigResponse.configs:type_name -> config.Config
-	13, // 6: config.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 7: config.ConfigService.Create:input_type -> config.CreateConfigRequest
-	2,  // 8: config.ConfigService.Update:input_type -> config.UpdateConfigRequest
-	3,  // 9: config.ConfigService.Delete:input_type -> config.DeleteConfigRequest
-	4,  // 10: config.ConfigService.Get:input_type -> config.GetConfigRequest
-	6,  // 11: config.ConfigService.GetByAppAndKey:input_type -> config.GetConfigByAppRequest
-	7,  // 12: config.ConfigService.List:input_type -> config.ListConfigRequest
-	9,  // 13: config.ConfigService.BatchGetByApp:input_type -> config.BatchGetConfigRequest
-	11, // 14: config.ConfigService.GetConfigListByApp:input_type -> config.GetConfigListByAppRequest
-	12, // 15: config.ConfigService.Create:output_type -> config.Response
-	12, // 16: config.ConfigService.Update:output_type -> config.Response
-	12, // 17: config.ConfigService.Delete:output_type -> config.Response
-	5,  // 18: config.ConfigService.Get:output_type -> config.GetConfigResponse
-	5,  // 19: config.ConfigService.GetByAppAndKey:output_type -> config.GetConfigResponse
-	8,  // 20: config.ConfigService.List:output_type -> config.ListConfigResponse
-	10, // 21: config.ConfigService.BatchGetByApp:output_type -> config.BatchGetConfigResponse
-	10, // 22: config.ConfigService.GetConfigListByApp:output_type -> config.BatchGetConfigResponse
-	15, // [15:23] is the sub-list for method output_type
-	7,  // [7:15] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	13, // 0: config.Config.config_status:type_name -> google.protobuf.Int32Value
+	13, // 1: config.CreateConfigRequest.config_status:type_name -> google.protobuf.Int32Value
+	13, // 2: config.UpdateConfigRequest.config_status:type_name -> google.protobuf.Int32Value
+	13, // 3: config.GetConfigResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: config.GetConfigResponse.config:type_name -> config.Config
+	13, // 5: config.ListConfigRequest.config_status:type_name -> google.protobuf.Int32Value
+	13, // 6: config.ListConfigResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: config.ListConfigResponse.configs:type_name -> config.Config
+	13, // 8: config.BatchGetConfigResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: config.BatchGetConfigResponse.configs:type_name -> config.Config
+	13, // 10: config.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 11: config.ConfigService.Create:input_type -> config.CreateConfigRequest
+	2,  // 12: config.ConfigService.Update:input_type -> config.UpdateConfigRequest
+	3,  // 13: config.ConfigService.Delete:input_type -> config.DeleteConfigRequest
+	4,  // 14: config.ConfigService.Get:input_type -> config.GetConfigRequest
+	6,  // 15: config.ConfigService.GetByAppAndKey:input_type -> config.GetConfigByAppRequest
+	7,  // 16: config.ConfigService.List:input_type -> config.ListConfigRequest
+	9,  // 17: config.ConfigService.BatchGetByApp:input_type -> config.BatchGetConfigRequest
+	11, // 18: config.ConfigService.GetConfigListByApp:input_type -> config.GetConfigListByAppRequest
+	12, // 19: config.ConfigService.Create:output_type -> config.Response
+	12, // 20: config.ConfigService.Update:output_type -> config.Response
+	12, // 21: config.ConfigService.Delete:output_type -> config.Response
+	5,  // 22: config.ConfigService.Get:output_type -> config.GetConfigResponse
+	5,  // 23: config.ConfigService.GetByAppAndKey:output_type -> config.GetConfigResponse
+	8,  // 24: config.ConfigService.List:output_type -> config.ListConfigResponse
+	10, // 25: config.ConfigService.BatchGetByApp:output_type -> config.BatchGetConfigResponse
+	10, // 26: config.ConfigService.GetConfigListByApp:output_type -> config.BatchGetConfigResponse
+	19, // [19:27] is the sub-list for method output_type
+	11, // [11:19] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_config_config_config_proto_init() }

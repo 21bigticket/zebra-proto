@@ -26,7 +26,7 @@ const (
 type DictData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DictCode      int64                  `protobuf:"varint,1,opt,name=dict_code,json=dictCode,proto3" json:"dict_code,omitempty"`
-	DictSort      int32                  `protobuf:"varint,2,opt,name=dict_sort,json=dictSort,proto3" json:"dict_sort,omitempty"`
+	DictSort      *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=dict_sort,json=dictSort,proto3" json:"dict_sort,omitempty"`
 	DictLabel     string                 `protobuf:"bytes,3,opt,name=dict_label,json=dictLabel,proto3" json:"dict_label,omitempty"`
 	DictValue     string                 `protobuf:"bytes,4,opt,name=dict_value,json=dictValue,proto3" json:"dict_value,omitempty"`
 	DictType      string                 `protobuf:"bytes,5,opt,name=dict_type,json=dictType,proto3" json:"dict_type,omitempty"`
@@ -80,11 +80,11 @@ func (x *DictData) GetDictCode() int64 {
 	return 0
 }
 
-func (x *DictData) GetDictSort() int32 {
+func (x *DictData) GetDictSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.DictSort
 	}
-	return 0
+	return nil
 }
 
 func (x *DictData) GetDictLabel() string {
@@ -532,7 +532,7 @@ func (x *GetDictDataByTypeResponse) GetDictData() []*DictData {
 // 创建字典数据请求
 type CreateDictDataRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DictSort      int32                  `protobuf:"varint,1,opt,name=dict_sort,json=dictSort,proto3" json:"dict_sort,omitempty"`
+	DictSort      *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=dict_sort,json=dictSort,proto3" json:"dict_sort,omitempty"`
 	DictLabel     string                 `protobuf:"bytes,2,opt,name=dict_label,json=dictLabel,proto3" json:"dict_label,omitempty"`
 	DictValue     string                 `protobuf:"bytes,3,opt,name=dict_value,json=dictValue,proto3" json:"dict_value,omitempty"`
 	DictType      string                 `protobuf:"bytes,4,opt,name=dict_type,json=dictType,proto3" json:"dict_type,omitempty"`
@@ -575,11 +575,11 @@ func (*CreateDictDataRequest) Descriptor() ([]byte, []int) {
 	return file_api_zebra_passport_dict_data_dict_data_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CreateDictDataRequest) GetDictSort() int32 {
+func (x *CreateDictDataRequest) GetDictSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.DictSort
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateDictDataRequest) GetDictLabel() string {
@@ -642,7 +642,7 @@ func (x *CreateDictDataRequest) GetRemark() string {
 type UpdateDictDataRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DictCode      int64                  `protobuf:"varint,1,opt,name=dict_code,json=dictCode,proto3" json:"dict_code,omitempty"`
-	DictSort      *int32                 `protobuf:"varint,2,opt,name=dict_sort,json=dictSort,proto3,oneof" json:"dict_sort,omitempty"`
+	DictSort      *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=dict_sort,json=dictSort,proto3" json:"dict_sort,omitempty"`
 	DictLabel     *string                `protobuf:"bytes,3,opt,name=dict_label,json=dictLabel,proto3,oneof" json:"dict_label,omitempty"`
 	DictValue     *string                `protobuf:"bytes,4,opt,name=dict_value,json=dictValue,proto3,oneof" json:"dict_value,omitempty"`
 	DictType      *string                `protobuf:"bytes,5,opt,name=dict_type,json=dictType,proto3,oneof" json:"dict_type,omitempty"`
@@ -692,11 +692,11 @@ func (x *UpdateDictDataRequest) GetDictCode() int64 {
 	return 0
 }
 
-func (x *UpdateDictDataRequest) GetDictSort() int32 {
-	if x != nil && x.DictSort != nil {
-		return *x.DictSort
+func (x *UpdateDictDataRequest) GetDictSort() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.DictSort
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateDictDataRequest) GetDictLabel() string {
@@ -856,10 +856,10 @@ var File_api_zebra_passport_dict_data_dict_data_proto protoreflect.FileDescripto
 
 const file_api_zebra_passport_dict_data_dict_data_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-passport/dict_data/dict_data.proto\x12\tdict_data\x1a\x1egoogle/protobuf/wrappers.proto\"\xa6\x03\n" +
+	",api/zebra-passport/dict_data/dict_data.proto\x12\tdict_data\x1a\x1egoogle/protobuf/wrappers.proto\"\xc3\x03\n" +
 	"\bDictData\x12\x1b\n" +
-	"\tdict_code\x18\x01 \x01(\x03R\bdictCode\x12\x1b\n" +
-	"\tdict_sort\x18\x02 \x01(\x05R\bdictSort\x12\x1d\n" +
+	"\tdict_code\x18\x01 \x01(\x03R\bdictCode\x128\n" +
+	"\tdict_sort\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\bdictSort\x12\x1d\n" +
 	"\n" +
 	"dict_label\x18\x03 \x01(\tR\tdictLabel\x12\x1d\n" +
 	"\n" +
@@ -902,9 +902,9 @@ const file_api_zebra_passport_dict_data_dict_data_proto_rawDesc = "" +
 	"\x19GetDictDataByTypeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x120\n" +
-	"\tdict_data\x18\x03 \x03(\v2\x13.dict_data.DictDataR\bdictData\"\x9a\x02\n" +
-	"\x15CreateDictDataRequest\x12\x1b\n" +
-	"\tdict_sort\x18\x01 \x01(\x05R\bdictSort\x12\x1d\n" +
+	"\tdict_data\x18\x03 \x03(\v2\x13.dict_data.DictDataR\bdictData\"\xb7\x02\n" +
+	"\x15CreateDictDataRequest\x128\n" +
+	"\tdict_sort\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\bdictSort\x12\x1d\n" +
 	"\n" +
 	"dict_label\x18\x02 \x01(\tR\tdictLabel\x12\x1d\n" +
 	"\n" +
@@ -916,25 +916,23 @@ const file_api_zebra_passport_dict_data_dict_data_proto_rawDesc = "" +
 	"\n" +
 	"is_default\x18\a \x01(\tR\tisDefault\x12\x16\n" +
 	"\x06status\x18\b \x01(\tR\x06status\x12\x16\n" +
-	"\x06remark\x18\t \x01(\tR\x06remark\"\xe0\x03\n" +
+	"\x06remark\x18\t \x01(\tR\x06remark\"\xea\x03\n" +
 	"\x15UpdateDictDataRequest\x12\x1b\n" +
-	"\tdict_code\x18\x01 \x01(\x03R\bdictCode\x12 \n" +
-	"\tdict_sort\x18\x02 \x01(\x05H\x00R\bdictSort\x88\x01\x01\x12\"\n" +
+	"\tdict_code\x18\x01 \x01(\x03R\bdictCode\x128\n" +
+	"\tdict_sort\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\bdictSort\x12\"\n" +
 	"\n" +
-	"dict_label\x18\x03 \x01(\tH\x01R\tdictLabel\x88\x01\x01\x12\"\n" +
+	"dict_label\x18\x03 \x01(\tH\x00R\tdictLabel\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"dict_value\x18\x04 \x01(\tH\x02R\tdictValue\x88\x01\x01\x12 \n" +
-	"\tdict_type\x18\x05 \x01(\tH\x03R\bdictType\x88\x01\x01\x12 \n" +
-	"\tcss_class\x18\x06 \x01(\tH\x04R\bcssClass\x88\x01\x01\x12\"\n" +
+	"dict_value\x18\x04 \x01(\tH\x01R\tdictValue\x88\x01\x01\x12 \n" +
+	"\tdict_type\x18\x05 \x01(\tH\x02R\bdictType\x88\x01\x01\x12 \n" +
+	"\tcss_class\x18\x06 \x01(\tH\x03R\bcssClass\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"list_class\x18\a \x01(\tH\x05R\tlistClass\x88\x01\x01\x12\"\n" +
+	"list_class\x18\a \x01(\tH\x04R\tlistClass\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"is_default\x18\b \x01(\tH\x06R\tisDefault\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\t \x01(\tH\aR\x06status\x88\x01\x01\x12\x1b\n" +
+	"is_default\x18\b \x01(\tH\x05R\tisDefault\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\t \x01(\tH\x06R\x06status\x88\x01\x01\x12\x1b\n" +
 	"\x06remark\x18\n" +
-	" \x01(\tH\bR\x06remark\x88\x01\x01B\f\n" +
-	"\n" +
-	"_dict_sortB\r\n" +
+	" \x01(\tH\aR\x06remark\x88\x01\x01B\r\n" +
 	"\v_dict_labelB\r\n" +
 	"\v_dict_valueB\f\n" +
 	"\n" +
@@ -987,30 +985,33 @@ var file_api_zebra_passport_dict_data_dict_data_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),     // 11: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_dict_data_dict_data_proto_depIdxs = []int32{
-	11, // 0: dict_data.ListDictDataResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: dict_data.ListDictDataResponse.dict_data:type_name -> dict_data.DictData
-	11, // 2: dict_data.GetDictDataResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: dict_data.GetDictDataResponse.dict_data:type_name -> dict_data.DictData
-	11, // 4: dict_data.GetDictDataByTypeResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: dict_data.GetDictDataByTypeResponse.dict_data:type_name -> dict_data.DictData
-	11, // 6: dict_data.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 7: dict_data.DictDataService.List:input_type -> dict_data.ListDictDataRequest
-	3,  // 8: dict_data.DictDataService.Get:input_type -> dict_data.GetDictDataRequest
-	5,  // 9: dict_data.DictDataService.GetByDictType:input_type -> dict_data.GetDictDataByTypeRequest
-	7,  // 10: dict_data.DictDataService.Create:input_type -> dict_data.CreateDictDataRequest
-	8,  // 11: dict_data.DictDataService.Update:input_type -> dict_data.UpdateDictDataRequest
-	9,  // 12: dict_data.DictDataService.Delete:input_type -> dict_data.DeleteDictDataRequest
-	2,  // 13: dict_data.DictDataService.List:output_type -> dict_data.ListDictDataResponse
-	4,  // 14: dict_data.DictDataService.Get:output_type -> dict_data.GetDictDataResponse
-	6,  // 15: dict_data.DictDataService.GetByDictType:output_type -> dict_data.GetDictDataByTypeResponse
-	10, // 16: dict_data.DictDataService.Create:output_type -> dict_data.Response
-	10, // 17: dict_data.DictDataService.Update:output_type -> dict_data.Response
-	10, // 18: dict_data.DictDataService.Delete:output_type -> dict_data.Response
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	11, // 0: dict_data.DictData.dict_sort:type_name -> google.protobuf.Int32Value
+	11, // 1: dict_data.ListDictDataResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 2: dict_data.ListDictDataResponse.dict_data:type_name -> dict_data.DictData
+	11, // 3: dict_data.GetDictDataResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: dict_data.GetDictDataResponse.dict_data:type_name -> dict_data.DictData
+	11, // 5: dict_data.GetDictDataByTypeResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: dict_data.GetDictDataByTypeResponse.dict_data:type_name -> dict_data.DictData
+	11, // 7: dict_data.CreateDictDataRequest.dict_sort:type_name -> google.protobuf.Int32Value
+	11, // 8: dict_data.UpdateDictDataRequest.dict_sort:type_name -> google.protobuf.Int32Value
+	11, // 9: dict_data.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 10: dict_data.DictDataService.List:input_type -> dict_data.ListDictDataRequest
+	3,  // 11: dict_data.DictDataService.Get:input_type -> dict_data.GetDictDataRequest
+	5,  // 12: dict_data.DictDataService.GetByDictType:input_type -> dict_data.GetDictDataByTypeRequest
+	7,  // 13: dict_data.DictDataService.Create:input_type -> dict_data.CreateDictDataRequest
+	8,  // 14: dict_data.DictDataService.Update:input_type -> dict_data.UpdateDictDataRequest
+	9,  // 15: dict_data.DictDataService.Delete:input_type -> dict_data.DeleteDictDataRequest
+	2,  // 16: dict_data.DictDataService.List:output_type -> dict_data.ListDictDataResponse
+	4,  // 17: dict_data.DictDataService.Get:output_type -> dict_data.GetDictDataResponse
+	6,  // 18: dict_data.DictDataService.GetByDictType:output_type -> dict_data.GetDictDataByTypeResponse
+	10, // 19: dict_data.DictDataService.Create:output_type -> dict_data.Response
+	10, // 20: dict_data.DictDataService.Update:output_type -> dict_data.Response
+	10, // 21: dict_data.DictDataService.Delete:output_type -> dict_data.Response
+	16, // [16:22] is the sub-list for method output_type
+	10, // [10:16] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_dict_data_dict_data_proto_init() }

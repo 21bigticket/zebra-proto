@@ -30,7 +30,7 @@ message Activity {
   int32  activity_type   = 3; // 1=秒杀, 2=拼团, 3=满减, 4=折扣
   int64  start_time      = 4;
   int64  end_time        = 5;
-  int32  activity_status = 6; // 0=未开始, 1=进行中, 2=已结束, 3=已取消
+  google.protobuf.Int32Value activity_status = 6; // 0=未开始, 1=进行中, 2=已结束, 3=已取消
   string remark          = 7;
   int64  create_time     = 8;
   int64  update_time     = 9;
@@ -52,7 +52,7 @@ message UpdateActivityRequest {
   string activity_name   = 2;
   int64  start_time      = 3;
   int64  end_time        = 4;
-  int32  activity_status = 5;
+  google.protobuf.Int32Value activity_status = 5;
   string remark          = 6;
 }
 
@@ -78,7 +78,7 @@ message ListActivityRequest {
   int32 page            = 1;
   int32 page_size       = 2;
   int32 activity_type   = 3; // -1表示全部
-  int32 activity_status = 4; // -1表示全部
+  google.protobuf.Int32Value activity_status = 4; // -1表示全部
 }
 
 // 列出活动响应
@@ -136,7 +136,7 @@ message ActivityGoods {
   int32  stock_limit       = 5; // 活动库存限制
   int32  sold_quantity     = 6; // 已售数量
   int32  limit_per_user    = 7; // 每人限购数量
-  int32  sort_order        = 8;
+  google.protobuf.Int32Value sort_order = 8;
   int64  create_time       = 9;
   int64  update_time       = 10;
   int32  is_deleted        = 11;

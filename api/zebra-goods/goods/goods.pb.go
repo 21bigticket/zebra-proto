@@ -49,8 +49,8 @@ type Goods struct {
 	SubTitle          string                 `protobuf:"bytes,6,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
 	MainImage         string                 `protobuf:"bytes,7,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
 	Detail            string                 `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail,omitempty"` // 富文本详情
-	SortOrder         int32                  `protobuf:"varint,9,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status            int32                  `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"` // 0=下架, 1=上架
+	SortOrder         *wrapperspb.Int32Value `protobuf:"bytes,9,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status            *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"` // 0=下架, 1=上架
 	CreateTime        int64                  `protobuf:"varint,11,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime        int64                  `protobuf:"varint,12,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted         int32                  `protobuf:"varint,13,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -148,18 +148,18 @@ func (x *Goods) GetDetail() string {
 	return ""
 }
 
-func (x *Goods) GetSortOrder() int32 {
+func (x *Goods) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *Goods) GetStatus() int32 {
+func (x *Goods) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *Goods) GetCreateTime() int64 {
@@ -221,7 +221,7 @@ type CreateGoodsRequest struct {
 	SubTitle          string                 `protobuf:"bytes,5,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
 	MainImage         string                 `protobuf:"bytes,6,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
 	Detail            string                 `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail,omitempty"`
-	SortOrder         int32                  `protobuf:"varint,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder         *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	GalleryImages     []string               `protobuf:"bytes,9,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`
 	AttributeTemplate []int64                `protobuf:"varint,10,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"`
 	SkuNameRule       string                 `protobuf:"bytes,11,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`
@@ -309,11 +309,11 @@ func (x *CreateGoodsRequest) GetDetail() string {
 	return ""
 }
 
-func (x *CreateGoodsRequest) GetSortOrder() int32 {
+func (x *CreateGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateGoodsRequest) GetGalleryImages() []string {
@@ -352,8 +352,8 @@ type UpdateGoodsRequest struct {
 	SubTitle          string                 `protobuf:"bytes,3,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
 	MainImage         string                 `protobuf:"bytes,4,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
 	Detail            string                 `protobuf:"bytes,5,opt,name=detail,proto3" json:"detail,omitempty"`
-	SortOrder         int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status            int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder         *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status            *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	GalleryImages     []string               `protobuf:"bytes,8,rep,name=gallery_images,json=galleryImages,proto3" json:"gallery_images,omitempty"`
 	AttributeTemplate []int64                `protobuf:"varint,9,rep,packed,name=attribute_template,json=attributeTemplate,proto3" json:"attribute_template,omitempty"`
 	SkuNameRule       string                 `protobuf:"bytes,10,opt,name=sku_name_rule,json=skuNameRule,proto3" json:"sku_name_rule,omitempty"`
@@ -430,18 +430,18 @@ func (x *UpdateGoodsRequest) GetDetail() string {
 	return ""
 }
 
-func (x *UpdateGoodsRequest) GetSortOrder() int32 {
+func (x *UpdateGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *UpdateGoodsRequest) GetStatus() int32 {
+func (x *UpdateGoodsRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateGoodsRequest) GetGalleryImages() []string {
@@ -652,7 +652,7 @@ type ListGoodsRequest struct {
 	CategoryId    int64                  `protobuf:"varint,3,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"` // -1表示全部
 	VendorId      int64                  `protobuf:"varint,4,opt,name=vendor_id,json=vendorId,proto3" json:"vendor_id,omitempty"`       // -1表示全部
 	BrandId       int64                  `protobuf:"varint,5,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`          // -1表示全部
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`                           // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`                            // -1表示全部
 	NameKeyword   string                 `protobuf:"bytes,7,opt,name=name_keyword,json=nameKeyword,proto3" json:"name_keyword,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -723,11 +723,11 @@ func (x *ListGoodsRequest) GetBrandId() int64 {
 	return 0
 }
 
-func (x *ListGoodsRequest) GetStatus() int32 {
+func (x *ListGoodsRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *ListGoodsRequest) GetNameKeyword() string {
@@ -862,7 +862,7 @@ var File_api_zebra_goods_goods_goods_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\n" +
-	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\x89\x04\n" +
+	"!api/zebra-goods/goods/goods.proto\x12\x05goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xc3\x04\n" +
 	"\x05Goods\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vcategory_id\x18\x02 \x01(\x03R\n" +
@@ -873,11 +873,11 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\tsub_title\x18\x06 \x01(\tR\bsubTitle\x12\x1d\n" +
 	"\n" +
 	"main_image\x18\a \x01(\tR\tmainImage\x12\x16\n" +
-	"\x06detail\x18\b \x01(\tR\x06detail\x12\x1d\n" +
+	"\x06detail\x18\b \x01(\tR\x06detail\x12:\n" +
 	"\n" +
-	"sort_order\x18\t \x01(\x05R\tsortOrder\x12\x16\n" +
+	"sort_order\x18\t \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
 	"\x06status\x18\n" +
-	" \x01(\x05R\x06status\x12\x1f\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vcreate_time\x18\v \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\f \x01(\x03R\n" +
@@ -888,7 +888,7 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\x12attribute_template\x18\x0f \x03(\x03R\x11attributeTemplate\x12\"\n" +
 	"\rsku_name_rule\x18\x10 \x01(\tR\vskuNameRule\x12\x1d\n" +
 	"\n" +
-	"goods_code\x18\x11 \x01(\tR\tgoodsCode\"\x8d\x03\n" +
+	"goods_code\x18\x11 \x01(\tR\tgoodsCode\"\xaa\x03\n" +
 	"\x12CreateGoodsRequest\x12\x1f\n" +
 	"\vcategory_id\x18\x01 \x01(\x03R\n" +
 	"categoryId\x12\x1b\n" +
@@ -898,25 +898,25 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\tsub_title\x18\x05 \x01(\tR\bsubTitle\x12\x1d\n" +
 	"\n" +
 	"main_image\x18\x06 \x01(\tR\tmainImage\x12\x16\n" +
-	"\x06detail\x18\a \x01(\tR\x06detail\x12\x1d\n" +
+	"\x06detail\x18\a \x01(\tR\x06detail\x12:\n" +
 	"\n" +
-	"sort_order\x18\b \x01(\x05R\tsortOrder\x12%\n" +
+	"sort_order\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12%\n" +
 	"\x0egallery_images\x18\t \x03(\tR\rgalleryImages\x12-\n" +
 	"\x12attribute_template\x18\n" +
 	" \x03(\x03R\x11attributeTemplate\x12\"\n" +
 	"\rsku_name_rule\x18\v \x01(\tR\vskuNameRule\x12\x1d\n" +
 	"\n" +
-	"goods_code\x18\f \x01(\tR\tgoodsCode\"\xb5\x03\n" +
+	"goods_code\x18\f \x01(\tR\tgoodsCode\"\xef\x03\n" +
 	"\x12UpdateGoodsRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
 	"\tsub_title\x18\x03 \x01(\tR\bsubTitle\x12\x1d\n" +
 	"\n" +
 	"main_image\x18\x04 \x01(\tR\tmainImage\x12\x16\n" +
-	"\x06detail\x18\x05 \x01(\tR\x06detail\x12\x1d\n" +
+	"\x06detail\x18\x05 \x01(\tR\x06detail\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\a \x01(\x05R\x06status\x12%\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12%\n" +
 	"\x0egallery_images\x18\b \x03(\tR\rgalleryImages\x12-\n" +
 	"\x12attribute_template\x18\t \x03(\x03R\x11attributeTemplate\x12\"\n" +
 	"\rsku_name_rule\x18\n" +
@@ -934,15 +934,15 @@ const file_api_zebra_goods_goods_goods_proto_rawDesc = "" +
 	"\x10GetGoodsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\"\n" +
-	"\x05goods\x18\x03 \x01(\v2\f.goods.GoodsR\x05goods\"\xd7\x01\n" +
+	"\x05goods\x18\x03 \x01(\v2\f.goods.GoodsR\x05goods\"\xf4\x01\n" +
 	"\x10ListGoodsRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
 	"\vcategory_id\x18\x03 \x01(\x03R\n" +
 	"categoryId\x12\x1b\n" +
 	"\tvendor_id\x18\x04 \x01(\x03R\bvendorId\x12\x19\n" +
-	"\bbrand_id\x18\x05 \x01(\x03R\abrandId\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12!\n" +
+	"\bbrand_id\x18\x05 \x01(\x03R\abrandId\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12!\n" +
 	"\fname_keyword\x18\a \x01(\tR\vnameKeyword\"\x90\x01\n" +
 	"\x11ListGoodsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
@@ -985,26 +985,32 @@ var file_api_zebra_goods_goods_goods_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_goods_goods_proto_depIdxs = []int32{
-	9,  // 0: goods.GetGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: goods.GetGoodsResponse.goods:type_name -> goods.Goods
-	9,  // 2: goods.ListGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: goods.ListGoodsResponse.goods:type_name -> goods.Goods
-	9,  // 4: goods.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: goods.GoodsService.Create:input_type -> goods.CreateGoodsRequest
-	2,  // 6: goods.GoodsService.Update:input_type -> goods.UpdateGoodsRequest
-	3,  // 7: goods.GoodsService.Delete:input_type -> goods.DeleteGoodsRequest
-	4,  // 8: goods.GoodsService.Get:input_type -> goods.GetGoodsRequest
-	6,  // 9: goods.GoodsService.List:input_type -> goods.ListGoodsRequest
-	8,  // 10: goods.GoodsService.Create:output_type -> goods.Response
-	8,  // 11: goods.GoodsService.Update:output_type -> goods.Response
-	8,  // 12: goods.GoodsService.Delete:output_type -> goods.Response
-	5,  // 13: goods.GoodsService.Get:output_type -> goods.GetGoodsResponse
-	7,  // 14: goods.GoodsService.List:output_type -> goods.ListGoodsResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	9,  // 0: goods.Goods.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 1: goods.Goods.status:type_name -> google.protobuf.Int32Value
+	9,  // 2: goods.CreateGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 3: goods.UpdateGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 4: goods.UpdateGoodsRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 5: goods.GetGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: goods.GetGoodsResponse.goods:type_name -> goods.Goods
+	9,  // 7: goods.ListGoodsRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 8: goods.ListGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: goods.ListGoodsResponse.goods:type_name -> goods.Goods
+	9,  // 10: goods.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 11: goods.GoodsService.Create:input_type -> goods.CreateGoodsRequest
+	2,  // 12: goods.GoodsService.Update:input_type -> goods.UpdateGoodsRequest
+	3,  // 13: goods.GoodsService.Delete:input_type -> goods.DeleteGoodsRequest
+	4,  // 14: goods.GoodsService.Get:input_type -> goods.GetGoodsRequest
+	6,  // 15: goods.GoodsService.List:input_type -> goods.ListGoodsRequest
+	8,  // 16: goods.GoodsService.Create:output_type -> goods.Response
+	8,  // 17: goods.GoodsService.Update:output_type -> goods.Response
+	8,  // 18: goods.GoodsService.Delete:output_type -> goods.Response
+	5,  // 19: goods.GoodsService.Get:output_type -> goods.GetGoodsResponse
+	7,  // 20: goods.GoodsService.List:output_type -> goods.ListGoodsResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_goods_goods_proto_init() }

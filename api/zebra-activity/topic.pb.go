@@ -46,8 +46,8 @@ type Topic struct {
 	PicUrl        string                 `protobuf:"bytes,4,opt,name=pic_url,json=picUrl,proto3" json:"pic_url,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
 	ReadCount     int64                  `protobuf:"varint,6,opt,name=read_count,json=readCount,proto3" json:"read_count,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -126,18 +126,18 @@ func (x *Topic) GetReadCount() int64 {
 	return 0
 }
 
-func (x *Topic) GetSortOrder() int32 {
+func (x *Topic) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *Topic) GetStatus() int32 {
+func (x *Topic) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *Topic) GetCreateTime() int64 {
@@ -162,7 +162,7 @@ type TopicGoods struct {
 	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	PicUrl        string                 `protobuf:"bytes,5,opt,name=pic_url,json=picUrl,proto3" json:"pic_url,omitempty"`
 	RetailPrice   int64                  `protobuf:"varint,6,opt,name=retail_price,json=retailPrice,proto3" json:"retail_price,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -239,18 +239,18 @@ func (x *TopicGoods) GetRetailPrice() int64 {
 	return 0
 }
 
-func (x *TopicGoods) GetSortOrder() int32 {
+func (x *TopicGoods) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 type CreateTopicGoodsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TopicId       int64                  `protobuf:"varint,1,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
 	GoodsId       int64                  `protobuf:"varint,2,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -299,11 +299,11 @@ func (x *CreateTopicGoodsRequest) GetGoodsId() int64 {
 	return 0
 }
 
-func (x *CreateTopicGoodsRequest) GetSortOrder() int32 {
+func (x *CreateTopicGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 type DeleteTopicGoodsRequest struct {
@@ -356,8 +356,8 @@ type CreateTopicRequest struct {
 	Subtitle      string                 `protobuf:"bytes,2,opt,name=subtitle,proto3" json:"subtitle,omitempty"`
 	PicUrl        string                 `protobuf:"bytes,3,opt,name=pic_url,json=picUrl,proto3" json:"pic_url,omitempty"`
 	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -420,18 +420,18 @@ func (x *CreateTopicRequest) GetContent() string {
 	return ""
 }
 
-func (x *CreateTopicRequest) GetSortOrder() int32 {
+func (x *CreateTopicRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *CreateTopicRequest) GetStatus() int32 {
+func (x *CreateTopicRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 type UpdateTopicRequest struct {
@@ -441,8 +441,8 @@ type UpdateTopicRequest struct {
 	Subtitle      string                 `protobuf:"bytes,3,opt,name=subtitle,proto3" json:"subtitle,omitempty"`
 	PicUrl        string                 `protobuf:"bytes,4,opt,name=pic_url,json=picUrl,proto3" json:"pic_url,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -512,18 +512,18 @@ func (x *UpdateTopicRequest) GetContent() string {
 	return ""
 }
 
-func (x *UpdateTopicRequest) GetSortOrder() int32 {
+func (x *UpdateTopicRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *UpdateTopicRequest) GetStatus() int32 {
+func (x *UpdateTopicRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 type DeleteTopicRequest struct {
@@ -574,7 +574,7 @@ type ListTopicRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Status        int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	TitleKeyword  string                 `protobuf:"bytes,4,opt,name=title_keyword,json=titleKeyword,proto3" json:"title_keyword,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -624,11 +624,11 @@ func (x *ListTopicRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListTopicRequest) GetStatus() int32 {
+func (x *ListTopicRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *ListTopicRequest) GetTitleKeyword() string {
@@ -1106,7 +1106,7 @@ var File_api_zebra_activity_topic_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_topic_proto_rawDesc = "" +
 	"\n" +
-	"\x1eapi/zebra-activity/topic.proto\x12\x05topic\x1a\x1egoogle/protobuf/wrappers.proto\"\x94\x02\n" +
+	"\x1eapi/zebra-activity/topic.proto\x12\x05topic\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x02\n" +
 	"\x05Topic\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
@@ -1114,15 +1114,15 @@ const file_api_zebra_activity_topic_proto_rawDesc = "" +
 	"\apic_url\x18\x04 \x01(\tR\x06picUrl\x12\x18\n" +
 	"\acontent\x18\x05 \x01(\tR\acontent\x12\x1d\n" +
 	"\n" +
-	"read_count\x18\x06 \x01(\x03R\treadCount\x12\x1d\n" +
+	"read_count\x18\x06 \x01(\x03R\treadCount\x12:\n" +
 	"\n" +
-	"sort_order\x18\a \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\b \x01(\x05R\x06status\x12\x1f\n" +
+	"sort_order\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\n" +
 	" \x01(\x03R\n" +
-	"updateTime\"\xc1\x01\n" +
+	"updateTime\"\xde\x01\n" +
 	"\n" +
 	"TopicGoods\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
@@ -1130,39 +1130,39 @@ const file_api_zebra_activity_topic_proto_rawDesc = "" +
 	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x17\n" +
 	"\apic_url\x18\x05 \x01(\tR\x06picUrl\x12!\n" +
-	"\fretail_price\x18\x06 \x01(\x03R\vretailPrice\x12\x1d\n" +
+	"\fretail_price\x18\x06 \x01(\x03R\vretailPrice\x12:\n" +
 	"\n" +
-	"sort_order\x18\a \x01(\x05R\tsortOrder\"n\n" +
+	"sort_order\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\"\x8b\x01\n" +
 	"\x17CreateTopicGoodsRequest\x12\x19\n" +
 	"\btopic_id\x18\x01 \x01(\x03R\atopicId\x12\x19\n" +
-	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x1d\n" +
+	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12:\n" +
 	"\n" +
-	"sort_order\x18\x03 \x01(\x05R\tsortOrder\")\n" +
+	"sort_order\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\")\n" +
 	"\x17DeleteTopicGoodsRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\xb0\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\xea\x01\n" +
 	"\x12CreateTopicRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x1a\n" +
 	"\bsubtitle\x18\x02 \x01(\tR\bsubtitle\x12\x17\n" +
 	"\apic_url\x18\x03 \x01(\tR\x06picUrl\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x12:\n" +
 	"\n" +
-	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\"\xc0\x01\n" +
+	"sort_order\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\xfa\x01\n" +
 	"\x12UpdateTopicRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x1a\n" +
 	"\bsubtitle\x18\x03 \x01(\tR\bsubtitle\x12\x17\n" +
 	"\apic_url\x18\x04 \x01(\tR\x06picUrl\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12\x1d\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\a \x01(\x05R\x06status\"$\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"$\n" +
 	"\x12DeleteTopicRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x80\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x9d\x01\n" +
 	"\x10ListTopicRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\x05R\x06status\x12#\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
+	"\x06status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12#\n" +
 	"\rtitle_keyword\x18\x04 \x01(\tR\ftitleKeyword\"\xc3\x01\n" +
 	"\x11ListTopicResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
@@ -1238,39 +1238,48 @@ var file_api_zebra_activity_topic_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),   // 16: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_topic_proto_depIdxs = []int32{
-	16, // 0: topic.ListTopicResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: topic.ListTopicResponse.topics:type_name -> topic.Topic
-	16, // 2: topic.GetTopicResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: topic.GetTopicResponse.topic:type_name -> topic.Topic
-	1,  // 4: topic.GetTopicResponse.goods:type_name -> topic.TopicGoods
-	16, // 5: topic.ListTopicGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 6: topic.ListTopicGoodsResponse.goods:type_name -> topic.TopicGoods
-	16, // 7: topic.GetRelatedTopicResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 8: topic.GetRelatedTopicResponse.topics:type_name -> topic.Topic
-	16, // 9: topic.Response.code:type_name -> google.protobuf.Int32Value
-	2,  // 10: topic.TopicService.CreateTopicGoods:input_type -> topic.CreateTopicGoodsRequest
-	3,  // 11: topic.TopicService.DeleteTopicGoods:input_type -> topic.DeleteTopicGoodsRequest
-	4,  // 12: topic.TopicService.CreateTopic:input_type -> topic.CreateTopicRequest
-	5,  // 13: topic.TopicService.UpdateTopic:input_type -> topic.UpdateTopicRequest
-	6,  // 14: topic.TopicService.DeleteTopic:input_type -> topic.DeleteTopicRequest
-	7,  // 15: topic.TopicService.ListTopic:input_type -> topic.ListTopicRequest
-	9,  // 16: topic.TopicService.GetTopic:input_type -> topic.GetTopicRequest
-	11, // 17: topic.TopicService.ListTopicGoods:input_type -> topic.ListTopicGoodsRequest
-	13, // 18: topic.TopicService.GetRelatedTopic:input_type -> topic.GetRelatedTopicRequest
-	15, // 19: topic.TopicService.CreateTopicGoods:output_type -> topic.Response
-	15, // 20: topic.TopicService.DeleteTopicGoods:output_type -> topic.Response
-	15, // 21: topic.TopicService.CreateTopic:output_type -> topic.Response
-	15, // 22: topic.TopicService.UpdateTopic:output_type -> topic.Response
-	15, // 23: topic.TopicService.DeleteTopic:output_type -> topic.Response
-	8,  // 24: topic.TopicService.ListTopic:output_type -> topic.ListTopicResponse
-	10, // 25: topic.TopicService.GetTopic:output_type -> topic.GetTopicResponse
-	12, // 26: topic.TopicService.ListTopicGoods:output_type -> topic.ListTopicGoodsResponse
-	14, // 27: topic.TopicService.GetRelatedTopic:output_type -> topic.GetRelatedTopicResponse
-	19, // [19:28] is the sub-list for method output_type
-	10, // [10:19] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	16, // 0: topic.Topic.sort_order:type_name -> google.protobuf.Int32Value
+	16, // 1: topic.Topic.status:type_name -> google.protobuf.Int32Value
+	16, // 2: topic.TopicGoods.sort_order:type_name -> google.protobuf.Int32Value
+	16, // 3: topic.CreateTopicGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	16, // 4: topic.CreateTopicRequest.sort_order:type_name -> google.protobuf.Int32Value
+	16, // 5: topic.CreateTopicRequest.status:type_name -> google.protobuf.Int32Value
+	16, // 6: topic.UpdateTopicRequest.sort_order:type_name -> google.protobuf.Int32Value
+	16, // 7: topic.UpdateTopicRequest.status:type_name -> google.protobuf.Int32Value
+	16, // 8: topic.ListTopicRequest.status:type_name -> google.protobuf.Int32Value
+	16, // 9: topic.ListTopicResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 10: topic.ListTopicResponse.topics:type_name -> topic.Topic
+	16, // 11: topic.GetTopicResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 12: topic.GetTopicResponse.topic:type_name -> topic.Topic
+	1,  // 13: topic.GetTopicResponse.goods:type_name -> topic.TopicGoods
+	16, // 14: topic.ListTopicGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 15: topic.ListTopicGoodsResponse.goods:type_name -> topic.TopicGoods
+	16, // 16: topic.GetRelatedTopicResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 17: topic.GetRelatedTopicResponse.topics:type_name -> topic.Topic
+	16, // 18: topic.Response.code:type_name -> google.protobuf.Int32Value
+	2,  // 19: topic.TopicService.CreateTopicGoods:input_type -> topic.CreateTopicGoodsRequest
+	3,  // 20: topic.TopicService.DeleteTopicGoods:input_type -> topic.DeleteTopicGoodsRequest
+	4,  // 21: topic.TopicService.CreateTopic:input_type -> topic.CreateTopicRequest
+	5,  // 22: topic.TopicService.UpdateTopic:input_type -> topic.UpdateTopicRequest
+	6,  // 23: topic.TopicService.DeleteTopic:input_type -> topic.DeleteTopicRequest
+	7,  // 24: topic.TopicService.ListTopic:input_type -> topic.ListTopicRequest
+	9,  // 25: topic.TopicService.GetTopic:input_type -> topic.GetTopicRequest
+	11, // 26: topic.TopicService.ListTopicGoods:input_type -> topic.ListTopicGoodsRequest
+	13, // 27: topic.TopicService.GetRelatedTopic:input_type -> topic.GetRelatedTopicRequest
+	15, // 28: topic.TopicService.CreateTopicGoods:output_type -> topic.Response
+	15, // 29: topic.TopicService.DeleteTopicGoods:output_type -> topic.Response
+	15, // 30: topic.TopicService.CreateTopic:output_type -> topic.Response
+	15, // 31: topic.TopicService.UpdateTopic:output_type -> topic.Response
+	15, // 32: topic.TopicService.DeleteTopic:output_type -> topic.Response
+	8,  // 33: topic.TopicService.ListTopic:output_type -> topic.ListTopicResponse
+	10, // 34: topic.TopicService.GetTopic:output_type -> topic.GetTopicResponse
+	12, // 35: topic.TopicService.ListTopicGoods:output_type -> topic.ListTopicGoodsResponse
+	14, // 36: topic.TopicService.GetRelatedTopic:output_type -> topic.GetRelatedTopicResponse
+	28, // [28:37] is the sub-list for method output_type
+	19, // [19:28] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_topic_proto_init() }

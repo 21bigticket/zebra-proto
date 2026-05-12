@@ -45,7 +45,7 @@ type WeixinTemplate struct {
 	TplCode       string                 `protobuf:"bytes,2,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	TplName       string                 `protobuf:"bytes,3,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplIdWeixin   string                 `protobuf:"bytes,4,opt,name=tpl_id_weixin,json=tplIdWeixin,proto3" json:"tpl_id_weixin,omitempty"` // 微信模板ID
-	TplStatus     int32                  `protobuf:"varint,5,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`        // 0=禁用, 1=启用
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`         // 0=禁用, 1=启用
 	CreateTime    int64                  `protobuf:"varint,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,7,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,8,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -111,11 +111,11 @@ func (x *WeixinTemplate) GetTplIdWeixin() string {
 	return ""
 }
 
-func (x *WeixinTemplate) GetTplStatus() int32 {
+func (x *WeixinTemplate) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *WeixinTemplate) GetCreateTime() int64 {
@@ -145,7 +145,7 @@ type CreateWeixinTemplateRequest struct {
 	TplCode       string                 `protobuf:"bytes,1,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplIdWeixin   string                 `protobuf:"bytes,3,opt,name=tpl_id_weixin,json=tplIdWeixin,proto3" json:"tpl_id_weixin,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -201,11 +201,11 @@ func (x *CreateWeixinTemplateRequest) GetTplIdWeixin() string {
 	return ""
 }
 
-func (x *CreateWeixinTemplateRequest) GetTplStatus() int32 {
+func (x *CreateWeixinTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 更新微信模板请求
@@ -214,7 +214,7 @@ type UpdateWeixinTemplateRequest struct {
 	TplId         int64                  `protobuf:"varint,1,opt,name=tpl_id,json=tplId,proto3" json:"tpl_id,omitempty"`
 	TplName       string                 `protobuf:"bytes,2,opt,name=tpl_name,json=tplName,proto3" json:"tpl_name,omitempty"`
 	TplIdWeixin   string                 `protobuf:"bytes,3,opt,name=tpl_id_weixin,json=tplIdWeixin,proto3" json:"tpl_id_weixin,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,11 +270,11 @@ func (x *UpdateWeixinTemplateRequest) GetTplIdWeixin() string {
 	return ""
 }
 
-func (x *UpdateWeixinTemplateRequest) GetTplStatus() int32 {
+func (x *UpdateWeixinTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 删除微信模板请求
@@ -471,7 +471,7 @@ type ListWeixinTemplateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TplStatus     int32                  `protobuf:"varint,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
+	TplStatus     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=tpl_status,json=tplStatus,proto3" json:"tpl_status,omitempty"` // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -520,11 +520,11 @@ func (x *ListWeixinTemplateRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListWeixinTemplateRequest) GetTplStatus() int32 {
+func (x *ListWeixinTemplateRequest) GetTplStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.TplStatus
 	}
-	return 0
+	return nil
 }
 
 // 微信模板分页查询响应
@@ -604,7 +604,7 @@ type WeixinLog struct {
 	Openid        string                 `protobuf:"bytes,3,opt,name=openid,proto3" json:"openid,omitempty"`
 	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	RetryCount    int32                  `protobuf:"varint,7,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
 	Remark        string                 `protobuf:"bytes,8,opt,name=remark,proto3" json:"remark,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -677,11 +677,11 @@ func (x *WeixinLog) GetContent() string {
 	return ""
 }
 
-func (x *WeixinLog) GetStatus() int32 {
+func (x *WeixinLog) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *WeixinLog) GetRetryCount() int32 {
@@ -712,7 +712,7 @@ type ListWeixinLogRequest struct {
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	Openid        string                 `protobuf:"bytes,3,opt,name=openid,proto3" json:"openid,omitempty"`
 	TplCode       string                 `protobuf:"bytes,4,opt,name=tpl_code,json=tplCode,proto3" json:"tpl_code,omitempty"`
-	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
 	StartTime     int64                  `protobuf:"varint,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime       int64                  `protobuf:"varint,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -777,11 +777,11 @@ func (x *ListWeixinLogRequest) GetTplCode() string {
 	return ""
 }
 
-func (x *ListWeixinLogRequest) GetStatus() int32 {
+func (x *ListWeixinLogRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *ListWeixinLogRequest) GetStartTime() int64 {
@@ -1215,32 +1215,32 @@ var File_api_zebra_message_weixin_weixin_proto protoreflect.FileDescriptor
 
 const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\n" +
-	"%api/zebra-message/weixin/weixin.proto\x12\x06weixin\x1a\x1egoogle/protobuf/wrappers.proto\"\x81\x02\n" +
+	"%api/zebra-message/weixin/weixin.proto\x12\x06weixin\x1a\x1egoogle/protobuf/wrappers.proto\"\x9e\x02\n" +
 	"\x0eWeixinTemplate\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_code\x18\x02 \x01(\tR\atplCode\x12\x19\n" +
 	"\btpl_name\x18\x03 \x01(\tR\atplName\x12\"\n" +
-	"\rtpl_id_weixin\x18\x04 \x01(\tR\vtplIdWeixin\x12\x1d\n" +
+	"\rtpl_id_weixin\x18\x04 \x01(\tR\vtplIdWeixin\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x05 \x01(\x05R\ttplStatus\x12\x1f\n" +
+	"tpl_status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\a \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\x96\x01\n" +
+	"is_deleted\x18\b \x01(\x05R\tisDeleted\"\xb3\x01\n" +
 	"\x1bCreateWeixinTemplateRequest\x12\x19\n" +
 	"\btpl_code\x18\x01 \x01(\tR\atplCode\x12\x19\n" +
 	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\"\n" +
-	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12\x1d\n" +
+	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"\x92\x01\n" +
+	"tpl_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"\xaf\x01\n" +
 	"\x1bUpdateWeixinTemplateRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\x12\x19\n" +
 	"\btpl_name\x18\x02 \x01(\tR\atplName\x12\"\n" +
-	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12\x1d\n" +
+	"\rtpl_id_weixin\x18\x03 \x01(\tR\vtplIdWeixin\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x04 \x01(\x05R\ttplStatus\"4\n" +
+	"tpl_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"4\n" +
 	"\x1bDeleteWeixinTemplateRequest\x12\x15\n" +
 	"\x06tpl_id\x18\x01 \x01(\x03R\x05tplId\"Y\n" +
 	"\x18GetWeixinTemplateRequest\x12\x17\n" +
@@ -1250,35 +1250,35 @@ const file_api_zebra_message_weixin_weixin_proto_rawDesc = "" +
 	"\x19GetWeixinTemplateResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
-	"\btemplate\x18\x03 \x01(\v2\x16.weixin.WeixinTemplateR\btemplate\"k\n" +
+	"\btemplate\x18\x03 \x01(\v2\x16.weixin.WeixinTemplateR\btemplate\"\x88\x01\n" +
 	"\x19ListWeixinTemplateRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12:\n" +
 	"\n" +
-	"tpl_status\x18\x03 \x01(\x05R\ttplStatus\"\xab\x01\n" +
+	"tpl_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\ttplStatus\"\xab\x01\n" +
 	"\x1aListWeixinTemplateResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x124\n" +
 	"\ttemplates\x18\x03 \x03(\v2\x16.weixin.WeixinTemplateR\ttemplates\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xf8\x01\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x95\x02\n" +
 	"\tWeixinLog\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\x12\x15\n" +
 	"\x06msg_id\x18\x02 \x01(\tR\x05msgId\x12\x16\n" +
 	"\x06openid\x18\x03 \x01(\tR\x06openid\x12\x19\n" +
 	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12\x1f\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vretry_count\x18\a \x01(\x05R\n" +
 	"retryCount\x12\x16\n" +
 	"\x06remark\x18\b \x01(\tR\x06remark\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
-	"createTime\"\xcc\x01\n" +
+	"createTime\"\xe9\x01\n" +
 	"\x14ListWeixinLogRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x16\n" +
 	"\x06openid\x18\x03 \x01(\tR\x06openid\x12\x19\n" +
-	"\btpl_code\x18\x04 \x01(\tR\atplCode\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\x12\x1d\n" +
+	"\btpl_code\x18\x04 \x01(\tR\atplCode\x123\n" +
+	"\x06status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\a \x01(\x03R\aendTime\"\x97\x01\n" +
@@ -1364,38 +1364,44 @@ var file_api_zebra_message_weixin_weixin_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),       // 18: google.protobuf.Int32Value
 }
 var file_api_zebra_message_weixin_weixin_proto_depIdxs = []int32{
-	18, // 0: weixin.GetWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: weixin.GetWeixinTemplateResponse.template:type_name -> weixin.WeixinTemplate
-	18, // 2: weixin.ListWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: weixin.ListWeixinTemplateResponse.templates:type_name -> weixin.WeixinTemplate
-	18, // 4: weixin.ListWeixinLogResponse.code:type_name -> google.protobuf.Int32Value
-	8,  // 5: weixin.ListWeixinLogResponse.logs:type_name -> weixin.WeixinLog
-	18, // 6: weixin.WeixinResponse.code:type_name -> google.protobuf.Int32Value
-	16, // 7: weixin.SendWeixinRequest.data:type_name -> weixin.SendWeixinRequest.DataEntry
-	18, // 8: weixin.SendWeixinResponse.code:type_name -> google.protobuf.Int32Value
-	17, // 9: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
-	18, // 10: weixin.BatchSendWeixinResponse.code:type_name -> google.protobuf.Int32Value
-	12, // 11: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
-	14, // 12: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
-	1,  // 13: weixin.WeixinService.CreateTemplate:input_type -> weixin.CreateWeixinTemplateRequest
-	2,  // 14: weixin.WeixinService.UpdateTemplate:input_type -> weixin.UpdateWeixinTemplateRequest
-	3,  // 15: weixin.WeixinService.DeleteTemplate:input_type -> weixin.DeleteWeixinTemplateRequest
-	4,  // 16: weixin.WeixinService.GetTemplate:input_type -> weixin.GetWeixinTemplateRequest
-	6,  // 17: weixin.WeixinService.ListTemplates:input_type -> weixin.ListWeixinTemplateRequest
-	9,  // 18: weixin.WeixinService.ListLogs:input_type -> weixin.ListWeixinLogRequest
-	13, // 19: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
-	15, // 20: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
-	11, // 21: weixin.WeixinService.CreateTemplate:output_type -> weixin.WeixinResponse
-	11, // 22: weixin.WeixinService.UpdateTemplate:output_type -> weixin.WeixinResponse
-	11, // 23: weixin.WeixinService.DeleteTemplate:output_type -> weixin.WeixinResponse
-	5,  // 24: weixin.WeixinService.GetTemplate:output_type -> weixin.GetWeixinTemplateResponse
-	7,  // 25: weixin.WeixinService.ListTemplates:output_type -> weixin.ListWeixinTemplateResponse
-	10, // 26: weixin.WeixinService.ListLogs:output_type -> weixin.ListWeixinLogResponse
-	19, // [19:27] is the sub-list for method output_type
-	11, // [11:19] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	18, // 0: weixin.WeixinTemplate.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 1: weixin.CreateWeixinTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 2: weixin.UpdateWeixinTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 3: weixin.GetWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: weixin.GetWeixinTemplateResponse.template:type_name -> weixin.WeixinTemplate
+	18, // 5: weixin.ListWeixinTemplateRequest.tpl_status:type_name -> google.protobuf.Int32Value
+	18, // 6: weixin.ListWeixinTemplateResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: weixin.ListWeixinTemplateResponse.templates:type_name -> weixin.WeixinTemplate
+	18, // 8: weixin.WeixinLog.status:type_name -> google.protobuf.Int32Value
+	18, // 9: weixin.ListWeixinLogRequest.status:type_name -> google.protobuf.Int32Value
+	18, // 10: weixin.ListWeixinLogResponse.code:type_name -> google.protobuf.Int32Value
+	8,  // 11: weixin.ListWeixinLogResponse.logs:type_name -> weixin.WeixinLog
+	18, // 12: weixin.WeixinResponse.code:type_name -> google.protobuf.Int32Value
+	16, // 13: weixin.SendWeixinRequest.data:type_name -> weixin.SendWeixinRequest.DataEntry
+	18, // 14: weixin.SendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	17, // 15: weixin.BatchSendWeixinRequest.data:type_name -> weixin.BatchSendWeixinRequest.DataEntry
+	18, // 16: weixin.BatchSendWeixinResponse.code:type_name -> google.protobuf.Int32Value
+	12, // 17: weixin.WeixinService.SendWeixin:input_type -> weixin.SendWeixinRequest
+	14, // 18: weixin.WeixinService.BatchSendWeixin:input_type -> weixin.BatchSendWeixinRequest
+	1,  // 19: weixin.WeixinService.CreateTemplate:input_type -> weixin.CreateWeixinTemplateRequest
+	2,  // 20: weixin.WeixinService.UpdateTemplate:input_type -> weixin.UpdateWeixinTemplateRequest
+	3,  // 21: weixin.WeixinService.DeleteTemplate:input_type -> weixin.DeleteWeixinTemplateRequest
+	4,  // 22: weixin.WeixinService.GetTemplate:input_type -> weixin.GetWeixinTemplateRequest
+	6,  // 23: weixin.WeixinService.ListTemplates:input_type -> weixin.ListWeixinTemplateRequest
+	9,  // 24: weixin.WeixinService.ListLogs:input_type -> weixin.ListWeixinLogRequest
+	13, // 25: weixin.WeixinService.SendWeixin:output_type -> weixin.SendWeixinResponse
+	15, // 26: weixin.WeixinService.BatchSendWeixin:output_type -> weixin.BatchSendWeixinResponse
+	11, // 27: weixin.WeixinService.CreateTemplate:output_type -> weixin.WeixinResponse
+	11, // 28: weixin.WeixinService.UpdateTemplate:output_type -> weixin.WeixinResponse
+	11, // 29: weixin.WeixinService.DeleteTemplate:output_type -> weixin.WeixinResponse
+	5,  // 30: weixin.WeixinService.GetTemplate:output_type -> weixin.GetWeixinTemplateResponse
+	7,  // 31: weixin.WeixinService.ListTemplates:output_type -> weixin.ListWeixinTemplateResponse
+	10, // 32: weixin.WeixinService.ListLogs:output_type -> weixin.ListWeixinLogResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_message_weixin_weixin_proto_init() }

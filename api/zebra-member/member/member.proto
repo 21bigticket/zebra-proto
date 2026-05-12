@@ -30,7 +30,7 @@ message Member {
   string password      = 3;
   string zb_lion       = 4;
   string nick_name     = 5;
-  int32  member_status = 6; // 0=禁用, 1=启用
+  google.protobuf.Int32Value member_status = 6; // 0=禁用, 1=启用
   string head_url      = 7;
   string phone         = 8;
   string email         = 9;
@@ -55,7 +55,7 @@ message UpdateMemberRequest {
   int64  user_id       = 1;
   string nick_name     = 2;
   string head_url      = 3;
-  int32  member_status = 4;
+  google.protobuf.Int32Value member_status = 4;
 }
 
 // 删除用户请求
@@ -84,7 +84,7 @@ message ListMemberRequest {
   int32  page            = 1;
   int32  page_size       = 2;
   string name_keyword   = 3; // 名称模糊查询
-  int32  member_status   = 4;  // 状态过滤，-1表示全部
+  google.protobuf.Int32Value member_status = 4; // 状态过滤，-1表示全部
 }
 
 // 列出用户响应

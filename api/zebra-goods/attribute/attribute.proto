@@ -28,8 +28,8 @@ message GoodsAttribute {
   int64  parent_id   = 2;
   string name        = 3;
   int32  type        = 4;
-  int32  sort_order  = 5;
-  int32  status      = 6;
+  google.protobuf.Int32Value sort_order = 5;
+  google.protobuf.Int32Value status = 6;
   string description = 7;
   int64  create_time = 8;
   int64  update_time = 9;
@@ -40,15 +40,15 @@ message CreateAttributeRequest {
   int64  parent_id  = 1;
   string name       = 2;
   int32  type       = 3;
-  int32  sort_order = 4;
+  google.protobuf.Int32Value sort_order = 4;
   string description = 5;
 }
 
 message UpdateAttributeRequest {
   int64  id         = 1;
   string name       = 2;
-  int32  sort_order = 3;
-  int32  status     = 4;
+  google.protobuf.Int32Value sort_order = 3;
+  google.protobuf.Int32Value status = 4;
   string description = 5;
 }
 
@@ -71,7 +71,7 @@ message ListAttributeRequest {
   int32  page_size  = 2;
   int64  parent_id  = 3;
   int32  type       = 4;
-  int32  status     = 5;
+  google.protobuf.Int32Value status = 5;
 }
 
 message ListAttributeResponse {

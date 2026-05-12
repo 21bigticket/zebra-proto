@@ -48,7 +48,7 @@ type Vendor struct {
 	Phone         string                 `protobuf:"bytes,5,opt,name=phone,proto3" json:"phone,omitempty"`
 	Email         string                 `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
 	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
-	Status        int32                  `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -135,11 +135,11 @@ func (x *Vendor) GetAddress() string {
 	return ""
 }
 
-func (x *Vendor) GetStatus() int32 {
+func (x *Vendor) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *Vendor) GetCreateTime() int64 {
@@ -257,7 +257,7 @@ type UpdateVendorRequest struct {
 	Phone         string                 `protobuf:"bytes,4,opt,name=phone,proto3" json:"phone,omitempty"`
 	Email         string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
 	Address       string                 `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
-	Status        int32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -334,11 +334,11 @@ func (x *UpdateVendorRequest) GetAddress() string {
 	return ""
 }
 
-func (x *UpdateVendorRequest) GetStatus() int32 {
+func (x *UpdateVendorRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 // 删除供应商请求
@@ -498,7 +498,7 @@ type ListVendorRequest struct {
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	NameKeyword   string                 `protobuf:"bytes,3,opt,name=name_keyword,json=nameKeyword,proto3" json:"name_keyword,omitempty"`
-	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -554,11 +554,11 @@ func (x *ListVendorRequest) GetNameKeyword() string {
 	return ""
 }
 
-func (x *ListVendorRequest) GetStatus() int32 {
+func (x *ListVendorRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 // 列出供应商响应
@@ -686,7 +686,7 @@ var File_api_zebra_goods_godds_vendor_vendor_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-goods/godds_vendor/vendor.proto\x12\x06vendor\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x02\n" +
+	")api/zebra-goods/godds_vendor/vendor.proto\x12\x06vendor\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\x02\n" +
 	"\x06Vendor\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -694,8 +694,8 @@ const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\acontact\x18\x04 \x01(\tR\acontact\x12\x14\n" +
 	"\x05phone\x18\x05 \x01(\tR\x05phone\x12\x14\n" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12\x18\n" +
-	"\aaddress\x18\a \x01(\tR\aaddress\x12\x16\n" +
-	"\x06status\x18\b \x01(\x05R\x06status\x12\x1f\n" +
+	"\aaddress\x18\a \x01(\tR\aaddress\x123\n" +
+	"\x06status\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\n" +
@@ -709,15 +709,15 @@ const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\acontact\x18\x03 \x01(\tR\acontact\x12\x14\n" +
 	"\x05phone\x18\x04 \x01(\tR\x05phone\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x18\n" +
-	"\aaddress\x18\x06 \x01(\tR\aaddress\"\xb1\x01\n" +
+	"\aaddress\x18\x06 \x01(\tR\aaddress\"\xce\x01\n" +
 	"\x13UpdateVendorRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\acontact\x18\x03 \x01(\tR\acontact\x12\x14\n" +
 	"\x05phone\x18\x04 \x01(\tR\x05phone\x12\x14\n" +
 	"\x05email\x18\x05 \x01(\tR\x05email\x12\x18\n" +
-	"\aaddress\x18\x06 \x01(\tR\aaddress\x12\x16\n" +
-	"\x06status\x18\a \x01(\x05R\x06status\"%\n" +
+	"\aaddress\x18\x06 \x01(\tR\aaddress\x123\n" +
+	"\x06status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"%\n" +
 	"\x13DeleteVendorRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\"\n" +
 	"\x10GetVendorRequest\x12\x0e\n" +
@@ -725,12 +725,12 @@ const file_api_zebra_goods_godds_vendor_vendor_proto_rawDesc = "" +
 	"\x11GetVendorResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12&\n" +
-	"\x06vendor\x18\x03 \x01(\v2\x0e.vendor.VendorR\x06vendor\"\x7f\n" +
+	"\x06vendor\x18\x03 \x01(\v2\x0e.vendor.VendorR\x06vendor\"\x9c\x01\n" +
 	"\x11ListVendorRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
-	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\"\x97\x01\n" +
+	"\fname_keyword\x18\x03 \x01(\tR\vnameKeyword\x123\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\x97\x01\n" +
 	"\x12ListVendorResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12(\n" +
@@ -772,26 +772,29 @@ var file_api_zebra_goods_godds_vendor_vendor_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_godds_vendor_vendor_proto_depIdxs = []int32{
-	9,  // 0: vendor.GetVendorResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: vendor.GetVendorResponse.vendor:type_name -> vendor.Vendor
-	9,  // 2: vendor.ListVendorResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: vendor.ListVendorResponse.vendors:type_name -> vendor.Vendor
-	9,  // 4: vendor.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: vendor.VendorService.Create:input_type -> vendor.CreateVendorRequest
-	2,  // 6: vendor.VendorService.Update:input_type -> vendor.UpdateVendorRequest
-	3,  // 7: vendor.VendorService.Delete:input_type -> vendor.DeleteVendorRequest
-	4,  // 8: vendor.VendorService.Get:input_type -> vendor.GetVendorRequest
-	6,  // 9: vendor.VendorService.List:input_type -> vendor.ListVendorRequest
-	8,  // 10: vendor.VendorService.Create:output_type -> vendor.Response
-	8,  // 11: vendor.VendorService.Update:output_type -> vendor.Response
-	8,  // 12: vendor.VendorService.Delete:output_type -> vendor.Response
-	5,  // 13: vendor.VendorService.Get:output_type -> vendor.GetVendorResponse
-	7,  // 14: vendor.VendorService.List:output_type -> vendor.ListVendorResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	9,  // 0: vendor.Vendor.status:type_name -> google.protobuf.Int32Value
+	9,  // 1: vendor.UpdateVendorRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 2: vendor.GetVendorResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: vendor.GetVendorResponse.vendor:type_name -> vendor.Vendor
+	9,  // 4: vendor.ListVendorRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 5: vendor.ListVendorResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: vendor.ListVendorResponse.vendors:type_name -> vendor.Vendor
+	9,  // 7: vendor.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 8: vendor.VendorService.Create:input_type -> vendor.CreateVendorRequest
+	2,  // 9: vendor.VendorService.Update:input_type -> vendor.UpdateVendorRequest
+	3,  // 10: vendor.VendorService.Delete:input_type -> vendor.DeleteVendorRequest
+	4,  // 11: vendor.VendorService.Get:input_type -> vendor.GetVendorRequest
+	6,  // 12: vendor.VendorService.List:input_type -> vendor.ListVendorRequest
+	8,  // 13: vendor.VendorService.Create:output_type -> vendor.Response
+	8,  // 14: vendor.VendorService.Update:output_type -> vendor.Response
+	8,  // 15: vendor.VendorService.Delete:output_type -> vendor.Response
+	5,  // 16: vendor.VendorService.Get:output_type -> vendor.GetVendorResponse
+	7,  // 17: vendor.VendorService.List:output_type -> vendor.ListVendorResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_godds_vendor_vendor_proto_init() }

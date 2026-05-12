@@ -28,7 +28,7 @@ type Post struct {
 	PostId        int64                  `protobuf:"varint,1,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
 	PostCode      string                 `protobuf:"bytes,2,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
 	PostName      string                 `protobuf:"bytes,3,opt,name=post_name,json=postName,proto3" json:"post_name,omitempty"`
-	PostSort      int32                  `protobuf:"varint,4,opt,name=post_sort,json=postSort,proto3" json:"post_sort,omitempty"`
+	PostSort      *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=post_sort,json=postSort,proto3" json:"post_sort,omitempty"`
 	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"` // 状态（0正常 1停用）
 	CreateBy      string                 `protobuf:"bytes,6,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -90,11 +90,11 @@ func (x *Post) GetPostName() string {
 	return ""
 }
 
-func (x *Post) GetPostSort() int32 {
+func (x *Post) GetPostSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.PostSort
 	}
-	return 0
+	return nil
 }
 
 func (x *Post) GetStatus() string {
@@ -396,7 +396,7 @@ type CreatePostRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PostCode      string                 `protobuf:"bytes,1,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
 	PostName      string                 `protobuf:"bytes,2,opt,name=post_name,json=postName,proto3" json:"post_name,omitempty"`
-	PostSort      int32                  `protobuf:"varint,3,opt,name=post_sort,json=postSort,proto3" json:"post_sort,omitempty"`
+	PostSort      *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=post_sort,json=postSort,proto3" json:"post_sort,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Remark        string                 `protobuf:"bytes,5,opt,name=remark,proto3" json:"remark,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -447,11 +447,11 @@ func (x *CreatePostRequest) GetPostName() string {
 	return ""
 }
 
-func (x *CreatePostRequest) GetPostSort() int32 {
+func (x *CreatePostRequest) GetPostSort() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.PostSort
 	}
-	return 0
+	return nil
 }
 
 func (x *CreatePostRequest) GetStatus() string {
@@ -474,7 +474,7 @@ type UpdatePostRequest struct {
 	PostId        int64                  `protobuf:"varint,1,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
 	PostCode      *string                `protobuf:"bytes,2,opt,name=post_code,json=postCode,proto3,oneof" json:"post_code,omitempty"`
 	PostName      *string                `protobuf:"bytes,3,opt,name=post_name,json=postName,proto3,oneof" json:"post_name,omitempty"`
-	PostSort      *int32                 `protobuf:"varint,4,opt,name=post_sort,json=postSort,proto3,oneof" json:"post_sort,omitempty"`
+	PostSort      *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=post_sort,json=postSort,proto3" json:"post_sort,omitempty"`
 	Status        *string                `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	Remark        *string                `protobuf:"bytes,6,opt,name=remark,proto3,oneof" json:"remark,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -532,11 +532,11 @@ func (x *UpdatePostRequest) GetPostName() string {
 	return ""
 }
 
-func (x *UpdatePostRequest) GetPostSort() int32 {
-	if x != nil && x.PostSort != nil {
-		return *x.PostSort
+func (x *UpdatePostRequest) GetPostSort() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.PostSort
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdatePostRequest) GetStatus() string {
@@ -654,12 +654,12 @@ var File_api_zebra_passport_post_post_proto protoreflect.FileDescriptor
 
 const file_api_zebra_passport_post_post_proto_rawDesc = "" +
 	"\n" +
-	"\"api/zebra-passport/post/post.proto\x12\x04post\x1a\x1egoogle/protobuf/wrappers.proto\"\xa2\x02\n" +
+	"\"api/zebra-passport/post/post.proto\x12\x04post\x1a\x1egoogle/protobuf/wrappers.proto\"\xbf\x02\n" +
 	"\x04Post\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\x12\x1b\n" +
 	"\tpost_code\x18\x02 \x01(\tR\bpostCode\x12\x1b\n" +
-	"\tpost_name\x18\x03 \x01(\tR\bpostName\x12\x1b\n" +
-	"\tpost_sort\x18\x04 \x01(\x05R\bpostSort\x12\x16\n" +
+	"\tpost_name\x18\x03 \x01(\tR\bpostName\x128\n" +
+	"\tpost_sort\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\bpostSort\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x1b\n" +
 	"\tcreate_by\x18\x06 \x01(\tR\bcreateBy\x12\x1f\n" +
 	"\vcreate_time\x18\a \x01(\x03R\n" +
@@ -687,26 +687,24 @@ const file_api_zebra_passport_post_post_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1e\n" +
 	"\x04post\x18\x03 \x01(\v2\n" +
-	".post.PostR\x04post\"\x9a\x01\n" +
+	".post.PostR\x04post\"\xb7\x01\n" +
 	"\x11CreatePostRequest\x12\x1b\n" +
 	"\tpost_code\x18\x01 \x01(\tR\bpostCode\x12\x1b\n" +
-	"\tpost_name\x18\x02 \x01(\tR\bpostName\x12\x1b\n" +
-	"\tpost_sort\x18\x03 \x01(\x05R\bpostSort\x12\x16\n" +
+	"\tpost_name\x18\x02 \x01(\tR\bpostName\x128\n" +
+	"\tpost_sort\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\bpostSort\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x16\n" +
-	"\x06remark\x18\x05 \x01(\tR\x06remark\"\x8c\x02\n" +
+	"\x06remark\x18\x05 \x01(\tR\x06remark\"\x96\x02\n" +
 	"\x11UpdatePostRequest\x12\x17\n" +
 	"\apost_id\x18\x01 \x01(\x03R\x06postId\x12 \n" +
 	"\tpost_code\x18\x02 \x01(\tH\x00R\bpostCode\x88\x01\x01\x12 \n" +
-	"\tpost_name\x18\x03 \x01(\tH\x01R\bpostName\x88\x01\x01\x12 \n" +
-	"\tpost_sort\x18\x04 \x01(\x05H\x02R\bpostSort\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x05 \x01(\tH\x03R\x06status\x88\x01\x01\x12\x1b\n" +
-	"\x06remark\x18\x06 \x01(\tH\x04R\x06remark\x88\x01\x01B\f\n" +
+	"\tpost_name\x18\x03 \x01(\tH\x01R\bpostName\x88\x01\x01\x128\n" +
+	"\tpost_sort\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\bpostSort\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01\x12\x1b\n" +
+	"\x06remark\x18\x06 \x01(\tH\x03R\x06remark\x88\x01\x01B\f\n" +
 	"\n" +
 	"_post_codeB\f\n" +
 	"\n" +
-	"_post_nameB\f\n" +
-	"\n" +
-	"_post_sortB\t\n" +
+	"_post_nameB\t\n" +
 	"\a_statusB\t\n" +
 	"\a_remark\".\n" +
 	"\x11DeletePostRequest\x12\x19\n" +
@@ -747,26 +745,29 @@ var file_api_zebra_passport_post_post_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_passport_post_post_proto_depIdxs = []int32{
-	9,  // 0: post.ListPostResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: post.ListPostResponse.posts:type_name -> post.Post
-	9,  // 2: post.GetPostResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: post.GetPostResponse.post:type_name -> post.Post
-	9,  // 4: post.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: post.PostService.List:input_type -> post.ListPostRequest
-	3,  // 6: post.PostService.Get:input_type -> post.GetPostRequest
-	5,  // 7: post.PostService.Create:input_type -> post.CreatePostRequest
-	6,  // 8: post.PostService.Update:input_type -> post.UpdatePostRequest
-	7,  // 9: post.PostService.Delete:input_type -> post.DeletePostRequest
-	2,  // 10: post.PostService.List:output_type -> post.ListPostResponse
-	4,  // 11: post.PostService.Get:output_type -> post.GetPostResponse
-	8,  // 12: post.PostService.Create:output_type -> post.Response
-	8,  // 13: post.PostService.Update:output_type -> post.Response
-	8,  // 14: post.PostService.Delete:output_type -> post.Response
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	9,  // 0: post.Post.post_sort:type_name -> google.protobuf.Int32Value
+	9,  // 1: post.ListPostResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 2: post.ListPostResponse.posts:type_name -> post.Post
+	9,  // 3: post.GetPostResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: post.GetPostResponse.post:type_name -> post.Post
+	9,  // 5: post.CreatePostRequest.post_sort:type_name -> google.protobuf.Int32Value
+	9,  // 6: post.UpdatePostRequest.post_sort:type_name -> google.protobuf.Int32Value
+	9,  // 7: post.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 8: post.PostService.List:input_type -> post.ListPostRequest
+	3,  // 9: post.PostService.Get:input_type -> post.GetPostRequest
+	5,  // 10: post.PostService.Create:input_type -> post.CreatePostRequest
+	6,  // 11: post.PostService.Update:input_type -> post.UpdatePostRequest
+	7,  // 12: post.PostService.Delete:input_type -> post.DeletePostRequest
+	2,  // 13: post.PostService.List:output_type -> post.ListPostResponse
+	4,  // 14: post.PostService.Get:output_type -> post.GetPostResponse
+	8,  // 15: post.PostService.Create:output_type -> post.Response
+	8,  // 16: post.PostService.Update:output_type -> post.Response
+	8,  // 17: post.PostService.Delete:output_type -> post.Response
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_passport_post_post_proto_init() }

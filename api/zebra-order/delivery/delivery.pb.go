@@ -41,12 +41,12 @@ const (
 // 订单发货信息
 type Delivery struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	DeliveryId     int64                  `protobuf:"varint,1,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id,omitempty"`             // 发货ID
-	OrderId        int64                  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                      // 订单ID
-	OrderNo        string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`                       // 订单号
-	DeliveryNo     string                 `protobuf:"bytes,4,opt,name=delivery_no,json=deliveryNo,proto3" json:"delivery_no,omitempty"`              // 物流单号
-	DeliveryComp   string                 `protobuf:"bytes,5,opt,name=delivery_comp,json=deliveryComp,proto3" json:"delivery_comp,omitempty"`        // 物流公司
-	DeliveryStatus int32                  `protobuf:"varint,6,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // 发货状态: 0=运输中, 1=已签收, 2=异常
+	DeliveryId     int64                  `protobuf:"varint,1,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id,omitempty"`            // 发货ID
+	OrderId        int64                  `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`                     // 订单ID
+	OrderNo        string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`                      // 订单号
+	DeliveryNo     string                 `protobuf:"bytes,4,opt,name=delivery_no,json=deliveryNo,proto3" json:"delivery_no,omitempty"`             // 物流单号
+	DeliveryComp   string                 `protobuf:"bytes,5,opt,name=delivery_comp,json=deliveryComp,proto3" json:"delivery_comp,omitempty"`       // 物流公司
+	DeliveryStatus *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // 发货状态: 0=运输中, 1=已签收, 2=异常
 	CreateTime     int64                  `protobuf:"varint,7,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime     int64                  `protobuf:"varint,8,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted      int32                  `protobuf:"varint,9,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -119,11 +119,11 @@ func (x *Delivery) GetDeliveryComp() string {
 	return ""
 }
 
-func (x *Delivery) GetDeliveryStatus() int32 {
+func (x *Delivery) GetDeliveryStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.DeliveryStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *Delivery) GetCreateTime() int64 {
@@ -280,8 +280,8 @@ func (x *CreateDeliveryResponse) GetMessage() string {
 // 更新发货状态请求
 type UpdateDeliveryStatusRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	OrderNo        string                 `protobuf:"bytes,1,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`                       // 订单号
-	DeliveryStatus int32                  `protobuf:"varint,2,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // 发货状态
+	OrderNo        string                 `protobuf:"bytes,1,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`                      // 订单号
+	DeliveryStatus *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // 发货状态
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -323,11 +323,11 @@ func (x *UpdateDeliveryStatusRequest) GetOrderNo() string {
 	return ""
 }
 
-func (x *UpdateDeliveryStatusRequest) GetDeliveryStatus() int32 {
+func (x *UpdateDeliveryStatusRequest) GetDeliveryStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.DeliveryStatus
 	}
-	return 0
+	return nil
 }
 
 // 查询发货信息请求
@@ -498,7 +498,7 @@ type ListDeliveryRequest struct {
 	OrderNo        string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	DeliveryNo     string                 `protobuf:"bytes,4,opt,name=delivery_no,json=deliveryNo,proto3" json:"delivery_no,omitempty"`
 	DeliveryComp   string                 `protobuf:"bytes,5,opt,name=delivery_comp,json=deliveryComp,proto3" json:"delivery_comp,omitempty"`
-	DeliveryStatus int32                  `protobuf:"varint,6,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // -1表示全部
+	DeliveryStatus *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=delivery_status,json=deliveryStatus,proto3" json:"delivery_status,omitempty"` // -1表示全部
 	StartTime      int64                  `protobuf:"varint,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime        int64                  `protobuf:"varint,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -570,11 +570,11 @@ func (x *ListDeliveryRequest) GetDeliveryComp() string {
 	return ""
 }
 
-func (x *ListDeliveryRequest) GetDeliveryStatus() int32 {
+func (x *ListDeliveryRequest) GetDeliveryStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.DeliveryStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *ListDeliveryRequest) GetStartTime() int64 {
@@ -664,7 +664,7 @@ var File_api_zebra_order_delivery_delivery_proto protoreflect.FileDescriptor
 
 const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\n" +
-	"'api/zebra-order/delivery/delivery.proto\x12\bdelivery\x1a\x1egoogle/protobuf/wrappers.proto\"\xb1\x02\n" +
+	"'api/zebra-order/delivery/delivery.proto\x12\bdelivery\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x02\n" +
 	"\bDelivery\x12\x1f\n" +
 	"\vdelivery_id\x18\x01 \x01(\x03R\n" +
 	"deliveryId\x12\x19\n" +
@@ -672,8 +672,8 @@ const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\border_no\x18\x03 \x01(\tR\aorderNo\x12\x1f\n" +
 	"\vdelivery_no\x18\x04 \x01(\tR\n" +
 	"deliveryNo\x12#\n" +
-	"\rdelivery_comp\x18\x05 \x01(\tR\fdeliveryComp\x12'\n" +
-	"\x0fdelivery_status\x18\x06 \x01(\x05R\x0edeliveryStatus\x12\x1f\n" +
+	"\rdelivery_comp\x18\x05 \x01(\tR\fdeliveryComp\x12D\n" +
+	"\x0fdelivery_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0edeliveryStatus\x12\x1f\n" +
 	"\vcreate_time\x18\a \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\b \x01(\x03R\n" +
@@ -689,10 +689,10 @@ const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
 	"\bdelivery\x18\x03 \x01(\v2\x12.delivery.DeliveryR\bdelivery\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\"a\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"~\n" +
 	"\x1bUpdateDeliveryStatusRequest\x12\x19\n" +
-	"\border_no\x18\x01 \x01(\tR\aorderNo\x12'\n" +
-	"\x0fdelivery_status\x18\x02 \x01(\x05R\x0edeliveryStatus\"\x80\x01\n" +
+	"\border_no\x18\x01 \x01(\tR\aorderNo\x12D\n" +
+	"\x0fdelivery_status\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0edeliveryStatus\"\x80\x01\n" +
 	"\x12GetDeliveryRequest\x12\x1b\n" +
 	"\border_no\x18\x01 \x01(\tH\x00R\aorderNo\x12!\n" +
 	"\vdelivery_no\x18\x02 \x01(\tH\x00R\n" +
@@ -703,15 +703,15 @@ const file_api_zebra_order_delivery_delivery_proto_rawDesc = "" +
 	"\x13GetDeliveryResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
-	"\bdelivery\x18\x03 \x01(\v2\x12.delivery.DeliveryR\bdelivery\"\x8a\x02\n" +
+	"\bdelivery\x18\x03 \x01(\v2\x12.delivery.DeliveryR\bdelivery\"\xa7\x02\n" +
 	"\x13ListDeliveryRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x19\n" +
 	"\border_no\x18\x03 \x01(\tR\aorderNo\x12\x1f\n" +
 	"\vdelivery_no\x18\x04 \x01(\tR\n" +
 	"deliveryNo\x12#\n" +
-	"\rdelivery_comp\x18\x05 \x01(\tR\fdeliveryComp\x12'\n" +
-	"\x0fdelivery_status\x18\x06 \x01(\x05R\x0edeliveryStatus\x12\x1d\n" +
+	"\rdelivery_comp\x18\x05 \x01(\tR\fdeliveryComp\x12D\n" +
+	"\x0fdelivery_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0edeliveryStatus\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\a \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\b \x01(\x03R\aendTime\"\xa3\x01\n" +
@@ -753,25 +753,28 @@ var file_api_zebra_order_delivery_delivery_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),       // 8: google.protobuf.Int32Value
 }
 var file_api_zebra_order_delivery_delivery_proto_depIdxs = []int32{
-	8,  // 0: delivery.CreateDeliveryResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: delivery.CreateDeliveryResponse.delivery:type_name -> delivery.Delivery
-	8,  // 2: delivery.GetDeliveryResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: delivery.GetDeliveryResponse.delivery:type_name -> delivery.Delivery
-	8,  // 4: delivery.ListDeliveryResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: delivery.ListDeliveryResponse.deliveries:type_name -> delivery.Delivery
-	1,  // 6: delivery.DeliveryService.CreateDelivery:input_type -> delivery.CreateDeliveryRequest
-	3,  // 7: delivery.DeliveryService.UpdateDeliveryStatus:input_type -> delivery.UpdateDeliveryStatusRequest
-	4,  // 8: delivery.DeliveryService.GetDelivery:input_type -> delivery.GetDeliveryRequest
-	6,  // 9: delivery.DeliveryService.ListDeliveries:input_type -> delivery.ListDeliveryRequest
-	2,  // 10: delivery.DeliveryService.CreateDelivery:output_type -> delivery.CreateDeliveryResponse
-	2,  // 11: delivery.DeliveryService.UpdateDeliveryStatus:output_type -> delivery.CreateDeliveryResponse
-	5,  // 12: delivery.DeliveryService.GetDelivery:output_type -> delivery.GetDeliveryResponse
-	7,  // 13: delivery.DeliveryService.ListDeliveries:output_type -> delivery.ListDeliveryResponse
-	10, // [10:14] is the sub-list for method output_type
-	6,  // [6:10] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	8,  // 0: delivery.Delivery.delivery_status:type_name -> google.protobuf.Int32Value
+	8,  // 1: delivery.CreateDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 2: delivery.CreateDeliveryResponse.delivery:type_name -> delivery.Delivery
+	8,  // 3: delivery.UpdateDeliveryStatusRequest.delivery_status:type_name -> google.protobuf.Int32Value
+	8,  // 4: delivery.GetDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: delivery.GetDeliveryResponse.delivery:type_name -> delivery.Delivery
+	8,  // 6: delivery.ListDeliveryRequest.delivery_status:type_name -> google.protobuf.Int32Value
+	8,  // 7: delivery.ListDeliveryResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 8: delivery.ListDeliveryResponse.deliveries:type_name -> delivery.Delivery
+	1,  // 9: delivery.DeliveryService.CreateDelivery:input_type -> delivery.CreateDeliveryRequest
+	3,  // 10: delivery.DeliveryService.UpdateDeliveryStatus:input_type -> delivery.UpdateDeliveryStatusRequest
+	4,  // 11: delivery.DeliveryService.GetDelivery:input_type -> delivery.GetDeliveryRequest
+	6,  // 12: delivery.DeliveryService.ListDeliveries:input_type -> delivery.ListDeliveryRequest
+	2,  // 13: delivery.DeliveryService.CreateDelivery:output_type -> delivery.CreateDeliveryResponse
+	2,  // 14: delivery.DeliveryService.UpdateDeliveryStatus:output_type -> delivery.CreateDeliveryResponse
+	5,  // 15: delivery.DeliveryService.GetDelivery:output_type -> delivery.GetDeliveryResponse
+	7,  // 16: delivery.DeliveryService.ListDeliveries:output_type -> delivery.ListDeliveryResponse
+	13, // [13:17] is the sub-list for method output_type
+	9,  // [9:13] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_order_delivery_delivery_proto_init() }

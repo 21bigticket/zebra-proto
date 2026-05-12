@@ -43,7 +43,7 @@ type MemberCollect struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CollectStatus int32                  `protobuf:"varint,3,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // 0=取消收藏, 1=已收藏
+	CollectStatus *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // 0=取消收藏, 1=已收藏
 	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -97,11 +97,11 @@ func (x *MemberCollect) GetUserId() int64 {
 	return 0
 }
 
-func (x *MemberCollect) GetCollectStatus() int32 {
+func (x *MemberCollect) GetCollectStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.CollectStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *MemberCollect) GetGoodsId() int64 {
@@ -204,7 +204,7 @@ func (x *CreateMemberCollectRequest) GetSkuId() int64 {
 type UpdateCollectStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CollectStatus int32                  `protobuf:"varint,2,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"`
+	CollectStatus *wrapperspb.Int32Value `protobuf:"bytes,2,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -246,11 +246,11 @@ func (x *UpdateCollectStatusRequest) GetId() int64 {
 	return 0
 }
 
-func (x *UpdateCollectStatusRequest) GetCollectStatus() int32 {
+func (x *UpdateCollectStatusRequest) GetCollectStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.CollectStatus
 	}
-	return 0
+	return nil
 }
 
 // 删除收藏请求
@@ -515,10 +515,10 @@ type ListMemberCollectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                      // 用户ID，0表示全部
-	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`                   // 商品ID，0表示全部
-	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`                         // SKU ID，0表示全部
-	CollectStatus int32                  `protobuf:"varint,6,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // -1表示全部
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                     // 用户ID，0表示全部
+	GoodsId       int64                  `protobuf:"varint,4,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`                  // 商品ID，0表示全部
+	SkuId         int64                  `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`                        // SKU ID，0表示全部
+	CollectStatus *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -588,11 +588,11 @@ func (x *ListMemberCollectRequest) GetSkuId() int64 {
 	return 0
 }
 
-func (x *ListMemberCollectRequest) GetCollectStatus() int32 {
+func (x *ListMemberCollectRequest) GetCollectStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.CollectStatus
 	}
-	return 0
+	return nil
 }
 
 // 分页查询收藏响应
@@ -728,9 +728,9 @@ func (x *CheckCollectStatusRequest) GetSkuId() int64 {
 // 检查收藏状态响应
 type CheckCollectStatusResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                         // 业务状态码: 0=成功, -1=失败, -2=数据为空
-	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`                                           // 提示语
-	CollectStatus int32                  `protobuf:"varint,3,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // 0=未收藏, 1=已收藏
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                        // 业务状态码: 0=成功, -1=失败, -2=数据为空
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`                                          // 提示语
+	CollectStatus *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=collect_status,json=collectStatus,proto3" json:"collect_status,omitempty"` // 0=未收藏, 1=已收藏
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -779,11 +779,11 @@ func (x *CheckCollectStatusResponse) GetMsg() string {
 	return ""
 }
 
-func (x *CheckCollectStatusResponse) GetCollectStatus() int32 {
+func (x *CheckCollectStatusResponse) GetCollectStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.CollectStatus
 	}
-	return 0
+	return nil
 }
 
 type MemberCollectResponse struct {
@@ -842,11 +842,11 @@ var File_api_zebra_member_member_member_collect_proto protoreflect.FileDescripto
 
 const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-member/member/member_collect.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xf2\x01\n" +
+	",api/zebra-member/member/member_collect.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\x02\n" +
 	"\rMemberCollect\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12%\n" +
-	"\x0ecollect_status\x18\x03 \x01(\x05R\rcollectStatus\x12\x19\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12B\n" +
+	"\x0ecollect_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\rcollectStatus\x12\x19\n" +
 	"\bgoods_id\x18\x04 \x01(\x03R\agoodsId\x12\x15\n" +
 	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\x12\x1f\n" +
 	"\vcreate_time\x18\x06 \x01(\x03R\n" +
@@ -858,10 +858,10 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x1aCreateMemberCollectRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x15\n" +
-	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"S\n" +
+	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"p\n" +
 	"\x1aUpdateCollectStatusRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12%\n" +
-	"\x0ecollect_status\x18\x02 \x01(\x05R\rcollectStatus\",\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12B\n" +
+	"\x0ecollect_status\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\rcollectStatus\",\n" +
 	"\x1aDeleteMemberCollectRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\")\n" +
 	"\x17GetMemberCollectRequest\x12\x0e\n" +
@@ -875,14 +875,14 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x13CollectListResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x121\n" +
-	"\bcollects\x18\x03 \x03(\v2\x15.member.MemberCollectR\bcollects\"\xbd\x01\n" +
+	"\bcollects\x18\x03 \x03(\v2\x15.member.MemberCollectR\bcollects\"\xda\x01\n" +
 	"\x18ListMemberCollectRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x19\n" +
 	"\bgoods_id\x18\x04 \x01(\x03R\agoodsId\x12\x15\n" +
-	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\x12%\n" +
-	"\x0ecollect_status\x18\x06 \x01(\x05R\rcollectStatus\"\xa7\x01\n" +
+	"\x06sku_id\x18\x05 \x01(\x03R\x05skuId\x12B\n" +
+	"\x0ecollect_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\rcollectStatus\"\xa7\x01\n" +
 	"\x19ListMemberCollectResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x121\n" +
@@ -891,11 +891,11 @@ const file_api_zebra_member_member_member_collect_proto_rawDesc = "" +
 	"\x19CheckCollectStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x19\n" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x15\n" +
-	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"\x86\x01\n" +
+	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\"\xa3\x01\n" +
 	"\x1aCheckCollectStatusResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
-	"\x03msg\x18\x02 \x01(\tR\x03msg\x12%\n" +
-	"\x0ecollect_status\x18\x03 \x01(\x05R\rcollectStatus\"Z\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12B\n" +
+	"\x0ecollect_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\rcollectStatus\"Z\n" +
 	"\x15MemberCollectResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg2\xc3\x04\n" +
@@ -938,33 +938,37 @@ var file_api_zebra_member_member_member_collect_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),       // 13: google.protobuf.Int32Value
 }
 var file_api_zebra_member_member_member_collect_proto_depIdxs = []int32{
-	13, // 0: member.GetMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: member.GetMemberCollectResponse.member_collect:type_name -> member.MemberCollect
-	13, // 2: member.CollectListResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: member.CollectListResponse.collects:type_name -> member.MemberCollect
-	13, // 4: member.ListMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: member.ListMemberCollectResponse.collects:type_name -> member.MemberCollect
-	13, // 6: member.CheckCollectStatusResponse.code:type_name -> google.protobuf.Int32Value
-	13, // 7: member.MemberCollectResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 8: member.MemberCollectService.Create:input_type -> member.CreateMemberCollectRequest
-	2,  // 9: member.MemberCollectService.UpdateStatus:input_type -> member.UpdateCollectStatusRequest
-	3,  // 10: member.MemberCollectService.Delete:input_type -> member.DeleteMemberCollectRequest
-	4,  // 11: member.MemberCollectService.Get:input_type -> member.GetMemberCollectRequest
-	6,  // 12: member.MemberCollectService.GetListByUser:input_type -> member.GetCollectListByUserRequest
-	8,  // 13: member.MemberCollectService.List:input_type -> member.ListMemberCollectRequest
-	10, // 14: member.MemberCollectService.CheckStatus:input_type -> member.CheckCollectStatusRequest
-	12, // 15: member.MemberCollectService.Create:output_type -> member.MemberCollectResponse
-	12, // 16: member.MemberCollectService.UpdateStatus:output_type -> member.MemberCollectResponse
-	12, // 17: member.MemberCollectService.Delete:output_type -> member.MemberCollectResponse
-	5,  // 18: member.MemberCollectService.Get:output_type -> member.GetMemberCollectResponse
-	7,  // 19: member.MemberCollectService.GetListByUser:output_type -> member.CollectListResponse
-	9,  // 20: member.MemberCollectService.List:output_type -> member.ListMemberCollectResponse
-	11, // 21: member.MemberCollectService.CheckStatus:output_type -> member.CheckCollectStatusResponse
-	15, // [15:22] is the sub-list for method output_type
-	8,  // [8:15] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	13, // 0: member.MemberCollect.collect_status:type_name -> google.protobuf.Int32Value
+	13, // 1: member.UpdateCollectStatusRequest.collect_status:type_name -> google.protobuf.Int32Value
+	13, // 2: member.GetMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: member.GetMemberCollectResponse.member_collect:type_name -> member.MemberCollect
+	13, // 4: member.CollectListResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: member.CollectListResponse.collects:type_name -> member.MemberCollect
+	13, // 6: member.ListMemberCollectRequest.collect_status:type_name -> google.protobuf.Int32Value
+	13, // 7: member.ListMemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 8: member.ListMemberCollectResponse.collects:type_name -> member.MemberCollect
+	13, // 9: member.CheckCollectStatusResponse.code:type_name -> google.protobuf.Int32Value
+	13, // 10: member.CheckCollectStatusResponse.collect_status:type_name -> google.protobuf.Int32Value
+	13, // 11: member.MemberCollectResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 12: member.MemberCollectService.Create:input_type -> member.CreateMemberCollectRequest
+	2,  // 13: member.MemberCollectService.UpdateStatus:input_type -> member.UpdateCollectStatusRequest
+	3,  // 14: member.MemberCollectService.Delete:input_type -> member.DeleteMemberCollectRequest
+	4,  // 15: member.MemberCollectService.Get:input_type -> member.GetMemberCollectRequest
+	6,  // 16: member.MemberCollectService.GetListByUser:input_type -> member.GetCollectListByUserRequest
+	8,  // 17: member.MemberCollectService.List:input_type -> member.ListMemberCollectRequest
+	10, // 18: member.MemberCollectService.CheckStatus:input_type -> member.CheckCollectStatusRequest
+	12, // 19: member.MemberCollectService.Create:output_type -> member.MemberCollectResponse
+	12, // 20: member.MemberCollectService.UpdateStatus:output_type -> member.MemberCollectResponse
+	12, // 21: member.MemberCollectService.Delete:output_type -> member.MemberCollectResponse
+	5,  // 22: member.MemberCollectService.Get:output_type -> member.GetMemberCollectResponse
+	7,  // 23: member.MemberCollectService.GetListByUser:output_type -> member.CollectListResponse
+	9,  // 24: member.MemberCollectService.List:output_type -> member.ListMemberCollectResponse
+	11, // 25: member.MemberCollectService.CheckStatus:output_type -> member.CheckCollectStatusResponse
+	19, // [19:26] is the sub-list for method output_type
+	12, // [12:19] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_member_member_member_collect_proto_init() }

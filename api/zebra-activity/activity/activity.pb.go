@@ -46,7 +46,7 @@ type Activity struct {
 	ActivityType   int32                  `protobuf:"varint,3,opt,name=activity_type,json=activityType,proto3" json:"activity_type,omitempty"` // 1=秒杀, 2=拼团, 3=满减, 4=折扣
 	StartTime      int64                  `protobuf:"varint,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime        int64                  `protobuf:"varint,5,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	ActivityStatus int32                  `protobuf:"varint,6,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"` // 0=未开始, 1=进行中, 2=已结束, 3=已取消
+	ActivityStatus *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"` // 0=未开始, 1=进行中, 2=已结束, 3=已取消
 	Remark         string                 `protobuf:"bytes,7,opt,name=remark,proto3" json:"remark,omitempty"`
 	CreateTime     int64                  `protobuf:"varint,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime     int64                  `protobuf:"varint,9,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -120,11 +120,11 @@ func (x *Activity) GetEndTime() int64 {
 	return 0
 }
 
-func (x *Activity) GetActivityStatus() int32 {
+func (x *Activity) GetActivityStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ActivityStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *Activity) GetRemark() string {
@@ -239,7 +239,7 @@ type UpdateActivityRequest struct {
 	ActivityName   string                 `protobuf:"bytes,2,opt,name=activity_name,json=activityName,proto3" json:"activity_name,omitempty"`
 	StartTime      int64                  `protobuf:"varint,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	EndTime        int64                  `protobuf:"varint,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	ActivityStatus int32                  `protobuf:"varint,5,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"`
+	ActivityStatus *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"`
 	Remark         string                 `protobuf:"bytes,6,opt,name=remark,proto3" json:"remark,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -303,11 +303,11 @@ func (x *UpdateActivityRequest) GetEndTime() int64 {
 	return 0
 }
 
-func (x *UpdateActivityRequest) GetActivityStatus() int32 {
+func (x *UpdateActivityRequest) GetActivityStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ActivityStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateActivityRequest) GetRemark() string {
@@ -473,8 +473,8 @@ type ListActivityRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Page           int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize       int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	ActivityType   int32                  `protobuf:"varint,3,opt,name=activity_type,json=activityType,proto3" json:"activity_type,omitempty"`       // -1表示全部
-	ActivityStatus int32                  `protobuf:"varint,4,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"` // -1表示全部
+	ActivityType   int32                  `protobuf:"varint,3,opt,name=activity_type,json=activityType,proto3" json:"activity_type,omitempty"`      // -1表示全部
+	ActivityStatus *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=activity_status,json=activityStatus,proto3" json:"activity_status,omitempty"` // -1表示全部
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -530,11 +530,11 @@ func (x *ListActivityRequest) GetActivityType() int32 {
 	return 0
 }
 
-func (x *ListActivityRequest) GetActivityStatus() int32 {
+func (x *ListActivityRequest) GetActivityStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ActivityStatus
 	}
-	return 0
+	return nil
 }
 
 // 列出活动响应
@@ -962,7 +962,7 @@ type ActivityGoods struct {
 	StockLimit      int32                  `protobuf:"varint,5,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`          // 活动库存限制
 	SoldQuantity    int32                  `protobuf:"varint,6,opt,name=sold_quantity,json=soldQuantity,proto3" json:"sold_quantity,omitempty"`    // 已售数量
 	LimitPerUser    int32                  `protobuf:"varint,7,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`  // 每人限购数量
-	SortOrder       int32                  `protobuf:"varint,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder       *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	CreateTime      int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime      int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted       int32                  `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -1049,11 +1049,11 @@ func (x *ActivityGoods) GetLimitPerUser() int32 {
 	return 0
 }
 
-func (x *ActivityGoods) GetSortOrder() int32 {
+func (x *ActivityGoods) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *ActivityGoods) GetCreateTime() int64 {
@@ -1500,7 +1500,7 @@ var File_api_zebra_activity_activity_activity_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\n" +
-	"*api/zebra-activity/activity/activity.proto\x12\bactivity\x1a\x1egoogle/protobuf/wrappers.proto\"\xd1\x02\n" +
+	"*api/zebra-activity/activity/activity.proto\x12\bactivity\x1a\x1egoogle/protobuf/wrappers.proto\"\xee\x02\n" +
 	"\bActivity\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12#\n" +
@@ -1508,8 +1508,8 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\ractivity_type\x18\x03 \x01(\x05R\factivityType\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x05 \x01(\x03R\aendTime\x12'\n" +
-	"\x0factivity_status\x18\x06 \x01(\x05R\x0eactivityStatus\x12\x16\n" +
+	"\bend_time\x18\x05 \x01(\x03R\aendTime\x12D\n" +
+	"\x0factivity_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0eactivityStatus\x12\x16\n" +
 	"\x06remark\x18\a \x01(\tR\x06remark\x12\x1f\n" +
 	"\vcreate_time\x18\b \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
@@ -1524,15 +1524,15 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\n" +
 	"start_time\x18\x03 \x01(\x03R\tstartTime\x12\x19\n" +
 	"\bend_time\x18\x04 \x01(\x03R\aendTime\x12\x16\n" +
-	"\x06remark\x18\x05 \x01(\tR\x06remark\"\xd8\x01\n" +
+	"\x06remark\x18\x05 \x01(\tR\x06remark\"\xf5\x01\n" +
 	"\x15UpdateActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12#\n" +
 	"\ractivity_name\x18\x02 \x01(\tR\factivityName\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x03 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x04 \x01(\x03R\aendTime\x12'\n" +
-	"\x0factivity_status\x18\x05 \x01(\x05R\x0eactivityStatus\x12\x16\n" +
+	"\bend_time\x18\x04 \x01(\x03R\aendTime\x12D\n" +
+	"\x0factivity_status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0eactivityStatus\x12\x16\n" +
 	"\x06remark\x18\x06 \x01(\tR\x06remark\"8\n" +
 	"\x15DeleteActivityRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
@@ -1543,12 +1543,12 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x13GetActivityResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12.\n" +
-	"\bactivity\x18\x03 \x01(\v2\x12.activity.ActivityR\bactivity\"\x94\x01\n" +
+	"\bactivity\x18\x03 \x01(\v2\x12.activity.ActivityR\bactivity\"\xb1\x01\n" +
 	"\x13ListActivityRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12#\n" +
-	"\ractivity_type\x18\x03 \x01(\x05R\factivityType\x12'\n" +
-	"\x0factivity_status\x18\x04 \x01(\x05R\x0eactivityStatus\"\xa3\x01\n" +
+	"\ractivity_type\x18\x03 \x01(\x05R\factivityType\x12D\n" +
+	"\x0factivity_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0eactivityStatus\"\xa3\x01\n" +
 	"\x14ListActivityResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x122\n" +
@@ -1576,7 +1576,7 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"activityId\"L\n" +
 	"\x16CancelActivityResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x86\x03\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xa3\x03\n" +
 	"\rActivityGoods\x12*\n" +
 	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\x12\x1f\n" +
 	"\vactivity_id\x18\x02 \x01(\x03R\n" +
@@ -1586,9 +1586,9 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\vstock_limit\x18\x05 \x01(\x05R\n" +
 	"stockLimit\x12#\n" +
 	"\rsold_quantity\x18\x06 \x01(\x05R\fsoldQuantity\x12$\n" +
-	"\x0elimit_per_user\x18\a \x01(\x05R\flimitPerUser\x12\x1d\n" +
+	"\x0elimit_per_user\x18\a \x01(\x05R\flimitPerUser\x12:\n" +
 	"\n" +
-	"sort_order\x18\b \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"sort_order\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\n" +
@@ -1680,44 +1680,48 @@ var file_api_zebra_activity_activity_activity_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),      // 23: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_activity_activity_proto_depIdxs = []int32{
-	23, // 0: activity.GetActivityResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: activity.GetActivityResponse.activity:type_name -> activity.Activity
-	23, // 2: activity.ListActivityResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: activity.ListActivityResponse.activities:type_name -> activity.Activity
-	23, // 4: activity.Response.code:type_name -> google.protobuf.Int32Value
-	23, // 5: activity.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	15, // 6: activity.GetActivityGoodsResponse.goods:type_name -> activity.ActivityGoods
-	23, // 7: activity.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
-	15, // 8: activity.GetGoodsActivityResponse.goods:type_name -> activity.ActivityGoods
-	1,  // 9: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
-	2,  // 10: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
-	3,  // 11: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
-	4,  // 12: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
-	6,  // 13: activity.ActivityService.List:input_type -> activity.ListActivityRequest
-	9,  // 14: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
-	11, // 15: activity.ActivityService.End:input_type -> activity.EndActivityRequest
-	13, // 16: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
-	16, // 17: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
-	18, // 18: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
-	20, // 19: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
-	22, // 20: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
-	8,  // 21: activity.ActivityService.Create:output_type -> activity.Response
-	8,  // 22: activity.ActivityService.Update:output_type -> activity.Response
-	8,  // 23: activity.ActivityService.Delete:output_type -> activity.Response
-	5,  // 24: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
-	7,  // 25: activity.ActivityService.List:output_type -> activity.ListActivityResponse
-	10, // 26: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
-	12, // 27: activity.ActivityService.End:output_type -> activity.EndActivityResponse
-	14, // 28: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
-	17, // 29: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
-	19, // 30: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
-	21, // 31: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
-	8,  // 32: activity.ActivityService.DeductActivityStock:output_type -> activity.Response
-	21, // [21:33] is the sub-list for method output_type
-	9,  // [9:21] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	23, // 0: activity.Activity.activity_status:type_name -> google.protobuf.Int32Value
+	23, // 1: activity.UpdateActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
+	23, // 2: activity.GetActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 3: activity.GetActivityResponse.activity:type_name -> activity.Activity
+	23, // 4: activity.ListActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
+	23, // 5: activity.ListActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: activity.ListActivityResponse.activities:type_name -> activity.Activity
+	23, // 7: activity.Response.code:type_name -> google.protobuf.Int32Value
+	23, // 8: activity.ActivityGoods.sort_order:type_name -> google.protobuf.Int32Value
+	23, // 9: activity.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	15, // 10: activity.GetActivityGoodsResponse.goods:type_name -> activity.ActivityGoods
+	23, // 11: activity.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
+	15, // 12: activity.GetGoodsActivityResponse.goods:type_name -> activity.ActivityGoods
+	1,  // 13: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
+	2,  // 14: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
+	3,  // 15: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
+	4,  // 16: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
+	6,  // 17: activity.ActivityService.List:input_type -> activity.ListActivityRequest
+	9,  // 18: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
+	11, // 19: activity.ActivityService.End:input_type -> activity.EndActivityRequest
+	13, // 20: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
+	16, // 21: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
+	18, // 22: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
+	20, // 23: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
+	22, // 24: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
+	8,  // 25: activity.ActivityService.Create:output_type -> activity.Response
+	8,  // 26: activity.ActivityService.Update:output_type -> activity.Response
+	8,  // 27: activity.ActivityService.Delete:output_type -> activity.Response
+	5,  // 28: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
+	7,  // 29: activity.ActivityService.List:output_type -> activity.ListActivityResponse
+	10, // 30: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
+	12, // 31: activity.ActivityService.End:output_type -> activity.EndActivityResponse
+	14, // 32: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
+	17, // 33: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
+	19, // 34: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
+	21, // 35: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
+	8,  // 36: activity.ActivityService.DeductActivityStock:output_type -> activity.Response
+	25, // [25:37] is the sub-list for method output_type
+	13, // [13:25] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_activity_activity_proto_init() }

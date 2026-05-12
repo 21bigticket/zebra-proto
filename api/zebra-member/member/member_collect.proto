@@ -27,7 +27,7 @@ option go_package = "./api/zebra-member/member;member";
 message MemberCollect {
   int64  id             = 1;
   int64  user_id        = 2;
-  int32  collect_status = 3; // 0=取消收藏, 1=已收藏
+  google.protobuf.Int32Value collect_status = 3; // 0=取消收藏, 1=已收藏
   int64  goods_id       = 4;
   int64  sku_id         = 5;
   int64  create_time    = 6;
@@ -45,7 +45,7 @@ message CreateMemberCollectRequest {
 // 更新收藏状态请求
 message UpdateCollectStatusRequest {
   int64 id             = 1;
-  int32 collect_status = 2;
+  google.protobuf.Int32Value collect_status = 2;
 }
 
 // 删除收藏请求
@@ -84,7 +84,7 @@ message ListMemberCollectRequest {
   int64 user_id = 3; // 用户ID，0表示全部
   int64 goods_id = 4; // 商品ID，0表示全部
   int64 sku_id = 5; // SKU ID，0表示全部
-  int32 collect_status = 6; // -1表示全部
+  google.protobuf.Int32Value collect_status = 6; // -1表示全部
 }
 
 // 分页查询收藏响应
@@ -106,7 +106,7 @@ message CheckCollectStatusRequest {
 message CheckCollectStatusResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
   string  msg = 2;  // 提示语
-  int32 collect_status = 3; // 0=未收藏, 1=已收藏
+  google.protobuf.Int32Value collect_status = 3; // 0=未收藏, 1=已收藏
 }
 
 message MemberCollectResponse {

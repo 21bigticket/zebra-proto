@@ -51,7 +51,7 @@ type MemberAddress struct {
 	City          string                 `protobuf:"bytes,8,opt,name=city,proto3" json:"city,omitempty"`
 	Region        string                 `protobuf:"bytes,9,opt,name=region,proto3" json:"region,omitempty"`
 	Street        string                 `protobuf:"bytes,10,opt,name=street,proto3" json:"street,omitempty"`
-	AddressStatus int32                  `protobuf:"varint,11,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"` // 0=禁用, 1=启用
+	AddressStatus *wrapperspb.Int32Value `protobuf:"bytes,11,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`  // 0=禁用, 1=启用
 	DefaultOption int32                  `protobuf:"varint,12,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"` // 0=非默认, 1=默认
 	CreateTime    int64                  `protobuf:"varint,13,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,14,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -160,11 +160,11 @@ func (x *MemberAddress) GetStreet() string {
 	return ""
 }
 
-func (x *MemberAddress) GetAddressStatus() int32 {
+func (x *MemberAddress) GetAddressStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.AddressStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *MemberAddress) GetDefaultOption() int32 {
@@ -207,7 +207,7 @@ type CreateMemberAddressRequest struct {
 	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
 	Region        string                 `protobuf:"bytes,8,opt,name=region,proto3" json:"region,omitempty"`
 	Street        string                 `protobuf:"bytes,9,opt,name=street,proto3" json:"street,omitempty"`
-	AddressStatus int32                  `protobuf:"varint,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
+	AddressStatus *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
 	DefaultOption int32                  `protobuf:"varint,11,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -306,11 +306,11 @@ func (x *CreateMemberAddressRequest) GetStreet() string {
 	return ""
 }
 
-func (x *CreateMemberAddressRequest) GetAddressStatus() int32 {
+func (x *CreateMemberAddressRequest) GetAddressStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.AddressStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateMemberAddressRequest) GetDefaultOption() int32 {
@@ -332,7 +332,7 @@ type UpdateMemberAddressRequest struct {
 	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
 	Region        string                 `protobuf:"bytes,8,opt,name=region,proto3" json:"region,omitempty"`
 	Street        string                 `protobuf:"bytes,9,opt,name=street,proto3" json:"street,omitempty"`
-	AddressStatus int32                  `protobuf:"varint,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
+	AddressStatus *wrapperspb.Int32Value `protobuf:"bytes,10,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"`
 	DefaultOption int32                  `protobuf:"varint,11,opt,name=default_option,json=defaultOption,proto3" json:"default_option,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -431,11 +431,11 @@ func (x *UpdateMemberAddressRequest) GetStreet() string {
 	return ""
 }
 
-func (x *UpdateMemberAddressRequest) GetAddressStatus() int32 {
+func (x *UpdateMemberAddressRequest) GetAddressStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.AddressStatus
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateMemberAddressRequest) GetDefaultOption() int32 {
@@ -707,8 +707,8 @@ type ListMemberAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                      // 用户ID，0表示全部
-	AddressStatus int32                  `protobuf:"varint,4,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"` // -1表示全部
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                     // 用户ID，0表示全部
+	AddressStatus *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=address_status,json=addressStatus,proto3" json:"address_status,omitempty"` // -1表示全部
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -764,11 +764,11 @@ func (x *ListMemberAddressRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *ListMemberAddressRequest) GetAddressStatus() int32 {
+func (x *ListMemberAddressRequest) GetAddressStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.AddressStatus
 	}
-	return 0
+	return nil
 }
 
 // 分页查询地址响应
@@ -949,7 +949,7 @@ var File_api_zebra_member_member_member_address_proto protoreflect.FileDescripto
 
 const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\n" +
-	",api/zebra-member/member/member_address.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x03\n" +
+	",api/zebra-member/member/member_address.proto\x12\x06member\x1a\x1egoogle/protobuf/wrappers.proto\"\xeb\x03\n" +
 	"\rMemberAddress\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
@@ -962,15 +962,15 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\x04city\x18\b \x01(\tR\x04city\x12\x16\n" +
 	"\x06region\x18\t \x01(\tR\x06region\x12\x16\n" +
 	"\x06street\x18\n" +
-	" \x01(\tR\x06street\x12%\n" +
-	"\x0eaddress_status\x18\v \x01(\x05R\raddressStatus\x12%\n" +
+	" \x01(\tR\x06street\x12B\n" +
+	"\x0eaddress_status\x18\v \x01(\v2\x1b.google.protobuf.Int32ValueR\raddressStatus\x12%\n" +
 	"\x0edefault_option\x18\f \x01(\x05R\rdefaultOption\x12\x1f\n" +
 	"\vcreate_time\x18\r \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x0e \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\x0f \x01(\x05R\tisDeleted\"\xea\x02\n" +
+	"is_deleted\x18\x0f \x01(\x05R\tisDeleted\"\x87\x03\n" +
 	"\x1aCreateMemberAddressRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12#\n" +
 	"\rreceiver_name\x18\x02 \x01(\tR\freceiverName\x12%\n" +
@@ -981,10 +981,10 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x12\n" +
 	"\x04city\x18\a \x01(\tR\x04city\x12\x16\n" +
 	"\x06region\x18\b \x01(\tR\x06region\x12\x16\n" +
-	"\x06street\x18\t \x01(\tR\x06street\x12%\n" +
+	"\x06street\x18\t \x01(\tR\x06street\x12B\n" +
 	"\x0eaddress_status\x18\n" +
-	" \x01(\x05R\raddressStatus\x12%\n" +
-	"\x0edefault_option\x18\v \x01(\x05R\rdefaultOption\"\xe1\x02\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueR\raddressStatus\x12%\n" +
+	"\x0edefault_option\x18\v \x01(\x05R\rdefaultOption\"\xfe\x02\n" +
 	"\x1aUpdateMemberAddressRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\rreceiver_name\x18\x02 \x01(\tR\freceiverName\x12%\n" +
@@ -995,9 +995,9 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x12\n" +
 	"\x04city\x18\a \x01(\tR\x04city\x12\x16\n" +
 	"\x06region\x18\b \x01(\tR\x06region\x12\x16\n" +
-	"\x06street\x18\t \x01(\tR\x06street\x12%\n" +
+	"\x06street\x18\t \x01(\tR\x06street\x12B\n" +
 	"\x0eaddress_status\x18\n" +
-	" \x01(\x05R\raddressStatus\x12%\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueR\raddressStatus\x12%\n" +
 	"\x0edefault_option\x18\v \x01(\x05R\rdefaultOption\",\n" +
 	"\x1aDeleteMemberAddressRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\")\n" +
@@ -1012,12 +1012,12 @@ const file_api_zebra_member_member_member_address_proto_rawDesc = "" +
 	"\x13AddressListResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
-	"\taddresses\x18\x03 \x03(\v2\x15.member.MemberAddressR\taddresses\"\x8b\x01\n" +
+	"\taddresses\x18\x03 \x03(\v2\x15.member.MemberAddressR\taddresses\"\xa8\x01\n" +
 	"\x18ListMemberAddressRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12%\n" +
-	"\x0eaddress_status\x18\x04 \x01(\x05R\raddressStatus\"\xa9\x01\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12B\n" +
+	"\x0eaddress_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\raddressStatus\"\xa9\x01\n" +
 	"\x19ListMemberAddressResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
@@ -1068,32 +1068,36 @@ var file_api_zebra_member_member_member_address_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),       // 12: google.protobuf.Int32Value
 }
 var file_api_zebra_member_member_member_address_proto_depIdxs = []int32{
-	12, // 0: member.GetMemberAddressResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: member.GetMemberAddressResponse.member_address:type_name -> member.MemberAddress
-	12, // 2: member.AddressListResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: member.AddressListResponse.addresses:type_name -> member.MemberAddress
-	12, // 4: member.ListMemberAddressResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 5: member.ListMemberAddressResponse.addresses:type_name -> member.MemberAddress
-	12, // 6: member.MemberAddressResponse.code:type_name -> google.protobuf.Int32Value
-	1,  // 7: member.MemberAddressService.Create:input_type -> member.CreateMemberAddressRequest
-	2,  // 8: member.MemberAddressService.Update:input_type -> member.UpdateMemberAddressRequest
-	3,  // 9: member.MemberAddressService.Delete:input_type -> member.DeleteMemberAddressRequest
-	4,  // 10: member.MemberAddressService.Get:input_type -> member.GetMemberAddressRequest
-	6,  // 11: member.MemberAddressService.GetListByUser:input_type -> member.GetAddressListByUserRequest
-	8,  // 12: member.MemberAddressService.List:input_type -> member.ListMemberAddressRequest
-	10, // 13: member.MemberAddressService.SetDefault:input_type -> member.SetDefaultAddressRequest
-	11, // 14: member.MemberAddressService.Create:output_type -> member.MemberAddressResponse
-	11, // 15: member.MemberAddressService.Update:output_type -> member.MemberAddressResponse
-	11, // 16: member.MemberAddressService.Delete:output_type -> member.MemberAddressResponse
-	5,  // 17: member.MemberAddressService.Get:output_type -> member.GetMemberAddressResponse
-	7,  // 18: member.MemberAddressService.GetListByUser:output_type -> member.AddressListResponse
-	9,  // 19: member.MemberAddressService.List:output_type -> member.ListMemberAddressResponse
-	11, // 20: member.MemberAddressService.SetDefault:output_type -> member.MemberAddressResponse
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	12, // 0: member.MemberAddress.address_status:type_name -> google.protobuf.Int32Value
+	12, // 1: member.CreateMemberAddressRequest.address_status:type_name -> google.protobuf.Int32Value
+	12, // 2: member.UpdateMemberAddressRequest.address_status:type_name -> google.protobuf.Int32Value
+	12, // 3: member.GetMemberAddressResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 4: member.GetMemberAddressResponse.member_address:type_name -> member.MemberAddress
+	12, // 5: member.AddressListResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: member.AddressListResponse.addresses:type_name -> member.MemberAddress
+	12, // 7: member.ListMemberAddressRequest.address_status:type_name -> google.protobuf.Int32Value
+	12, // 8: member.ListMemberAddressResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: member.ListMemberAddressResponse.addresses:type_name -> member.MemberAddress
+	12, // 10: member.MemberAddressResponse.code:type_name -> google.protobuf.Int32Value
+	1,  // 11: member.MemberAddressService.Create:input_type -> member.CreateMemberAddressRequest
+	2,  // 12: member.MemberAddressService.Update:input_type -> member.UpdateMemberAddressRequest
+	3,  // 13: member.MemberAddressService.Delete:input_type -> member.DeleteMemberAddressRequest
+	4,  // 14: member.MemberAddressService.Get:input_type -> member.GetMemberAddressRequest
+	6,  // 15: member.MemberAddressService.GetListByUser:input_type -> member.GetAddressListByUserRequest
+	8,  // 16: member.MemberAddressService.List:input_type -> member.ListMemberAddressRequest
+	10, // 17: member.MemberAddressService.SetDefault:input_type -> member.SetDefaultAddressRequest
+	11, // 18: member.MemberAddressService.Create:output_type -> member.MemberAddressResponse
+	11, // 19: member.MemberAddressService.Update:output_type -> member.MemberAddressResponse
+	11, // 20: member.MemberAddressService.Delete:output_type -> member.MemberAddressResponse
+	5,  // 21: member.MemberAddressService.Get:output_type -> member.GetMemberAddressResponse
+	7,  // 22: member.MemberAddressService.GetListByUser:output_type -> member.AddressListResponse
+	9,  // 23: member.MemberAddressService.List:output_type -> member.ListMemberAddressResponse
+	11, // 24: member.MemberAddressService.SetDefault:output_type -> member.MemberAddressResponse
+	18, // [18:25] is the sub-list for method output_type
+	11, // [11:18] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_member_member_member_address_proto_init() }

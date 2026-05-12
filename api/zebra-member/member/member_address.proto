@@ -35,7 +35,7 @@ message MemberAddress {
   string city           = 8;
   string region         = 9;
   string street         = 10;
-  int32  address_status = 11; // 0=禁用, 1=启用
+  google.protobuf.Int32Value address_status = 11; // 0=禁用, 1=启用
   int32  default_option = 12; // 0=非默认, 1=默认
   int64  create_time    = 13;
   int64  update_time    = 14;
@@ -53,7 +53,7 @@ message CreateMemberAddressRequest {
   string city            = 7;
   string region          = 8;
   string street          = 9;
-  int32  address_status  = 10;
+  google.protobuf.Int32Value address_status = 10;
   int32  default_option  = 11;
 }
 
@@ -68,7 +68,7 @@ message UpdateMemberAddressRequest {
   string city            = 7;
   string region          = 8;
   string street          = 9;
-  int32  address_status  = 10;
+  google.protobuf.Int32Value address_status = 10;
   int32  default_option  = 11;
 }
 
@@ -106,7 +106,7 @@ message ListMemberAddressRequest {
   int32 page = 1;
   int32 page_size = 2;
   int64 user_id = 3; // 用户ID，0表示全部
-  int32 address_status = 4; // -1表示全部
+  google.protobuf.Int32Value address_status = 4; // -1表示全部
 }
 
 // 分页查询地址响应

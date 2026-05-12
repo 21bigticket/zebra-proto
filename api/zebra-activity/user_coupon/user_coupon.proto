@@ -29,7 +29,7 @@ message UserCoupon {
   int64  user_id        = 2;
   int64  coupon_id      = 3;
   string coupon_no      = 4;
-  int32  coupon_status  = 5; // 0=未使用, 1=已使用, 2=已过期, 3=已预占
+  google.protobuf.Int32Value coupon_status = 5; // 0=未使用, 1=已使用, 2=已过期, 3=已预占
   int64  start_time     = 6;
   int64  end_time       = 7;
   int64  use_time       = 8;
@@ -46,8 +46,8 @@ message UserCouponLog {
   int64 coupon_id = 4;
   string action = 5;
   string order_no = 6;
-  int32 before_status = 7;
-  int32 after_status = 8;
+  google.protobuf.Int32Value before_status = 7;
+  google.protobuf.Int32Value after_status = 8;
   string result = 9;
   string message = 10;
   string request_data = 11;
@@ -136,7 +136,7 @@ message ListUserCouponRequest {
   int64 user_id       = 1;
   int32 page          = 2;
   int32 page_size     = 3;
-  int32 coupon_status = 4; // -1表示全部
+  google.protobuf.Int32Value coupon_status = 4; // -1表示全部
 }
 
 // 列出用户优惠券响应

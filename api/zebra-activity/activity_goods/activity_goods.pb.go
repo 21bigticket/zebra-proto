@@ -48,7 +48,7 @@ type ActivityGoods struct {
 	StockLimit      int32                  `protobuf:"varint,5,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`          // 活动库存限制
 	SoldQuantity    int32                  `protobuf:"varint,6,opt,name=sold_quantity,json=soldQuantity,proto3" json:"sold_quantity,omitempty"`    // 已售数量
 	LimitPerUser    int32                  `protobuf:"varint,7,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`  // 每人限购数量，0表示不限购
-	SortOrder       int32                  `protobuf:"varint,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`             // 排序
+	SortOrder       *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`              // 排序
 	CreateTime      int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime      int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted       int32                  `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -135,11 +135,11 @@ func (x *ActivityGoods) GetLimitPerUser() int32 {
 	return 0
 }
 
-func (x *ActivityGoods) GetSortOrder() int32 {
+func (x *ActivityGoods) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *ActivityGoods) GetCreateTime() int64 {
@@ -171,7 +171,7 @@ type CreateActivityGoodsRequest struct {
 	ActivityPrice int64                  `protobuf:"varint,3,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"`
 	StockLimit    int32                  `protobuf:"varint,4,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`
 	LimitPerUser  int32                  `protobuf:"varint,5,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -241,11 +241,11 @@ func (x *CreateActivityGoodsRequest) GetLimitPerUser() int32 {
 	return 0
 }
 
-func (x *CreateActivityGoodsRequest) GetSortOrder() int32 {
+func (x *CreateActivityGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 // 批量创建活动商品请求
@@ -308,7 +308,7 @@ type UpdateActivityGoodsRequest struct {
 	ActivityPrice   int64                  `protobuf:"varint,2,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"`
 	StockLimit      int32                  `protobuf:"varint,3,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`
 	LimitPerUser    int32                  `protobuf:"varint,4,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`
-	SortOrder       int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder       *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -371,11 +371,11 @@ func (x *UpdateActivityGoodsRequest) GetLimitPerUser() int32 {
 	return 0
 }
 
-func (x *UpdateActivityGoodsRequest) GetSortOrder() int32 {
+func (x *UpdateActivityGoodsRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 // 删除活动商品请求
@@ -1142,7 +1142,7 @@ var File_api_zebra_activity_activity_goods_activity_goods_proto protoreflect.Fil
 
 const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\n" +
-	"6api/zebra-activity/activity_goods/activity_goods.proto\x12\x0eactivity_goods\x1a\x1egoogle/protobuf/wrappers.proto\"\x86\x03\n" +
+	"6api/zebra-activity/activity_goods/activity_goods.proto\x12\x0eactivity_goods\x1a\x1egoogle/protobuf/wrappers.proto\"\xa3\x03\n" +
 	"\rActivityGoods\x12*\n" +
 	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\x12\x1f\n" +
 	"\vactivity_id\x18\x02 \x01(\x03R\n" +
@@ -1152,16 +1152,16 @@ const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\vstock_limit\x18\x05 \x01(\x05R\n" +
 	"stockLimit\x12#\n" +
 	"\rsold_quantity\x18\x06 \x01(\x05R\fsoldQuantity\x12$\n" +
-	"\x0elimit_per_user\x18\a \x01(\x05R\flimitPerUser\x12\x1d\n" +
+	"\x0elimit_per_user\x18\a \x01(\x05R\flimitPerUser\x12:\n" +
 	"\n" +
-	"sort_order\x18\b \x01(\x05R\tsortOrder\x12\x1f\n" +
+	"sort_order\x18\b \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\n" +
 	" \x01(\x03R\n" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\v \x01(\x05R\tisDeleted\"\xe1\x01\n" +
+	"is_deleted\x18\v \x01(\x05R\tisDeleted\"\xfe\x01\n" +
 	"\x1aCreateActivityGoodsRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x15\n" +
@@ -1169,21 +1169,21 @@ const file_api_zebra_activity_activity_goods_activity_goods_proto_rawDesc = "" +
 	"\x0eactivity_price\x18\x03 \x01(\x03R\ractivityPrice\x12\x1f\n" +
 	"\vstock_limit\x18\x04 \x01(\x05R\n" +
 	"stockLimit\x12$\n" +
-	"\x0elimit_per_user\x18\x05 \x01(\x05R\flimitPerUser\x12\x1d\n" +
+	"\x0elimit_per_user\x18\x05 \x01(\x05R\flimitPerUser\x12:\n" +
 	"\n" +
-	"sort_order\x18\x06 \x01(\x05R\tsortOrder\"\x84\x01\n" +
+	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\"\x84\x01\n" +
 	"\x1fBatchCreateActivityGoodsRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12@\n" +
-	"\x05goods\x18\x02 \x03(\v2*.activity_goods.CreateActivityGoodsRequestR\x05goods\"\xd5\x01\n" +
+	"\x05goods\x18\x02 \x03(\v2*.activity_goods.CreateActivityGoodsRequestR\x05goods\"\xf2\x01\n" +
 	"\x1aUpdateActivityGoodsRequest\x12*\n" +
 	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\x12%\n" +
 	"\x0eactivity_price\x18\x02 \x01(\x03R\ractivityPrice\x12\x1f\n" +
 	"\vstock_limit\x18\x03 \x01(\x05R\n" +
 	"stockLimit\x12$\n" +
-	"\x0elimit_per_user\x18\x04 \x01(\x05R\flimitPerUser\x12\x1d\n" +
+	"\x0elimit_per_user\x18\x04 \x01(\x05R\flimitPerUser\x12:\n" +
 	"\n" +
-	"sort_order\x18\x05 \x01(\x05R\tsortOrder\"H\n" +
+	"sort_order\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\"H\n" +
 	"\x1aDeleteActivityGoodsRequest\x12*\n" +
 	"\x11activity_goods_id\x18\x01 \x01(\x03R\x0factivityGoodsId\"O\n" +
 	"\x1fBatchDeleteActivityGoodsRequest\x12,\n" +
@@ -1281,39 +1281,42 @@ var file_api_zebra_activity_activity_goods_activity_goods_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),           // 17: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_activity_goods_activity_goods_proto_depIdxs = []int32{
-	1,  // 0: activity_goods.BatchCreateActivityGoodsRequest.goods:type_name -> activity_goods.CreateActivityGoodsRequest
-	17, // 1: activity_goods.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 2: activity_goods.GetActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
-	17, // 3: activity_goods.ListActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 4: activity_goods.ListActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
-	17, // 5: activity_goods.Response.code:type_name -> google.protobuf.Int32Value
-	17, // 6: activity_goods.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 7: activity_goods.GetGoodsActivityResponse.goods:type_name -> activity_goods.ActivityGoods
-	1,  // 8: activity_goods.ActivityGoodsService.Create:input_type -> activity_goods.CreateActivityGoodsRequest
-	2,  // 9: activity_goods.ActivityGoodsService.BatchCreate:input_type -> activity_goods.BatchCreateActivityGoodsRequest
-	3,  // 10: activity_goods.ActivityGoodsService.Update:input_type -> activity_goods.UpdateActivityGoodsRequest
-	4,  // 11: activity_goods.ActivityGoodsService.Delete:input_type -> activity_goods.DeleteActivityGoodsRequest
-	5,  // 12: activity_goods.ActivityGoodsService.BatchDelete:input_type -> activity_goods.BatchDeleteActivityGoodsRequest
-	6,  // 13: activity_goods.ActivityGoodsService.Get:input_type -> activity_goods.GetActivityGoodsRequest
-	8,  // 14: activity_goods.ActivityGoodsService.List:input_type -> activity_goods.ListActivityGoodsRequest
-	11, // 15: activity_goods.ActivityGoodsService.GetGoodsActivity:input_type -> activity_goods.GetGoodsActivityRequest
-	13, // 16: activity_goods.ActivityGoodsService.ValidateActivity:input_type -> activity_goods.ValidateActivityRequest
-	15, // 17: activity_goods.ActivityGoodsService.DeductActivityStock:input_type -> activity_goods.DeductActivityStockRequest
-	10, // 18: activity_goods.ActivityGoodsService.Create:output_type -> activity_goods.Response
-	16, // 19: activity_goods.ActivityGoodsService.BatchCreate:output_type -> activity_goods.ActivityGoodsResponse
-	10, // 20: activity_goods.ActivityGoodsService.Update:output_type -> activity_goods.Response
-	10, // 21: activity_goods.ActivityGoodsService.Delete:output_type -> activity_goods.Response
-	16, // 22: activity_goods.ActivityGoodsService.BatchDelete:output_type -> activity_goods.ActivityGoodsResponse
-	7,  // 23: activity_goods.ActivityGoodsService.Get:output_type -> activity_goods.GetActivityGoodsResponse
-	9,  // 24: activity_goods.ActivityGoodsService.List:output_type -> activity_goods.ListActivityGoodsResponse
-	12, // 25: activity_goods.ActivityGoodsService.GetGoodsActivity:output_type -> activity_goods.GetGoodsActivityResponse
-	14, // 26: activity_goods.ActivityGoodsService.ValidateActivity:output_type -> activity_goods.ValidateActivityResponse
-	10, // 27: activity_goods.ActivityGoodsService.DeductActivityStock:output_type -> activity_goods.Response
-	18, // [18:28] is the sub-list for method output_type
-	8,  // [8:18] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	17, // 0: activity_goods.ActivityGoods.sort_order:type_name -> google.protobuf.Int32Value
+	17, // 1: activity_goods.CreateActivityGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	1,  // 2: activity_goods.BatchCreateActivityGoodsRequest.goods:type_name -> activity_goods.CreateActivityGoodsRequest
+	17, // 3: activity_goods.UpdateActivityGoodsRequest.sort_order:type_name -> google.protobuf.Int32Value
+	17, // 4: activity_goods.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 5: activity_goods.GetActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
+	17, // 6: activity_goods.ListActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 7: activity_goods.ListActivityGoodsResponse.activity_goods:type_name -> activity_goods.ActivityGoods
+	17, // 8: activity_goods.Response.code:type_name -> google.protobuf.Int32Value
+	17, // 9: activity_goods.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 10: activity_goods.GetGoodsActivityResponse.goods:type_name -> activity_goods.ActivityGoods
+	1,  // 11: activity_goods.ActivityGoodsService.Create:input_type -> activity_goods.CreateActivityGoodsRequest
+	2,  // 12: activity_goods.ActivityGoodsService.BatchCreate:input_type -> activity_goods.BatchCreateActivityGoodsRequest
+	3,  // 13: activity_goods.ActivityGoodsService.Update:input_type -> activity_goods.UpdateActivityGoodsRequest
+	4,  // 14: activity_goods.ActivityGoodsService.Delete:input_type -> activity_goods.DeleteActivityGoodsRequest
+	5,  // 15: activity_goods.ActivityGoodsService.BatchDelete:input_type -> activity_goods.BatchDeleteActivityGoodsRequest
+	6,  // 16: activity_goods.ActivityGoodsService.Get:input_type -> activity_goods.GetActivityGoodsRequest
+	8,  // 17: activity_goods.ActivityGoodsService.List:input_type -> activity_goods.ListActivityGoodsRequest
+	11, // 18: activity_goods.ActivityGoodsService.GetGoodsActivity:input_type -> activity_goods.GetGoodsActivityRequest
+	13, // 19: activity_goods.ActivityGoodsService.ValidateActivity:input_type -> activity_goods.ValidateActivityRequest
+	15, // 20: activity_goods.ActivityGoodsService.DeductActivityStock:input_type -> activity_goods.DeductActivityStockRequest
+	10, // 21: activity_goods.ActivityGoodsService.Create:output_type -> activity_goods.Response
+	16, // 22: activity_goods.ActivityGoodsService.BatchCreate:output_type -> activity_goods.ActivityGoodsResponse
+	10, // 23: activity_goods.ActivityGoodsService.Update:output_type -> activity_goods.Response
+	10, // 24: activity_goods.ActivityGoodsService.Delete:output_type -> activity_goods.Response
+	16, // 25: activity_goods.ActivityGoodsService.BatchDelete:output_type -> activity_goods.ActivityGoodsResponse
+	7,  // 26: activity_goods.ActivityGoodsService.Get:output_type -> activity_goods.GetActivityGoodsResponse
+	9,  // 27: activity_goods.ActivityGoodsService.List:output_type -> activity_goods.ListActivityGoodsResponse
+	12, // 28: activity_goods.ActivityGoodsService.GetGoodsActivity:output_type -> activity_goods.GetGoodsActivityResponse
+	14, // 29: activity_goods.ActivityGoodsService.ValidateActivity:output_type -> activity_goods.ValidateActivityResponse
+	10, // 30: activity_goods.ActivityGoodsService.DeductActivityStock:output_type -> activity_goods.Response
+	21, // [21:31] is the sub-list for method output_type
+	11, // [11:21] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_activity_goods_activity_goods_proto_init() }

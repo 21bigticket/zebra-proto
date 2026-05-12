@@ -11,7 +11,7 @@ message Post {
   int64  post_id     = 1;
   string post_code   = 2;
   string post_name   = 3;
-  int32  post_sort   = 4;
+  google.protobuf.Int32Value post_sort = 4;
   string status      = 5; // 状态（0正常 1停用）
   string create_by   = 6;
   int64  create_time = 7;
@@ -53,7 +53,7 @@ message GetPostResponse {
 message CreatePostRequest {
   string post_code = 1;
   string post_name = 2;
-  int32  post_sort = 3;
+  google.protobuf.Int32Value post_sort = 3;
   string status    = 4;
   string remark    = 5;
 }
@@ -63,7 +63,7 @@ message UpdatePostRequest {
   int64  post_id   = 1;
   optional string post_code = 2;
   optional string post_name = 3;
-  optional int32  post_sort = 4;
+  google.protobuf.Int32Value post_sort = 4;
   optional string status    = 5;
   optional string remark    = 6;
 }

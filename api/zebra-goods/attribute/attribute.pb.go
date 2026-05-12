@@ -44,8 +44,8 @@ type GoodsAttribute struct {
 	ParentId      int64                  `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,9,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -112,18 +112,18 @@ func (x *GoodsAttribute) GetType() int32 {
 	return 0
 }
 
-func (x *GoodsAttribute) GetSortOrder() int32 {
+func (x *GoodsAttribute) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *GoodsAttribute) GetStatus() int32 {
+func (x *GoodsAttribute) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *GoodsAttribute) GetDescription() string {
@@ -159,7 +159,7 @@ type CreateAttributeRequest struct {
 	ParentId      int64                  `protobuf:"varint,1,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -216,11 +216,11 @@ func (x *CreateAttributeRequest) GetType() int32 {
 	return 0
 }
 
-func (x *CreateAttributeRequest) GetSortOrder() int32 {
+func (x *CreateAttributeRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
 func (x *CreateAttributeRequest) GetDescription() string {
@@ -234,8 +234,8 @@ type UpdateAttributeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	SortOrder     int32                  `protobuf:"varint,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
-	Status        int32                  `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
+	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -285,18 +285,18 @@ func (x *UpdateAttributeRequest) GetName() string {
 	return ""
 }
 
-func (x *UpdateAttributeRequest) GetSortOrder() int32 {
+func (x *UpdateAttributeRequest) GetSortOrder() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.SortOrder
 	}
-	return 0
+	return nil
 }
 
-func (x *UpdateAttributeRequest) GetStatus() int32 {
+func (x *UpdateAttributeRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 func (x *UpdateAttributeRequest) GetDescription() string {
@@ -460,7 +460,7 @@ type ListAttributeRequest struct {
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	ParentId      int64                  `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
-	Status        int32                  `protobuf:"varint,5,opt,name=status,proto3" json:"status,omitempty"`
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -523,11 +523,11 @@ func (x *ListAttributeRequest) GetType() int32 {
 	return 0
 }
 
-func (x *ListAttributeRequest) GetStatus() int32 {
+func (x *ListAttributeRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
 	}
-	return 0
+	return nil
 }
 
 type ListAttributeResponse struct {
@@ -654,15 +654,15 @@ var File_api_zebra_goods_attribute_attribute_proto protoreflect.FileDescriptor
 
 const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\n" +
-	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\x1a\x1egoogle/protobuf/wrappers.proto\"\x9f\x02\n" +
+	")api/zebra-goods/attribute/attribute.proto\x12\tattribute\x1a\x1egoogle/protobuf/wrappers.proto\"\xd9\x02\n" +
 	"\x0eGoodsAttribute\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x1d\n" +
+	"\x04type\x18\x04 \x01(\x05R\x04type\x12:\n" +
 	"\n" +
-	"sort_order\x18\x05 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\x05R\x06status\x12 \n" +
+	"sort_order\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12 \n" +
 	"\vdescription\x18\a \x01(\tR\vdescription\x12\x1f\n" +
 	"\vcreate_time\x18\b \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
@@ -670,20 +670,20 @@ const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"updateTime\x12\x1d\n" +
 	"\n" +
 	"is_deleted\x18\n" +
-	" \x01(\x05R\tisDeleted\"\x9e\x01\n" +
+	" \x01(\x05R\tisDeleted\"\xbb\x01\n" +
 	"\x16CreateAttributeRequest\x12\x1b\n" +
 	"\tparent_id\x18\x01 \x01(\x03R\bparentId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x1d\n" +
+	"\x04type\x18\x03 \x01(\x05R\x04type\x12:\n" +
 	"\n" +
-	"sort_order\x18\x04 \x01(\x05R\tsortOrder\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\"\x95\x01\n" +
+	"sort_order\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\"\xcf\x01\n" +
 	"\x16UpdateAttributeRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12:\n" +
 	"\n" +
-	"sort_order\x18\x03 \x01(\x05R\tsortOrder\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\x05R\x06status\x12 \n" +
+	"sort_order\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\"(\n" +
 	"\x16DeleteAttributeRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"%\n" +
@@ -692,13 +692,13 @@ const file_api_zebra_goods_attribute_attribute_proto_rawDesc = "" +
 	"\x14GetAttributeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x127\n" +
-	"\tattribute\x18\x03 \x01(\v2\x19.attribute.GoodsAttributeR\tattribute\"\x90\x01\n" +
+	"\tattribute\x18\x03 \x01(\v2\x19.attribute.GoodsAttributeR\tattribute\"\xad\x01\n" +
 	"\x14ListAttributeRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1b\n" +
 	"\tparent_id\x18\x03 \x01(\x03R\bparentId\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"\xab\x01\n" +
+	"\x04type\x18\x04 \x01(\x05R\x04type\x123\n" +
+	"\x06status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\xab\x01\n" +
 	"\x15ListAttributeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x129\n" +
@@ -742,26 +742,32 @@ var file_api_zebra_goods_attribute_attribute_proto_goTypes = []any{
 	(*wrapperspb.Int32Value)(nil),  // 9: google.protobuf.Int32Value
 }
 var file_api_zebra_goods_attribute_attribute_proto_depIdxs = []int32{
-	9,  // 0: attribute.GetAttributeResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 1: attribute.GetAttributeResponse.attribute:type_name -> attribute.GoodsAttribute
-	9,  // 2: attribute.ListAttributeResponse.code:type_name -> google.protobuf.Int32Value
-	0,  // 3: attribute.ListAttributeResponse.attributes:type_name -> attribute.GoodsAttribute
-	9,  // 4: attribute.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: attribute.AttributeService.Create:input_type -> attribute.CreateAttributeRequest
-	2,  // 6: attribute.AttributeService.Update:input_type -> attribute.UpdateAttributeRequest
-	3,  // 7: attribute.AttributeService.Delete:input_type -> attribute.DeleteAttributeRequest
-	4,  // 8: attribute.AttributeService.Get:input_type -> attribute.GetAttributeRequest
-	6,  // 9: attribute.AttributeService.List:input_type -> attribute.ListAttributeRequest
-	8,  // 10: attribute.AttributeService.Create:output_type -> attribute.Response
-	8,  // 11: attribute.AttributeService.Update:output_type -> attribute.Response
-	8,  // 12: attribute.AttributeService.Delete:output_type -> attribute.Response
-	5,  // 13: attribute.AttributeService.Get:output_type -> attribute.GetAttributeResponse
-	7,  // 14: attribute.AttributeService.List:output_type -> attribute.ListAttributeResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	9,  // 0: attribute.GoodsAttribute.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 1: attribute.GoodsAttribute.status:type_name -> google.protobuf.Int32Value
+	9,  // 2: attribute.CreateAttributeRequest.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 3: attribute.UpdateAttributeRequest.sort_order:type_name -> google.protobuf.Int32Value
+	9,  // 4: attribute.UpdateAttributeRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 5: attribute.GetAttributeResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 6: attribute.GetAttributeResponse.attribute:type_name -> attribute.GoodsAttribute
+	9,  // 7: attribute.ListAttributeRequest.status:type_name -> google.protobuf.Int32Value
+	9,  // 8: attribute.ListAttributeResponse.code:type_name -> google.protobuf.Int32Value
+	0,  // 9: attribute.ListAttributeResponse.attributes:type_name -> attribute.GoodsAttribute
+	9,  // 10: attribute.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 11: attribute.AttributeService.Create:input_type -> attribute.CreateAttributeRequest
+	2,  // 12: attribute.AttributeService.Update:input_type -> attribute.UpdateAttributeRequest
+	3,  // 13: attribute.AttributeService.Delete:input_type -> attribute.DeleteAttributeRequest
+	4,  // 14: attribute.AttributeService.Get:input_type -> attribute.GetAttributeRequest
+	6,  // 15: attribute.AttributeService.List:input_type -> attribute.ListAttributeRequest
+	8,  // 16: attribute.AttributeService.Create:output_type -> attribute.Response
+	8,  // 17: attribute.AttributeService.Update:output_type -> attribute.Response
+	8,  // 18: attribute.AttributeService.Delete:output_type -> attribute.Response
+	5,  // 19: attribute.AttributeService.Get:output_type -> attribute.GetAttributeResponse
+	7,  // 20: attribute.AttributeService.List:output_type -> attribute.ListAttributeResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_goods_attribute_attribute_proto_init() }

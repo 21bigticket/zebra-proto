@@ -28,7 +28,7 @@ message Order {
   int64  order_id         = 1;
   string order_no        = 2;
   int64  user_id          = 3;
-  int32  order_status     = 4;  // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
+  google.protobuf.Int32Value order_status = 4; // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
   int64  total_amount     = 5;  // 订单总金额（分）
   int64  pay_amount       = 6;  // 实付金额（分）
   int64  discount_amount  = 7;  // 优惠金额（分）
@@ -68,7 +68,7 @@ message OrderDelivery {
   string order_no         = 3;  // 订单号
   string delivery_no      = 4;  // 物流单号
   string delivery_comp    = 5;  // 物流公司
-  int32  delivery_status  = 6;  // 发货状态: 0=运输中, 1=已签收, 2=异常
+  google.protobuf.Int32Value delivery_status = 6; // 发货状态: 0=运输中, 1=已签收, 2=异常
   int64  create_time      = 7;
   int64  update_time      = 8;
   int32  is_deleted       = 9;
@@ -150,7 +150,7 @@ message GetOrderResponse {
 // 查询用户订单列表请求
 message GetUserOrdersRequest {
   int64  user_id       = 1;
-  int32  order_status  = 2;  // -1=全部
+  google.protobuf.Int32Value order_status = 2; // -1=全部
   int32  page          = 3;
   int32  page_size     = 4;
 }
@@ -169,7 +169,7 @@ message ListOrderRequest {
   int32 page_size = 2;
   int64 user_id = 3; // 用户ID，0表示全部
   string order_no = 4; // 订单号，空表示全部
-  int32 order_status = 5; // -1=全部
+  google.protobuf.Int32Value order_status = 5; // -1=全部
   int64 start_time = 6; // 创建开始时间戳
   int64 end_time = 7; // 创建结束时间戳
 }
