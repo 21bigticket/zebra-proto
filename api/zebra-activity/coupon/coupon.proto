@@ -93,6 +93,7 @@ message ListCouponRequest {
   int32  page_size = 2;
   int32  type      = 3; // -1表示全部
   google.protobuf.Int32Value status = 4; // -1表示全部
+  string name_keyword = 5; // 优惠券名称模糊查询
 }
 
 // 列出优惠券响应

@@ -585,8 +585,9 @@ type ListCouponRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`    // -1表示全部
-	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // -1表示全部
+	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`                                 // -1表示全部
+	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                              // -1表示全部
+	NameKeyword   string                 `protobuf:"bytes,5,opt,name=name_keyword,json=nameKeyword,proto3" json:"name_keyword,omitempty"` // 优惠券名称模糊查询
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -647,6 +648,13 @@ func (x *ListCouponRequest) GetStatus() *wrapperspb.Int32Value {
 		return x.Status
 	}
 	return nil
+}
+
+func (x *ListCouponRequest) GetNameKeyword() string {
+	if x != nil {
+		return x.NameKeyword
+	}
+	return ""
 }
 
 // 列出优惠券响应
@@ -834,12 +842,13 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\x11GetCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12&\n" +
-	"\x06coupon\x18\x03 \x01(\v2\x0e.coupon.CouponR\x06coupon\"\x8d\x01\n" +
+	"\x06coupon\x18\x03 \x01(\v2\x0e.coupon.CouponR\x06coupon\"\xb0\x01\n" +
 	"\x11ListCouponRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x123\n" +
-	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\x97\x01\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12!\n" +
+	"\fname_keyword\x18\x05 \x01(\tR\vnameKeyword\"\x97\x01\n" +
 	"\x12ListCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12(\n" +

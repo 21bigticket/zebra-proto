@@ -133,7 +133,7 @@ message GetUserCouponResponse {
 
 // 列出用户优惠券请求
 message ListUserCouponRequest {
-  int64 user_id       = 1;
+  google.protobuf.Int64Value user_id = 1; // 用户ID，不传表示查询全部
   int32 page          = 2;
   int32 page_size     = 3;
   google.protobuf.Int32Value coupon_status = 4; // -1表示全部
