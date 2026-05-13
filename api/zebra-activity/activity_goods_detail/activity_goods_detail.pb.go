@@ -87,7 +87,7 @@ type SkuActivityPrice struct {
 	SkuId         int64                  `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	ActivityId    int64                  `protobuf:"varint,2,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
 	ActivityType  string                 `protobuf:"bytes,3,opt,name=activity_type,json=activityType,proto3" json:"activity_type,omitempty"`
-	ActivityPrice int64                  `protobuf:"varint,4,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"`
+	ActivityPrice string                 `protobuf:"bytes,4,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"` // 活动价（元）
 	StockLimit    int32                  `protobuf:"varint,5,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`
 	SoldQuantity  int32                  `protobuf:"varint,6,opt,name=sold_quantity,json=soldQuantity,proto3" json:"sold_quantity,omitempty"`
 	LimitPerUser  int32                  `protobuf:"varint,7,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`
@@ -148,11 +148,11 @@ func (x *SkuActivityPrice) GetActivityType() string {
 	return ""
 }
 
-func (x *SkuActivityPrice) GetActivityPrice() int64 {
+func (x *SkuActivityPrice) GetActivityPrice() string {
 	if x != nil {
 		return x.ActivityPrice
 	}
-	return 0
+	return ""
 }
 
 func (x *SkuActivityPrice) GetStockLimit() int32 {
@@ -332,7 +332,7 @@ const file_api_zebra_activity_activity_goods_detail_activity_goods_detail_proto_
 	"\vactivity_id\x18\x02 \x01(\x03R\n" +
 	"activityId\x12#\n" +
 	"\ractivity_type\x18\x03 \x01(\tR\factivityType\x12%\n" +
-	"\x0eactivity_price\x18\x04 \x01(\x03R\ractivityPrice\x12\x1f\n" +
+	"\x0eactivity_price\x18\x04 \x01(\tR\ractivityPrice\x12\x1f\n" +
 	"\vstock_limit\x18\x05 \x01(\x05R\n" +
 	"stockLimit\x12#\n" +
 	"\rsold_quantity\x18\x06 \x01(\x05R\fsoldQuantity\x12$\n" +

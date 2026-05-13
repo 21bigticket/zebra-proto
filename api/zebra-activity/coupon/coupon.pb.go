@@ -44,8 +44,8 @@ type Coupon struct {
 	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type           int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`                                           // 1=满减券, 2=折扣券, 3=立减券
-	MinAmount      int64                  `protobuf:"varint,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`                // 最小使用金额（分）
-	DiscountAmount int64                  `protobuf:"varint,5,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"` // 优惠金额（分）
+	MinAmount      string                 `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`                 // 最小使用金额（元）
+	DiscountAmount string                 `protobuf:"bytes,5,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`  // 优惠金额（元）
 	DiscountRate   int32                  `protobuf:"varint,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`       // 折扣率（如95表示95折）
 	TotalQuantity  int32                  `protobuf:"varint,7,opt,name=total_quantity,json=totalQuantity,proto3" json:"total_quantity,omitempty"`    // 总数量
 	IssuedQuantity int32                  `protobuf:"varint,8,opt,name=issued_quantity,json=issuedQuantity,proto3" json:"issued_quantity,omitempty"` // 已发放数量
@@ -112,18 +112,18 @@ func (x *Coupon) GetType() int32 {
 	return 0
 }
 
-func (x *Coupon) GetMinAmount() int64 {
+func (x *Coupon) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *Coupon) GetDiscountAmount() int64 {
+func (x *Coupon) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *Coupon) GetDiscountRate() int32 {
@@ -208,8 +208,8 @@ type CreateCouponRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Name           string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Type           int32                  `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
-	MinAmount      int64                  `protobuf:"varint,3,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	DiscountAmount int64                  `protobuf:"varint,4,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	MinAmount      string                 `protobuf:"bytes,3,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	DiscountAmount string                 `protobuf:"bytes,4,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
 	DiscountRate   int32                  `protobuf:"varint,5,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
 	TotalQuantity  int32                  `protobuf:"varint,6,opt,name=total_quantity,json=totalQuantity,proto3" json:"total_quantity,omitempty"`
 	ValidDays      int32                  `protobuf:"varint,7,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`
@@ -263,18 +263,18 @@ func (x *CreateCouponRequest) GetType() int32 {
 	return 0
 }
 
-func (x *CreateCouponRequest) GetMinAmount() int64 {
+func (x *CreateCouponRequest) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *CreateCouponRequest) GetDiscountAmount() int64 {
+func (x *CreateCouponRequest) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *CreateCouponRequest) GetDiscountRate() int32 {
@@ -317,8 +317,8 @@ type UpdateCouponRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MinAmount      int64                  `protobuf:"varint,3,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	DiscountAmount int64                  `protobuf:"varint,4,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	MinAmount      string                 `protobuf:"bytes,3,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	DiscountAmount string                 `protobuf:"bytes,4,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
 	DiscountRate   int32                  `protobuf:"varint,5,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
 	TotalQuantity  int32                  `protobuf:"varint,6,opt,name=total_quantity,json=totalQuantity,proto3" json:"total_quantity,omitempty"`
 	ValidDays      int32                  `protobuf:"varint,7,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`
@@ -373,18 +373,18 @@ func (x *UpdateCouponRequest) GetName() string {
 	return ""
 }
 
-func (x *UpdateCouponRequest) GetMinAmount() int64 {
+func (x *UpdateCouponRequest) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *UpdateCouponRequest) GetDiscountAmount() int64 {
+func (x *UpdateCouponRequest) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdateCouponRequest) GetDiscountRate() int32 {
@@ -788,8 +788,8 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x04 \x01(\x03R\tminAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\x05 \x01(\x03R\x0ediscountAmount\x12#\n" +
+	"min_amount\x18\x04 \x01(\tR\tminAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x05 \x01(\tR\x0ediscountAmount\x12#\n" +
 	"\rdiscount_rate\x18\x06 \x01(\x05R\fdiscountRate\x12%\n" +
 	"\x0etotal_quantity\x18\a \x01(\x05R\rtotalQuantity\x12'\n" +
 	"\x0fissued_quantity\x18\b \x01(\x05R\x0eissuedQuantity\x12#\n" +
@@ -811,8 +811,8 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\x05R\x04type\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x03 \x01(\x03R\tminAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\x04 \x01(\x03R\x0ediscountAmount\x12#\n" +
+	"min_amount\x18\x03 \x01(\tR\tminAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x04 \x01(\tR\x0ediscountAmount\x12#\n" +
 	"\rdiscount_rate\x18\x05 \x01(\x05R\fdiscountRate\x12%\n" +
 	"\x0etotal_quantity\x18\x06 \x01(\x05R\rtotalQuantity\x12\x1d\n" +
 	"\n" +
@@ -824,8 +824,8 @@ const file_api_zebra_activity_coupon_coupon_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x03 \x01(\x03R\tminAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\x04 \x01(\x03R\x0ediscountAmount\x12#\n" +
+	"min_amount\x18\x03 \x01(\tR\tminAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x04 \x01(\tR\x0ediscountAmount\x12#\n" +
 	"\rdiscount_rate\x18\x05 \x01(\x05R\fdiscountRate\x12%\n" +
 	"\x0etotal_quantity\x18\x06 \x01(\x05R\rtotalQuantity\x12\x1d\n" +
 	"\n" +

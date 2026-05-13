@@ -124,7 +124,7 @@ type CartItem struct {
 	SkuId         int64                  `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	SkuName       string                 `protobuf:"bytes,5,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`
 	SkuImage      string                 `protobuf:"bytes,6,opt,name=sku_image,json=skuImage,proto3" json:"sku_image,omitempty"`
-	Price         int64                  `protobuf:"varint,7,opt,name=price,proto3" json:"price,omitempty"`       // 单价（分）
+	Price         string                 `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`        // 单价（元）
 	Quantity      int32                  `protobuf:"varint,8,opt,name=quantity,proto3" json:"quantity,omitempty"` // 数量
 	CreateTime    int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -205,11 +205,11 @@ func (x *CartItem) GetSkuImage() string {
 	return ""
 }
 
-func (x *CartItem) GetPrice() int64 {
+func (x *CartItem) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *CartItem) GetQuantity() int32 {
@@ -247,7 +247,7 @@ type AddItemRequest struct {
 	SkuId         int64                  `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	SkuName       string                 `protobuf:"bytes,3,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`
 	SkuImage      string                 `protobuf:"bytes,4,opt,name=sku_image,json=skuImage,proto3" json:"sku_image,omitempty"`
-	Price         int64                  `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,5,opt,name=price,proto3" json:"price,omitempty"` // 单价（元）
 	Quantity      int32                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -311,11 +311,11 @@ func (x *AddItemRequest) GetSkuImage() string {
 	return ""
 }
 
-func (x *AddItemRequest) GetPrice() int64 {
+func (x *AddItemRequest) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *AddItemRequest) GetQuantity() int32 {
@@ -544,9 +544,9 @@ type GetCartResponse struct {
 	Msg                 string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`   // 提示语
 	Cart                *Cart                  `protobuf:"bytes,3,opt,name=cart,proto3" json:"cart,omitempty"`
 	Items               []*CartItem            `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
-	TotalAmount         int64                  `protobuf:"varint,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	DiscountAmount      int64                  `protobuf:"varint,6,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
-	PayAmount           int64                  `protobuf:"varint,7,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
+	TotalAmount         string                 `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	DiscountAmount      string                 `protobuf:"bytes,6,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	PayAmount           string                 `protobuf:"bytes,7,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
 	AppliedUserCouponId int64                  `protobuf:"varint,8,opt,name=applied_user_coupon_id,json=appliedUserCouponId,proto3" json:"applied_user_coupon_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -610,25 +610,25 @@ func (x *GetCartResponse) GetItems() []*CartItem {
 	return nil
 }
 
-func (x *GetCartResponse) GetTotalAmount() int64 {
+func (x *GetCartResponse) GetTotalAmount() string {
 	if x != nil {
 		return x.TotalAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetCartResponse) GetDiscountAmount() int64 {
+func (x *GetCartResponse) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *GetCartResponse) GetPayAmount() int64 {
+func (x *GetCartResponse) GetPayAmount() string {
 	if x != nil {
 		return x.PayAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *GetCartResponse) GetAppliedUserCouponId() int64 {
@@ -918,7 +918,7 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\x06sku_id\x18\x04 \x01(\x03R\x05skuId\x12\x19\n" +
 	"\bsku_name\x18\x05 \x01(\tR\askuName\x12\x1b\n" +
 	"\tsku_image\x18\x06 \x01(\tR\bskuImage\x12\x14\n" +
-	"\x05price\x18\a \x01(\x03R\x05price\x12\x1a\n" +
+	"\x05price\x18\a \x01(\tR\x05price\x12\x1a\n" +
 	"\bquantity\x18\b \x01(\x05R\bquantity\x12\x1f\n" +
 	"\vcreate_time\x18\t \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
@@ -932,7 +932,7 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\x06sku_id\x18\x02 \x01(\x03R\x05skuId\x12\x19\n" +
 	"\bsku_name\x18\x03 \x01(\tR\askuName\x12\x1b\n" +
 	"\tsku_image\x18\x04 \x01(\tR\bskuImage\x12\x14\n" +
-	"\x05price\x18\x05 \x01(\x03R\x05price\x12\x1a\n" +
+	"\x05price\x18\x05 \x01(\tR\x05price\x12\x1a\n" +
 	"\bquantity\x18\x06 \x01(\x05R\bquantity\"E\n" +
 	"\x11RemoveItemRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x17\n" +
@@ -952,10 +952,10 @@ const file_api_zebra_cart_cart_cart_proto_rawDesc = "" +
 	"\x04cart\x18\x03 \x01(\v2\n" +
 	".cart.CartR\x04cart\x12$\n" +
 	"\x05items\x18\x04 \x03(\v2\x0e.cart.CartItemR\x05items\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\x03R\vtotalAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\x06 \x01(\x03R\x0ediscountAmount\x12\x1d\n" +
+	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x06 \x01(\tR\x0ediscountAmount\x12\x1d\n" +
 	"\n" +
-	"pay_amount\x18\a \x01(\x03R\tpayAmount\x123\n" +
+	"pay_amount\x18\a \x01(\tR\tpayAmount\x123\n" +
 	"\x16applied_user_coupon_id\x18\b \x01(\x03R\x13appliedUserCouponId\"[\n" +
 	"\x0fListCartRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +

@@ -55,9 +55,35 @@ const (
 	// PaymentServiceListPaymentLogsProcedure is the fully-qualified name of the PaymentService's ListPaymentLogs RPC.
 	PaymentServiceListPaymentLogsProcedure = "/payment.PaymentService/ListPaymentLogs"
 )
+const (
+	// WalletServiceName is the fully-qualified name of the WalletService service.
+	WalletServiceName = "payment.WalletService"
+)
+
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// WalletServiceTopUpProcedure is the fully-qualified name of the WalletService's TopUp RPC.
+	WalletServiceTopUpProcedure = "/payment.WalletService/TopUp"
+	// WalletServiceGetWalletProcedure is the fully-qualified name of the WalletService's GetWallet RPC.
+	WalletServiceGetWalletProcedure = "/payment.WalletService/GetWallet"
+	// WalletServiceListWalletsProcedure is the fully-qualified name of the WalletService's ListWallets RPC.
+	WalletServiceListWalletsProcedure = "/payment.WalletService/ListWallets"
+	// WalletServiceListBalanceJournalsProcedure is the fully-qualified name of the WalletService's ListBalanceJournals RPC.
+	WalletServiceListBalanceJournalsProcedure = "/payment.WalletService/ListBalanceJournals"
+	// WalletServiceDeductProcedure is the fully-qualified name of the WalletService's Deduct RPC.
+	WalletServiceDeductProcedure = "/payment.WalletService/Deduct"
+)
 
 var (
 	_ PaymentService = (*PaymentServiceImpl)(nil)
+
+	_ WalletService = (*WalletServiceImpl)(nil)
 )
 
 // PaymentService is a client for the payment.PaymentService service.
@@ -71,6 +97,15 @@ type PaymentService interface {
 	ListRefunds(ctx context.Context, req *ListRefundRequest, opts ...client.CallOption) (*ListRefundResponse, error)
 	LogPayment(ctx context.Context, req *LogPaymentRequest, opts ...client.CallOption) (*LogPaymentResponse, error)
 	ListPaymentLogs(ctx context.Context, req *ListPaymentLogRequest, opts ...client.CallOption) (*ListPaymentLogResponse, error)
+}
+
+// WalletService is a client for the payment.WalletService service.
+type WalletService interface {
+	TopUp(ctx context.Context, req *TopUpRequest, opts ...client.CallOption) (*TopUpResponse, error)
+	GetWallet(ctx context.Context, req *GetWalletRequest, opts ...client.CallOption) (*GetWalletResponse, error)
+	ListWallets(ctx context.Context, req *ListWalletRequest, opts ...client.CallOption) (*ListWalletResponse, error)
+	ListBalanceJournals(ctx context.Context, req *ListBalanceJournalRequest, opts ...client.CallOption) (*ListBalanceJournalResponse, error)
+	Deduct(ctx context.Context, req *DeductBalanceRequest, opts ...client.CallOption) (*DeductBalanceResponse, error)
 }
 
 // NewPaymentService constructs a client for the payment.PaymentService service.
@@ -165,11 +200,79 @@ func (c *PaymentServiceImpl) ListPaymentLogs(ctx context.Context, req *ListPayme
 	return resp, nil
 }
 
+// NewWalletService constructs a client for the payment.WalletService service.
+func NewWalletService(cli *client.Client, opts ...client.ReferenceOption) (WalletService, error) {
+	conn, err := cli.DialWithInfo("payment.WalletService", &WalletService_ClientInfo, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &WalletServiceImpl{
+		conn: conn,
+	}, nil
+}
+
+func SetConsumerWalletService(srv common.RPCService) {
+	dubbo.SetConsumerServiceWithInfo(srv, &WalletService_ClientInfo)
+}
+
+// WalletServiceImpl implements WalletService.
+type WalletServiceImpl struct {
+	conn *client.Connection
+}
+
+func (c *WalletServiceImpl) TopUp(ctx context.Context, req *TopUpRequest, opts ...client.CallOption) (*TopUpResponse, error) {
+	resp := new(TopUpResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "TopUp", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WalletServiceImpl) GetWallet(ctx context.Context, req *GetWalletRequest, opts ...client.CallOption) (*GetWalletResponse, error) {
+	resp := new(GetWalletResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetWallet", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WalletServiceImpl) ListWallets(ctx context.Context, req *ListWalletRequest, opts ...client.CallOption) (*ListWalletResponse, error) {
+	resp := new(ListWalletResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListWallets", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WalletServiceImpl) ListBalanceJournals(ctx context.Context, req *ListBalanceJournalRequest, opts ...client.CallOption) (*ListBalanceJournalResponse, error) {
+	resp := new(ListBalanceJournalResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListBalanceJournals", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *WalletServiceImpl) Deduct(ctx context.Context, req *DeductBalanceRequest, opts ...client.CallOption) (*DeductBalanceResponse, error) {
+	resp := new(DeductBalanceResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Deduct", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var PaymentService_ClientInfo = client.ClientInfo{
 	InterfaceName: "payment.PaymentService",
 	MethodNames:   []string{"CreatePayment", "PayCallback", "CreateRefund", "GetPayment", "ListPayments", "GetRefund", "ListRefunds", "LogPayment", "ListPaymentLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*PaymentServiceImpl)
+		dubboCli.conn = conn
+	},
+}
+var WalletService_ClientInfo = client.ClientInfo{
+	InterfaceName: "payment.WalletService",
+	MethodNames:   []string{"TopUp", "GetWallet", "ListWallets", "ListBalanceJournals", "Deduct"},
+	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
+		dubboCli := dubboCliRaw.(*WalletServiceImpl)
 		dubboCli.conn = conn
 	},
 }
@@ -193,6 +296,23 @@ func RegisterPaymentServiceHandler(srv *server.Server, hdlr PaymentServiceHandle
 
 func SetProviderPaymentService(srv common.RPCService) {
 	dubbo.SetProviderServiceWithInfo(srv, &PaymentService_ServiceInfo)
+}
+
+// WalletServiceHandler is an implementation of the payment.WalletService service.
+type WalletServiceHandler interface {
+	TopUp(context.Context, *TopUpRequest) (*TopUpResponse, error)
+	GetWallet(context.Context, *GetWalletRequest) (*GetWalletResponse, error)
+	ListWallets(context.Context, *ListWalletRequest) (*ListWalletResponse, error)
+	ListBalanceJournals(context.Context, *ListBalanceJournalRequest) (*ListBalanceJournalResponse, error)
+	Deduct(context.Context, *DeductBalanceRequest) (*DeductBalanceResponse, error)
+}
+
+func RegisterWalletServiceHandler(srv *server.Server, hdlr WalletServiceHandler, opts ...server.ServiceOption) error {
+	return srv.Register(hdlr, &WalletService_ServiceInfo, opts...)
+}
+
+func SetProviderWalletService(srv common.RPCService) {
+	dubbo.SetProviderServiceWithInfo(srv, &WalletService_ServiceInfo)
 }
 
 var PaymentService_ServiceInfo = server.ServiceInfo{
@@ -328,6 +448,87 @@ var PaymentService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListPaymentLogRequest)
 				res, err := handler.(PaymentServiceHandler).ListPaymentLogs(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+	},
+}
+var WalletService_ServiceInfo = server.ServiceInfo{
+	InterfaceName: "payment.WalletService",
+	ServiceType:   (*WalletServiceHandler)(nil),
+	Methods: []server.MethodInfo{
+		{
+			Name: "TopUp",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(TopUpRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*TopUpRequest)
+				res, err := handler.(WalletServiceHandler).TopUp(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "GetWallet",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(GetWalletRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*GetWalletRequest)
+				res, err := handler.(WalletServiceHandler).GetWallet(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListWallets",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListWalletRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListWalletRequest)
+				res, err := handler.(WalletServiceHandler).ListWallets(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ListBalanceJournals",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ListBalanceJournalRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ListBalanceJournalRequest)
+				res, err := handler.(WalletServiceHandler).ListBalanceJournals(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "Deduct",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(DeductBalanceRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*DeductBalanceRequest)
+				res, err := handler.(WalletServiceHandler).Deduct(ctx, req)
 				if err != nil {
 					return nil, err
 				}

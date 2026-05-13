@@ -34,7 +34,7 @@ message DetailSku {
   int64 id = 1;
   string name = 2;
   repeated int64 spec_value_ids = 3;
-  int64 price = 4;
+  string price = 4; // 价格（元）
   int32 stock_num = 5;
   string image_url = 6;
   bool in_stock = 7;
@@ -47,8 +47,8 @@ message GetDetailResponse {
   repeated SpecGroup spec_groups = 4;
   repeated DetailSku skus = 5;
   int64 default_sku_id = 6;
-  int64 min_price = 7;
-  int64 max_price = 8;
+  string min_price = 7; // 最低价（元）
+  string max_price = 8; // 最高价（元）
   bool has_stock = 9;
 }
 

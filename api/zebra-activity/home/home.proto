@@ -15,8 +15,8 @@ message HomeCoupon {
   int64 id = 1;
   string name = 2;
   int32 type = 3;
-  int64 min_amount = 4;
-  int64 discount_amount = 5;
+  string min_amount = 4; // 最小使用金额（元）
+  string discount_amount = 5; // 优惠金额（元）
   int32 discount_rate = 6;
   int32 valid_days = 7;
   int32 total_quantity = 8;

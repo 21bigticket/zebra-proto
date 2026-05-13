@@ -74,7 +74,7 @@ message ReserveCouponRequest {
   int64 user_coupon_id = 1;
   int64 user_id = 2;
   string order_no = 3;
-  int64 order_amount = 4;
+  string order_amount = 4; // 订单金额（元）
 }
 
 // 预占优惠券响应
@@ -107,7 +107,7 @@ message UseCouponRequest {
   int64  user_coupon_id = 1;
   int64  user_id        = 2;
   string order_no       = 3;
-  int64  order_amount   = 4;
+  string  order_amount   = 4; // 订单金额（元）
 }
 
 // 使用优惠券响应
@@ -150,7 +150,7 @@ message ListUserCouponResponse {
 // 查询可用优惠券请求（下单时）
 message GetAvailableCouponsRequest {
   int64 user_id     = 1;
-  int64 order_amount = 2; // 订单金额（分）
+  string order_amount = 2; // 订单金额（元）
 }
 
 // 查询可用优惠券响应
@@ -164,15 +164,15 @@ message GetAvailableCouponsResponse {
 message CalculateDiscountRequest {
   int64 user_coupon_id = 1;
   int64 user_id = 2;
-  int64 order_amount = 3;
+  string order_amount = 3; // 订单金额（元）
 }
 
 // 计算优惠金额响应
 message CalculateDiscountResponse {
   google.protobuf.Int32Value code = 1;
   string msg = 2;
-  int64 discount_amount = 3;
-  int64 final_amount = 4;
+  string discount_amount = 3; // 优惠金额（元）
+  string final_amount = 4; // 最终金额（元）
   string message = 5;
 }
 

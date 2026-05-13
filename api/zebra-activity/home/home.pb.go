@@ -79,8 +79,8 @@ type HomeCoupon struct {
 	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type           int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
-	MinAmount      int64                  `protobuf:"varint,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	DiscountAmount int64                  `protobuf:"varint,5,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	MinAmount      string                 `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`                // 最小使用金额（元）
+	DiscountAmount string                 `protobuf:"bytes,5,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"` // 优惠金额（元）
 	DiscountRate   int32                  `protobuf:"varint,6,opt,name=discount_rate,json=discountRate,proto3" json:"discount_rate,omitempty"`
 	ValidDays      int32                  `protobuf:"varint,7,opt,name=valid_days,json=validDays,proto3" json:"valid_days,omitempty"`
 	TotalQuantity  int32                  `protobuf:"varint,8,opt,name=total_quantity,json=totalQuantity,proto3" json:"total_quantity,omitempty"`
@@ -140,18 +140,18 @@ func (x *HomeCoupon) GetType() int32 {
 	return 0
 }
 
-func (x *HomeCoupon) GetMinAmount() int64 {
+func (x *HomeCoupon) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *HomeCoupon) GetDiscountAmount() int64 {
+func (x *HomeCoupon) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *HomeCoupon) GetDiscountRate() int32 {
@@ -341,8 +341,8 @@ const file_api_zebra_activity_home_home_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x04 \x01(\x03R\tminAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\x05 \x01(\x03R\x0ediscountAmount\x12#\n" +
+	"min_amount\x18\x04 \x01(\tR\tminAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\x05 \x01(\tR\x0ediscountAmount\x12#\n" +
 	"\rdiscount_rate\x18\x06 \x01(\x05R\fdiscountRate\x12\x1d\n" +
 	"\n" +
 	"valid_days\x18\a \x01(\x05R\tvalidDays\x12%\n" +

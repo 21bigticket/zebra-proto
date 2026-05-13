@@ -28,8 +28,8 @@ message Coupon {
   int64  id              = 1;
   string name            = 2;
   int32  type            = 3; // 1=满减券, 2=折扣券, 3=立减券
-  int64  min_amount      = 4; // 最小使用金额（分）
-  int64  discount_amount = 5; // 优惠金额（分）
+  string min_amount      = 4; // 最小使用金额（元）
+  string discount_amount = 5; // 优惠金额（元）
   int32  discount_rate   = 6; // 折扣率（如95表示95折）
   int32  total_quantity  = 7; // 总数量
   int32  issued_quantity = 8; // 已发放数量
@@ -47,8 +47,8 @@ message Coupon {
 message CreateCouponRequest {
   string name            = 1;
   int32  type            = 2;
-  int64  min_amount      = 3;
-  int64  discount_amount = 4;
+  string min_amount      = 3;
+  string discount_amount = 4;
   int32  discount_rate   = 5;
   int32  total_quantity  = 6;
   int32  valid_days      = 7;
@@ -60,8 +60,8 @@ message CreateCouponRequest {
 message UpdateCouponRequest {
   int64  id              = 1;
   string name            = 2;
-  int64  min_amount      = 3;
-  int64  discount_amount = 4;
+  string min_amount      = 3;
+  string discount_amount = 4;
   int32  discount_rate   = 5;
   int32  total_quantity  = 6;
   int32  valid_days      = 7;

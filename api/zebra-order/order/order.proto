@@ -29,10 +29,10 @@ message Order {
   string order_no        = 2;
   int64  user_id          = 3;
   google.protobuf.Int32Value order_status = 4; // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
-  int64  total_amount     = 5;  // 订单总金额（分）
-  int64  pay_amount       = 6;  // 实付金额（分）
-  int64  discount_amount  = 7;  // 优惠金额（分）
-  int64  freight_amount   = 8;  // 运费（分）
+  string total_amount     = 5;  // 订单总金额（元），如 "199.00"
+  string pay_amount       = 6;  // 实付金额（元）
+  string discount_amount  = 7;  // 优惠金额（元）
+  string freight_amount   = 8;  // 运费（元）
   string receiver_name    = 9;
   string receiver_phone   = 10;
   string receiver_address = 11;
@@ -53,9 +53,9 @@ message OrderItem {
   int64  sku_id         = 4;
   string sku_name      = 5;
   string sku_image     = 6;
-  int64  price          = 7;  // 商品单价（分）
+  string price          = 7;  // 商品单价（元）
   int32  quantity       = 8;  // 数量
-  int64  total_amount   = 9;  // 小计（分）
+  string total_amount   = 9;  // 小计（元）
   int64  create_time    = 10;
   int64  update_time    = 11;
   int32  is_deleted     = 12;

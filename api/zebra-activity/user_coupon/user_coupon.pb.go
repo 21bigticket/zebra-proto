@@ -439,7 +439,7 @@ type ReserveCouponRequest struct {
 	UserCouponId  int64                  `protobuf:"varint,1,opt,name=user_coupon_id,json=userCouponId,proto3" json:"user_coupon_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
-	OrderAmount   int64                  `protobuf:"varint,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	OrderAmount   string                 `protobuf:"bytes,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"` // 订单金额（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -495,11 +495,11 @@ func (x *ReserveCouponRequest) GetOrderNo() string {
 	return ""
 }
 
-func (x *ReserveCouponRequest) GetOrderAmount() int64 {
+func (x *ReserveCouponRequest) GetOrderAmount() string {
 	if x != nil {
 		return x.OrderAmount
 	}
-	return 0
+	return ""
 }
 
 // 预占优惠券响应
@@ -723,7 +723,7 @@ type UseCouponRequest struct {
 	UserCouponId  int64                  `protobuf:"varint,1,opt,name=user_coupon_id,json=userCouponId,proto3" json:"user_coupon_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
-	OrderAmount   int64                  `protobuf:"varint,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	OrderAmount   string                 `protobuf:"bytes,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"` // 订单金额（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -779,11 +779,11 @@ func (x *UseCouponRequest) GetOrderNo() string {
 	return ""
 }
 
-func (x *UseCouponRequest) GetOrderAmount() int64 {
+func (x *UseCouponRequest) GetOrderAmount() string {
 	if x != nil {
 		return x.OrderAmount
 	}
-	return 0
+	return ""
 }
 
 // 使用优惠券响应
@@ -1111,7 +1111,7 @@ func (x *ListUserCouponResponse) GetTotal() int32 {
 type GetAvailableCouponsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrderAmount   int64                  `protobuf:"varint,2,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"` // 订单金额（分）
+	OrderAmount   string                 `protobuf:"bytes,2,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"` // 订单金额（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1153,11 +1153,11 @@ func (x *GetAvailableCouponsRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *GetAvailableCouponsRequest) GetOrderAmount() int64 {
+func (x *GetAvailableCouponsRequest) GetOrderAmount() string {
 	if x != nil {
 		return x.OrderAmount
 	}
-	return 0
+	return ""
 }
 
 // 查询可用优惠券响应
@@ -1226,7 +1226,7 @@ type CalculateDiscountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserCouponId  int64                  `protobuf:"varint,1,opt,name=user_coupon_id,json=userCouponId,proto3" json:"user_coupon_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrderAmount   int64                  `protobuf:"varint,3,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	OrderAmount   string                 `protobuf:"bytes,3,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"` // 订单金额（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1275,11 +1275,11 @@ func (x *CalculateDiscountRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *CalculateDiscountRequest) GetOrderAmount() int64 {
+func (x *CalculateDiscountRequest) GetOrderAmount() string {
 	if x != nil {
 		return x.OrderAmount
 	}
-	return 0
+	return ""
 }
 
 // 计算优惠金额响应
@@ -1287,8 +1287,8 @@ type CalculateDiscountResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Code           *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Msg            string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
-	DiscountAmount int64                  `protobuf:"varint,3,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
-	FinalAmount    int64                  `protobuf:"varint,4,opt,name=final_amount,json=finalAmount,proto3" json:"final_amount,omitempty"`
+	DiscountAmount string                 `protobuf:"bytes,3,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"` // 优惠金额（元）
+	FinalAmount    string                 `protobuf:"bytes,4,opt,name=final_amount,json=finalAmount,proto3" json:"final_amount,omitempty"`          // 最终金额（元）
 	Message        string                 `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1338,18 +1338,18 @@ func (x *CalculateDiscountResponse) GetMsg() string {
 	return ""
 }
 
-func (x *CalculateDiscountResponse) GetDiscountAmount() int64 {
+func (x *CalculateDiscountResponse) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *CalculateDiscountResponse) GetFinalAmount() int64 {
+func (x *CalculateDiscountResponse) GetFinalAmount() string {
 	if x != nil {
 		return x.FinalAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *CalculateDiscountResponse) GetMessage() string {
@@ -1700,7 +1700,7 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
 	"\border_no\x18\x03 \x01(\tR\aorderNo\x12!\n" +
-	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"\xc8\x01\n" +
+	"\forder_amount\x18\x04 \x01(\tR\vorderAmount\"\xc8\x01\n" +
 	"\x15ReserveCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
@@ -1723,7 +1723,7 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x19\n" +
 	"\border_no\x18\x03 \x01(\tR\aorderNo\x12!\n" +
-	"\forder_amount\x18\x04 \x01(\x03R\vorderAmount\"\xc4\x01\n" +
+	"\forder_amount\x18\x04 \x01(\tR\vorderAmount\"\xc4\x01\n" +
 	"\x11UseCouponResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +
@@ -1750,7 +1750,7 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"X\n" +
 	"\x1aGetAvailableCouponsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
-	"\forder_amount\x18\x02 \x01(\x03R\vorderAmount\"\x9c\x01\n" +
+	"\forder_amount\x18\x02 \x01(\tR\vorderAmount\"\x9c\x01\n" +
 	"\x1bGetAvailableCouponsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12:\n" +
@@ -1758,12 +1758,12 @@ const file_api_zebra_activity_user_coupon_user_coupon_proto_rawDesc = "" +
 	"\x18CalculateDiscountRequest\x12$\n" +
 	"\x0euser_coupon_id\x18\x01 \x01(\x03R\fuserCouponId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12!\n" +
-	"\forder_amount\x18\x03 \x01(\x03R\vorderAmount\"\xc4\x01\n" +
+	"\forder_amount\x18\x03 \x01(\tR\vorderAmount\"\xc4\x01\n" +
 	"\x19CalculateDiscountResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
-	"\x0fdiscount_amount\x18\x03 \x01(\x03R\x0ediscountAmount\x12!\n" +
-	"\ffinal_amount\x18\x04 \x01(\x03R\vfinalAmount\x12\x18\n" +
+	"\x0fdiscount_amount\x18\x03 \x01(\tR\x0ediscountAmount\x12!\n" +
+	"\ffinal_amount\x18\x04 \x01(\tR\vfinalAmount\x12\x18\n" +
 	"\amessage\x18\x05 \x01(\tR\amessage\"0\n" +
 	"\x17GetUserCouponLogRequest\x12\x15\n" +
 	"\x06log_id\x18\x01 \x01(\x03R\x05logId\"\xa1\x01\n" +

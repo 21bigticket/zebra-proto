@@ -29,7 +29,7 @@ message GoodsSku {
   int64  goods_id    = 2;
   string sku_code    = 3; // SKU编码
   string name        = 4; // SKU名称，如"红色-L"
-  int64  price       = 5; // 价格(分)
+  string price       = 5; // 价格（元），如 "99.90"
   string image_url   = 6;
   google.protobuf.Int32Value sort_order = 7;
   google.protobuf.Int32Value status = 8; // 0=禁用, 1=启用
@@ -45,7 +45,7 @@ message CreateSkuRequest {
   int64  goods_id   = 1;
   string sku_code   = 2;
   string name       = 3;
-  int64  price      = 4;
+  string price      = 4;  // 价格（元）
   string image_url  = 5;
   google.protobuf.Int32Value sort_order = 6;
   repeated int64 spec_ids = 9; // 关联的规格ID列表
@@ -55,7 +55,7 @@ message CreateSkuRequest {
 message UpdateSkuRequest {
   int64  id         = 1;
   string name       = 2;
-  int64  price      = 3;
+  string price      = 3;  // 价格（元）
   string image_url  = 4;
   google.protobuf.Int32Value sort_order = 5;
   google.protobuf.Int32Value status = 6;
@@ -68,7 +68,7 @@ message BatchCreateSkuItem {
   int64  goods_id   = 1;
   string sku_code   = 2;
   string name       = 3;
-  int64  price      = 4;
+  string price      = 4;  // 价格（元）
   string image_url  = 5;
   google.protobuf.Int32Value sort_order = 6;
   repeated int64 spec_ids = 9; // 关联的规格ID列表
@@ -80,7 +80,7 @@ message BatchCreateSkuRequest {
 
 message BatchUpdateSkuItem {
   int64  id         = 1;
-  int64  price      = 2;
+  string price      = 2;  // 价格（元）
   google.protobuf.Int32Value sort_order = 4;
   google.protobuf.Int32Value status = 5;
 }

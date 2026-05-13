@@ -16,7 +16,7 @@ message SkuActivityPrice {
   int64 sku_id = 1;
   int64 activity_id = 2;
   string activity_type = 3;
-  int64 activity_price = 4;
+  string activity_price = 4; // 活动价（元）
   int32 stock_limit = 5;
   int32 sold_quantity = 6;
   int32 limit_per_user = 7;

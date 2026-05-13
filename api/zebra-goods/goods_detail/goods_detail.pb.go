@@ -267,7 +267,7 @@ type DetailSku struct {
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	SpecValueIds  []int64                `protobuf:"varint,3,rep,packed,name=spec_value_ids,json=specValueIds,proto3" json:"spec_value_ids,omitempty"`
-	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"` // 价格（元）
 	StockNum      int32                  `protobuf:"varint,5,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
 	ImageUrl      string                 `protobuf:"bytes,6,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	InStock       bool                   `protobuf:"varint,7,opt,name=in_stock,json=inStock,proto3" json:"in_stock,omitempty"`
@@ -326,11 +326,11 @@ func (x *DetailSku) GetSpecValueIds() []int64 {
 	return nil
 }
 
-func (x *DetailSku) GetPrice() int64 {
+func (x *DetailSku) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *DetailSku) GetStockNum() int32 {
@@ -362,8 +362,8 @@ type GetDetailResponse struct {
 	SpecGroups    []*SpecGroup           `protobuf:"bytes,4,rep,name=spec_groups,json=specGroups,proto3" json:"spec_groups,omitempty"`
 	Skus          []*DetailSku           `protobuf:"bytes,5,rep,name=skus,proto3" json:"skus,omitempty"`
 	DefaultSkuId  int64                  `protobuf:"varint,6,opt,name=default_sku_id,json=defaultSkuId,proto3" json:"default_sku_id,omitempty"`
-	MinPrice      int64                  `protobuf:"varint,7,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"`
-	MaxPrice      int64                  `protobuf:"varint,8,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"`
+	MinPrice      string                 `protobuf:"bytes,7,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"` // 最低价（元）
+	MaxPrice      string                 `protobuf:"bytes,8,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"` // 最高价（元）
 	HasStock      bool                   `protobuf:"varint,9,opt,name=has_stock,json=hasStock,proto3" json:"has_stock,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -441,18 +441,18 @@ func (x *GetDetailResponse) GetDefaultSkuId() int64 {
 	return 0
 }
 
-func (x *GetDetailResponse) GetMinPrice() int64 {
+func (x *GetDetailResponse) GetMinPrice() string {
 	if x != nil {
 		return x.MinPrice
 	}
-	return 0
+	return ""
 }
 
-func (x *GetDetailResponse) GetMaxPrice() int64 {
+func (x *GetDetailResponse) GetMaxPrice() string {
 	if x != nil {
 		return x.MaxPrice
 	}
-	return 0
+	return ""
 }
 
 func (x *GetDetailResponse) GetHasStock() bool {
@@ -488,7 +488,7 @@ const file_api_zebra_goods_goods_detail_goods_detail_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12$\n" +
 	"\x0espec_value_ids\x18\x03 \x03(\x03R\fspecValueIds\x12\x14\n" +
-	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
+	"\x05price\x18\x04 \x01(\tR\x05price\x12\x1b\n" +
 	"\tstock_num\x18\x05 \x01(\x05R\bstockNum\x12\x1b\n" +
 	"\timage_url\x18\x06 \x01(\tR\bimageUrl\x12\x19\n" +
 	"\bin_stock\x18\a \x01(\bR\ainStock\"\xe9\x02\n" +
@@ -500,8 +500,8 @@ const file_api_zebra_goods_goods_detail_goods_detail_proto_rawDesc = "" +
 	"specGroups\x12+\n" +
 	"\x04skus\x18\x05 \x03(\v2\x17.goods_detail.DetailSkuR\x04skus\x12$\n" +
 	"\x0edefault_sku_id\x18\x06 \x01(\x03R\fdefaultSkuId\x12\x1b\n" +
-	"\tmin_price\x18\a \x01(\x03R\bminPrice\x12\x1b\n" +
-	"\tmax_price\x18\b \x01(\x03R\bmaxPrice\x12\x1b\n" +
+	"\tmin_price\x18\a \x01(\tR\bminPrice\x12\x1b\n" +
+	"\tmax_price\x18\b \x01(\tR\bmaxPrice\x12\x1b\n" +
 	"\thas_stock\x18\t \x01(\bR\bhasStock2b\n" +
 	"\x12GoodsDetailService\x12L\n" +
 	"\tGetDetail\x12\x1e.goods_detail.GetDetailRequest\x1a\x1f.goods_detail.GetDetailResponseB-Z+./api/zebra-goods/goods_detail;goods_detailb\x06proto3"

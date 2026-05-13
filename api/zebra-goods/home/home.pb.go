@@ -216,8 +216,8 @@ type HomeGoods struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	MainImage     string                 `protobuf:"bytes,3,opt,name=main_image,json=mainImage,proto3" json:"main_image,omitempty"`
 	SubTitle      string                 `protobuf:"bytes,4,opt,name=sub_title,json=subTitle,proto3" json:"sub_title,omitempty"`
-	RetailPrice   int64                  `protobuf:"varint,5,opt,name=retail_price,json=retailPrice,proto3" json:"retail_price,omitempty"`
-	CounterPrice  int64                  `protobuf:"varint,6,opt,name=counter_price,json=counterPrice,proto3" json:"counter_price,omitempty"`
+	RetailPrice   string                 `protobuf:"bytes,5,opt,name=retail_price,json=retailPrice,proto3" json:"retail_price,omitempty"`    // 零售价（元）
+	CounterPrice  string                 `protobuf:"bytes,6,opt,name=counter_price,json=counterPrice,proto3" json:"counter_price,omitempty"` // 最高价（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -280,18 +280,18 @@ func (x *HomeGoods) GetSubTitle() string {
 	return ""
 }
 
-func (x *HomeGoods) GetRetailPrice() int64 {
+func (x *HomeGoods) GetRetailPrice() string {
 	if x != nil {
 		return x.RetailPrice
 	}
-	return 0
+	return ""
 }
 
-func (x *HomeGoods) GetCounterPrice() int64 {
+func (x *HomeGoods) GetCounterPrice() string {
 	if x != nil {
 		return x.CounterPrice
 	}
-	return 0
+	return ""
 }
 
 type GetGoodsHomeResponse struct {
@@ -397,8 +397,8 @@ const file_api_zebra_goods_home_home_proto_rawDesc = "" +
 	"\n" +
 	"main_image\x18\x03 \x01(\tR\tmainImage\x12\x1b\n" +
 	"\tsub_title\x18\x04 \x01(\tR\bsubTitle\x12!\n" +
-	"\fretail_price\x18\x05 \x01(\x03R\vretailPrice\x12#\n" +
-	"\rcounter_price\x18\x06 \x01(\x03R\fcounterPrice\"\xef\x01\n" +
+	"\fretail_price\x18\x05 \x01(\tR\vretailPrice\x12#\n" +
+	"\rcounter_price\x18\x06 \x01(\tR\fcounterPrice\"\xef\x01\n" +
 	"\x14GetGoodsHomeResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x128\n" +

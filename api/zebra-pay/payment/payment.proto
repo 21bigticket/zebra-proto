@@ -29,7 +29,7 @@ message Payment {
   string pay_no          = 2;
   string order_no        = 3;
   int64  user_id          = 4;
-  int64  pay_amount      = 5;  // 支付金额（分）
+  string pay_amount      = 5;  // 支付金额（元），如 "100.50"
   int32  pay_type        = 6;  // 1=支付宝, 2=微信, 3=余额
   google.protobuf.Int32Value pay_status = 7; // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
   string third_party_no  = 8;  // 第三方支付流水号
@@ -47,7 +47,7 @@ message Refund {
   string refund_no       = 2;
   string pay_no          = 3;
   string order_no        = 4;
-  int64  refund_amount   = 5;  // 退款金额（分）
+  string refund_amount   = 5;  // 退款金额（元），如 "50.00"
   google.protobuf.Int32Value refund_status = 6; // 0=退款中, 1=退款成功, 2=退款失败
   string third_party_no  = 7;  // 第三方退款流水号
   int64  refund_time     = 8;
@@ -62,7 +62,7 @@ message RefundItem {
   int64  item_id         = 1;
   int64  refund_id       = 2;
   string sales_no       = 3;  // 售后单号
-  int64  refund_amount   = 4;  // 退款金额（分）
+  string refund_amount   = 4;  // 退款金额（元）
   int64  create_time     = 5;
   int64  update_time     = 6;
   int32  is_deleted      = 7;
@@ -72,7 +72,7 @@ message RefundItem {
 message CreatePaymentRequest {
   string order_no    = 1;
   int64  user_id      = 2;
-  int64  pay_amount   = 3;
+  string pay_amount   = 3;  // 支付金额（元）
   int32  pay_type     = 4;
   string notify_url  = 5;
   string return_url  = 6;
@@ -98,7 +98,7 @@ message PayCallbackRequest {
 message CreateRefundRequest {
   string       pay_no       = 1;
   string       sales_no     = 2;  // 售后单号
-  int64        refund_amount = 3;
+  string       refund_amount = 3;  // 退款金额（元）
   string       refund_reason = 4;
   repeated RefundItemReq items = 5;
 }
@@ -106,7 +106,7 @@ message CreateRefundRequest {
 // 退款明细请求
 message RefundItemReq {
   string sales_no     = 1;
-  int64  refund_amount = 2;
+  string refund_amount = 2;  // 退款金额（元）
 }
 
 // 创建退款响应
@@ -257,4 +257,113 @@ service PaymentService {
   rpc ListRefunds(ListRefundRequest) returns (ListRefundResponse);
   rpc LogPayment(LogPaymentRequest) returns (LogPaymentResponse);
   rpc ListPaymentLogs(ListPaymentLogRequest) returns (ListPaymentLogResponse);
+}
+
+// ==================== 钱包服务 ====================
+
+// 余额账户
+message Wallet {
+  int64  id          = 1;
+  int64  user_id     = 2;
+  string balance     = 3;  // 可用余额（元），如 "100.50"
+  string frozen      = 4;  // 冻结金额（元），如 "0.00"
+  int64  create_time = 5;
+  int64  update_time = 6;
+}
+
+// 余额流水
+message BalanceJournal {
+  int64  id             = 1;
+  string journal_no     = 2;
+  int64  user_id        = 3;
+  int32  type           = 4;  // 1=充值, 2=消费, 3=退款退回, 4=冻结, 5=解冻
+  string amount         = 5;  // 变动金额（元）
+  string balance_before = 6;  // 变动前余额（元）
+  string balance_after  = 7;  // 变动后余额（元）
+  string related_no     = 8;  // 关联单号
+  int64  operator_id    = 9;  // 操作人ID
+  string remark         = 10; // 备注
+  int64  create_time    = 11;
+}
+
+// 充值请求
+message TopUpRequest {
+  int64  user_id     = 1;
+  string amount      = 2;  // 充值金额（元）
+  string remark      = 3;
+  int64  operator_id = 4;
+}
+
+// 充值响应
+message TopUpResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  Wallet wallet = 3;
+}
+
+// 查询钱包请求
+message GetWalletRequest {
+  int64 user_id = 1;
+}
+
+// 查询钱包响应
+message GetWalletResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  Wallet wallet = 3;
+}
+
+// 钱包分页查询请求
+message ListWalletRequest {
+  int32 page       = 1;
+  int32 page_size  = 2;
+  int64 user_id    = 3;  // 0=全部
+}
+
+// 钱包分页查询响应
+message ListWalletResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated Wallet wallets = 3;
+  int32 total = 4;
+}
+
+// 流水分页查询请求
+message ListBalanceJournalRequest {
+  int32  page       = 1;
+  int32  page_size  = 2;
+  int64  user_id    = 3;
+  int32  type       = 4;
+  int64  start_time = 5;
+  int64  end_time   = 6;
+}
+
+// 流水分页查询响应
+message ListBalanceJournalResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated BalanceJournal journals = 3;
+  int32 total = 4;
+}
+
+// 扣款请求
+message DeductBalanceRequest {
+  int64  user_id    = 1;
+  string amount     = 2;
+  string related_no = 3;
+}
+
+// 扣款响应
+message DeductBalanceResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+}
+
+// 钱包服务（5个RPC）
+service WalletService {
+  rpc TopUp(TopUpRequest) returns (TopUpResponse);
+  rpc GetWallet(GetWalletRequest) returns (GetWalletResponse);
+  rpc ListWallets(ListWalletRequest) returns (ListWalletResponse);
+  rpc ListBalanceJournals(ListBalanceJournalRequest) returns (ListBalanceJournalResponse);
+  rpc Deduct(DeductBalanceRequest) returns (DeductBalanceResponse);
 }

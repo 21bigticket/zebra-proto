@@ -958,10 +958,10 @@ type ActivityGoods struct {
 	ActivityGoodsId int64                  `protobuf:"varint,1,opt,name=activity_goods_id,json=activityGoodsId,proto3" json:"activity_goods_id,omitempty"`
 	ActivityId      int64                  `protobuf:"varint,2,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
 	SkuId           int64                  `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	ActivityPrice   int64                  `protobuf:"varint,4,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"` // 活动价（分）
-	StockLimit      int32                  `protobuf:"varint,5,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`          // 活动库存限制
-	SoldQuantity    int32                  `protobuf:"varint,6,opt,name=sold_quantity,json=soldQuantity,proto3" json:"sold_quantity,omitempty"`    // 已售数量
-	LimitPerUser    int32                  `protobuf:"varint,7,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"`  // 每人限购数量
+	ActivityPrice   string                 `protobuf:"bytes,4,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"` // 活动价（元）
+	StockLimit      int32                  `protobuf:"varint,5,opt,name=stock_limit,json=stockLimit,proto3" json:"stock_limit,omitempty"`         // 活动库存限制
+	SoldQuantity    int32                  `protobuf:"varint,6,opt,name=sold_quantity,json=soldQuantity,proto3" json:"sold_quantity,omitempty"`   // 已售数量
+	LimitPerUser    int32                  `protobuf:"varint,7,opt,name=limit_per_user,json=limitPerUser,proto3" json:"limit_per_user,omitempty"` // 每人限购数量
 	SortOrder       *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	CreateTime      int64                  `protobuf:"varint,9,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime      int64                  `protobuf:"varint,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
@@ -1021,11 +1021,11 @@ func (x *ActivityGoods) GetSkuId() int64 {
 	return 0
 }
 
-func (x *ActivityGoods) GetActivityPrice() int64 {
+func (x *ActivityGoods) GetActivityPrice() string {
 	if x != nil {
 		return x.ActivityPrice
 	}
-	return 0
+	return ""
 }
 
 func (x *ActivityGoods) GetStockLimit() int32 {
@@ -1363,7 +1363,7 @@ type ValidateActivityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	ActivityPrice int64                  `protobuf:"varint,3,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"`
+	ActivityPrice string                 `protobuf:"bytes,3,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"` // 活动价（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1412,11 +1412,11 @@ func (x *ValidateActivityResponse) GetMessage() string {
 	return ""
 }
 
-func (x *ValidateActivityResponse) GetActivityPrice() int64 {
+func (x *ValidateActivityResponse) GetActivityPrice() string {
 	if x != nil {
 		return x.ActivityPrice
 	}
-	return 0
+	return ""
 }
 
 // 扣减活动库存请求
@@ -1582,7 +1582,7 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\vactivity_id\x18\x02 \x01(\x03R\n" +
 	"activityId\x12\x15\n" +
 	"\x06sku_id\x18\x03 \x01(\x03R\x05skuId\x12%\n" +
-	"\x0eactivity_price\x18\x04 \x01(\x03R\ractivityPrice\x12\x1f\n" +
+	"\x0eactivity_price\x18\x04 \x01(\tR\ractivityPrice\x12\x1f\n" +
 	"\vstock_limit\x18\x05 \x01(\x05R\n" +
 	"stockLimit\x12#\n" +
 	"\rsold_quantity\x18\x06 \x01(\x05R\fsoldQuantity\x12$\n" +
@@ -1618,7 +1618,7 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x18ValidateActivityResponse\x12\x14\n" +
 	"\x05valid\x18\x01 \x01(\bR\x05valid\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12%\n" +
-	"\x0eactivity_price\x18\x03 \x01(\x03R\ractivityPrice\"\xa4\x01\n" +
+	"\x0eactivity_price\x18\x03 \x01(\tR\ractivityPrice\"\xa4\x01\n" +
 	"\x1aDeductActivityStockRequest\x12\x1f\n" +
 	"\vactivity_id\x18\x01 \x01(\x03R\n" +
 	"activityId\x12\x15\n" +

@@ -44,11 +44,11 @@ type Order struct {
 	OrderId         int64                  `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	OrderNo         string                 `protobuf:"bytes,2,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	UserId          int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrderStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`           // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
-	TotalAmount     int64                  `protobuf:"varint,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`          // 订单总金额（分）
-	PayAmount       int64                  `protobuf:"varint,6,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`                // 实付金额（分）
-	DiscountAmount  int64                  `protobuf:"varint,7,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"` // 优惠金额（分）
-	FreightAmount   int64                  `protobuf:"varint,8,opt,name=freight_amount,json=freightAmount,proto3" json:"freight_amount,omitempty"`    // 运费（分）
+	OrderStatus     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=order_status,json=orderStatus,proto3" json:"order_status,omitempty"`          // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
+	TotalAmount     string                 `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`          // 订单总金额（元），如 "199.00"
+	PayAmount       string                 `protobuf:"bytes,6,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`                // 实付金额（元）
+	DiscountAmount  string                 `protobuf:"bytes,7,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"` // 优惠金额（元）
+	FreightAmount   string                 `protobuf:"bytes,8,opt,name=freight_amount,json=freightAmount,proto3" json:"freight_amount,omitempty"`    // 运费（元）
 	ReceiverName    string                 `protobuf:"bytes,9,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
 	ReceiverPhone   string                 `protobuf:"bytes,10,opt,name=receiver_phone,json=receiverPhone,proto3" json:"receiver_phone,omitempty"`
 	ReceiverAddress string                 `protobuf:"bytes,11,opt,name=receiver_address,json=receiverAddress,proto3" json:"receiver_address,omitempty"`
@@ -121,32 +121,32 @@ func (x *Order) GetOrderStatus() *wrapperspb.Int32Value {
 	return nil
 }
 
-func (x *Order) GetTotalAmount() int64 {
+func (x *Order) GetTotalAmount() string {
 	if x != nil {
 		return x.TotalAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *Order) GetPayAmount() int64 {
+func (x *Order) GetPayAmount() string {
 	if x != nil {
 		return x.PayAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *Order) GetDiscountAmount() int64 {
+func (x *Order) GetDiscountAmount() string {
 	if x != nil {
 		return x.DiscountAmount
 	}
-	return 0
+	return ""
 }
 
-func (x *Order) GetFreightAmount() int64 {
+func (x *Order) GetFreightAmount() string {
 	if x != nil {
 		return x.FreightAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *Order) GetReceiverName() string {
@@ -228,9 +228,9 @@ type OrderItem struct {
 	SkuId         int64                  `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	SkuName       string                 `protobuf:"bytes,5,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`
 	SkuImage      string                 `protobuf:"bytes,6,opt,name=sku_image,json=skuImage,proto3" json:"sku_image,omitempty"`
-	Price         int64                  `protobuf:"varint,7,opt,name=price,proto3" json:"price,omitempty"`                                // 商品单价（分）
-	Quantity      int32                  `protobuf:"varint,8,opt,name=quantity,proto3" json:"quantity,omitempty"`                          // 数量
-	TotalAmount   int64                  `protobuf:"varint,9,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // 小计（分）
+	Price         string                 `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`                                // 商品单价（元）
+	Quantity      int32                  `protobuf:"varint,8,opt,name=quantity,proto3" json:"quantity,omitempty"`                         // 数量
+	TotalAmount   string                 `protobuf:"bytes,9,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // 小计（元）
 	CreateTime    int64                  `protobuf:"varint,10,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,11,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,12,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -310,11 +310,11 @@ func (x *OrderItem) GetSkuImage() string {
 	return ""
 }
 
-func (x *OrderItem) GetPrice() int64 {
+func (x *OrderItem) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *OrderItem) GetQuantity() int32 {
@@ -324,11 +324,11 @@ func (x *OrderItem) GetQuantity() int32 {
 	return 0
 }
 
-func (x *OrderItem) GetTotalAmount() int64 {
+func (x *OrderItem) GetTotalAmount() string {
 	if x != nil {
 		return x.TotalAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *OrderItem) GetCreateTime() int64 {
@@ -1687,11 +1687,11 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\border_no\x18\x02 \x01(\tR\aorderNo\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12>\n" +
 	"\forder_status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\vorderStatus\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\x03R\vtotalAmount\x12\x1d\n" +
+	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12\x1d\n" +
 	"\n" +
-	"pay_amount\x18\x06 \x01(\x03R\tpayAmount\x12'\n" +
-	"\x0fdiscount_amount\x18\a \x01(\x03R\x0ediscountAmount\x12%\n" +
-	"\x0efreight_amount\x18\b \x01(\x03R\rfreightAmount\x12#\n" +
+	"pay_amount\x18\x06 \x01(\tR\tpayAmount\x12'\n" +
+	"\x0fdiscount_amount\x18\a \x01(\tR\x0ediscountAmount\x12%\n" +
+	"\x0efreight_amount\x18\b \x01(\tR\rfreightAmount\x12#\n" +
 	"\rreceiver_name\x18\t \x01(\tR\freceiverName\x12%\n" +
 	"\x0ereceiver_phone\x18\n" +
 	" \x01(\tR\rreceiverPhone\x12)\n" +
@@ -1715,9 +1715,9 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\x06sku_id\x18\x04 \x01(\x03R\x05skuId\x12\x19\n" +
 	"\bsku_name\x18\x05 \x01(\tR\askuName\x12\x1b\n" +
 	"\tsku_image\x18\x06 \x01(\tR\bskuImage\x12\x14\n" +
-	"\x05price\x18\a \x01(\x03R\x05price\x12\x1a\n" +
+	"\x05price\x18\a \x01(\tR\x05price\x12\x1a\n" +
 	"\bquantity\x18\b \x01(\x05R\bquantity\x12!\n" +
-	"\ftotal_amount\x18\t \x01(\x03R\vtotalAmount\x12\x1f\n" +
+	"\ftotal_amount\x18\t \x01(\tR\vtotalAmount\x12\x1f\n" +
 	"\vcreate_time\x18\n" +
 	" \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +

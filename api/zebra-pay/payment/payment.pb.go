@@ -45,7 +45,7 @@ type Payment struct {
 	PayNo         string                 `protobuf:"bytes,2,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PayAmount     int64                  `protobuf:"varint,5,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`           // 支付金额（分）
+	PayAmount     string                 `protobuf:"bytes,5,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`            // 支付金额（元），如 "100.50"
 	PayType       int32                  `protobuf:"varint,6,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`                 // 1=支付宝, 2=微信, 3=余额
 	PayStatus     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`            // 0=待支付, 1=支付成功, 2=支付失败, 3=已退款
 	ThirdPartyNo  string                 `protobuf:"bytes,8,opt,name=third_party_no,json=thirdPartyNo,proto3" json:"third_party_no,omitempty"` // 第三方支付流水号
@@ -117,11 +117,11 @@ func (x *Payment) GetUserId() int64 {
 	return 0
 }
 
-func (x *Payment) GetPayAmount() int64 {
+func (x *Payment) GetPayAmount() string {
 	if x != nil {
 		return x.PayAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *Payment) GetPayType() int32 {
@@ -194,7 +194,7 @@ type Refund struct {
 	RefundNo      string                 `protobuf:"bytes,2,opt,name=refund_no,json=refundNo,proto3" json:"refund_no,omitempty"`
 	PayNo         string                 `protobuf:"bytes,3,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
-	RefundAmount  int64                  `protobuf:"varint,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`  // 退款金额（分）
+	RefundAmount  string                 `protobuf:"bytes,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`   // 退款金额（元），如 "50.00"
 	RefundStatus  *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"`   // 0=退款中, 1=退款成功, 2=退款失败
 	ThirdPartyNo  string                 `protobuf:"bytes,7,opt,name=third_party_no,json=thirdPartyNo,proto3" json:"third_party_no,omitempty"` // 第三方退款流水号
 	RefundTime    int64                  `protobuf:"varint,8,opt,name=refund_time,json=refundTime,proto3" json:"refund_time,omitempty"`
@@ -264,11 +264,11 @@ func (x *Refund) GetOrderNo() string {
 	return ""
 }
 
-func (x *Refund) GetRefundAmount() int64 {
+func (x *Refund) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *Refund) GetRefundStatus() *wrapperspb.Int32Value {
@@ -325,8 +325,8 @@ type RefundItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ItemId        int64                  `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
 	RefundId      int64                  `protobuf:"varint,2,opt,name=refund_id,json=refundId,proto3" json:"refund_id,omitempty"`
-	SalesNo       string                 `protobuf:"bytes,3,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`                 // 售后单号
-	RefundAmount  int64                  `protobuf:"varint,4,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（分）
+	SalesNo       string                 `protobuf:"bytes,3,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`                // 售后单号
+	RefundAmount  string                 `protobuf:"bytes,4,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
 	CreateTime    int64                  `protobuf:"varint,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,6,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,7,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -385,11 +385,11 @@ func (x *RefundItem) GetSalesNo() string {
 	return ""
 }
 
-func (x *RefundItem) GetRefundAmount() int64 {
+func (x *RefundItem) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *RefundItem) GetCreateTime() int64 {
@@ -418,7 +418,7 @@ type CreatePaymentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderNo       string                 `protobuf:"bytes,1,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PayAmount     int64                  `protobuf:"varint,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
+	PayAmount     string                 `protobuf:"bytes,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"` // 支付金额（元）
 	PayType       int32                  `protobuf:"varint,4,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`
 	NotifyUrl     string                 `protobuf:"bytes,5,opt,name=notify_url,json=notifyUrl,proto3" json:"notify_url,omitempty"`
 	ReturnUrl     string                 `protobuf:"bytes,6,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
@@ -470,11 +470,11 @@ func (x *CreatePaymentRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *CreatePaymentRequest) GetPayAmount() int64 {
+func (x *CreatePaymentRequest) GetPayAmount() string {
 	if x != nil {
 		return x.PayAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *CreatePaymentRequest) GetPayType() int32 {
@@ -640,8 +640,8 @@ func (x *PayCallbackRequest) GetPayStatus() *wrapperspb.Int32Value {
 type CreateRefundRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PayNo         string                 `protobuf:"bytes,1,opt,name=pay_no,json=payNo,proto3" json:"pay_no,omitempty"`
-	SalesNo       string                 `protobuf:"bytes,2,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"` // 售后单号
-	RefundAmount  int64                  `protobuf:"varint,3,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	SalesNo       string                 `protobuf:"bytes,2,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`                // 售后单号
+	RefundAmount  string                 `protobuf:"bytes,3,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
 	RefundReason  string                 `protobuf:"bytes,4,opt,name=refund_reason,json=refundReason,proto3" json:"refund_reason,omitempty"`
 	Items         []*RefundItemReq       `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -692,11 +692,11 @@ func (x *CreateRefundRequest) GetSalesNo() string {
 	return ""
 }
 
-func (x *CreateRefundRequest) GetRefundAmount() int64 {
+func (x *CreateRefundRequest) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *CreateRefundRequest) GetRefundReason() string {
@@ -717,7 +717,7 @@ func (x *CreateRefundRequest) GetItems() []*RefundItemReq {
 type RefundItemReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SalesNo       string                 `protobuf:"bytes,1,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`
-	RefundAmount  int64                  `protobuf:"varint,2,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	RefundAmount  string                 `protobuf:"bytes,2,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -759,11 +759,11 @@ func (x *RefundItemReq) GetSalesNo() string {
 	return ""
 }
 
-func (x *RefundItemReq) GetRefundAmount() int64 {
+func (x *RefundItemReq) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 // 创建退款响应
@@ -1965,6 +1965,850 @@ func (x *PaymentResponse) GetPayment() *Payment {
 	return nil
 }
 
+// 余额账户
+type Wallet struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Balance       string                 `protobuf:"bytes,3,opt,name=balance,proto3" json:"balance,omitempty"` // 可用余额（元），如 "100.50"
+	Frozen        string                 `protobuf:"bytes,4,opt,name=frozen,proto3" json:"frozen,omitempty"`   // 冻结金额（元），如 "0.00"
+	CreateTime    int64                  `protobuf:"varint,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime    int64                  `protobuf:"varint,6,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Wallet) Reset() {
+	*x = Wallet{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Wallet) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Wallet) ProtoMessage() {}
+
+func (x *Wallet) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Wallet.ProtoReflect.Descriptor instead.
+func (*Wallet) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *Wallet) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Wallet) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *Wallet) GetBalance() string {
+	if x != nil {
+		return x.Balance
+	}
+	return ""
+}
+
+func (x *Wallet) GetFrozen() string {
+	if x != nil {
+		return x.Frozen
+	}
+	return ""
+}
+
+func (x *Wallet) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *Wallet) GetUpdateTime() int64 {
+	if x != nil {
+		return x.UpdateTime
+	}
+	return 0
+}
+
+// 余额流水
+type BalanceJournal struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	JournalNo     string                 `protobuf:"bytes,2,opt,name=journal_no,json=journalNo,proto3" json:"journal_no,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`                                       // 1=充值, 2=消费, 3=退款退回, 4=冻结, 5=解冻
+	Amount        string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`                                    // 变动金额（元）
+	BalanceBefore string                 `protobuf:"bytes,6,opt,name=balance_before,json=balanceBefore,proto3" json:"balance_before,omitempty"` // 变动前余额（元）
+	BalanceAfter  string                 `protobuf:"bytes,7,opt,name=balance_after,json=balanceAfter,proto3" json:"balance_after,omitempty"`    // 变动后余额（元）
+	RelatedNo     string                 `protobuf:"bytes,8,opt,name=related_no,json=relatedNo,proto3" json:"related_no,omitempty"`             // 关联单号
+	OperatorId    int64                  `protobuf:"varint,9,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`         // 操作人ID
+	Remark        string                 `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`                                   // 备注
+	CreateTime    int64                  `protobuf:"varint,11,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BalanceJournal) Reset() {
+	*x = BalanceJournal{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BalanceJournal) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BalanceJournal) ProtoMessage() {}
+
+func (x *BalanceJournal) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BalanceJournal.ProtoReflect.Descriptor instead.
+func (*BalanceJournal) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *BalanceJournal) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *BalanceJournal) GetJournalNo() string {
+	if x != nil {
+		return x.JournalNo
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *BalanceJournal) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *BalanceJournal) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetBalanceBefore() string {
+	if x != nil {
+		return x.BalanceBefore
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetBalanceAfter() string {
+	if x != nil {
+		return x.BalanceAfter
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetRelatedNo() string {
+	if x != nil {
+		return x.RelatedNo
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *BalanceJournal) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *BalanceJournal) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+// 充值请求
+type TopUpRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"` // 充值金额（元）
+	Remark        string                 `protobuf:"bytes,3,opt,name=remark,proto3" json:"remark,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopUpRequest) Reset() {
+	*x = TopUpRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopUpRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopUpRequest) ProtoMessage() {}
+
+func (x *TopUpRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopUpRequest.ProtoReflect.Descriptor instead.
+func (*TopUpRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *TopUpRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *TopUpRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *TopUpRequest) GetRemark() string {
+	if x != nil {
+		return x.Remark
+	}
+	return ""
+}
+
+func (x *TopUpRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+// 充值响应
+type TopUpResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wallet        *Wallet                `protobuf:"bytes,3,opt,name=wallet,proto3" json:"wallet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TopUpResponse) Reset() {
+	*x = TopUpResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopUpResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopUpResponse) ProtoMessage() {}
+
+func (x *TopUpResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopUpResponse.ProtoReflect.Descriptor instead.
+func (*TopUpResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *TopUpResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *TopUpResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *TopUpResponse) GetWallet() *Wallet {
+	if x != nil {
+		return x.Wallet
+	}
+	return nil
+}
+
+// 查询钱包请求
+type GetWalletRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWalletRequest) Reset() {
+	*x = GetWalletRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWalletRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWalletRequest) ProtoMessage() {}
+
+func (x *GetWalletRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWalletRequest.ProtoReflect.Descriptor instead.
+func (*GetWalletRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetWalletRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+// 查询钱包响应
+type GetWalletResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wallet        *Wallet                `protobuf:"bytes,3,opt,name=wallet,proto3" json:"wallet,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWalletResponse) Reset() {
+	*x = GetWalletResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWalletResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWalletResponse) ProtoMessage() {}
+
+func (x *GetWalletResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWalletResponse.ProtoReflect.Descriptor instead.
+func (*GetWalletResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetWalletResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *GetWalletResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *GetWalletResponse) GetWallet() *Wallet {
+	if x != nil {
+		return x.Wallet
+	}
+	return nil
+}
+
+// 钱包分页查询请求
+type ListWalletRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // 0=全部
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWalletRequest) Reset() {
+	*x = ListWalletRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWalletRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWalletRequest) ProtoMessage() {}
+
+func (x *ListWalletRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWalletRequest.ProtoReflect.Descriptor instead.
+func (*ListWalletRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListWalletRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListWalletRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListWalletRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+// 钱包分页查询响应
+type ListWalletResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Wallets       []*Wallet              `protobuf:"bytes,3,rep,name=wallets,proto3" json:"wallets,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWalletResponse) Reset() {
+	*x = ListWalletResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWalletResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWalletResponse) ProtoMessage() {}
+
+func (x *ListWalletResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWalletResponse.ProtoReflect.Descriptor instead.
+func (*ListWalletResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListWalletResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListWalletResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListWalletResponse) GetWallets() []*Wallet {
+	if x != nil {
+		return x.Wallets
+	}
+	return nil
+}
+
+func (x *ListWalletResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// 流水分页查询请求
+type ListBalanceJournalRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type          int32                  `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
+	StartTime     int64                  `protobuf:"varint,5,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime       int64                  `protobuf:"varint,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBalanceJournalRequest) Reset() {
+	*x = ListBalanceJournalRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBalanceJournalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBalanceJournalRequest) ProtoMessage() {}
+
+func (x *ListBalanceJournalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBalanceJournalRequest.ProtoReflect.Descriptor instead.
+func (*ListBalanceJournalRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListBalanceJournalRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListBalanceJournalRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListBalanceJournalRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListBalanceJournalRequest) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *ListBalanceJournalRequest) GetStartTime() int64 {
+	if x != nil {
+		return x.StartTime
+	}
+	return 0
+}
+
+func (x *ListBalanceJournalRequest) GetEndTime() int64 {
+	if x != nil {
+		return x.EndTime
+	}
+	return 0
+}
+
+// 流水分页查询响应
+type ListBalanceJournalResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Journals      []*BalanceJournal      `protobuf:"bytes,3,rep,name=journals,proto3" json:"journals,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBalanceJournalResponse) Reset() {
+	*x = ListBalanceJournalResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBalanceJournalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBalanceJournalResponse) ProtoMessage() {}
+
+func (x *ListBalanceJournalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBalanceJournalResponse.ProtoReflect.Descriptor instead.
+func (*ListBalanceJournalResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ListBalanceJournalResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ListBalanceJournalResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ListBalanceJournalResponse) GetJournals() []*BalanceJournal {
+	if x != nil {
+		return x.Journals
+	}
+	return nil
+}
+
+func (x *ListBalanceJournalResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// 扣款请求
+type DeductBalanceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	RelatedNo     string                 `protobuf:"bytes,3,opt,name=related_no,json=relatedNo,proto3" json:"related_no,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeductBalanceRequest) Reset() {
+	*x = DeductBalanceRequest{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeductBalanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeductBalanceRequest) ProtoMessage() {}
+
+func (x *DeductBalanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeductBalanceRequest.ProtoReflect.Descriptor instead.
+func (*DeductBalanceRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *DeductBalanceRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *DeductBalanceRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *DeductBalanceRequest) GetRelatedNo() string {
+	if x != nil {
+		return x.RelatedNo
+	}
+	return ""
+}
+
+// 扣款响应
+type DeductBalanceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                 `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeductBalanceResponse) Reset() {
+	*x = DeductBalanceResponse{}
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeductBalanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeductBalanceResponse) ProtoMessage() {}
+
+func (x *DeductBalanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_pay_payment_payment_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeductBalanceResponse.ProtoReflect.Descriptor instead.
+func (*DeductBalanceResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_pay_payment_payment_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *DeductBalanceResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *DeductBalanceResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 var File_api_zebra_pay_payment_payment_proto protoreflect.FileDescriptor
 
 const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
@@ -1976,7 +2820,7 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\border_no\x18\x03 \x01(\tR\aorderNo\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"pay_amount\x18\x05 \x01(\x03R\tpayAmount\x12\x19\n" +
+	"pay_amount\x18\x05 \x01(\tR\tpayAmount\x12\x19\n" +
 	"\bpay_type\x18\x06 \x01(\x05R\apayType\x12:\n" +
 	"\n" +
 	"pay_status\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\x12$\n" +
@@ -1998,7 +2842,7 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\trefund_no\x18\x02 \x01(\tR\brefundNo\x12\x15\n" +
 	"\x06pay_no\x18\x03 \x01(\tR\x05payNo\x12\x19\n" +
 	"\border_no\x18\x04 \x01(\tR\aorderNo\x12#\n" +
-	"\rrefund_amount\x18\x05 \x01(\x03R\frefundAmount\x12@\n" +
+	"\rrefund_amount\x18\x05 \x01(\tR\frefundAmount\x12@\n" +
 	"\rrefund_status\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\frefundStatus\x12$\n" +
 	"\x0ethird_party_no\x18\a \x01(\tR\fthirdPartyNo\x12\x1f\n" +
 	"\vrefund_time\x18\b \x01(\x03R\n" +
@@ -2016,7 +2860,7 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\aitem_id\x18\x01 \x01(\x03R\x06itemId\x12\x1b\n" +
 	"\trefund_id\x18\x02 \x01(\x03R\brefundId\x12\x19\n" +
 	"\bsales_no\x18\x03 \x01(\tR\asalesNo\x12#\n" +
-	"\rrefund_amount\x18\x04 \x01(\x03R\frefundAmount\x12\x1f\n" +
+	"\rrefund_amount\x18\x04 \x01(\tR\frefundAmount\x12\x1f\n" +
 	"\vcreate_time\x18\x05 \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x06 \x01(\x03R\n" +
@@ -2027,7 +2871,7 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
-	"pay_amount\x18\x03 \x01(\x03R\tpayAmount\x12\x19\n" +
+	"pay_amount\x18\x03 \x01(\tR\tpayAmount\x12\x19\n" +
 	"\bpay_type\x18\x04 \x01(\x05R\apayType\x12\x1d\n" +
 	"\n" +
 	"notify_url\x18\x05 \x01(\tR\tnotifyUrl\x12\x1d\n" +
@@ -2047,12 +2891,12 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x13CreateRefundRequest\x12\x15\n" +
 	"\x06pay_no\x18\x01 \x01(\tR\x05payNo\x12\x19\n" +
 	"\bsales_no\x18\x02 \x01(\tR\asalesNo\x12#\n" +
-	"\rrefund_amount\x18\x03 \x01(\x03R\frefundAmount\x12#\n" +
+	"\rrefund_amount\x18\x03 \x01(\tR\frefundAmount\x12#\n" +
 	"\rrefund_reason\x18\x04 \x01(\tR\frefundReason\x12,\n" +
 	"\x05items\x18\x05 \x03(\v2\x16.payment.RefundItemReqR\x05items\"O\n" +
 	"\rRefundItemReq\x12\x19\n" +
 	"\bsales_no\x18\x01 \x01(\tR\asalesNo\x12#\n" +
-	"\rrefund_amount\x18\x02 \x01(\x03R\frefundAmount\"\x9c\x01\n" +
+	"\rrefund_amount\x18\x02 \x01(\tR\frefundAmount\"\x9c\x01\n" +
 	"\x14CreateRefundResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
@@ -2148,7 +2992,79 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x18\n" +
 	"\asuccess\x18\x03 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x04 \x01(\tR\amessage\x12*\n" +
-	"\apayment\x18\x05 \x01(\v2\x10.payment.PaymentR\apayment2\xac\x05\n" +
+	"\apayment\x18\x05 \x01(\v2\x10.payment.PaymentR\apayment\"\xa5\x01\n" +
+	"\x06Wallet\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
+	"\abalance\x18\x03 \x01(\tR\abalance\x12\x16\n" +
+	"\x06frozen\x18\x04 \x01(\tR\x06frozen\x12\x1f\n" +
+	"\vcreate_time\x18\x05 \x01(\x03R\n" +
+	"createTime\x12\x1f\n" +
+	"\vupdate_time\x18\x06 \x01(\x03R\n" +
+	"updateTime\"\xc9\x02\n" +
+	"\x0eBalanceJournal\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
+	"\n" +
+	"journal_no\x18\x02 \x01(\tR\tjournalNo\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12%\n" +
+	"\x0ebalance_before\x18\x06 \x01(\tR\rbalanceBefore\x12#\n" +
+	"\rbalance_after\x18\a \x01(\tR\fbalanceAfter\x12\x1d\n" +
+	"\n" +
+	"related_no\x18\b \x01(\tR\trelatedNo\x12\x1f\n" +
+	"\voperator_id\x18\t \x01(\x03R\n" +
+	"operatorId\x12\x16\n" +
+	"\x06remark\x18\n" +
+	" \x01(\tR\x06remark\x12\x1f\n" +
+	"\vcreate_time\x18\v \x01(\x03R\n" +
+	"createTime\"x\n" +
+	"\fTopUpRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x16\n" +
+	"\x06remark\x18\x03 \x01(\tR\x06remark\x12\x1f\n" +
+	"\voperator_id\x18\x04 \x01(\x03R\n" +
+	"operatorId\"{\n" +
+	"\rTopUpResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
+	"\x06wallet\x18\x03 \x01(\v2\x0f.payment.WalletR\x06wallet\"+\n" +
+	"\x10GetWalletRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x7f\n" +
+	"\x11GetWalletResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12'\n" +
+	"\x06wallet\x18\x03 \x01(\v2\x0f.payment.WalletR\x06wallet\"]\n" +
+	"\x11ListWalletRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"\x98\x01\n" +
+	"\x12ListWalletResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12)\n" +
+	"\awallets\x18\x03 \x03(\v2\x0f.payment.WalletR\awallets\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\xb3\x01\n" +
+	"\x19ListBalanceJournalRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\x05R\x04type\x12\x1d\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\x03R\tstartTime\x12\x19\n" +
+	"\bend_time\x18\x06 \x01(\x03R\aendTime\"\xaa\x01\n" +
+	"\x1aListBalanceJournalResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x123\n" +
+	"\bjournals\x18\x03 \x03(\v2\x17.payment.BalanceJournalR\bjournals\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"f\n" +
+	"\x14DeductBalanceRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"related_no\x18\x03 \x01(\tR\trelatedNo\"Z\n" +
+	"\x15DeductBalanceResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg2\xac\x05\n" +
 	"\x0ePaymentService\x12N\n" +
 	"\rCreatePayment\x12\x1d.payment.CreatePaymentRequest\x1a\x1e.payment.CreatePaymentResponse\x12D\n" +
 	"\vPayCallback\x12\x1b.payment.PayCallbackRequest\x1a\x18.payment.PaymentResponse\x12K\n" +
@@ -2160,7 +3076,13 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\vListRefunds\x12\x1a.payment.ListRefundRequest\x1a\x1b.payment.ListRefundResponse\x12E\n" +
 	"\n" +
 	"LogPayment\x12\x1a.payment.LogPaymentRequest\x1a\x1b.payment.LogPaymentResponse\x12R\n" +
-	"\x0fListPaymentLogs\x12\x1e.payment.ListPaymentLogRequest\x1a\x1f.payment.ListPaymentLogResponseB!Z\x1f./api/zebra-pay/payment;paymentb\x06proto3"
+	"\x0fListPaymentLogs\x12\x1e.payment.ListPaymentLogRequest\x1a\x1f.payment.ListPaymentLogResponse2\xfc\x02\n" +
+	"\rWalletService\x126\n" +
+	"\x05TopUp\x12\x15.payment.TopUpRequest\x1a\x16.payment.TopUpResponse\x12B\n" +
+	"\tGetWallet\x12\x19.payment.GetWalletRequest\x1a\x1a.payment.GetWalletResponse\x12F\n" +
+	"\vListWallets\x12\x1a.payment.ListWalletRequest\x1a\x1b.payment.ListWalletResponse\x12^\n" +
+	"\x13ListBalanceJournals\x12\".payment.ListBalanceJournalRequest\x1a#.payment.ListBalanceJournalResponse\x12G\n" +
+	"\x06Deduct\x12\x1d.payment.DeductBalanceRequest\x1a\x1e.payment.DeductBalanceResponseB!Z\x1f./api/zebra-pay/payment;paymentb\x06proto3"
 
 var (
 	file_api_zebra_pay_payment_payment_proto_rawDescOnce sync.Once
@@ -2174,82 +3096,113 @@ func file_api_zebra_pay_payment_payment_proto_rawDescGZIP() []byte {
 	return file_api_zebra_pay_payment_payment_proto_rawDescData
 }
 
-var file_api_zebra_pay_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_api_zebra_pay_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_api_zebra_pay_payment_payment_proto_goTypes = []any{
-	(*Payment)(nil),                // 0: payment.Payment
-	(*Refund)(nil),                 // 1: payment.Refund
-	(*RefundItem)(nil),             // 2: payment.RefundItem
-	(*CreatePaymentRequest)(nil),   // 3: payment.CreatePaymentRequest
-	(*CreatePaymentResponse)(nil),  // 4: payment.CreatePaymentResponse
-	(*PayCallbackRequest)(nil),     // 5: payment.PayCallbackRequest
-	(*CreateRefundRequest)(nil),    // 6: payment.CreateRefundRequest
-	(*RefundItemReq)(nil),          // 7: payment.RefundItemReq
-	(*CreateRefundResponse)(nil),   // 8: payment.CreateRefundResponse
-	(*GetPaymentRequest)(nil),      // 9: payment.GetPaymentRequest
-	(*GetPaymentResponse)(nil),     // 10: payment.GetPaymentResponse
-	(*ListPaymentRequest)(nil),     // 11: payment.ListPaymentRequest
-	(*ListPaymentResponse)(nil),    // 12: payment.ListPaymentResponse
-	(*GetRefundRequest)(nil),       // 13: payment.GetRefundRequest
-	(*GetRefundResponse)(nil),      // 14: payment.GetRefundResponse
-	(*ListRefundRequest)(nil),      // 15: payment.ListRefundRequest
-	(*ListRefundResponse)(nil),     // 16: payment.ListRefundResponse
-	(*PaymentLog)(nil),             // 17: payment.PaymentLog
-	(*LogPaymentRequest)(nil),      // 18: payment.LogPaymentRequest
-	(*LogPaymentResponse)(nil),     // 19: payment.LogPaymentResponse
-	(*ListPaymentLogRequest)(nil),  // 20: payment.ListPaymentLogRequest
-	(*ListPaymentLogResponse)(nil), // 21: payment.ListPaymentLogResponse
-	(*PaymentResponse)(nil),        // 22: payment.PaymentResponse
-	(*wrapperspb.Int32Value)(nil),  // 23: google.protobuf.Int32Value
+	(*Payment)(nil),                    // 0: payment.Payment
+	(*Refund)(nil),                     // 1: payment.Refund
+	(*RefundItem)(nil),                 // 2: payment.RefundItem
+	(*CreatePaymentRequest)(nil),       // 3: payment.CreatePaymentRequest
+	(*CreatePaymentResponse)(nil),      // 4: payment.CreatePaymentResponse
+	(*PayCallbackRequest)(nil),         // 5: payment.PayCallbackRequest
+	(*CreateRefundRequest)(nil),        // 6: payment.CreateRefundRequest
+	(*RefundItemReq)(nil),              // 7: payment.RefundItemReq
+	(*CreateRefundResponse)(nil),       // 8: payment.CreateRefundResponse
+	(*GetPaymentRequest)(nil),          // 9: payment.GetPaymentRequest
+	(*GetPaymentResponse)(nil),         // 10: payment.GetPaymentResponse
+	(*ListPaymentRequest)(nil),         // 11: payment.ListPaymentRequest
+	(*ListPaymentResponse)(nil),        // 12: payment.ListPaymentResponse
+	(*GetRefundRequest)(nil),           // 13: payment.GetRefundRequest
+	(*GetRefundResponse)(nil),          // 14: payment.GetRefundResponse
+	(*ListRefundRequest)(nil),          // 15: payment.ListRefundRequest
+	(*ListRefundResponse)(nil),         // 16: payment.ListRefundResponse
+	(*PaymentLog)(nil),                 // 17: payment.PaymentLog
+	(*LogPaymentRequest)(nil),          // 18: payment.LogPaymentRequest
+	(*LogPaymentResponse)(nil),         // 19: payment.LogPaymentResponse
+	(*ListPaymentLogRequest)(nil),      // 20: payment.ListPaymentLogRequest
+	(*ListPaymentLogResponse)(nil),     // 21: payment.ListPaymentLogResponse
+	(*PaymentResponse)(nil),            // 22: payment.PaymentResponse
+	(*Wallet)(nil),                     // 23: payment.Wallet
+	(*BalanceJournal)(nil),             // 24: payment.BalanceJournal
+	(*TopUpRequest)(nil),               // 25: payment.TopUpRequest
+	(*TopUpResponse)(nil),              // 26: payment.TopUpResponse
+	(*GetWalletRequest)(nil),           // 27: payment.GetWalletRequest
+	(*GetWalletResponse)(nil),          // 28: payment.GetWalletResponse
+	(*ListWalletRequest)(nil),          // 29: payment.ListWalletRequest
+	(*ListWalletResponse)(nil),         // 30: payment.ListWalletResponse
+	(*ListBalanceJournalRequest)(nil),  // 31: payment.ListBalanceJournalRequest
+	(*ListBalanceJournalResponse)(nil), // 32: payment.ListBalanceJournalResponse
+	(*DeductBalanceRequest)(nil),       // 33: payment.DeductBalanceRequest
+	(*DeductBalanceResponse)(nil),      // 34: payment.DeductBalanceResponse
+	(*wrapperspb.Int32Value)(nil),      // 35: google.protobuf.Int32Value
 }
 var file_api_zebra_pay_payment_payment_proto_depIdxs = []int32{
-	23, // 0: payment.Payment.pay_status:type_name -> google.protobuf.Int32Value
-	23, // 1: payment.Refund.refund_status:type_name -> google.protobuf.Int32Value
-	23, // 2: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 0: payment.Payment.pay_status:type_name -> google.protobuf.Int32Value
+	35, // 1: payment.Refund.refund_status:type_name -> google.protobuf.Int32Value
+	35, // 2: payment.CreatePaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: payment.CreatePaymentResponse.payment:type_name -> payment.Payment
-	23, // 4: payment.PayCallbackRequest.pay_status:type_name -> google.protobuf.Int32Value
+	35, // 4: payment.PayCallbackRequest.pay_status:type_name -> google.protobuf.Int32Value
 	7,  // 5: payment.CreateRefundRequest.items:type_name -> payment.RefundItemReq
-	23, // 6: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 6: payment.CreateRefundResponse.code:type_name -> google.protobuf.Int32Value
 	1,  // 7: payment.CreateRefundResponse.refund:type_name -> payment.Refund
-	23, // 8: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 8: payment.GetPaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 9: payment.GetPaymentResponse.payment:type_name -> payment.Payment
-	23, // 10: payment.ListPaymentRequest.pay_status:type_name -> google.protobuf.Int32Value
-	23, // 11: payment.ListPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 10: payment.ListPaymentRequest.pay_status:type_name -> google.protobuf.Int32Value
+	35, // 11: payment.ListPaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 12: payment.ListPaymentResponse.payments:type_name -> payment.Payment
-	23, // 13: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 13: payment.GetRefundResponse.code:type_name -> google.protobuf.Int32Value
 	1,  // 14: payment.GetRefundResponse.refund:type_name -> payment.Refund
 	2,  // 15: payment.GetRefundResponse.items:type_name -> payment.RefundItem
-	23, // 16: payment.ListRefundRequest.refund_status:type_name -> google.protobuf.Int32Value
-	23, // 17: payment.ListRefundResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 16: payment.ListRefundRequest.refund_status:type_name -> google.protobuf.Int32Value
+	35, // 17: payment.ListRefundResponse.code:type_name -> google.protobuf.Int32Value
 	1,  // 18: payment.ListRefundResponse.refunds:type_name -> payment.Refund
-	23, // 19: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 19: payment.LogPaymentResponse.code:type_name -> google.protobuf.Int32Value
 	17, // 20: payment.LogPaymentResponse.log:type_name -> payment.PaymentLog
-	23, // 21: payment.ListPaymentLogResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 21: payment.ListPaymentLogResponse.code:type_name -> google.protobuf.Int32Value
 	17, // 22: payment.ListPaymentLogResponse.logs:type_name -> payment.PaymentLog
-	23, // 23: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
+	35, // 23: payment.PaymentResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 24: payment.PaymentResponse.payment:type_name -> payment.Payment
-	3,  // 25: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
-	5,  // 26: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
-	6,  // 27: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
-	9,  // 28: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
-	11, // 29: payment.PaymentService.ListPayments:input_type -> payment.ListPaymentRequest
-	13, // 30: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
-	15, // 31: payment.PaymentService.ListRefunds:input_type -> payment.ListRefundRequest
-	18, // 32: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
-	20, // 33: payment.PaymentService.ListPaymentLogs:input_type -> payment.ListPaymentLogRequest
-	4,  // 34: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
-	22, // 35: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
-	8,  // 36: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
-	10, // 37: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
-	12, // 38: payment.PaymentService.ListPayments:output_type -> payment.ListPaymentResponse
-	14, // 39: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
-	16, // 40: payment.PaymentService.ListRefunds:output_type -> payment.ListRefundResponse
-	19, // 41: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
-	21, // 42: payment.PaymentService.ListPaymentLogs:output_type -> payment.ListPaymentLogResponse
-	34, // [34:43] is the sub-list for method output_type
-	25, // [25:34] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	35, // 25: payment.TopUpResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 26: payment.TopUpResponse.wallet:type_name -> payment.Wallet
+	35, // 27: payment.GetWalletResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 28: payment.GetWalletResponse.wallet:type_name -> payment.Wallet
+	35, // 29: payment.ListWalletResponse.code:type_name -> google.protobuf.Int32Value
+	23, // 30: payment.ListWalletResponse.wallets:type_name -> payment.Wallet
+	35, // 31: payment.ListBalanceJournalResponse.code:type_name -> google.protobuf.Int32Value
+	24, // 32: payment.ListBalanceJournalResponse.journals:type_name -> payment.BalanceJournal
+	35, // 33: payment.DeductBalanceResponse.code:type_name -> google.protobuf.Int32Value
+	3,  // 34: payment.PaymentService.CreatePayment:input_type -> payment.CreatePaymentRequest
+	5,  // 35: payment.PaymentService.PayCallback:input_type -> payment.PayCallbackRequest
+	6,  // 36: payment.PaymentService.CreateRefund:input_type -> payment.CreateRefundRequest
+	9,  // 37: payment.PaymentService.GetPayment:input_type -> payment.GetPaymentRequest
+	11, // 38: payment.PaymentService.ListPayments:input_type -> payment.ListPaymentRequest
+	13, // 39: payment.PaymentService.GetRefund:input_type -> payment.GetRefundRequest
+	15, // 40: payment.PaymentService.ListRefunds:input_type -> payment.ListRefundRequest
+	18, // 41: payment.PaymentService.LogPayment:input_type -> payment.LogPaymentRequest
+	20, // 42: payment.PaymentService.ListPaymentLogs:input_type -> payment.ListPaymentLogRequest
+	25, // 43: payment.WalletService.TopUp:input_type -> payment.TopUpRequest
+	27, // 44: payment.WalletService.GetWallet:input_type -> payment.GetWalletRequest
+	29, // 45: payment.WalletService.ListWallets:input_type -> payment.ListWalletRequest
+	31, // 46: payment.WalletService.ListBalanceJournals:input_type -> payment.ListBalanceJournalRequest
+	33, // 47: payment.WalletService.Deduct:input_type -> payment.DeductBalanceRequest
+	4,  // 48: payment.PaymentService.CreatePayment:output_type -> payment.CreatePaymentResponse
+	22, // 49: payment.PaymentService.PayCallback:output_type -> payment.PaymentResponse
+	8,  // 50: payment.PaymentService.CreateRefund:output_type -> payment.CreateRefundResponse
+	10, // 51: payment.PaymentService.GetPayment:output_type -> payment.GetPaymentResponse
+	12, // 52: payment.PaymentService.ListPayments:output_type -> payment.ListPaymentResponse
+	14, // 53: payment.PaymentService.GetRefund:output_type -> payment.GetRefundResponse
+	16, // 54: payment.PaymentService.ListRefunds:output_type -> payment.ListRefundResponse
+	19, // 55: payment.PaymentService.LogPayment:output_type -> payment.LogPaymentResponse
+	21, // 56: payment.PaymentService.ListPaymentLogs:output_type -> payment.ListPaymentLogResponse
+	26, // 57: payment.WalletService.TopUp:output_type -> payment.TopUpResponse
+	28, // 58: payment.WalletService.GetWallet:output_type -> payment.GetWalletResponse
+	30, // 59: payment.WalletService.ListWallets:output_type -> payment.ListWalletResponse
+	32, // 60: payment.WalletService.ListBalanceJournals:output_type -> payment.ListBalanceJournalResponse
+	34, // 61: payment.WalletService.Deduct:output_type -> payment.DeductBalanceResponse
+	48, // [48:62] is the sub-list for method output_type
+	34, // [34:48] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_pay_payment_payment_proto_init() }
@@ -2271,9 +3224,9 @@ func file_api_zebra_pay_payment_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_pay_payment_payment_proto_rawDesc), len(file_api_zebra_pay_payment_payment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   35,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_api_zebra_pay_payment_payment_proto_goTypes,
 		DependencyIndexes: file_api_zebra_pay_payment_payment_proto_depIdxs,

@@ -32,7 +32,7 @@ message AfterSales {
   int32  sales_type      = 5;  // 1=退款, 2=退货, 3=换货
   int32  sales_reason    = 6;  // 1=不想要了, 2=商品质量问题, 3=商品错发漏发, 4=其他
   string sales_desc      = 7;  // 售后说明
-  int64  refund_amount   = 8;  // 退款金额（分）
+  string refund_amount   = 8;  // 退款金额（元）
   google.protobuf.Int32Value sales_status = 9; // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
   string audit_remark    = 10; // 审核备注
   int64  audit_time      = 11;
@@ -50,7 +50,7 @@ message AfterSalesItem {
   int64  sku_id          = 4;
   string sku_name       = 5;
   int32  quantity        = 6;
-  int64  refund_amount   = 7;  // 退款金额（分）
+  string refund_amount   = 7;  // 退款金额（元）
   int64  create_time     = 8;
   int64  update_time     = 9;
   int32  is_deleted      = 10;

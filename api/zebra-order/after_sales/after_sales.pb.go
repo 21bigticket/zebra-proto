@@ -45,12 +45,12 @@ type AfterSales struct {
 	SalesNo       string                 `protobuf:"bytes,2,opt,name=sales_no,json=salesNo,proto3" json:"sales_no,omitempty"`
 	OrderNo       string                 `protobuf:"bytes,3,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
 	UserId        int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	SalesType     int32                  `protobuf:"varint,5,opt,name=sales_type,json=salesType,proto3" json:"sales_type,omitempty"`          // 1=退款, 2=退货, 3=换货
-	SalesReason   int32                  `protobuf:"varint,6,opt,name=sales_reason,json=salesReason,proto3" json:"sales_reason,omitempty"`    // 1=不想要了, 2=商品质量问题, 3=商品错发漏发, 4=其他
-	SalesDesc     string                 `protobuf:"bytes,7,opt,name=sales_desc,json=salesDesc,proto3" json:"sales_desc,omitempty"`           // 售后说明
-	RefundAmount  int64                  `protobuf:"varint,8,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（分）
-	SalesStatus   *wrapperspb.Int32Value `protobuf:"bytes,9,opt,name=sales_status,json=salesStatus,proto3" json:"sales_status,omitempty"`     // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
-	AuditRemark   string                 `protobuf:"bytes,10,opt,name=audit_remark,json=auditRemark,proto3" json:"audit_remark,omitempty"`    // 审核备注
+	SalesType     int32                  `protobuf:"varint,5,opt,name=sales_type,json=salesType,proto3" json:"sales_type,omitempty"`         // 1=退款, 2=退货, 3=换货
+	SalesReason   int32                  `protobuf:"varint,6,opt,name=sales_reason,json=salesReason,proto3" json:"sales_reason,omitempty"`   // 1=不想要了, 2=商品质量问题, 3=商品错发漏发, 4=其他
+	SalesDesc     string                 `protobuf:"bytes,7,opt,name=sales_desc,json=salesDesc,proto3" json:"sales_desc,omitempty"`          // 售后说明
+	RefundAmount  string                 `protobuf:"bytes,8,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
+	SalesStatus   *wrapperspb.Int32Value `protobuf:"bytes,9,opt,name=sales_status,json=salesStatus,proto3" json:"sales_status,omitempty"`    // 0=待审核, 1=审核通过, 2=审核拒绝, 3=退款中, 4=退款完成, 5=已关闭
+	AuditRemark   string                 `protobuf:"bytes,10,opt,name=audit_remark,json=auditRemark,proto3" json:"audit_remark,omitempty"`   // 审核备注
 	AuditTime     int64                  `protobuf:"varint,11,opt,name=audit_time,json=auditTime,proto3" json:"audit_time,omitempty"`
 	RefundTime    int64                  `protobuf:"varint,12,opt,name=refund_time,json=refundTime,proto3" json:"refund_time,omitempty"`
 	CreateTime    int64                  `protobuf:"varint,13,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
@@ -139,11 +139,11 @@ func (x *AfterSales) GetSalesDesc() string {
 	return ""
 }
 
-func (x *AfterSales) GetRefundAmount() int64 {
+func (x *AfterSales) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *AfterSales) GetSalesStatus() *wrapperspb.Int32Value {
@@ -204,7 +204,7 @@ type AfterSalesItem struct {
 	SkuId         int64                  `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	SkuName       string                 `protobuf:"bytes,5,opt,name=sku_name,json=skuName,proto3" json:"sku_name,omitempty"`
 	Quantity      int32                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	RefundAmount  int64                  `protobuf:"varint,7,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（分）
+	RefundAmount  string                 `protobuf:"bytes,7,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
 	CreateTime    int64                  `protobuf:"varint,8,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
 	UpdateTime    int64                  `protobuf:"varint,9,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	IsDeleted     int32                  `protobuf:"varint,10,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
@@ -284,11 +284,11 @@ func (x *AfterSalesItem) GetQuantity() int32 {
 	return 0
 }
 
-func (x *AfterSalesItem) GetRefundAmount() int64 {
+func (x *AfterSalesItem) GetRefundAmount() string {
 	if x != nil {
 		return x.RefundAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *AfterSalesItem) GetCreateTime() int64 {
@@ -1125,7 +1125,7 @@ const file_api_zebra_order_after_sales_after_sales_proto_rawDesc = "" +
 	"\fsales_reason\x18\x06 \x01(\x05R\vsalesReason\x12\x1d\n" +
 	"\n" +
 	"sales_desc\x18\a \x01(\tR\tsalesDesc\x12#\n" +
-	"\rrefund_amount\x18\b \x01(\x03R\frefundAmount\x12>\n" +
+	"\rrefund_amount\x18\b \x01(\tR\frefundAmount\x12>\n" +
 	"\fsales_status\x18\t \x01(\v2\x1b.google.protobuf.Int32ValueR\vsalesStatus\x12!\n" +
 	"\faudit_remark\x18\n" +
 	" \x01(\tR\vauditRemark\x12\x1d\n" +
@@ -1146,7 +1146,7 @@ const file_api_zebra_order_after_sales_after_sales_proto_rawDesc = "" +
 	"\x06sku_id\x18\x04 \x01(\x03R\x05skuId\x12\x19\n" +
 	"\bsku_name\x18\x05 \x01(\tR\askuName\x12\x1a\n" +
 	"\bquantity\x18\x06 \x01(\x05R\bquantity\x12#\n" +
-	"\rrefund_amount\x18\a \x01(\x03R\frefundAmount\x12\x1f\n" +
+	"\rrefund_amount\x18\a \x01(\tR\frefundAmount\x12\x1f\n" +
 	"\vcreate_time\x18\b \x01(\x03R\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\t \x01(\x03R\n" +

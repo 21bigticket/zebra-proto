@@ -45,7 +45,7 @@ type GoodsSku struct {
 	GoodsId       int64                  `protobuf:"varint,2,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	SkuCode       string                 `protobuf:"bytes,3,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"` // SKU编码
 	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`                      // SKU名称，如"红色-L"
-	Price         int64                  `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`                   // 价格(分)
+	Price         string                 `protobuf:"bytes,5,opt,name=price,proto3" json:"price,omitempty"`                    // 价格（元），如 "99.90"
 	ImageUrl      string                 `protobuf:"bytes,6,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,7,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        *wrapperspb.Int32Value `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"` // 0=禁用, 1=启用
@@ -116,11 +116,11 @@ func (x *GoodsSku) GetName() string {
 	return ""
 }
 
-func (x *GoodsSku) GetPrice() int64 {
+func (x *GoodsSku) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *GoodsSku) GetImageUrl() string {
@@ -185,7 +185,7 @@ type CreateSkuRequest struct {
 	GoodsId       int64                  `protobuf:"varint,1,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	SkuCode       string                 `protobuf:"bytes,2,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"` // 价格（元）
 	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	SpecIds       []int64                `protobuf:"varint,9,rep,packed,name=spec_ids,json=specIds,proto3" json:"spec_ids,omitempty"` // 关联的规格ID列表
@@ -244,11 +244,11 @@ func (x *CreateSkuRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateSkuRequest) GetPrice() int64 {
+func (x *CreateSkuRequest) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *CreateSkuRequest) GetImageUrl() string {
@@ -277,7 +277,7 @@ type UpdateSkuRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Price         int64                  `protobuf:"varint,3,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,3,opt,name=price,proto3" json:"price,omitempty"` // 价格（元）
 	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
@@ -332,11 +332,11 @@ func (x *UpdateSkuRequest) GetName() string {
 	return ""
 }
 
-func (x *UpdateSkuRequest) GetPrice() int64 {
+func (x *UpdateSkuRequest) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *UpdateSkuRequest) GetImageUrl() string {
@@ -386,7 +386,7 @@ type BatchCreateSkuItem struct {
 	GoodsId       int64                  `protobuf:"varint,1,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
 	SkuCode       string                 `protobuf:"bytes,2,opt,name=sku_code,json=skuCode,proto3" json:"sku_code,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Price         int64                  `protobuf:"varint,4,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,4,opt,name=price,proto3" json:"price,omitempty"` // 价格（元）
 	ImageUrl      string                 `protobuf:"bytes,5,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,6,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	SpecIds       []int64                `protobuf:"varint,9,rep,packed,name=spec_ids,json=specIds,proto3" json:"spec_ids,omitempty"` // 关联的规格ID列表
@@ -445,11 +445,11 @@ func (x *BatchCreateSkuItem) GetName() string {
 	return ""
 }
 
-func (x *BatchCreateSkuItem) GetPrice() int64 {
+func (x *BatchCreateSkuItem) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *BatchCreateSkuItem) GetImageUrl() string {
@@ -520,7 +520,7 @@ func (x *BatchCreateSkuRequest) GetItems() []*BatchCreateSkuItem {
 type BatchUpdateSkuItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
+	Price         string                 `protobuf:"bytes,2,opt,name=price,proto3" json:"price,omitempty"` // 价格（元）
 	SortOrder     *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=sort_order,json=sortOrder,proto3" json:"sort_order,omitempty"`
 	Status        *wrapperspb.Int32Value `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -564,11 +564,11 @@ func (x *BatchUpdateSkuItem) GetId() int64 {
 	return 0
 }
 
-func (x *BatchUpdateSkuItem) GetPrice() int64 {
+func (x *BatchUpdateSkuItem) GetPrice() string {
 	if x != nil {
 		return x.Price
 	}
-	return 0
+	return ""
 }
 
 func (x *BatchUpdateSkuItem) GetSortOrder() *wrapperspb.Int32Value {
@@ -1092,7 +1092,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\bgoods_id\x18\x02 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x03 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x14\n" +
-	"\x05price\x18\x05 \x01(\x03R\x05price\x12\x1b\n" +
+	"\x05price\x18\x05 \x01(\tR\x05price\x12\x1b\n" +
 	"\timage_url\x18\x06 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
 	"sort_order\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
@@ -1110,7 +1110,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
-	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
+	"\x05price\x18\x04 \x01(\tR\x05price\x12\x1b\n" +
 	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
 	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x19\n" +
@@ -1118,7 +1118,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x10UpdateSkuRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05price\x18\x03 \x01(\x03R\x05price\x12\x1b\n" +
+	"\x05price\x18\x03 \x01(\tR\x05price\x12\x1b\n" +
 	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
 	"sort_order\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
@@ -1130,7 +1130,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\bgoods_id\x18\x01 \x01(\x03R\agoodsId\x12\x19\n" +
 	"\bsku_code\x18\x02 \x01(\tR\askuCode\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
-	"\x05price\x18\x04 \x01(\x03R\x05price\x12\x1b\n" +
+	"\x05price\x18\x04 \x01(\tR\x05price\x12\x1b\n" +
 	"\timage_url\x18\x05 \x01(\tR\bimageUrl\x12:\n" +
 	"\n" +
 	"sort_order\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x12\x19\n" +
@@ -1139,7 +1139,7 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2\x17.sku.BatchCreateSkuItemR\x05items\"\xab\x01\n" +
 	"\x12BatchUpdateSkuItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
-	"\x05price\x18\x02 \x01(\x03R\x05price\x12:\n" +
+	"\x05price\x18\x02 \x01(\tR\x05price\x12:\n" +
 	"\n" +
 	"sort_order\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\tsortOrder\x123\n" +
 	"\x06status\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"F\n" +

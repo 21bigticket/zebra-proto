@@ -40,7 +40,7 @@ message CartItem {
   int64  sku_id      = 4;
   string sku_name    = 5;
   string sku_image   = 6;
-  int64  price       = 7;  // 单价（分）
+  string price       = 7;  // 单价（元）
   int32  quantity    = 8;  // 数量
   int64  create_time = 9;
   int64  update_time = 10;
@@ -53,7 +53,7 @@ message AddItemRequest {
   int64  sku_id   = 2;
   string sku_name = 3;
   string sku_image = 4;
-  int64  price    = 5;
+  string price    = 5;  // 单价（元）
   int32  quantity = 6;
 }
 
@@ -87,9 +87,9 @@ message GetCartResponse {
   string  msg = 2;  // 提示语
   Cart           cart        = 3;
   repeated CartItem items    = 4;
-  int64 total_amount = 5;
-  int64 discount_amount = 6;
-  int64 pay_amount = 7;
+  string total_amount = 5;
+  string discount_amount = 6;
+  string pay_amount = 7;
   int64 applied_user_coupon_id = 8;
 }
 

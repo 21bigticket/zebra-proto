@@ -30,8 +30,8 @@ message HomeGoods {
   string name = 2;
   string main_image = 3;
   string sub_title = 4;
-  int64 retail_price = 5;
-  int64 counter_price = 6;
+  string retail_price = 5; // 零售价（元）
+  string counter_price = 6; // 最高价（元）
 }
 
 message GetGoodsHomeResponse {
