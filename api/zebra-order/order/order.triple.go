@@ -52,6 +52,8 @@ const (
 	OrderServiceGetOrderProcedure = "/order.OrderService/GetOrder"
 	// OrderServiceGetUserOrdersProcedure is the fully-qualified name of the OrderService's GetUserOrders RPC.
 	OrderServiceGetUserOrdersProcedure = "/order.OrderService/GetUserOrders"
+	// OrderServiceGetUserOrderCountsProcedure is the fully-qualified name of the OrderService's GetUserOrderCounts RPC.
+	OrderServiceGetUserOrderCountsProcedure = "/order.OrderService/GetUserOrderCounts"
 	// OrderServiceListOrdersProcedure is the fully-qualified name of the OrderService's ListOrders RPC.
 	OrderServiceListOrdersProcedure = "/order.OrderService/ListOrders"
 )
@@ -70,6 +72,7 @@ type OrderService interface {
 	FinishOrder(ctx context.Context, req *FinishOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 	GetOrder(ctx context.Context, req *GetOrderRequest, opts ...client.CallOption) (*GetOrderResponse, error)
 	GetUserOrders(ctx context.Context, req *GetUserOrdersRequest, opts ...client.CallOption) (*GetUserOrdersResponse, error)
+	GetUserOrderCounts(ctx context.Context, req *GetUserOrderCountsRequest, opts ...client.CallOption) (*GetUserOrderCountsResponse, error)
 	ListOrders(ctx context.Context, req *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error)
 }
 
@@ -157,6 +160,14 @@ func (c *OrderServiceImpl) GetUserOrders(ctx context.Context, req *GetUserOrders
 	return resp, nil
 }
 
+func (c *OrderServiceImpl) GetUserOrderCounts(ctx context.Context, req *GetUserOrderCountsRequest, opts ...client.CallOption) (*GetUserOrderCountsResponse, error) {
+	resp := new(GetUserOrderCountsResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "GetUserOrderCounts", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *OrderServiceImpl) ListOrders(ctx context.Context, req *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error) {
 	resp := new(ListOrderResponse)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ListOrders", opts...); err != nil {
@@ -167,7 +178,7 @@ func (c *OrderServiceImpl) ListOrders(ctx context.Context, req *ListOrderRequest
 
 var OrderService_ClientInfo = client.ClientInfo{
 	InterfaceName: "order.OrderService",
-	MethodNames:   []string{"CreateOrder", "CancelOrder", "DeleteOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "ListOrders"},
+	MethodNames:   []string{"CreateOrder", "CancelOrder", "DeleteOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "GetUserOrderCounts", "ListOrders"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*OrderServiceImpl)
 		dubboCli.conn = conn
@@ -184,6 +195,7 @@ type OrderServiceHandler interface {
 	FinishOrder(context.Context, *FinishOrderRequest) (*OrderResponse, error)
 	GetOrder(context.Context, *GetOrderRequest) (*GetOrderResponse, error)
 	GetUserOrders(context.Context, *GetUserOrdersRequest) (*GetUserOrdersResponse, error)
+	GetUserOrderCounts(context.Context, *GetUserOrderCountsRequest) (*GetUserOrderCountsResponse, error)
 	ListOrders(context.Context, *ListOrderRequest) (*ListOrderResponse, error)
 }
 
@@ -313,6 +325,21 @@ var OrderService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*GetUserOrdersRequest)
 				res, err := handler.(OrderServiceHandler).GetUserOrders(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "GetUserOrderCounts",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(GetUserOrderCountsRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*GetUserOrderCountsRequest)
+				res, err := handler.(OrderServiceHandler).GetUserOrderCounts(ctx, req)
 				if err != nil {
 					return nil, err
 				}

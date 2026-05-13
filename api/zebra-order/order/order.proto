@@ -191,6 +191,28 @@ message OrderResponse {
   Order  order    = 5;
 }
 
+// 用户订单各状态数量
+message OrderStatusCount {
+  int32 order_status = 1; // 0=待支付, 1=已支付, 2=已发货, 3=已完成, 4=已取消, 5=售后中
+  int32 count        = 2;
+}
+
+// 查询用户订单各状态数量请求
+message GetUserOrderCountsRequest {
+  int64 user_id = 1;
+}
+
+// 查询用户订单各状态数量响应
+message GetUserOrderCountsResponse {
+  google.protobuf.Int32Value code = 1; // 业务状态码: 0=成功, -1=失败
+  string msg = 2;
+  google.protobuf.Int32Value total = 3; // 全部订单数（不含已取消）
+  google.protobuf.Int32Value unpaid = 4; // 待支付
+  google.protobuf.Int32Value unship = 5; // 待发货（已支付）
+  google.protobuf.Int32Value unrecv = 6; // 待收货（已发货）
+  google.protobuf.Int32Value finished = 7; // 已完成
+}
+
 // 订单服务
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
@@ -201,5 +223,6 @@ service OrderService {
   rpc FinishOrder(FinishOrderRequest) returns (OrderResponse);
   rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
   rpc GetUserOrders(GetUserOrdersRequest) returns (GetUserOrdersResponse);
+  rpc GetUserOrderCounts(GetUserOrderCountsRequest) returns (GetUserOrderCountsResponse);
   rpc ListOrders(ListOrderRequest) returns (ListOrderResponse);
 }
