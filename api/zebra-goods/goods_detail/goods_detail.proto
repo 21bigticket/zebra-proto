@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package goods_detail;
+
+option go_package = "./api/zebra-goods/goods_detail;goods_detail";
+
+message GetDetailRequest {
+  int64 goods_id = 1;
+}
+
+message GoodsInfo {
+  int64 id = 1;
+  string name = 2;
+  string brief = 3;
+  string detail = 4;
+  string main_image = 5;
+  repeated string gallery_images = 6;
+}
+
+message SpecValue {
+  int64 id = 1;
+  string value = 2;
+  string image_url = 3;
+}
+
+message SpecGroup {
+  string name = 1;
+  repeated SpecValue values = 2;
+}
+
+message DetailSku {
+  int64 id = 1;
+  string name = 2;
+  repeated int64 spec_value_ids = 3;
+  int64 price = 4;
+  int32 stock_num = 5;
+  string image_url = 6;
+  bool in_stock = 7;
+}
+
+message GetDetailResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  GoodsInfo goods = 3;
+  repeated SpecGroup spec_groups = 4;
+  repeated DetailSku skus = 5;
+  int64 default_sku_id = 6;
+  int64 min_price = 7;
+  int64 max_price = 8;
+  bool has_stock = 9;
+}
+
+service GoodsDetailService {
+  rpc GetDetail(GetDetailRequest) returns (GetDetailResponse);
+}

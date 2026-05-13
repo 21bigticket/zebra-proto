@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package activity_goods_detail;
+
+option go_package = "./api/zebra-activity/activity_goods_detail;activity_goods_detail";
+
+message GetGoodsActivitySummaryRequest {
+  int64 goods_id = 1;
+  repeated int64 sku_ids = 2;
+  int64 user_id = 3;
+}
+
+message SkuActivityPrice {
+  int64 sku_id = 1;
+  int64 activity_id = 2;
+  string activity_type = 3;
+  int64 activity_price = 4;
+  int32 stock_limit = 5;
+  int32 sold_quantity = 6;
+  int32 limit_per_user = 7;
+  int64 begin_time = 8;
+  int64 end_time = 9;
+}
+
+message ActivityTag {
+  int64 activity_id = 1;
+  string title = 2;
+  string tag = 3;
+}
+
+message GetGoodsActivitySummaryResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated SkuActivityPrice sku_activity_prices = 3;
+  repeated ActivityTag tags = 4;
+}
+
+service GoodsActivityService {
+  rpc GetGoodsActivitySummary(GetGoodsActivitySummaryRequest) returns (GetGoodsActivitySummaryResponse);
+}
