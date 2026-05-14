@@ -1,0 +1,47 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package order_refund;
+
+option go_package = "./api/zebra-order/order_refund;order_refund";
+
+// 订单退款请求
+message RefundOrderRequest {
+  string order_no      = 1;
+  int64  user_id       = 2;
+  string refund_amount = 3;   // 退款金额（元）
+  string refund_reason = 4;   // 退款原因
+  bool   return_stock  = 5;   // 是否归还库存
+}
+
+// 通用响应
+message RefundOrderResponse {
+  google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败
+  string  msg = 2;  // 提示语
+  bool    success = 3;
+  string  message = 4;
+}
+
+// 订单退款服务
+service OrderRefundService {
+  // 订单退款
+  rpc RefundOrder(RefundOrderRequest) returns (RefundOrderResponse);
+}
