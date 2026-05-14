@@ -56,6 +56,8 @@ const (
 	OrderServiceGetUserOrderCountsProcedure = "/order.OrderService/GetUserOrderCounts"
 	// OrderServiceListOrdersProcedure is the fully-qualified name of the OrderService's ListOrders RPC.
 	OrderServiceListOrdersProcedure = "/order.OrderService/ListOrders"
+	// OrderServiceRefundOrderProcedure is the fully-qualified name of the OrderService's RefundOrder RPC.
+	OrderServiceRefundOrderProcedure = "/order.OrderService/RefundOrder"
 )
 
 var (
@@ -74,6 +76,7 @@ type OrderService interface {
 	GetUserOrders(ctx context.Context, req *GetUserOrdersRequest, opts ...client.CallOption) (*GetUserOrdersResponse, error)
 	GetUserOrderCounts(ctx context.Context, req *GetUserOrderCountsRequest, opts ...client.CallOption) (*GetUserOrderCountsResponse, error)
 	ListOrders(ctx context.Context, req *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error)
+	RefundOrder(ctx context.Context, req *RefundOrderRequest, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 // NewOrderService constructs a client for the order.OrderService service.
@@ -176,9 +179,17 @@ func (c *OrderServiceImpl) ListOrders(ctx context.Context, req *ListOrderRequest
 	return resp, nil
 }
 
+func (c *OrderServiceImpl) RefundOrder(ctx context.Context, req *RefundOrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	resp := new(OrderResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "RefundOrder", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var OrderService_ClientInfo = client.ClientInfo{
 	InterfaceName: "order.OrderService",
-	MethodNames:   []string{"CreateOrder", "CancelOrder", "DeleteOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "GetUserOrderCounts", "ListOrders"},
+	MethodNames:   []string{"CreateOrder", "CancelOrder", "DeleteOrder", "PayOrder", "DeliverOrder", "FinishOrder", "GetOrder", "GetUserOrders", "GetUserOrderCounts", "ListOrders", "RefundOrder"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*OrderServiceImpl)
 		dubboCli.conn = conn
@@ -197,6 +208,7 @@ type OrderServiceHandler interface {
 	GetUserOrders(context.Context, *GetUserOrdersRequest) (*GetUserOrdersResponse, error)
 	GetUserOrderCounts(context.Context, *GetUserOrderCountsRequest) (*GetUserOrderCountsResponse, error)
 	ListOrders(context.Context, *ListOrderRequest) (*ListOrderResponse, error)
+	RefundOrder(context.Context, *RefundOrderRequest) (*OrderResponse, error)
 }
 
 func RegisterOrderServiceHandler(srv *server.Server, hdlr OrderServiceHandler, opts ...server.ServiceOption) error {
@@ -355,6 +367,21 @@ var OrderService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListOrderRequest)
 				res, err := handler.(OrderServiceHandler).ListOrders(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "RefundOrder",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(RefundOrderRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*RefundOrderRequest)
+				res, err := handler.(OrderServiceHandler).RefundOrder(ctx, req)
 				if err != nil {
 					return nil, err
 				}

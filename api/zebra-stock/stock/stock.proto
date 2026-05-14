@@ -143,6 +143,14 @@ message ListStockResponse {
   int32 total = 4;
 }
 
+// 归还已售库存请求（退款场景）
+message ReturnSoldRequest {
+  int64  sku_id    = 1;  // SKU ID
+  int32  num       = 2;  // 归还数量
+  string order_no  = 3;  // 订单号
+  string remark    = 4;  // 备注
+}
+
 // 通用响应
 message StockResponse {
   google.protobuf.Int32Value  code = 1;  // 业务状态码: 0=成功, -1=失败, -2=数据为空
@@ -174,4 +182,6 @@ service StockService {
   rpc GetStock(GetStockRequest) returns (GetStockResponse);
   // 分页查询库存
   rpc List(ListStockRequest) returns (ListStockResponse);
+  // 归还已售库存（退款场景）
+  rpc ReturnSold(ReturnSoldRequest) returns (StockResponse);
 }

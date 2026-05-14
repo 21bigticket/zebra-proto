@@ -644,6 +644,7 @@ type CreateRefundRequest struct {
 	RefundAmount  string                 `protobuf:"bytes,3,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
 	RefundReason  string                 `protobuf:"bytes,4,opt,name=refund_reason,json=refundReason,proto3" json:"refund_reason,omitempty"`
 	Items         []*RefundItemReq       `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
+	ReturnStock   bool                   `protobuf:"varint,6,opt,name=return_stock,json=returnStock,proto3" json:"return_stock,omitempty"` // 是否归还库存
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -711,6 +712,13 @@ func (x *CreateRefundRequest) GetItems() []*RefundItemReq {
 		return x.Items
 	}
 	return nil
+}
+
+func (x *CreateRefundRequest) GetReturnStock() bool {
+	if x != nil {
+		return x.ReturnStock
+	}
+	return false
 }
 
 // 退款明细请求
@@ -2887,13 +2895,14 @@ const file_api_zebra_pay_payment_payment_proto_rawDesc = "" +
 	"\x06pay_no\x18\x01 \x01(\tR\x05payNo\x12$\n" +
 	"\x0ethird_party_no\x18\x02 \x01(\tR\fthirdPartyNo\x12:\n" +
 	"\n" +
-	"pay_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\"\xbf\x01\n" +
+	"pay_status\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\tpayStatus\"\xe2\x01\n" +
 	"\x13CreateRefundRequest\x12\x15\n" +
 	"\x06pay_no\x18\x01 \x01(\tR\x05payNo\x12\x19\n" +
 	"\bsales_no\x18\x02 \x01(\tR\asalesNo\x12#\n" +
 	"\rrefund_amount\x18\x03 \x01(\tR\frefundAmount\x12#\n" +
 	"\rrefund_reason\x18\x04 \x01(\tR\frefundReason\x12,\n" +
-	"\x05items\x18\x05 \x03(\v2\x16.payment.RefundItemReqR\x05items\"O\n" +
+	"\x05items\x18\x05 \x03(\v2\x16.payment.RefundItemReqR\x05items\x12!\n" +
+	"\freturn_stock\x18\x06 \x01(\bR\vreturnStock\"O\n" +
 	"\rRefundItemReq\x12\x19\n" +
 	"\bsales_no\x18\x01 \x01(\tR\asalesNo\x12#\n" +
 	"\rrefund_amount\x18\x02 \x01(\tR\frefundAmount\"\x9c\x01\n" +

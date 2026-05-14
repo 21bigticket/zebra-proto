@@ -101,6 +101,7 @@ message CreateRefundRequest {
   string       refund_amount = 3;  // 退款金额（元）
   string       refund_reason = 4;
   repeated RefundItemReq items = 5;
+  bool         return_stock = 6;  // 是否归还库存
 }
 
 // 退款明细请求

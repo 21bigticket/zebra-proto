@@ -1677,6 +1677,83 @@ func (x *GetUserOrderCountsResponse) GetFinished() *wrapperspb.Int32Value {
 	return nil
 }
 
+// 订单退款请求
+type RefundOrderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderNo       string                 `protobuf:"bytes,1,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RefundAmount  string                 `protobuf:"bytes,3,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"` // 退款金额（元）
+	RefundReason  string                 `protobuf:"bytes,4,opt,name=refund_reason,json=refundReason,proto3" json:"refund_reason,omitempty"` // 退款原因
+	ReturnStock   bool                   `protobuf:"varint,5,opt,name=return_stock,json=returnStock,proto3" json:"return_stock,omitempty"`   // 是否归还库存
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefundOrderRequest) Reset() {
+	*x = RefundOrderRequest{}
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefundOrderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefundOrderRequest) ProtoMessage() {}
+
+func (x *RefundOrderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_order_order_order_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefundOrderRequest.ProtoReflect.Descriptor instead.
+func (*RefundOrderRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_order_order_order_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *RefundOrderRequest) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
+func (x *RefundOrderRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *RefundOrderRequest) GetRefundAmount() string {
+	if x != nil {
+		return x.RefundAmount
+	}
+	return ""
+}
+
+func (x *RefundOrderRequest) GetRefundReason() string {
+	if x != nil {
+		return x.RefundReason
+	}
+	return ""
+}
+
+func (x *RefundOrderRequest) GetReturnStock() bool {
+	if x != nil {
+		return x.ReturnStock
+	}
+	return false
+}
+
 var File_api_zebra_order_order_order_proto protoreflect.FileDescriptor
 
 const file_api_zebra_order_order_order_proto_rawDesc = "" +
@@ -1826,7 +1903,13 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\x06unpaid\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06unpaid\x123\n" +
 	"\x06unship\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06unship\x123\n" +
 	"\x06unrecv\x18\x06 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06unrecv\x127\n" +
-	"\bfinished\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\bfinished2\xb5\x05\n" +
+	"\bfinished\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueR\bfinished\"\xb5\x01\n" +
+	"\x12RefundOrderRequest\x12\x19\n" +
+	"\border_no\x18\x01 \x01(\tR\aorderNo\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
+	"\rrefund_amount\x18\x03 \x01(\tR\frefundAmount\x12#\n" +
+	"\rrefund_reason\x18\x04 \x01(\tR\frefundReason\x12!\n" +
+	"\freturn_stock\x18\x05 \x01(\bR\vreturnStock2\xf5\x05\n" +
 	"\fOrderService\x12D\n" +
 	"\vCreateOrder\x12\x19.order.CreateOrderRequest\x1a\x1a.order.CreateOrderResponse\x12>\n" +
 	"\vCancelOrder\x12\x19.order.CancelOrderRequest\x1a\x14.order.OrderResponse\x12>\n" +
@@ -1838,7 +1921,8 @@ const file_api_zebra_order_order_order_proto_rawDesc = "" +
 	"\rGetUserOrders\x12\x1b.order.GetUserOrdersRequest\x1a\x1c.order.GetUserOrdersResponse\x12Y\n" +
 	"\x12GetUserOrderCounts\x12 .order.GetUserOrderCountsRequest\x1a!.order.GetUserOrderCountsResponse\x12?\n" +
 	"\n" +
-	"ListOrders\x12\x17.order.ListOrderRequest\x1a\x18.order.ListOrderResponseB\x1fZ\x1d./api/zebra-order/order;orderb\x06proto3"
+	"ListOrders\x12\x17.order.ListOrderRequest\x1a\x18.order.ListOrderResponse\x12>\n" +
+	"\vRefundOrder\x12\x19.order.RefundOrderRequest\x1a\x14.order.OrderResponseB\x1fZ\x1d./api/zebra-order/order;orderb\x06proto3"
 
 var (
 	file_api_zebra_order_order_order_proto_rawDescOnce sync.Once
@@ -1852,7 +1936,7 @@ func file_api_zebra_order_order_order_proto_rawDescGZIP() []byte {
 	return file_api_zebra_order_order_order_proto_rawDescData
 }
 
-var file_api_zebra_order_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_api_zebra_order_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_api_zebra_order_order_order_proto_goTypes = []any{
 	(*Order)(nil),                      // 0: order.Order
 	(*OrderItem)(nil),                  // 1: order.OrderItem
@@ -1875,32 +1959,33 @@ var file_api_zebra_order_order_order_proto_goTypes = []any{
 	(*OrderStatusCount)(nil),           // 18: order.OrderStatusCount
 	(*GetUserOrderCountsRequest)(nil),  // 19: order.GetUserOrderCountsRequest
 	(*GetUserOrderCountsResponse)(nil), // 20: order.GetUserOrderCountsResponse
-	(*wrapperspb.Int32Value)(nil),      // 21: google.protobuf.Int32Value
+	(*RefundOrderRequest)(nil),         // 21: order.RefundOrderRequest
+	(*wrapperspb.Int32Value)(nil),      // 22: google.protobuf.Int32Value
 }
 var file_api_zebra_order_order_order_proto_depIdxs = []int32{
-	21, // 0: order.Order.order_status:type_name -> google.protobuf.Int32Value
-	21, // 1: order.OrderDelivery.delivery_status:type_name -> google.protobuf.Int32Value
+	22, // 0: order.Order.order_status:type_name -> google.protobuf.Int32Value
+	22, // 1: order.OrderDelivery.delivery_status:type_name -> google.protobuf.Int32Value
 	4,  // 2: order.CreateOrderRequest.items:type_name -> order.OrderItemReq
-	21, // 3: order.CreateOrderResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 3: order.CreateOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 4: order.CreateOrderResponse.order:type_name -> order.Order
-	21, // 5: order.GetOrderResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 5: order.GetOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 6: order.GetOrderResponse.order:type_name -> order.Order
 	1,  // 7: order.GetOrderResponse.items:type_name -> order.OrderItem
 	2,  // 8: order.GetOrderResponse.delivery:type_name -> order.OrderDelivery
-	21, // 9: order.GetUserOrdersRequest.order_status:type_name -> google.protobuf.Int32Value
-	21, // 10: order.GetUserOrdersResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 9: order.GetUserOrdersRequest.order_status:type_name -> google.protobuf.Int32Value
+	22, // 10: order.GetUserOrdersResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 11: order.GetUserOrdersResponse.orders:type_name -> order.Order
-	21, // 12: order.ListOrderRequest.order_status:type_name -> google.protobuf.Int32Value
-	21, // 13: order.ListOrderResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 12: order.ListOrderRequest.order_status:type_name -> google.protobuf.Int32Value
+	22, // 13: order.ListOrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 14: order.ListOrderResponse.orders:type_name -> order.Order
-	21, // 15: order.OrderResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 15: order.OrderResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 16: order.OrderResponse.order:type_name -> order.Order
-	21, // 17: order.GetUserOrderCountsResponse.code:type_name -> google.protobuf.Int32Value
-	21, // 18: order.GetUserOrderCountsResponse.total:type_name -> google.protobuf.Int32Value
-	21, // 19: order.GetUserOrderCountsResponse.unpaid:type_name -> google.protobuf.Int32Value
-	21, // 20: order.GetUserOrderCountsResponse.unship:type_name -> google.protobuf.Int32Value
-	21, // 21: order.GetUserOrderCountsResponse.unrecv:type_name -> google.protobuf.Int32Value
-	21, // 22: order.GetUserOrderCountsResponse.finished:type_name -> google.protobuf.Int32Value
+	22, // 17: order.GetUserOrderCountsResponse.code:type_name -> google.protobuf.Int32Value
+	22, // 18: order.GetUserOrderCountsResponse.total:type_name -> google.protobuf.Int32Value
+	22, // 19: order.GetUserOrderCountsResponse.unpaid:type_name -> google.protobuf.Int32Value
+	22, // 20: order.GetUserOrderCountsResponse.unship:type_name -> google.protobuf.Int32Value
+	22, // 21: order.GetUserOrderCountsResponse.unrecv:type_name -> google.protobuf.Int32Value
+	22, // 22: order.GetUserOrderCountsResponse.finished:type_name -> google.protobuf.Int32Value
 	3,  // 23: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
 	6,  // 24: order.OrderService.CancelOrder:input_type -> order.CancelOrderRequest
 	7,  // 25: order.OrderService.DeleteOrder:input_type -> order.DeleteOrderRequest
@@ -1911,18 +1996,20 @@ var file_api_zebra_order_order_order_proto_depIdxs = []int32{
 	13, // 30: order.OrderService.GetUserOrders:input_type -> order.GetUserOrdersRequest
 	19, // 31: order.OrderService.GetUserOrderCounts:input_type -> order.GetUserOrderCountsRequest
 	15, // 32: order.OrderService.ListOrders:input_type -> order.ListOrderRequest
-	5,  // 33: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
-	17, // 34: order.OrderService.CancelOrder:output_type -> order.OrderResponse
-	17, // 35: order.OrderService.DeleteOrder:output_type -> order.OrderResponse
-	17, // 36: order.OrderService.PayOrder:output_type -> order.OrderResponse
-	17, // 37: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
-	17, // 38: order.OrderService.FinishOrder:output_type -> order.OrderResponse
-	12, // 39: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
-	14, // 40: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
-	20, // 41: order.OrderService.GetUserOrderCounts:output_type -> order.GetUserOrderCountsResponse
-	16, // 42: order.OrderService.ListOrders:output_type -> order.ListOrderResponse
-	33, // [33:43] is the sub-list for method output_type
-	23, // [23:33] is the sub-list for method input_type
+	21, // 33: order.OrderService.RefundOrder:input_type -> order.RefundOrderRequest
+	5,  // 34: order.OrderService.CreateOrder:output_type -> order.CreateOrderResponse
+	17, // 35: order.OrderService.CancelOrder:output_type -> order.OrderResponse
+	17, // 36: order.OrderService.DeleteOrder:output_type -> order.OrderResponse
+	17, // 37: order.OrderService.PayOrder:output_type -> order.OrderResponse
+	17, // 38: order.OrderService.DeliverOrder:output_type -> order.OrderResponse
+	17, // 39: order.OrderService.FinishOrder:output_type -> order.OrderResponse
+	12, // 40: order.OrderService.GetOrder:output_type -> order.GetOrderResponse
+	14, // 41: order.OrderService.GetUserOrders:output_type -> order.GetUserOrdersResponse
+	20, // 42: order.OrderService.GetUserOrderCounts:output_type -> order.GetUserOrderCountsResponse
+	16, // 43: order.OrderService.ListOrders:output_type -> order.ListOrderResponse
+	17, // 44: order.OrderService.RefundOrder:output_type -> order.OrderResponse
+	34, // [34:45] is the sub-list for method output_type
+	23, // [23:34] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
 	23, // [23:23] is the sub-list for extension extendee
 	0,  // [0:23] is the sub-list for field type_name
@@ -1943,7 +2030,7 @@ func file_api_zebra_order_order_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_order_order_order_proto_rawDesc), len(file_api_zebra_order_order_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

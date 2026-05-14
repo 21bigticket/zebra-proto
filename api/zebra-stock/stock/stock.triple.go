@@ -56,6 +56,8 @@ const (
 	StockServiceGetStockProcedure = "/stock.StockService/GetStock"
 	// StockServiceListProcedure is the fully-qualified name of the StockService's List RPC.
 	StockServiceListProcedure = "/stock.StockService/List"
+	// StockServiceReturnSoldProcedure is the fully-qualified name of the StockService's ReturnSold RPC.
+	StockServiceReturnSoldProcedure = "/stock.StockService/ReturnSold"
 )
 
 var (
@@ -74,6 +76,7 @@ type StockService interface {
 	BatchRelease(ctx context.Context, req *BatchReleaseRequest, opts ...client.CallOption) (*StockResponse, error)
 	GetStock(ctx context.Context, req *GetStockRequest, opts ...client.CallOption) (*GetStockResponse, error)
 	List(ctx context.Context, req *ListStockRequest, opts ...client.CallOption) (*ListStockResponse, error)
+	ReturnSold(ctx context.Context, req *ReturnSoldRequest, opts ...client.CallOption) (*StockResponse, error)
 }
 
 // NewStockService constructs a client for the stock.StockService service.
@@ -176,9 +179,17 @@ func (c *StockServiceImpl) List(ctx context.Context, req *ListStockRequest, opts
 	return resp, nil
 }
 
+func (c *StockServiceImpl) ReturnSold(ctx context.Context, req *ReturnSoldRequest, opts ...client.CallOption) (*StockResponse, error) {
+	resp := new(StockResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ReturnSold", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 var StockService_ClientInfo = client.ClientInfo{
 	InterfaceName: "stock.StockService",
-	MethodNames:   []string{"Inbound", "BatchInbound", "Outbound", "BatchOutbound", "Freeze", "BatchFreeze", "Release", "BatchRelease", "GetStock", "List"},
+	MethodNames:   []string{"Inbound", "BatchInbound", "Outbound", "BatchOutbound", "Freeze", "BatchFreeze", "Release", "BatchRelease", "GetStock", "List", "ReturnSold"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*StockServiceImpl)
 		dubboCli.conn = conn
@@ -197,6 +208,7 @@ type StockServiceHandler interface {
 	BatchRelease(context.Context, *BatchReleaseRequest) (*StockResponse, error)
 	GetStock(context.Context, *GetStockRequest) (*GetStockResponse, error)
 	List(context.Context, *ListStockRequest) (*ListStockResponse, error)
+	ReturnSold(context.Context, *ReturnSoldRequest) (*StockResponse, error)
 }
 
 func RegisterStockServiceHandler(srv *server.Server, hdlr StockServiceHandler, opts ...server.ServiceOption) error {
@@ -355,6 +367,21 @@ var StockService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ListStockRequest)
 				res, err := handler.(StockServiceHandler).List(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ReturnSold",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ReturnSoldRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ReturnSoldRequest)
+				res, err := handler.(StockServiceHandler).ReturnSold(ctx, req)
 				if err != nil {
 					return nil, err
 				}

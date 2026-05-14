@@ -213,6 +213,15 @@ message GetUserOrderCountsResponse {
   google.protobuf.Int32Value finished = 7; // 已完成
 }
 
+// 订单退款请求
+message RefundOrderRequest {
+  string order_no      = 1;
+  int64  user_id       = 2;
+  string refund_amount = 3;   // 退款金额（元）
+  string refund_reason = 4;   // 退款原因
+  bool   return_stock  = 5;   // 是否归还库存
+}
+
 // 订单服务
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
@@ -225,4 +234,5 @@ service OrderService {
   rpc GetUserOrders(GetUserOrdersRequest) returns (GetUserOrdersResponse);
   rpc GetUserOrderCounts(GetUserOrderCountsRequest) returns (GetUserOrderCountsResponse);
   rpc ListOrders(ListOrderRequest) returns (ListOrderResponse);
+  rpc RefundOrder(RefundOrderRequest) returns (OrderResponse);
 }
