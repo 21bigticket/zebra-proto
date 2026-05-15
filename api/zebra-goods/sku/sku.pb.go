@@ -899,6 +899,7 @@ type ListSkuRequest struct {
 	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	GoodsId       int64                  `protobuf:"varint,3,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"` // -1表示全部
 	Status        *wrapperspb.Int32Value `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                   // -1表示全部
+	Ids           []int64                `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids,omitempty"`                 // 按ID列表查询（优先级高于其他条件）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -957,6 +958,13 @@ func (x *ListSkuRequest) GetGoodsId() int64 {
 func (x *ListSkuRequest) GetStatus() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.Status
+	}
+	return nil
+}
+
+func (x *ListSkuRequest) GetIds() []int64 {
+	if x != nil {
+		return x.Ids
 	}
 	return nil
 }
@@ -1159,12 +1167,13 @@ const file_api_zebra_goods_sku_sku_proto_rawDesc = "" +
 	"\x17MatchSkuBySpecsResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12\x1f\n" +
-	"\x03sku\x18\x03 \x01(\v2\r.sku.GoodsSkuR\x03sku\"\x91\x01\n" +
+	"\x03sku\x18\x03 \x01(\v2\r.sku.GoodsSkuR\x03sku\"\xa3\x01\n" +
 	"\x0eListSkuRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x19\n" +
 	"\bgoods_id\x18\x03 \x01(\x03R\agoodsId\x123\n" +
-	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\"\x8d\x01\n" +
+	"\x06status\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06status\x12\x10\n" +
+	"\x03ids\x18\x05 \x03(\x03R\x03ids\"\x8d\x01\n" +
 	"\x0fListSkuResponse\x12/\n" +
 	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
 	"\x03msg\x18\x02 \x01(\tR\x03msg\x12!\n" +

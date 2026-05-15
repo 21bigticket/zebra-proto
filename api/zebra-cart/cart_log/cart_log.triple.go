@@ -38,6 +38,8 @@ const (
 const (
 	// CartLogServiceCreateProcedure is the fully-qualified name of the CartLogService's Create RPC.
 	CartLogServiceCreateProcedure = "/cart_log.CartLogService/Create"
+	// CartLogServiceBatchCreateProcedure is the fully-qualified name of the CartLogService's BatchCreate RPC.
+	CartLogServiceBatchCreateProcedure = "/cart_log.CartLogService/BatchCreate"
 	// CartLogServiceGetProcedure is the fully-qualified name of the CartLogService's Get RPC.
 	CartLogServiceGetProcedure = "/cart_log.CartLogService/Get"
 	// CartLogServiceListProcedure is the fully-qualified name of the CartLogService's List RPC.
@@ -55,6 +57,7 @@ var (
 // CartLogService is a client for the cart_log.CartLogService service.
 type CartLogService interface {
 	Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error)
+	BatchCreate(ctx context.Context, req *BatchCreateLogRequest, opts ...client.CallOption) (*Response, error)
 	Get(ctx context.Context, req *GetLogRequest, opts ...client.CallOption) (*GetLogResponse, error)
 	List(ctx context.Context, req *ListLogRequest, opts ...client.CallOption) (*ListLogResponse, error)
 	GetUserLogs(ctx context.Context, req *GetUserLogsRequest, opts ...client.CallOption) (*ListLogResponse, error)
@@ -84,6 +87,14 @@ type CartLogServiceImpl struct {
 func (c *CartLogServiceImpl) Create(ctx context.Context, req *CreateLogRequest, opts ...client.CallOption) (*Response, error) {
 	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "Create", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func (c *CartLogServiceImpl) BatchCreate(ctx context.Context, req *BatchCreateLogRequest, opts ...client.CallOption) (*Response, error) {
+	resp := new(Response)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "BatchCreate", opts...); err != nil {
 		return nil, err
 	}
 	return resp, nil
@@ -123,7 +134,7 @@ func (c *CartLogServiceImpl) GetCartLogs(ctx context.Context, req *GetCartLogsRe
 
 var CartLogService_ClientInfo = client.ClientInfo{
 	InterfaceName: "cart_log.CartLogService",
-	MethodNames:   []string{"Create", "Get", "List", "GetUserLogs", "GetCartLogs"},
+	MethodNames:   []string{"Create", "BatchCreate", "Get", "List", "GetUserLogs", "GetCartLogs"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*CartLogServiceImpl)
 		dubboCli.conn = conn
@@ -133,6 +144,7 @@ var CartLogService_ClientInfo = client.ClientInfo{
 // CartLogServiceHandler is an implementation of the cart_log.CartLogService service.
 type CartLogServiceHandler interface {
 	Create(context.Context, *CreateLogRequest) (*Response, error)
+	BatchCreate(context.Context, *BatchCreateLogRequest) (*Response, error)
 	Get(context.Context, *GetLogRequest) (*GetLogResponse, error)
 	List(context.Context, *ListLogRequest) (*ListLogResponse, error)
 	GetUserLogs(context.Context, *GetUserLogsRequest) (*ListLogResponse, error)
@@ -160,6 +172,21 @@ var CartLogService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*CreateLogRequest)
 				res, err := handler.(CartLogServiceHandler).Create(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "BatchCreate",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(BatchCreateLogRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*BatchCreateLogRequest)
+				res, err := handler.(CartLogServiceHandler).BatchCreate(ctx, req)
 				if err != nil {
 					return nil, err
 				}

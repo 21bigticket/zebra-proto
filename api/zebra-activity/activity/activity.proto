@@ -190,6 +190,34 @@ message DeductActivityStockRequest {
   string order_no   = 5;
 }
 
+// 批量验证活动条目
+message ActivityBatchItem {
+  int64 sku_id   = 1;
+  int32 quantity = 2;
+}
+
+// 批量验证活动请求
+message ValidateActivityBatchRequest {
+  int64 activity_id = 1;
+  int64 user_id     = 2;
+  repeated ActivityBatchItem items = 3;
+}
+
+// 单条验证结果
+message ActivityValidationResult {
+  int64  sku_id         = 1;
+  bool   valid          = 2;
+  string message        = 3;
+  string activity_price = 4;
+}
+
+// 批量验证活动响应
+message ValidateActivityBatchResponse {
+  google.protobuf.Int32Value code = 1;
+  string msg = 2;
+  repeated ActivityValidationResult results = 3;
+}
+
 // 活动服务
 service ActivityService {
   rpc Create(CreateActivityRequest) returns (Response);
@@ -203,5 +231,6 @@ service ActivityService {
   rpc GetActivityGoods(GetActivityGoodsRequest) returns (GetActivityGoodsResponse);
   rpc GetGoodsActivity(GetGoodsActivityRequest) returns (GetGoodsActivityResponse);
   rpc ValidateActivity(ValidateActivityRequest) returns (ValidateActivityResponse);
+  rpc ValidateActivityBatch(ValidateActivityBatchRequest) returns (ValidateActivityBatchResponse);
   rpc DeductActivityStock(DeductActivityStockRequest) returns (Response);
 }

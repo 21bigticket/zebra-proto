@@ -682,6 +682,51 @@ func (x *GetCartLogsRequest) GetEndTime() int64 {
 	return 0
 }
 
+// 批量创建日志请求
+type BatchCreateLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*CreateLogRequest    `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateLogRequest) Reset() {
+	*x = BatchCreateLogRequest{}
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateLogRequest) ProtoMessage() {}
+
+func (x *BatchCreateLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_cart_cart_log_cart_log_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateLogRequest.ProtoReflect.Descriptor instead.
+func (*BatchCreateLogRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *BatchCreateLogRequest) GetItems() []*CreateLogRequest {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 var File_api_zebra_cart_cart_log_cart_log_proto protoreflect.FileDescriptor
 
 const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
@@ -740,9 +785,12 @@ const file_api_zebra_cart_cart_log_cart_log_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"start_time\x18\x04 \x01(\x03R\tstartTime\x12\x19\n" +
-	"\bend_time\x18\x05 \x01(\x03R\aendTime2\xd1\x02\n" +
+	"\bend_time\x18\x05 \x01(\x03R\aendTime\"I\n" +
+	"\x15BatchCreateLogRequest\x120\n" +
+	"\x05items\x18\x01 \x03(\v2\x1a.cart_log.CreateLogRequestR\x05items2\x95\x03\n" +
 	"\x0eCartLogService\x128\n" +
-	"\x06Create\x12\x1a.cart_log.CreateLogRequest\x1a\x12.cart_log.Response\x128\n" +
+	"\x06Create\x12\x1a.cart_log.CreateLogRequest\x1a\x12.cart_log.Response\x12B\n" +
+	"\vBatchCreate\x12\x1f.cart_log.BatchCreateLogRequest\x1a\x12.cart_log.Response\x128\n" +
 	"\x03Get\x12\x17.cart_log.GetLogRequest\x1a\x18.cart_log.GetLogResponse\x12;\n" +
 	"\x04List\x12\x18.cart_log.ListLogRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
 	"\vGetUserLogs\x12\x1c.cart_log.GetUserLogsRequest\x1a\x19.cart_log.ListLogResponse\x12F\n" +
@@ -760,7 +808,7 @@ func file_api_zebra_cart_cart_log_cart_log_proto_rawDescGZIP() []byte {
 	return file_api_zebra_cart_cart_log_cart_log_proto_rawDescData
 }
 
-var file_api_zebra_cart_cart_log_cart_log_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_api_zebra_cart_cart_log_cart_log_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_zebra_cart_cart_log_cart_log_proto_goTypes = []any{
 	(*CartLog)(nil),               // 0: cart_log.CartLog
 	(*CreateLogRequest)(nil),      // 1: cart_log.CreateLogRequest
@@ -771,29 +819,33 @@ var file_api_zebra_cart_cart_log_cart_log_proto_goTypes = []any{
 	(*Response)(nil),              // 6: cart_log.Response
 	(*GetUserLogsRequest)(nil),    // 7: cart_log.GetUserLogsRequest
 	(*GetCartLogsRequest)(nil),    // 8: cart_log.GetCartLogsRequest
-	(*wrapperspb.Int32Value)(nil), // 9: google.protobuf.Int32Value
+	(*BatchCreateLogRequest)(nil), // 9: cart_log.BatchCreateLogRequest
+	(*wrapperspb.Int32Value)(nil), // 10: google.protobuf.Int32Value
 }
 var file_api_zebra_cart_cart_log_cart_log_proto_depIdxs = []int32{
-	9,  // 0: cart_log.GetLogResponse.code:type_name -> google.protobuf.Int32Value
+	10, // 0: cart_log.GetLogResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 1: cart_log.GetLogResponse.cart_log:type_name -> cart_log.CartLog
-	9,  // 2: cart_log.ListLogResponse.code:type_name -> google.protobuf.Int32Value
+	10, // 2: cart_log.ListLogResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: cart_log.ListLogResponse.cart_logs:type_name -> cart_log.CartLog
-	9,  // 4: cart_log.Response.code:type_name -> google.protobuf.Int32Value
-	1,  // 5: cart_log.CartLogService.Create:input_type -> cart_log.CreateLogRequest
-	2,  // 6: cart_log.CartLogService.Get:input_type -> cart_log.GetLogRequest
-	4,  // 7: cart_log.CartLogService.List:input_type -> cart_log.ListLogRequest
-	7,  // 8: cart_log.CartLogService.GetUserLogs:input_type -> cart_log.GetUserLogsRequest
-	8,  // 9: cart_log.CartLogService.GetCartLogs:input_type -> cart_log.GetCartLogsRequest
-	6,  // 10: cart_log.CartLogService.Create:output_type -> cart_log.Response
-	3,  // 11: cart_log.CartLogService.Get:output_type -> cart_log.GetLogResponse
-	5,  // 12: cart_log.CartLogService.List:output_type -> cart_log.ListLogResponse
-	5,  // 13: cart_log.CartLogService.GetUserLogs:output_type -> cart_log.ListLogResponse
-	5,  // 14: cart_log.CartLogService.GetCartLogs:output_type -> cart_log.ListLogResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	10, // 4: cart_log.Response.code:type_name -> google.protobuf.Int32Value
+	1,  // 5: cart_log.BatchCreateLogRequest.items:type_name -> cart_log.CreateLogRequest
+	1,  // 6: cart_log.CartLogService.Create:input_type -> cart_log.CreateLogRequest
+	9,  // 7: cart_log.CartLogService.BatchCreate:input_type -> cart_log.BatchCreateLogRequest
+	2,  // 8: cart_log.CartLogService.Get:input_type -> cart_log.GetLogRequest
+	4,  // 9: cart_log.CartLogService.List:input_type -> cart_log.ListLogRequest
+	7,  // 10: cart_log.CartLogService.GetUserLogs:input_type -> cart_log.GetUserLogsRequest
+	8,  // 11: cart_log.CartLogService.GetCartLogs:input_type -> cart_log.GetCartLogsRequest
+	6,  // 12: cart_log.CartLogService.Create:output_type -> cart_log.Response
+	6,  // 13: cart_log.CartLogService.BatchCreate:output_type -> cart_log.Response
+	3,  // 14: cart_log.CartLogService.Get:output_type -> cart_log.GetLogResponse
+	5,  // 15: cart_log.CartLogService.List:output_type -> cart_log.ListLogResponse
+	5,  // 16: cart_log.CartLogService.GetUserLogs:output_type -> cart_log.ListLogResponse
+	5,  // 17: cart_log.CartLogService.GetCartLogs:output_type -> cart_log.ListLogResponse
+	12, // [12:18] is the sub-list for method output_type
+	6,  // [6:12] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_cart_cart_log_cart_log_proto_init() }
@@ -807,7 +859,7 @@ func file_api_zebra_cart_cart_log_cart_log_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_cart_cart_log_cart_log_proto_rawDesc), len(file_api_zebra_cart_cart_log_cart_log_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

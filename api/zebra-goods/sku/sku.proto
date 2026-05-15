@@ -123,6 +123,7 @@ message ListSkuRequest {
   int32  page_size = 2;
   int64  goods_id  = 3; // -1表示全部
   google.protobuf.Int32Value status = 4; // -1表示全部
+  repeated int64 ids = 5; // 按ID列表查询（优先级高于其他条件）
 }
 
 // 列出SKU响应

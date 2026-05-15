@@ -1496,6 +1496,250 @@ func (x *DeductActivityStockRequest) GetOrderNo() string {
 	return ""
 }
 
+// 批量验证活动条目
+type ActivityBatchItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkuId         int64                  `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ActivityBatchItem) Reset() {
+	*x = ActivityBatchItem{}
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActivityBatchItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivityBatchItem) ProtoMessage() {}
+
+func (x *ActivityBatchItem) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivityBatchItem.ProtoReflect.Descriptor instead.
+func (*ActivityBatchItem) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ActivityBatchItem) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
+	}
+	return 0
+}
+
+func (x *ActivityBatchItem) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+// 批量验证活动请求
+type ValidateActivityBatchRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ActivityId    int64                  `protobuf:"varint,1,opt,name=activity_id,json=activityId,proto3" json:"activity_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Items         []*ActivityBatchItem   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateActivityBatchRequest) Reset() {
+	*x = ValidateActivityBatchRequest{}
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateActivityBatchRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateActivityBatchRequest) ProtoMessage() {}
+
+func (x *ValidateActivityBatchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateActivityBatchRequest.ProtoReflect.Descriptor instead.
+func (*ValidateActivityBatchRequest) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ValidateActivityBatchRequest) GetActivityId() int64 {
+	if x != nil {
+		return x.ActivityId
+	}
+	return 0
+}
+
+func (x *ValidateActivityBatchRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ValidateActivityBatchRequest) GetItems() []*ActivityBatchItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+// 单条验证结果
+type ActivityValidationResult struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkuId         int64                  `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Valid         bool                   `protobuf:"varint,2,opt,name=valid,proto3" json:"valid,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	ActivityPrice string                 `protobuf:"bytes,4,opt,name=activity_price,json=activityPrice,proto3" json:"activity_price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ActivityValidationResult) Reset() {
+	*x = ActivityValidationResult{}
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActivityValidationResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivityValidationResult) ProtoMessage() {}
+
+func (x *ActivityValidationResult) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivityValidationResult.ProtoReflect.Descriptor instead.
+func (*ActivityValidationResult) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ActivityValidationResult) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
+	}
+	return 0
+}
+
+func (x *ActivityValidationResult) GetValid() bool {
+	if x != nil {
+		return x.Valid
+	}
+	return false
+}
+
+func (x *ActivityValidationResult) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ActivityValidationResult) GetActivityPrice() string {
+	if x != nil {
+		return x.ActivityPrice
+	}
+	return ""
+}
+
+// 批量验证活动响应
+type ValidateActivityBatchResponse struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Code          *wrapperspb.Int32Value      `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg           string                      `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Results       []*ActivityValidationResult `protobuf:"bytes,3,rep,name=results,proto3" json:"results,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ValidateActivityBatchResponse) Reset() {
+	*x = ValidateActivityBatchResponse{}
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ValidateActivityBatchResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ValidateActivityBatchResponse) ProtoMessage() {}
+
+func (x *ValidateActivityBatchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_zebra_activity_activity_activity_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ValidateActivityBatchResponse.ProtoReflect.Descriptor instead.
+func (*ValidateActivityBatchResponse) Descriptor() ([]byte, []int) {
+	return file_api_zebra_activity_activity_activity_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ValidateActivityBatchResponse) GetCode() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *ValidateActivityBatchResponse) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
+func (x *ValidateActivityBatchResponse) GetResults() []*ActivityValidationResult {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
 var File_api_zebra_activity_activity_activity_proto protoreflect.FileDescriptor
 
 const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
@@ -1625,7 +1869,24 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x06sku_id\x18\x02 \x01(\x03R\x05skuId\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\x05R\bquantity\x12\x19\n" +
-	"\border_no\x18\x05 \x01(\tR\aorderNo2\x96\a\n" +
+	"\border_no\x18\x05 \x01(\tR\aorderNo\"F\n" +
+	"\x11ActivityBatchItem\x12\x15\n" +
+	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"\x8b\x01\n" +
+	"\x1cValidateActivityBatchRequest\x12\x1f\n" +
+	"\vactivity_id\x18\x01 \x01(\x03R\n" +
+	"activityId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x121\n" +
+	"\x05items\x18\x03 \x03(\v2\x1b.activity.ActivityBatchItemR\x05items\"\x88\x01\n" +
+	"\x18ActivityValidationResult\x12\x15\n" +
+	"\x06sku_id\x18\x01 \x01(\x03R\x05skuId\x12\x14\n" +
+	"\x05valid\x18\x02 \x01(\bR\x05valid\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12%\n" +
+	"\x0eactivity_price\x18\x04 \x01(\tR\ractivityPrice\"\xa0\x01\n" +
+	"\x1dValidateActivityBatchResponse\x12/\n" +
+	"\x04code\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x04code\x12\x10\n" +
+	"\x03msg\x18\x02 \x01(\tR\x03msg\x12<\n" +
+	"\aresults\x18\x03 \x03(\v2\".activity.ActivityValidationResultR\aresults2\x80\b\n" +
 	"\x0fActivityService\x12=\n" +
 	"\x06Create\x12\x1f.activity.CreateActivityRequest\x1a\x12.activity.Response\x12=\n" +
 	"\x06Update\x12\x1f.activity.UpdateActivityRequest\x1a\x12.activity.Response\x12=\n" +
@@ -1637,7 +1898,8 @@ const file_api_zebra_activity_activity_activity_proto_rawDesc = "" +
 	"\x06Cancel\x12\x1f.activity.CancelActivityRequest\x1a .activity.CancelActivityResponse\x12Y\n" +
 	"\x10GetActivityGoods\x12!.activity.GetActivityGoodsRequest\x1a\".activity.GetActivityGoodsResponse\x12Y\n" +
 	"\x10GetGoodsActivity\x12!.activity.GetGoodsActivityRequest\x1a\".activity.GetGoodsActivityResponse\x12Y\n" +
-	"\x10ValidateActivity\x12!.activity.ValidateActivityRequest\x1a\".activity.ValidateActivityResponse\x12O\n" +
+	"\x10ValidateActivity\x12!.activity.ValidateActivityRequest\x1a\".activity.ValidateActivityResponse\x12h\n" +
+	"\x15ValidateActivityBatch\x12&.activity.ValidateActivityBatchRequest\x1a'.activity.ValidateActivityBatchResponse\x12O\n" +
 	"\x13DeductActivityStock\x12$.activity.DeductActivityStockRequest\x1a\x12.activity.ResponseB(Z&./api/zebra-activity/activity;activityb\x06proto3"
 
 var (
@@ -1652,76 +1914,85 @@ func file_api_zebra_activity_activity_activity_proto_rawDescGZIP() []byte {
 	return file_api_zebra_activity_activity_activity_proto_rawDescData
 }
 
-var file_api_zebra_activity_activity_activity_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_api_zebra_activity_activity_activity_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_api_zebra_activity_activity_activity_proto_goTypes = []any{
-	(*Activity)(nil),                   // 0: activity.Activity
-	(*CreateActivityRequest)(nil),      // 1: activity.CreateActivityRequest
-	(*UpdateActivityRequest)(nil),      // 2: activity.UpdateActivityRequest
-	(*DeleteActivityRequest)(nil),      // 3: activity.DeleteActivityRequest
-	(*GetActivityRequest)(nil),         // 4: activity.GetActivityRequest
-	(*GetActivityResponse)(nil),        // 5: activity.GetActivityResponse
-	(*ListActivityRequest)(nil),        // 6: activity.ListActivityRequest
-	(*ListActivityResponse)(nil),       // 7: activity.ListActivityResponse
-	(*Response)(nil),                   // 8: activity.Response
-	(*StartActivityRequest)(nil),       // 9: activity.StartActivityRequest
-	(*StartActivityResponse)(nil),      // 10: activity.StartActivityResponse
-	(*EndActivityRequest)(nil),         // 11: activity.EndActivityRequest
-	(*EndActivityResponse)(nil),        // 12: activity.EndActivityResponse
-	(*CancelActivityRequest)(nil),      // 13: activity.CancelActivityRequest
-	(*CancelActivityResponse)(nil),     // 14: activity.CancelActivityResponse
-	(*ActivityGoods)(nil),              // 15: activity.ActivityGoods
-	(*GetActivityGoodsRequest)(nil),    // 16: activity.GetActivityGoodsRequest
-	(*GetActivityGoodsResponse)(nil),   // 17: activity.GetActivityGoodsResponse
-	(*GetGoodsActivityRequest)(nil),    // 18: activity.GetGoodsActivityRequest
-	(*GetGoodsActivityResponse)(nil),   // 19: activity.GetGoodsActivityResponse
-	(*ValidateActivityRequest)(nil),    // 20: activity.ValidateActivityRequest
-	(*ValidateActivityResponse)(nil),   // 21: activity.ValidateActivityResponse
-	(*DeductActivityStockRequest)(nil), // 22: activity.DeductActivityStockRequest
-	(*wrapperspb.Int32Value)(nil),      // 23: google.protobuf.Int32Value
+	(*Activity)(nil),                      // 0: activity.Activity
+	(*CreateActivityRequest)(nil),         // 1: activity.CreateActivityRequest
+	(*UpdateActivityRequest)(nil),         // 2: activity.UpdateActivityRequest
+	(*DeleteActivityRequest)(nil),         // 3: activity.DeleteActivityRequest
+	(*GetActivityRequest)(nil),            // 4: activity.GetActivityRequest
+	(*GetActivityResponse)(nil),           // 5: activity.GetActivityResponse
+	(*ListActivityRequest)(nil),           // 6: activity.ListActivityRequest
+	(*ListActivityResponse)(nil),          // 7: activity.ListActivityResponse
+	(*Response)(nil),                      // 8: activity.Response
+	(*StartActivityRequest)(nil),          // 9: activity.StartActivityRequest
+	(*StartActivityResponse)(nil),         // 10: activity.StartActivityResponse
+	(*EndActivityRequest)(nil),            // 11: activity.EndActivityRequest
+	(*EndActivityResponse)(nil),           // 12: activity.EndActivityResponse
+	(*CancelActivityRequest)(nil),         // 13: activity.CancelActivityRequest
+	(*CancelActivityResponse)(nil),        // 14: activity.CancelActivityResponse
+	(*ActivityGoods)(nil),                 // 15: activity.ActivityGoods
+	(*GetActivityGoodsRequest)(nil),       // 16: activity.GetActivityGoodsRequest
+	(*GetActivityGoodsResponse)(nil),      // 17: activity.GetActivityGoodsResponse
+	(*GetGoodsActivityRequest)(nil),       // 18: activity.GetGoodsActivityRequest
+	(*GetGoodsActivityResponse)(nil),      // 19: activity.GetGoodsActivityResponse
+	(*ValidateActivityRequest)(nil),       // 20: activity.ValidateActivityRequest
+	(*ValidateActivityResponse)(nil),      // 21: activity.ValidateActivityResponse
+	(*DeductActivityStockRequest)(nil),    // 22: activity.DeductActivityStockRequest
+	(*ActivityBatchItem)(nil),             // 23: activity.ActivityBatchItem
+	(*ValidateActivityBatchRequest)(nil),  // 24: activity.ValidateActivityBatchRequest
+	(*ActivityValidationResult)(nil),      // 25: activity.ActivityValidationResult
+	(*ValidateActivityBatchResponse)(nil), // 26: activity.ValidateActivityBatchResponse
+	(*wrapperspb.Int32Value)(nil),         // 27: google.protobuf.Int32Value
 }
 var file_api_zebra_activity_activity_activity_proto_depIdxs = []int32{
-	23, // 0: activity.Activity.activity_status:type_name -> google.protobuf.Int32Value
-	23, // 1: activity.UpdateActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
-	23, // 2: activity.GetActivityResponse.code:type_name -> google.protobuf.Int32Value
+	27, // 0: activity.Activity.activity_status:type_name -> google.protobuf.Int32Value
+	27, // 1: activity.UpdateActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
+	27, // 2: activity.GetActivityResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 3: activity.GetActivityResponse.activity:type_name -> activity.Activity
-	23, // 4: activity.ListActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
-	23, // 5: activity.ListActivityResponse.code:type_name -> google.protobuf.Int32Value
+	27, // 4: activity.ListActivityRequest.activity_status:type_name -> google.protobuf.Int32Value
+	27, // 5: activity.ListActivityResponse.code:type_name -> google.protobuf.Int32Value
 	0,  // 6: activity.ListActivityResponse.activities:type_name -> activity.Activity
-	23, // 7: activity.Response.code:type_name -> google.protobuf.Int32Value
-	23, // 8: activity.ActivityGoods.sort_order:type_name -> google.protobuf.Int32Value
-	23, // 9: activity.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
+	27, // 7: activity.Response.code:type_name -> google.protobuf.Int32Value
+	27, // 8: activity.ActivityGoods.sort_order:type_name -> google.protobuf.Int32Value
+	27, // 9: activity.GetActivityGoodsResponse.code:type_name -> google.protobuf.Int32Value
 	15, // 10: activity.GetActivityGoodsResponse.goods:type_name -> activity.ActivityGoods
-	23, // 11: activity.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
+	27, // 11: activity.GetGoodsActivityResponse.code:type_name -> google.protobuf.Int32Value
 	15, // 12: activity.GetGoodsActivityResponse.goods:type_name -> activity.ActivityGoods
-	1,  // 13: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
-	2,  // 14: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
-	3,  // 15: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
-	4,  // 16: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
-	6,  // 17: activity.ActivityService.List:input_type -> activity.ListActivityRequest
-	9,  // 18: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
-	11, // 19: activity.ActivityService.End:input_type -> activity.EndActivityRequest
-	13, // 20: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
-	16, // 21: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
-	18, // 22: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
-	20, // 23: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
-	22, // 24: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
-	8,  // 25: activity.ActivityService.Create:output_type -> activity.Response
-	8,  // 26: activity.ActivityService.Update:output_type -> activity.Response
-	8,  // 27: activity.ActivityService.Delete:output_type -> activity.Response
-	5,  // 28: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
-	7,  // 29: activity.ActivityService.List:output_type -> activity.ListActivityResponse
-	10, // 30: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
-	12, // 31: activity.ActivityService.End:output_type -> activity.EndActivityResponse
-	14, // 32: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
-	17, // 33: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
-	19, // 34: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
-	21, // 35: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
-	8,  // 36: activity.ActivityService.DeductActivityStock:output_type -> activity.Response
-	25, // [25:37] is the sub-list for method output_type
-	13, // [13:25] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	23, // 13: activity.ValidateActivityBatchRequest.items:type_name -> activity.ActivityBatchItem
+	27, // 14: activity.ValidateActivityBatchResponse.code:type_name -> google.protobuf.Int32Value
+	25, // 15: activity.ValidateActivityBatchResponse.results:type_name -> activity.ActivityValidationResult
+	1,  // 16: activity.ActivityService.Create:input_type -> activity.CreateActivityRequest
+	2,  // 17: activity.ActivityService.Update:input_type -> activity.UpdateActivityRequest
+	3,  // 18: activity.ActivityService.Delete:input_type -> activity.DeleteActivityRequest
+	4,  // 19: activity.ActivityService.Get:input_type -> activity.GetActivityRequest
+	6,  // 20: activity.ActivityService.List:input_type -> activity.ListActivityRequest
+	9,  // 21: activity.ActivityService.Start:input_type -> activity.StartActivityRequest
+	11, // 22: activity.ActivityService.End:input_type -> activity.EndActivityRequest
+	13, // 23: activity.ActivityService.Cancel:input_type -> activity.CancelActivityRequest
+	16, // 24: activity.ActivityService.GetActivityGoods:input_type -> activity.GetActivityGoodsRequest
+	18, // 25: activity.ActivityService.GetGoodsActivity:input_type -> activity.GetGoodsActivityRequest
+	20, // 26: activity.ActivityService.ValidateActivity:input_type -> activity.ValidateActivityRequest
+	24, // 27: activity.ActivityService.ValidateActivityBatch:input_type -> activity.ValidateActivityBatchRequest
+	22, // 28: activity.ActivityService.DeductActivityStock:input_type -> activity.DeductActivityStockRequest
+	8,  // 29: activity.ActivityService.Create:output_type -> activity.Response
+	8,  // 30: activity.ActivityService.Update:output_type -> activity.Response
+	8,  // 31: activity.ActivityService.Delete:output_type -> activity.Response
+	5,  // 32: activity.ActivityService.Get:output_type -> activity.GetActivityResponse
+	7,  // 33: activity.ActivityService.List:output_type -> activity.ListActivityResponse
+	10, // 34: activity.ActivityService.Start:output_type -> activity.StartActivityResponse
+	12, // 35: activity.ActivityService.End:output_type -> activity.EndActivityResponse
+	14, // 36: activity.ActivityService.Cancel:output_type -> activity.CancelActivityResponse
+	17, // 37: activity.ActivityService.GetActivityGoods:output_type -> activity.GetActivityGoodsResponse
+	19, // 38: activity.ActivityService.GetGoodsActivity:output_type -> activity.GetGoodsActivityResponse
+	21, // 39: activity.ActivityService.ValidateActivity:output_type -> activity.ValidateActivityResponse
+	26, // 40: activity.ActivityService.ValidateActivityBatch:output_type -> activity.ValidateActivityBatchResponse
+	8,  // 41: activity.ActivityService.DeductActivityStock:output_type -> activity.Response
+	29, // [29:42] is the sub-list for method output_type
+	16, // [16:29] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_api_zebra_activity_activity_activity_proto_init() }
@@ -1735,7 +2006,7 @@ func file_api_zebra_activity_activity_activity_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zebra_activity_activity_activity_proto_rawDesc), len(file_api_zebra_activity_activity_activity_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

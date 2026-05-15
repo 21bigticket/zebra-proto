@@ -58,6 +58,8 @@ const (
 	ActivityServiceGetGoodsActivityProcedure = "/activity.ActivityService/GetGoodsActivity"
 	// ActivityServiceValidateActivityProcedure is the fully-qualified name of the ActivityService's ValidateActivity RPC.
 	ActivityServiceValidateActivityProcedure = "/activity.ActivityService/ValidateActivity"
+	// ActivityServiceValidateActivityBatchProcedure is the fully-qualified name of the ActivityService's ValidateActivityBatch RPC.
+	ActivityServiceValidateActivityBatchProcedure = "/activity.ActivityService/ValidateActivityBatch"
 	// ActivityServiceDeductActivityStockProcedure is the fully-qualified name of the ActivityService's DeductActivityStock RPC.
 	ActivityServiceDeductActivityStockProcedure = "/activity.ActivityService/DeductActivityStock"
 )
@@ -79,6 +81,7 @@ type ActivityService interface {
 	GetActivityGoods(ctx context.Context, req *GetActivityGoodsRequest, opts ...client.CallOption) (*GetActivityGoodsResponse, error)
 	GetGoodsActivity(ctx context.Context, req *GetGoodsActivityRequest, opts ...client.CallOption) (*GetGoodsActivityResponse, error)
 	ValidateActivity(ctx context.Context, req *ValidateActivityRequest, opts ...client.CallOption) (*ValidateActivityResponse, error)
+	ValidateActivityBatch(ctx context.Context, req *ValidateActivityBatchRequest, opts ...client.CallOption) (*ValidateActivityBatchResponse, error)
 	DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error)
 }
 
@@ -190,6 +193,14 @@ func (c *ActivityServiceImpl) ValidateActivity(ctx context.Context, req *Validat
 	return resp, nil
 }
 
+func (c *ActivityServiceImpl) ValidateActivityBatch(ctx context.Context, req *ValidateActivityBatchRequest, opts ...client.CallOption) (*ValidateActivityBatchResponse, error) {
+	resp := new(ValidateActivityBatchResponse)
+	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "ValidateActivityBatch", opts...); err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *ActivityServiceImpl) DeductActivityStock(ctx context.Context, req *DeductActivityStockRequest, opts ...client.CallOption) (*Response, error) {
 	resp := new(Response)
 	if err := c.conn.CallUnary(ctx, []interface{}{req}, resp, "DeductActivityStock", opts...); err != nil {
@@ -200,7 +211,7 @@ func (c *ActivityServiceImpl) DeductActivityStock(ctx context.Context, req *Dedu
 
 var ActivityService_ClientInfo = client.ClientInfo{
 	InterfaceName: "activity.ActivityService",
-	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "Start", "End", "Cancel", "GetActivityGoods", "GetGoodsActivity", "ValidateActivity", "DeductActivityStock"},
+	MethodNames:   []string{"Create", "Update", "Delete", "Get", "List", "Start", "End", "Cancel", "GetActivityGoods", "GetGoodsActivity", "ValidateActivity", "ValidateActivityBatch", "DeductActivityStock"},
 	ConnectionInjectFunc: func(dubboCliRaw interface{}, conn *client.Connection) {
 		dubboCli := dubboCliRaw.(*ActivityServiceImpl)
 		dubboCli.conn = conn
@@ -220,6 +231,7 @@ type ActivityServiceHandler interface {
 	GetActivityGoods(context.Context, *GetActivityGoodsRequest) (*GetActivityGoodsResponse, error)
 	GetGoodsActivity(context.Context, *GetGoodsActivityRequest) (*GetGoodsActivityResponse, error)
 	ValidateActivity(context.Context, *ValidateActivityRequest) (*ValidateActivityResponse, error)
+	ValidateActivityBatch(context.Context, *ValidateActivityBatchRequest) (*ValidateActivityBatchResponse, error)
 	DeductActivityStock(context.Context, *DeductActivityStockRequest) (*Response, error)
 }
 
@@ -394,6 +406,21 @@ var ActivityService_ServiceInfo = server.ServiceInfo{
 			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
 				req := args[0].(*ValidateActivityRequest)
 				res, err := handler.(ActivityServiceHandler).ValidateActivity(ctx, req)
+				if err != nil {
+					return nil, err
+				}
+				return triple_protocol.NewResponse(res), nil
+			},
+		},
+		{
+			Name: "ValidateActivityBatch",
+			Type: constant.CallUnary,
+			ReqInitFunc: func() interface{} {
+				return new(ValidateActivityBatchRequest)
+			},
+			MethodFunc: func(ctx context.Context, args []interface{}, handler interface{}) (interface{}, error) {
+				req := args[0].(*ValidateActivityBatchRequest)
+				res, err := handler.(ActivityServiceHandler).ValidateActivityBatch(ctx, req)
 				if err != nil {
 					return nil, err
 				}

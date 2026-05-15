@@ -96,10 +96,17 @@ message GetCartLogsRequest {
   int64 end_time   = 5;
 }
 
+// 批量创建日志请求
+message BatchCreateLogRequest {
+  repeated CreateLogRequest items = 1;
+}
+
 // 购物车日志服务
 service CartLogService {
   // 创建日志
   rpc Create(CreateLogRequest) returns (Response);
+  // 批量创建日志
+  rpc BatchCreate(BatchCreateLogRequest) returns (Response);
   // 获取单条日志
   rpc Get(GetLogRequest) returns (GetLogResponse);
   // 查询日志列表
